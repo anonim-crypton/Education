@@ -21,6 +21,7 @@ import {
   MenuIcon,
   XIcon,
 } from "@/components/animated-icons";
+import { BookAIcon, BookUpIcon, CalculatorIcon, HistoryIcon, ScaleIcon } from "lucide-react";
 
 const courses = [
   {
@@ -30,28 +31,28 @@ const courses = [
     href: "/courses/programming",
   },
   {
-    title: "Dizayn",
-    description: "UI/UX, Grafik dizayn, Figma",
-    icon: PaletteIcon,
-    href: "/courses/design",
-  },
-  {
-    title: "Biznes",
-    description: "Marketing, Menejment, Moliya",
-    icon: BriefcaseIcon,
-    href: "/courses/business",
-  },
-  {
-    title: "Marketing",
-    description: "SMM, SEO, Reklama strategiyalari",
-    icon: TrendingUpIcon,
-    href: "/courses/marketing",
-  },
-  {
-    title: "Tillar",
-    description: "Ingliz, Rus, Koreys tillari",
+    title: "Ingliz tili",
+    description: "Beginer daraja",
     icon: LanguagesIcon,
-    href: "/courses/languages",
+    href: "/courses/ingliz tili",
+  },
+  {
+    title: "Matematika ",
+    description: "Beginer daraja",
+    icon: CalculatorIcon,
+    href: "/courses/matematika",
+  },
+  {
+    title: "Tarix",
+    description: "Beginer daraja",
+    icon: BookAIcon,
+    href: "/courses/tarix",
+  },
+  {
+    title: "Huquq",
+    description: "Beginer daraja",
+    icon:ScaleIcon ,
+    href: "/courses/tarix",
   },
 ];
 
