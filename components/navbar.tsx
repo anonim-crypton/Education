@@ -230,13 +230,14 @@ export function Navbar() {
 
             {/* Auth Buttons */}
             <div className="hidden sm:flex items-center gap-2">
-              <motion.button
+              <motion.a
+                href="/login"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
               >
                 Kirish
-              </motion.button>
+              </motion.a>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -282,14 +283,15 @@ export function Navbar() {
           >
             <div className="px-4 py-4 space-y-2">
               {/* Mobile Login Button */}
-              <motion.button
+              <motion.a
+                href="/login"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0 }}
-                className="w-full rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer"
+                className="w-full rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer block text-center"
               >
                 Kirish
-              </motion.button>
+              </motion.a>
               
               {navLinks.map((link, index) => (
                 <motion.div

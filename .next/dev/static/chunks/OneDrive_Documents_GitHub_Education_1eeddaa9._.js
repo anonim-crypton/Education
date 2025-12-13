@@ -1340,7 +1340,8 @@ function Navbar() {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "hidden sm:flex items-center gap-2",
                                     children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].a, {
+                                            href: "/login",
                                             whileHover: {
                                                 scale: 1.05
                                             },
@@ -1365,7 +1366,7 @@ function Navbar() {
                                             children: "Ro'yxatdan o'tish"
                                         }, void 0, false, {
                                             fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                            lineNumber: 240,
+                                            lineNumber: 241,
                                             columnNumber: 15
                                         }, this)
                                     ]
@@ -1387,12 +1388,12 @@ function Navbar() {
                                         children: "Ro'yxatdan o'tish"
                                     }, void 0, false, {
                                         fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                        lineNumber: 251,
+                                        lineNumber: 252,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                    lineNumber: 250,
+                                    lineNumber: 251,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
@@ -1408,18 +1409,18 @@ function Navbar() {
                                         className: "w-5 h-5"
                                     }, void 0, false, {
                                         fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                        lineNumber: 267,
+                                        lineNumber: 268,
                                         columnNumber: 35
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$components$2f$animated$2d$icons$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MenuIcon"], {
                                         className: "w-5 h-5"
                                     }, void 0, false, {
                                         fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                        lineNumber: 267,
+                                        lineNumber: 268,
                                         columnNumber: 67
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                    lineNumber: 261,
+                                    lineNumber: 262,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -1460,7 +1461,8 @@ function Navbar() {
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "px-4 py-4 space-y-2",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].a, {
+                                href: "/login",
                                 initial: {
                                     opacity: 0,
                                     x: -20
@@ -1472,11 +1474,11 @@ function Navbar() {
                                 transition: {
                                     delay: 0
                                 },
-                                className: "w-full rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer",
+                                className: "w-full rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer block text-center",
                                 children: "Kirish"
                             }, void 0, false, {
                                 fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                lineNumber: 285,
+                                lineNumber: 286,
                                 columnNumber: 15
                             }, this),
                             navLinks.map((link, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1500,14 +1502,14 @@ function Navbar() {
                                                     className: "w-5 h-5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                                    lineNumber: 305,
+                                                    lineNumber: 307,
                                                     columnNumber: 21
                                                 }, this),
                                                 link.title
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                            lineNumber: 301,
+                                            lineNumber: 303,
                                             columnNumber: 19
                                         }, this),
                                         link.hasDropdown && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1520,41 +1522,41 @@ function Navbar() {
                                                             className: "w-4 h-4"
                                                         }, void 0, false, {
                                                             fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                                            lineNumber: 316,
+                                                            lineNumber: 318,
                                                             columnNumber: 27
                                                         }, this),
                                                         course.title
                                                     ]
                                                 }, course.title, true, {
                                                     fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                                    lineNumber: 311,
+                                                    lineNumber: 313,
                                                     columnNumber: 25
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                            lineNumber: 309,
+                                            lineNumber: 311,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, link.title, true, {
                                     fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                                    lineNumber: 295,
+                                    lineNumber: 297,
                                     columnNumber: 17
                                 }, this))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                        lineNumber: 283,
+                        lineNumber: 284,
                         columnNumber: 13
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                    lineNumber: 276,
+                    lineNumber: 277,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                lineNumber: 274,
+                lineNumber: 275,
                 columnNumber: 7
             }, this)
         ]
@@ -1597,12 +1599,12 @@ function CourseDropdownItem({ course, index }) {
                     isHovered: isHovered
                 }, void 0, false, {
                     fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                    lineNumber: 352,
+                    lineNumber: 354,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                lineNumber: 351,
+                lineNumber: 353,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1612,7 +1614,7 @@ function CourseDropdownItem({ course, index }) {
                         children: course.title
                     }, void 0, false, {
                         fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                        lineNumber: 355,
+                        lineNumber: 357,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$OneDrive$2f$Documents$2f$GitHub$2f$Education$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1620,19 +1622,19 @@ function CourseDropdownItem({ course, index }) {
                         children: course.description
                     }, void 0, false, {
                         fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                        lineNumber: 356,
+                        lineNumber: 358,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-                lineNumber: 354,
+                lineNumber: 356,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx",
-        lineNumber: 342,
+        lineNumber: 344,
         columnNumber: 5
     }, this);
 }
