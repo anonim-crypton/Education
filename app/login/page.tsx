@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, memo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { Lock, Mail, Eye, EyeOff, ArrowLeft, Sparkles, User, Send, Chrome, ArrowRight } from "lucide-react"
@@ -27,14 +27,10 @@ interface Particle {
 }
 
 export default function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true)
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [fullName, setFullName] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
+   const [showPassword, setShowPassword] = useState(false)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
   const [particles, setParticles] = useState<Particle[]>([])
 
   useEffect(() => {
@@ -49,16 +45,12 @@ export default function LoginPage() {
     setParticles(generatedParticles)
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setTimeout(() => setIsLoading(false), 1500)
-    if (isLogin) {
-      console.log("Login:", { email, password })
-    } else {
-      console.log("Sign Up:", { fullName, email, password, confirmPassword })
-    }
-  }
+    console.log("Login:", { email, password })
+  }, [email, password])
 
   return (
     <section className="relative min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center px-4 py-12 overflow-hidden">
@@ -115,7 +107,7 @@ export default function LoginPage() {
       {/* Header */}
       <header className="fixed left-0 right-0 top-0 flex items-center justify-between px-6 py-4 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-sm z-40">
         <span className="text-xs tracking-[0.14em] uppercase text-zinc-400">
-          EduLearn
+          Edugame
         </span>
         <Button
           variant="outline"
@@ -164,52 +156,23 @@ export default function LoginPage() {
             </div>
 
             <AnimatePresence mode="wait">
-              <motion.div
-                key={isLogin ? "login" : "signup"}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-              >
-                <CardTitle className="text-2xl">
-                  {isLogin ? "Xush kelibsiz" : "Akkaunt yaratish"}
-                </CardTitle>
-                <CardDescription className="text-zinc-400">
-                  {isLogin
-                    ? "Akkauntingizga kiring va o'qishni boshlang"
-                    : "Yangi akkaunt yaratib, platformada ro'yxatdan o'ting"}
-                </CardDescription>
-              </motion.div>
-            </AnimatePresence>
+               <motion.div
+                 key="login"
+                 initial={{ opacity: 0, y: -10 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -10 }}
+               >
+                 <CardTitle className="text-2xl">Xush kelibsiz</CardTitle>
+                 <CardDescription className="text-zinc-400">
+                   Akkauntingizga kiring va o'qishni boshlang
+                 </CardDescription>
+               </motion.div>
+             </AnimatePresence>
           </CardHeader>
 
           <CardContent className="grid gap-4">
             <AnimatePresence mode="wait">
-              <form onSubmit={handleSubmit} className="space-y-4" key={isLogin ? "login-form" : "signup-form"}>
-                {/* Full Name (only for Sign Up) */}
-                {!isLogin && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="grid gap-2"
-                  >
-                    <Label htmlFor="name" className="text-zinc-300">
-                      To'liq ismi
-                    </Label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                      <Input
-                        id="name"
-                        type="text"
-                        placeholder="Sizning ismingiz"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                        className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                        required
-                      />
-                    </div>
-                  </motion.div>
-                )}
+              <form onSubmit={handleSubmit} className="space-y-4" key="login-form">
 
                 {/* Email Input */}
                 <motion.div
@@ -269,65 +232,25 @@ export default function LoginPage() {
                   </div>
                 </motion.div>
 
-                {/* Confirm Password (only for Sign Up) */}
-                {!isLogin && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="grid gap-2"
-                  >
-                    <Label htmlFor="confirm-password" className="text-zinc-300">
-                      Parolni tasdiqlang
+                {/* Remember & Forgot Password */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      id="remember"
+                      className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
+                    />
+                    <Label htmlFor="remember" className="text-zinc-400 cursor-pointer">
+                      Eslab qol
                     </Label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                      <Input
-                        id="confirm-password"
-                        type={showConfirmPassword ? "text" : "password"}
-                        placeholder="••••••••"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                        required
-                      />
-                      <button
-                        type="button"
-                        aria-label={showConfirmPassword ? "Hide password" : "Show password"}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
-                        onClick={() => setShowConfirmPassword((v) => !v)}
-                      >
-                        {showConfirmPassword ? (
-                          <EyeOff className="h-4 w-4" />
-                        ) : (
-                          <Eye className="h-4 w-4" />
-                        )}
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* Remember & Forgot Password (only for Login) */}
-                {isLogin && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Checkbox
-                        id="remember"
-                        className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
-                      />
-                      <Label htmlFor="remember" className="text-zinc-400 cursor-pointer">
-                        Eslab qol
-                      </Label>
-                    </div>
-                    <a href="#" className="text-sm text-zinc-300 hover:text-zinc-100">
-                      Parolni unitdingizmi?
-                    </a>
-                  </motion.div>
-                )}
+                  </div>
+                  <a href="#" className="text-sm text-zinc-300 hover:text-zinc-100">
+                    Parolni unitdingizmi?
+                  </a>
+                </motion.div>
 
                 {/* Submit Button */}
                 <motion.button
@@ -338,81 +261,64 @@ export default function LoginPage() {
                   className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                 >
                   {isLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      >
-                        <Sparkles className="w-4 h-4" />
-                      </motion.div>
-                      Yuklanmoqda...
-                    </span>
-                  ) : isLogin ? (
-                    "Kirish"
-                  ) : (
-                    "Ro'yxatdan o'tish"
-                  )}
+                     <span className="flex items-center justify-center gap-2">
+                       <motion.div
+                         animate={{ rotate: 360 }}
+                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                       >
+                         <Sparkles className="w-4 h-4" />
+                       </motion.div>
+                       Yuklanmoqda...
+                     </span>
+                   ) : (
+                     "Kirish"
+                   )}
                 </motion.button>
 
                 {/* Divider */}
-                {isLogin && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="relative"
-                  >
-                    <Separator className="bg-zinc-800" />
-                    <span className="absolute left-1/2 -translate-x-1/2 -top-3 bg-zinc-900/70 px-2 text-[11px] uppercase tracking-widest text-zinc-500">
-                      yoki
-                    </span>
-                  </motion.div>
-                )}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="relative"
+                >
+                  <Separator className="bg-zinc-800" />
+                  <span className="absolute left-1/2 -translate-x-1/2 -top-3 bg-zinc-900/70 px-2 text-[11px] uppercase tracking-widest text-zinc-500">
+                    yoki
+                  </span>
+                </motion.div>
 
                 {/* Social Login */}
-                {isLogin && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="grid grid-cols-2 gap-3"
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="grid grid-cols-2 gap-3"
+                >
+                  <Button
+                    variant="outline"
+                    type="button"
+                    className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
                   >
-                    <Button
-                      variant="outline"
-                      type="button"
-                      className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
-                    >
-                      <Send className="h-4 w-4 mr-2" />
-                      Telegram
-                    </Button>
-                    <Button
-                      variant="outline"
-                      type="button"
-                      className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
-                    >
-                      <Chrome className="h-4 w-4 mr-2" />
-                      Google
-                    </Button>
-                  </motion.div>
-                )}
+                    <Send className="h-4 w-4 mr-2" />
+                    Telegram
+                  </Button>
+                  <Button
+                    variant="outline"
+                    type="button"
+                    className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
+                  >
+                    <Chrome className="h-4 w-4 mr-2" />
+                    Google
+                  </Button>
+                </motion.div>
               </form>
             </AnimatePresence>
           </CardContent>
 
           <CardFooter className="flex items-center justify-center text-sm text-zinc-400">
-            {isLogin ? (
-              <>
-                Akkauntingiz yo'qmi?
-                <button className="ml-1 text-zinc-200 hover:underline" onClick={() => setIsLogin(false)}>
-                  Ro'yxatdan o'tish
-                </button>
-              </>
-            ) : (
-              <>
-                Allaqachon akkauntingiz bor?
-                <button className="ml-1 text-zinc-200 hover:underline" onClick={() => setIsLogin(true)}>
-                  Kiring
-                </button>
-              </>
-            )}
+            Akkauntingiz yo'qmi?
+            <Link href="/register" className="ml-1 text-zinc-200 hover:underline">
+              Ro'yxatdan o'tish
+            </Link>
           </CardFooter>
         </Card>
       </motion.div>

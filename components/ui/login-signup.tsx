@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import {
   Card,
   CardHeader,
@@ -26,7 +27,7 @@ import {
 } from "lucide-react";
 
 export default function LoginCardSection() {
-  const [showPassword, setShowPassword] = useState(false);
+   const [showPassword, setShowPassword] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -257,9 +258,12 @@ export default function LoginCardSection() {
 
           <CardFooter className="flex items-center justify-center text-sm text-zinc-400">
             Don't have an account?
-            <a className="ml-1 text-zinc-200 hover:underline" href="#">
+            <Link 
+              href="/register"
+              className="ml-1 text-zinc-200 hover:underline"
+            >
               Create one
-            </a>
+            </Link>
           </CardFooter>
         </Card>
       </div>

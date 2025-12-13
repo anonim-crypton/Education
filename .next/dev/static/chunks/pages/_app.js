@@ -1,13 +1,13 @@
 __turbopack_load_page_chunks__("/_app", [
-  "static/chunks/cfd5f_next_dist_compiled_8220b949._.js",
-  "static/chunks/cfd5f_next_dist_shared_lib_7c4d2738._.js",
-  "static/chunks/cfd5f_next_dist_client_5ce7101e._.js",
-  "static/chunks/cfd5f_next_dist_1eee40a5._.js",
-  "static/chunks/cfd5f_next_app_216dc582.js",
-  "static/chunks/[next]_entry_page-loader_ts_c91f5e14._.js",
-  "static/chunks/cfd5f_react-dom_bdd14d63._.js",
-  "static/chunks/cfd5f_ae66274e._.js",
-  "static/chunks/[root-of-the-server]__00652a9b._.js",
-  "static/chunks/Downloads_education-website-design_pages__app_2da965e7._.js",
-  "static/chunks/turbopack-Downloads_education-website-design_pages__app_2be9a9ef._.js"
+  "static/chunks/5f8d5_next_dist_compiled_12d2b1cf._.js",
+  "static/chunks/5f8d5_next_dist_shared_lib_2e74a084._.js",
+  "static/chunks/5f8d5_next_dist_client_4ceffc53._.js",
+  "static/chunks/5f8d5_next_dist_73bbf379._.js",
+  "static/chunks/5f8d5_next_app_69af60b0.js",
+  "static/chunks/[next]_entry_page-loader_ts_1feab1ef._.js",
+  "static/chunks/5f8d5_react-dom_80082b5a._.js",
+  "static/chunks/5f8d5_a5daeb45._.js",
+  "static/chunks/[root-of-the-server]__37943f92._.js",
+  "static/chunks/OneDrive_Documents_GitHub_Education_pages__app_2da965e7._.js",
+  "static/chunks/turbopack-OneDrive_Documents_GitHub_Education_pages__app_2f8c5adc._.js"
 ])

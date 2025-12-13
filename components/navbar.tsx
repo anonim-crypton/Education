@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import Image from "next/image"
-import { useTheme } from "next-themes"
-import { motion, AnimatePresence } from "framer-motion"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { useState, useRef, useEffect, memo, useCallback } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   HomeIcon,
   BookOpenIcon,
@@ -17,12 +17,10 @@ import {
   LanguagesIcon,
   UsersIcon,
   PhoneIcon,
-  SunIcon,
-  MoonIcon,
   ChevronDownIcon,
   MenuIcon,
   XIcon,
-} from "@/components/animated-icons"
+} from "@/components/animated-icons";
 
 const courses = [
   {
@@ -55,7 +53,7 @@ const courses = [
     icon: LanguagesIcon,
     href: "/courses/languages",
   },
-]
+];
 
 const navLinks = [
   { title: "Bosh sahifa", href: "/", icon: HomeIcon },
@@ -63,42 +61,43 @@ const navLinks = [
   { title: "O'qituvchilar", href: "/teachers", icon: GraduationCapIcon },
   { title: "Biz haqimizda", href: "/about", icon: UsersIcon },
   { title: "Aloqa", href: "/contact", icon: PhoneIcon },
-]
+];
 
-export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null)
-  const [mounted, setMounted] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const { theme, setTheme } = useTheme()
+const NavbarComponent = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
+      clearTimeout(timeoutRef.current);
     }
-    setIsDropdownOpen(true)
-  }
+    setIsDropdownOpen(true);
+  };
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      setIsDropdownOpen(false)
-    }, 150)
-  }
+      setIsDropdownOpen(false);
+    }, 150);
+  };
 
   return (
     <motion.nav
@@ -107,7 +106,9 @@ export function Navbar() {
       transition={{ duration: 0.5 }}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-border" : "bg-transparent",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-border"
+          : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -125,14 +126,14 @@ export function Navbar() {
             >
               <Image
                 src="/Education.jpg.png"
-                alt="Education"
+                alt="Edugame"
                 width={48}
                 height={48}
                 className="w-full h-full object-cover dark:brightness-100 brightness-150 contrast-125"
               />
             </motion.div>
             <span className="text-xl font-bold text-foreground">
-              Edu<span className="text-primary">cation</span>
+              Edu<span className="text-primary">game</span>
             </span>
           </motion.a>
 
@@ -150,15 +151,23 @@ export function Navbar() {
                   href={link.href}
                   className={cn(
                     "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors relative",
-                    "text-foreground/70 hover:text-foreground",
+                    "text-foreground/70 hover:text-foreground"
                   )}
                   onHoverStart={() => setHoveredLink(link.title)}
                   onHoverEnd={() => setHoveredLink(null)}
                   whileHover={{ y: -2 }}
                 >
-                  <link.icon className="w-4 h-4" isHovered={hoveredLink === link.title} />
+                  <link.icon
+                    className="w-4 h-4"
+                    isHovered={hoveredLink === link.title}
+                  />
                   <span>{link.title}</span>
-                  {link.hasDropdown && <ChevronDownIcon className="w-4 h-4" isHovered={isDropdownOpen} />}
+                  {link.hasDropdown && (
+                    <ChevronDownIcon
+                      className="w-4 h-4"
+                      isHovered={isDropdownOpen}
+                    />
+                  )}
                   {hoveredLink === link.title && (
                     <motion.div
                       layoutId="navHover"
@@ -186,7 +195,11 @@ export function Navbar() {
                       >
                         <div className="grid gap-1">
                           {courses.map((course, index) => (
-                            <CourseDropdownItem key={course.title} course={course} index={index} />
+                            <CourseDropdownItem
+                              key={course.title}
+                              course={course}
+                              index={index}
+                            />
                           ))}
                         </div>
                         <div className="mt-2 pt-2 border-t border-border">
@@ -208,54 +221,39 @@ export function Navbar() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
-            {/* Commented out theme toggle
-            {mounted && (
-              <motion.button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="relative w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <AnimatePresence mode="wait">
-                  {theme === "dark" ? (
-                    <SunIcon key="sun" className="w-5 h-5 text-foreground" />
-                  ) : (
-                    <MoonIcon key="moon" className="w-5 h-5 text-foreground" />
-                  )}
-                </AnimatePresence>
-              </motion.button>
-            )}
-            */}
-
             {/* Auth Buttons */}
             <div className="hidden sm:flex items-center gap-2">
-              <motion.a
-                href="/login"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
-              >
-                Kirish
-              </motion.a>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
-              >
-                Ro'yxatdan o'tish
-              </motion.button>
+              <Link href="/login">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                >
+                  Kirish
+                </motion.button>
+              </Link>
+              <Link href="/register">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                >
+                  Ro'yxatdan o'tish
+                </motion.button>
+              </Link>
             </div>
 
             {/* Mobile Register Button */}
             <div className="sm:hidden">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
-              >
-                Ro'yxatdan o'tish
-              </motion.button>
+              <Link href="/register">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
+                >
+                  Ro'yxatdan o'tish
+                </motion.button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -265,7 +263,11 @@ export function Navbar() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isMobileMenuOpen ? <XIcon className="w-5 h-5" /> : <MenuIcon className="w-5 h-5" />}
+              {isMobileMenuOpen ? (
+                <XIcon className="w-5 h-5" />
+              ) : (
+                <MenuIcon className="w-5 h-5" />
+              )}
             </motion.button>
           </div>
         </div>
@@ -292,7 +294,7 @@ export function Navbar() {
               >
                 Kirish
               </motion.a>
-              
+
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.title}
@@ -328,17 +330,19 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
-}
+    );
+    };
 
-function CourseDropdownItem({
+    export const Navbar = memo(NavbarComponent);
+
+    const CourseDropdownItem = memo(function CourseDropdownItem({
   course,
   index,
 }: {
-  course: (typeof courses)[0]
-  index: number
+  course: (typeof courses)[0];
+  index: number;
 }) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.a
@@ -355,8 +359,10 @@ function CourseDropdownItem({
       </div>
       <div>
         <h4 className="text-sm font-medium text-foreground">{course.title}</h4>
-        <p className="text-xs text-muted-foreground mt-0.5">{course.description}</p>
+        <p className="text-xs text-muted-foreground mt-0.5">
+          {course.description}
+        </p>
       </div>
     </motion.a>
-  )
-}
+  );
+});

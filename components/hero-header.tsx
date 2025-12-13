@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import { useState, memo, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
   GraduationCapIcon,
   BookOpenIcon,
@@ -10,17 +10,22 @@ import {
   PlayIcon,
   SparklesIcon,
   ArrowRightIcon,
-} from "@/components/animated-icons"
+} from "@/components/animated-icons";
 
 const stats = [
   { value: "0+", label: "O'quvchilar", icon: UsersIcon },
   { value: "0+", label: "Kurslar", icon: BookOpenIcon },
   { value: "0%", label: "Muvaffaqiyat", icon: SparklesIcon },
-]
+] as const;
 
-export function HeroHeader() {
-  const [isPlayHovered, setIsPlayHovered] = useState(false)
-  const [isStartHovered, setIsStartHovered] = useState(false)
+const HeroHeaderContent = memo(function HeroHeaderContent() {
+  const [isPlayHovered, setIsPlayHovered] = useState(false);
+  const [isStartHovered, setIsStartHovered] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 lg:pt-0">
@@ -46,9 +51,9 @@ export function HeroHeader() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={isLoaded ? { opacity: 0, x: -50 } : false}
+            animate={isLoaded ? { opacity: 1, x: 0 } : false}
+            transition={{ duration: 0.4 }}
             className="text-center lg:text-left"
           >
             {/* Badge */}
@@ -60,11 +65,17 @@ export function HeroHeader() {
             >
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                transition={{
+                  duration: 4,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "linear",
+                }}
               >
                 <SparklesIcon className="w-4 h-4 text-primary" />
               </motion.div>
-              <span className="text-sm font-medium text-primary">Education-talim uchun ishlab chiqilgan veb sayt</span>
+              <span className="text-sm font-medium text-primary">
+                Education-talim uchun ishlab chiqilgan veb sayt
+              </span>
             </motion.div>
 
             {/* Heading */}
@@ -104,8 +115,8 @@ export function HeroHeader() {
               transition={{ delay: 0.4 }}
               className="mt-6 text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 text-pretty"
             >
-              Professional o'qituvchilar, zamonaviy kurslar va interaktiv ta'lim usullari bilan o'z sohangizdagi
-              mutaxassisga aylaning.
+              Professional o'qituvchilar, zamonaviy kurslar va interaktiv ta'lim
+              usullari bilan o'z sohangizdagi mutaxassisga aylaning.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -122,15 +133,16 @@ export function HeroHeader() {
                 onMouseLeave={() => setIsStartHovered(false)}
               >
                 <span>Bepul boshlash</span>
-                <ArrowRightIcon className="w-5 h-5 ml-2" isHovered={isStartHovered} />
+                <ArrowRightIcon
+                  className="w-5 h-5 ml-2"
+                  isHovered={isStartHovered}
+                />
               </Button>
-            
-            
-                {/* <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-2">
+
+              {/* <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-2">
                   <PlayIcon className="w-3.5 h-3.5 text-primary ml-0.5" isHovered={isPlayHovered} />
                 </div>
                 <span>Video ko'rish</span> */}
-        
             </motion.div>
 
             {/* Stats */}
@@ -158,10 +170,18 @@ export function HeroHeader() {
               <motion.div
                 className="relative bg-card rounded-3xl p-8 shadow-2xl border border-border"
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                transition={{
+                  duration: 6,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
               >
                 <div className="aspect-square relative overflow-hidden rounded-2xl bg-secondary">
-                  <img src="/students-learning-in-modern-classroom-with-laptops.jpg" alt="Ta'lim" className="w-full h-full object-cover" />
+                  <img
+                    src="/students-learning-in-modern-classroom-with-laptops.jpg"
+                    alt="Ta'lim"
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6">
                     <div className="bg-card/90 backdrop-blur-sm rounded-xl p-4 border border-border">
@@ -170,8 +190,12 @@ export function HeroHeader() {
                           <GraduationCapIcon className="w-6 h-6 text-primary-foreground" />
                         </div>
                         <div>
-                          <p className="font-semibold text-foreground">Yangi kurs qo'shildi!</p>
-                          <p className="text-sm text-muted-foreground">Ingliz tili</p>
+                          <p className="font-semibold text-foreground">
+                            Yangi kurs qo'shildi!
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            Ingliz tili
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -183,7 +207,12 @@ export function HeroHeader() {
               <motion.div
                 className="absolute -top-6 -right-6 bg-card rounded-2xl p-4 shadow-xl border border-border"
                 animate={{ y: [0, -8, 0], rotate: [0, 2, 0] }}
-                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.5 }}
+                transition={{
+                  duration: 4,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
@@ -191,7 +220,9 @@ export function HeroHeader() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-foreground">0</p>
-                    <p className="text-xs text-muted-foreground">Bugun qo'shildi</p>
+                    <p className="text-xs text-muted-foreground">
+                      Bugun qo'shildi
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -199,12 +230,20 @@ export function HeroHeader() {
               <motion.div
                 className="absolute -bottom-4 -left-6 bg-card rounded-2xl p-4 shadow-xl border border-border"
                 animate={{ y: [0, 8, 0], rotate: [0, -2, 0] }}
-                transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
+                transition={{
+                  duration: 5,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
               >
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-secondary border-2 border-card overflow-hidden">
+                      <div
+                        key={i}
+                        className="w-8 h-8 rounded-full bg-secondary border-2 border-card overflow-hidden"
+                      >
                         <img
                           src={`/professional-avatar.png?height=32&width=32&query=professional person avatar ${i}`}
                           alt=""
@@ -214,8 +253,12 @@ export function HeroHeader() {
                     ))}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">+1 o'qituvchi</p>
-                    <p className="text-xs text-muted-foreground">Professional jamoa</p>
+                    <p className="text-sm font-semibold text-foreground">
+                      +1 o'qituvchi
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Professional jamoa
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -224,11 +267,21 @@ export function HeroHeader() {
         </div>
       </div>
     </section>
-  )
+  );
+});
+
+export function HeroHeader() {
+  return <HeroHeaderContent />;
 }
 
-function StatItem({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
-  const [isHovered, setIsHovered] = useState(false)
+const StatItem = memo(function StatItem({
+  stat,
+  index,
+}: {
+  stat: (typeof stats)[0];
+  index: number;
+}) {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
@@ -241,9 +294,11 @@ function StatItem({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
     >
       <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
         <stat.icon className="w-5 h-5 text-primary" isHovered={isHovered} />
-        <span className="text-2xl sm:text-3xl font-bold text-foreground">{stat.value}</span>
+        <span className="text-2xl sm:text-3xl font-bold text-foreground">
+          {stat.value}
+        </span>
       </div>
       <p className="text-sm text-muted-foreground">{stat.label}</p>
     </motion.div>
-  )
-}
+  );
+});

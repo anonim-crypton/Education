@@ -1,3 +1,0 @@
-module.exports=[99444,a=>{a.n(a.i(25483))},44626,a=>{a.n(a.i(69646))},11787,a=>{a.n(a.i(10429))},62711,a=>{a.n(a.i(74373))},87854,a=>{a.n(a.i(69425))},69425,(a,b,c)=>{"use strict";Object.defineProperty(c,"__esModule",{value:!0}),Object.defineProperty(c,"default",{enumerable:!0,get:function(){return f}});let d=a.r(50524),e=a.r(64957);function f(){return(0,d.jsx)(e.HTTPAccessErrorFallback,{status:401,message:"You're not authorized to access this page."})}("function"==typeof c.default||"object"==typeof c.default&&null!==c.default)&&void 0===c.default.__esModule&&(Object.defineProperty(c.default,"__esModule",{value:!0}),Object.assign(c.default,c),b.exports=c.default)}];
-
-//# sourceMappingURL=Downloads_education-website-design_a8eb022c._.js.map
