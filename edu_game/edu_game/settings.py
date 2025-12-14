@@ -25,7 +25,19 @@ SECRET_KEY = 'django-insecure-02g05&x^adpca@kc+ln$-qd006j(lk97q%@baou!dfa*%z#2p=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    "education-production-8611.up.railway.app",
+    ".up.railway.app",
+    "localhost",
+    "127.0.0.1",
+]
+
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://education-production-8611.up.railway.app",
+    "https://*.up.railway.app",
+]
+
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
@@ -147,3 +159,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SAMESITE = "Lax"
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
