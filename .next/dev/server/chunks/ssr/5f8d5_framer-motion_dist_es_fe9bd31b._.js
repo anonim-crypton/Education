@@ -2117,7 +2117,11 @@ function loadExternalIsValidProp(isValidProp) {
      * We attempt to import this package but require won't be defined in esm environments, in that case
      * isPropValid will have to be provided via `MotionContext`. In a 6.0.0 this should probably be removed
      * in favour of explicit injection.
-     */ loadExternalIsValidProp(__turbopack_context__.r("[project]/OneDrive/Documents/GitHub/Education/node_modules/@emotion/is-prop-valid/dist/emotion-is-prop-valid.esm.js [app-ssr] (ecmascript)").default);
+     */ loadExternalIsValidProp((()=>{
+        const e = new Error("Cannot find module '@emotion/is-prop-valid'");
+        e.code = 'MODULE_NOT_FOUND';
+        throw e;
+    })().default);
 } catch  {
 // We don't need to actually do anything here - the fallback is the existing `isPropValid`.
 }

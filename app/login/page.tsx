@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback, memo } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { login, storeTokens, type ApiError } from "@/lib/api";
+// import { useGoogleLogin } from "@react-oauth/google";
 import {
   Lock,
   Mail,
@@ -38,11 +41,13 @@ interface Particle {
 }
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Form validation
   const isFormValid = username.trim() && password.trim();
@@ -60,14 +65,68 @@ export default function LoginPage() {
   }, []);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
+      setErrors({});
       setIsLoading(true);
-      setTimeout(() => setIsLoading(false), 800);
-      console.log("Login:", { username, password });
+
+      try {
+        const response = await login({ username, password });
+        storeTokens(response.access, response.refresh);
+        router.push("/dashboard");
+      } catch (error: unknown) {
+        const apiError = error as ApiError;
+        if (apiError.errors) {
+          const formattedErrors: Record<string, string> = {};
+          Object.entries(apiError.errors).forEach(([field, messages]) => {
+            formattedErrors[field] = Array.isArray(messages) 
+              ? messages[0] 
+              : messages as string;
+          });
+          setErrors(formattedErrors);
+        } else {
+          setErrors({ general: "Login failed. Please try again." });
+        }
+      } finally {
+        setIsLoading(false);
+      }
     },
-    [username, password]
+    [username, password, router]
   );
+
+  // const googleLoginHandler = useGoogleLogin({
+  //   onSuccess: async (codeResponse) => {
+  //     try {
+  //       setIsLoading(true);
+  //       setErrors({});
+  //       const response = await googleLogin(codeResponse.access_token);
+  //       storeTokens(response.access, response.refresh);
+  //       router.push("/dashboard");
+  //     } catch (error: unknown) {
+  //       const apiError = error as ApiError;
+  //       if (apiError.errors) {
+  //         const formattedErrors: Record<string, string> = {};
+  //         Object.entries(apiError.errors).forEach(([field, messages]) => {
+  //           formattedErrors[field] = Array.isArray(messages)
+  //             ? messages[0]
+  //             : messages as string;
+  //         });
+  //         setErrors(formattedErrors);
+  //       } else {
+  //         setErrors({ general: "Google login failed. Please try again." });
+  //       }
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   },
+  //   onError: () => {
+  //     setErrors({ general: "Google login failed" });
+  //   },
+  // });
+
+  const handleGoogleLogin = () => {
+    setErrors({ general: "Google login coming soon" });
+  };
 
   return (
     <section className="relative min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center px-4 py-12 overflow-hidden">
@@ -196,6 +255,17 @@ export default function LoginPage() {
                 className="space-y-4"
                 key="login-form"
               >
+                {/* General Error */}
+                {errors.general && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg"
+                  >
+                    <p className="text-sm text-red-400">{errors.general}</p>
+                  </motion.div>
+                )}
+
                 {/* Username Input */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -212,11 +282,21 @@ export default function LoginPage() {
                       type="text"
                       placeholder="Username"
                       value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                        if (errors.username) {
+                          setErrors({ ...errors, username: "" });
+                        }
+                      }}
+                      className={`pl-10 bg-zinc-950 text-zinc-50 placeholder:text-zinc-600 ${
+                        errors.username ? "border-red-500" : "border-zinc-800"
+                      }`}
                       required
                     />
                   </div>
+                  {errors.username && (
+                    <p className="text-xs text-red-400">{errors.username}</p>
+                  )}
                 </motion.div>
 
                 {/* Password Input */}
@@ -235,8 +315,15 @@ export default function LoginPage() {
                       type={showPassword ? "text" : "password"}
                       placeholder="••••••••"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        if (errors.password) {
+                          setErrors({ ...errors, password: "" });
+                        }
+                      }}
+                      className={`pl-10 pr-10 bg-zinc-950 text-zinc-50 placeholder:text-zinc-600 ${
+                        errors.password ? "border-red-500" : "border-zinc-800"
+                      }`}
                       required
                     />
                     <button
@@ -254,6 +341,9 @@ export default function LoginPage() {
                       )}
                     </button>
                   </div>
+                  {errors.password && (
+                    <p className="text-xs text-red-400">{errors.password}</p>
+                  )}
                 </motion.div>
 
                 {/* Remember & Forgot Password */}
@@ -326,6 +416,7 @@ export default function LoginPage() {
                   <Button
                     variant="outline"
                     type="button"
+                    onClick={() => handleGoogleLogin()}
                     className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
                   >
                     <Chrome className="h-4 w-4 mr-2" />

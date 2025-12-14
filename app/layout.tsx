@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { PageTransitionLoader } from "@/components/page-transition-loader"
 import { AIAssistant } from "@/components/ai-assistant"
+// import { GoogleOAuthProvider } from "@react-oauth/google"
 import "./globals.css"
 
 const inter = Inter({ 
@@ -46,11 +47,13 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body className="font-sans antialiased bg-background text-foreground">
+        {/* <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}> */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <PageTransitionLoader />
           <AIAssistant />
           {children}
         </ThemeProvider>
+        {/* </GoogleOAuthProvider> */}
         <Analytics />
       </body>
     </html>

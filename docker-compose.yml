@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: edugame
+      POSTGRES_USER: edugame
+      POSTGRES_PASSWORD: edugame_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./edu_game
+      dockerfile: Dockerfile
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DEBUG: "False"
+      DATABASE_URL: postgres://edugame:edugame_password@db:5432/edugame
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./edu_game:/app
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000
+      NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+    depends_on:
+      - backend
+    volumes:
+      - ./:/app
+
+volumes:
+  postgres_data:

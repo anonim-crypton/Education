@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback, memo } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { register, storeTokens, type ApiError } from "@/lib/api";
+// import { useGoogleLogin } from "@react-oauth/google";
 import {
   Lock,
   Mail,
@@ -37,6 +40,7 @@ interface Particle {
 }
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,6 +49,7 @@ export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Password validation
   const passwordRequirements = {
@@ -72,16 +77,38 @@ export default function RegisterPage() {
   }, []);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
       if (!isFormValid) return;
+      
+      setErrors({});
       setIsLoading(true);
-      setTimeout(() => {
-        console.log("Sign Up:", { username, schoolName, email, password });
-        // Show success modal
+
+      try {
+        await register({
+          username,
+          email,
+          password,
+          password_confirm: password,
+          school_name: schoolName,
+        });
         setShowSuccessModal(true);
+      } catch (error: unknown) {
+        const apiError = error as ApiError;
+        if (apiError.errors) {
+          const formattedErrors: Record<string, string> = {};
+          Object.entries(apiError.errors).forEach(([field, messages]) => {
+            formattedErrors[field] = Array.isArray(messages) 
+              ? messages[0] 
+              : messages as string;
+          });
+          setErrors(formattedErrors);
+        } else {
+          setErrors({ general: "Registration failed. Please try again." });
+        }
+      } finally {
         setIsLoading(false);
-      }, 800);
+      }
     },
     [email, password, username, schoolName, isFormValid]
   );
@@ -90,6 +117,43 @@ export default function RegisterPage() {
     setShowSuccessModal(false);
     // Redirect to login page
     window.location.href = "/login";
+  };
+
+  // const googleRegisterHandler = useGoogleLogin({
+  //   onSuccess: async (codeResponse) => {
+  //     try {
+  //       setIsLoading(true);
+  //       setErrors({});
+  //       const response = await googleRegister(codeResponse.access_token, schoolName);
+  //       storeTokens(response.access, response.refresh);
+  //       setShowSuccessModal(true);
+  //       setTimeout(() => {
+  //         router.push("/dashboard");
+  //       }, 2000);
+  //     } catch (error: unknown) {
+  //       const apiError = error as ApiError;
+  //       if (apiError.errors) {
+  //         const formattedErrors: Record<string, string> = {};
+  //         Object.entries(apiError.errors).forEach(([field, messages]) => {
+  //           formattedErrors[field] = Array.isArray(messages)
+  //             ? messages[0]
+  //             : messages as string;
+  //         });
+  //         setErrors(formattedErrors);
+  //       } else {
+  //         setErrors({ general: "Google registration failed. Please try again." });
+  //       }
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   },
+  //   onError: () => {
+  //     setErrors({ general: "Google registration failed" });
+  //   },
+  // });
+
+  const handleGoogleRegister = () => {
+    setErrors({ general: "Google registration coming soon" });
   };
 
   return (
@@ -191,6 +255,17 @@ export default function RegisterPage() {
                 className="space-y-4"
                 key="signup-form"
               >
+                {/* General Error */}
+                {errors.general && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg"
+                  >
+                    <p className="text-sm text-red-400">{errors.general}</p>
+                  </motion.div>
+                )}
+
                 {/* Username */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -207,11 +282,21 @@ export default function RegisterPage() {
                       type="text"
                       placeholder="Username"
                       value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                        if (errors.username) {
+                          setErrors({ ...errors, username: "" });
+                        }
+                      }}
+                      className={`pl-10 bg-zinc-950 text-zinc-50 placeholder:text-zinc-600 ${
+                        errors.username ? "border-red-500" : "border-zinc-800"
+                      }`}
                       required
                     />
                   </div>
+                  {errors.username && (
+                    <p className="text-xs text-red-400">{errors.username}</p>
+                  )}
                 </motion.div>
 
                 {/* School Name */}
@@ -262,11 +347,21 @@ export default function RegisterPage() {
                       type="email"
                       placeholder="you@example.com"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (errors.email) {
+                          setErrors({ ...errors, email: "" });
+                        }
+                      }}
+                      className={`pl-10 bg-zinc-950 text-zinc-50 placeholder:text-zinc-600 ${
+                        errors.email ? "border-red-500" : "border-zinc-800"
+                      }`}
                       required
                     />
                   </div>
+                  {errors.email && (
+                    <p className="text-xs text-red-400">{errors.email}</p>
+                  )}
                 </motion.div>
 
                 {/* Password Input */}
@@ -285,9 +380,16 @@ export default function RegisterPage() {
                       type={showPassword ? "text" : "password"}
                       placeholder="Kamida 8 ta belgi, raqam, katta harf va maxsus belgi"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        if (errors.password) {
+                          setErrors({ ...errors, password: "" });
+                        }
+                      }}
                       className={`pl-10 pr-10 bg-zinc-950 text-zinc-50 placeholder:text-zinc-600 ${
-                        password && !isPasswordValid
+                        errors.password 
+                          ? "border-red-500"
+                          : password && !isPasswordValid
                           ? "border-red-500"
                           : password && isPasswordValid
                           ? "border-green-500"
@@ -310,6 +412,9 @@ export default function RegisterPage() {
                       )}
                     </button>
                   </div>
+                  {errors.password && (
+                    <p className="text-xs text-red-400">{errors.password}</p>
+                  )}
 
                   {/* Password Requirements Checker */}
                   {password && (
@@ -465,6 +570,7 @@ export default function RegisterPage() {
                   <Button
                     variant="outline"
                     type="button"
+                    onClick={() => handleGoogleRegister()}
                     className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
                   >
                     <Chrome className="h-4 w-4 mr-2" />
