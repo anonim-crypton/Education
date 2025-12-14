@@ -1,10 +1,21 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback, memo } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Link from "next/link"
-import { Lock, Mail, Eye, EyeOff, ArrowLeft, Sparkles, User, Send, Chrome, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect, useCallback, memo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import {
+  Lock,
+  Mail,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+  Sparkles,
+  User,
+  Send,
+  Chrome,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -12,47 +23,63 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface Particle {
-  id: number
-  left: number
-  top: number
-  duration: number
-  delay: number
+  id: number;
+  left: number;
+  top: number;
+  duration: number;
+  delay: number;
 }
 
 export default function RegisterPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [fullName, setFullName] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [particles, setParticles] = useState<Particle[]>([])
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [schoolName, setSchoolName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  // Password validation
+  const passwordRequirements = {
+    minLength: password.length >= 8,
+    hasUpperCase: /[A-Z]/.test(password),
+    hasLowerCase: /[a-z]/.test(password),
+    hasNumber: /\d/.test(password),
+    hasSpecialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+  };
+
+  const isPasswordValid = Object.values(passwordRequirements).every(Boolean);
+  const isFormValid =
+    fullName.trim() && schoolName.trim() && email.trim() && isPasswordValid;
 
   useEffect(() => {
-    // Generate particles only on client side
-    const generatedParticles: Particle[] = [...Array(20)].map((_, i) => ({
+    // Generate particles only on client side (kamaytirilgan: 20 dan 8 ga)
+    const generatedParticles: Particle[] = [...Array(8)].map((_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
-      duration: 3 + Math.random() * 3,
-      delay: Math.random() * 2,
-    }))
-    setParticles(generatedParticles)
-  }, [])
+      duration: 4 + Math.random() * 2,
+      delay: Math.random() * 1,
+    }));
+    setParticles(generatedParticles);
+  }, []);
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setTimeout(() => setIsLoading(false), 1500)
-    console.log("Sign Up:", { fullName, email, password, confirmPassword })
-  }, [email, password, fullName, confirmPassword])
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!isFormValid) return;
+      setIsLoading(true);
+      setTimeout(() => setIsLoading(false), 800);
+      console.log("Sign Up:", { fullName, schoolName, email, password });
+    },
+    [email, password, fullName, schoolName, isFormValid]
+  );
 
   return (
     <section className="relative min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center px-4 py-12 overflow-hidden">
@@ -65,22 +92,22 @@ export default function RegisterPage() {
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Animated Gradient Orbs */}
+      {/* Animated Gradient Orbs (Optimized) */}
       <motion.div
         className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl"
         animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
+          x: [0, 50, 0],
+          y: [0, 25, 0],
         }}
-        transition={{ duration: 10, repeat: Infinity }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-accent/20 to-primary/10 rounded-full blur-3xl"
         animate={{
-          x: [0, -100, 0],
-          y: [0, -50, 0],
+          x: [0, -50, 0],
+          y: [0, -25, 0],
         }}
-        transition={{ duration: 12, repeat: Infinity }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Floating particles */}
@@ -146,7 +173,11 @@ export default function RegisterPage() {
 
           <CardContent className="grid gap-4">
             <AnimatePresence mode="wait">
-              <form onSubmit={handleSubmit} className="space-y-4" key="signup-form">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4"
+                key="signup-form"
+              >
                 {/* Full Name */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -168,6 +199,38 @@ export default function RegisterPage() {
                       required
                     />
                   </div>
+                </motion.div>
+
+                {/* School Name */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="grid gap-2"
+                >
+                  <Label htmlFor="school" className="text-zinc-300">
+                    Maktabingiz nomi
+                  </Label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                    <Input
+                      id="school"
+                      type="text"
+                      placeholder="Masalan: 1-maktab, Xorazm maktabi"
+                      value={schoolName}
+                      onChange={(e) => setSchoolName(e.target.value)}
+                      className={`pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600 ${
+                        schoolName.trim() === "" && schoolName !== ""
+                          ? "border-red-500"
+                          : ""
+                      }`}
+                      required
+                    />
+                  </div>
+                  {schoolName && schoolName.trim() === "" && (
+                    <p className="text-xs text-red-400 mt-1">
+                      Maktab nomi to'g'ri kiritilib bo'lmadi
+                    </p>
+                  )}
                 </motion.div>
 
                 {/* Email Input */}
@@ -207,15 +270,23 @@ export default function RegisterPage() {
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="••••••••"
+                      placeholder="Kamida 8 ta belgi, raqam, katta harf va maxsus belgi"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                      className={`pl-10 pr-10 bg-zinc-950 text-zinc-50 placeholder:text-zinc-600 ${
+                        password && !isPasswordValid
+                          ? "border-red-500"
+                          : password && isPasswordValid
+                          ? "border-green-500"
+                          : "border-zinc-800"
+                      }`}
                       required
                     />
                     <button
                       type="button"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                       className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
                       onClick={() => setShowPassword((v) => !v)}
                     >
@@ -226,47 +297,121 @@ export default function RegisterPage() {
                       )}
                     </button>
                   </div>
-                </motion.div>
 
-                {/* Confirm Password */}
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="grid gap-2"
-                >
-                  <Label htmlFor="confirm-password" className="text-zinc-300">
-                    Parolni tasdiqlang
-                  </Label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                    <Input
-                      id="confirm-password"
-                      type={showConfirmPassword ? "text" : "password"}
-                      placeholder="••••••••"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                      required
-                    />
-                    <button
-                      type="button"
-                      aria-label={showConfirmPassword ? "Hide password" : "Show password"}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
-                      onClick={() => setShowConfirmPassword((v) => !v)}
+                  {/* Password Requirements Checker */}
+                  {password && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="mt-3 p-3 bg-zinc-900/50 rounded-lg border border-zinc-800"
                     >
-                      {showConfirmPassword ? (
-                        <EyeOff className="h-4 w-4" />
-                      ) : (
-                        <Eye className="h-4 w-4" />
-                      )}
-                    </button>
-                  </div>
+                      <p className="text-xs text-zinc-400 mb-2 font-semibold">
+                        Parol talablari:
+                      </p>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div
+                            className={`w-3 h-3 rounded-full ${
+                              passwordRequirements.minLength
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          />
+                          <span
+                            className={`text-xs ${
+                              passwordRequirements.minLength
+                                ? "text-green-400"
+                                : "text-red-400"
+                            }`}
+                          >
+                            Kamida 8 ta belgi
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <div
+                            className={`w-3 h-3 rounded-full ${
+                              passwordRequirements.hasUpperCase
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          />
+                          <span
+                            className={`text-xs ${
+                              passwordRequirements.hasUpperCase
+                                ? "text-green-400"
+                                : "text-red-400"
+                            }`}
+                          >
+                            Katta harf (A-Z)
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <div
+                            className={`w-3 h-3 rounded-full ${
+                              passwordRequirements.hasLowerCase
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          />
+                          <span
+                            className={`text-xs ${
+                              passwordRequirements.hasLowerCase
+                                ? "text-green-400"
+                                : "text-red-400"
+                            }`}
+                          >
+                            Kichik harf (a-z)
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <div
+                            className={`w-3 h-3 rounded-full ${
+                              passwordRequirements.hasNumber
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          />
+                          <span
+                            className={`text-xs ${
+                              passwordRequirements.hasNumber
+                                ? "text-green-400"
+                                : "text-red-400"
+                            }`}
+                          >
+                            Raqam (0-9)
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <div
+                            className={`w-3 h-3 rounded-full ${
+                              passwordRequirements.hasSpecialChar
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                            }`}
+                          />
+                          <span
+                            className={`text-xs ${
+                              passwordRequirements.hasSpecialChar
+                                ? "text-green-400"
+                                : "text-red-400"
+                            }`}
+                          >
+                            Maxsus belgi (!@#$%^&* va h.k.)
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
                 </motion.div>
 
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={isLoading || !isFormValid}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
@@ -275,7 +420,11 @@ export default function RegisterPage() {
                     <span className="flex items-center justify-center gap-2">
                       <motion.div
                         animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
                       >
                         <Sparkles className="w-4 h-4" />
                       </motion.div>
@@ -334,5 +483,5 @@ export default function RegisterPage() {
         </Card>
       </motion.div>
     </section>
-  )
+  );
 }

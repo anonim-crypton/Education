@@ -12,10 +12,56 @@ import {
   ArrowRightIcon,
 } from "@/components/animated-icons";
 
+// Icons8 SVG Icons
+const UsersIcon8 = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-5 h-5 text-blue-500"
+  >
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+const BooksIcon8 = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="w-5 h-5 text-blue-500"
+  >
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+  </svg>
+);
+
+const StarIcon8 = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-5 h-5 text-blue-500"
+  >
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </svg>
+);
+
 const stats = [
-  { value: "0+", label: "O'quvchilar", icon: UsersIcon },
-  { value: "0+", label: "Kurslar", icon: BookOpenIcon },
-  { value: "0%", label: "Muvaffaqiyat", icon: SparklesIcon },
+  { value: "10K+", label: "O'quvchilar", icon: UsersIcon8 },
+  { value: "50+", label: "Kurslar", icon: BooksIcon8 },
+  { value: "95%", label: "Muvaffaqiyat", icon: StarIcon8 },
 ] as const;
 
 const HeroHeaderContent = memo(function HeroHeaderContent() {
@@ -293,7 +339,7 @@ const StatItem = memo(function StatItem({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex items-center justify-center lg:justify-start gap-2 mb-1">
-        <stat.icon className="w-5 h-5 text-primary" isHovered={isHovered} />
+        <stat.icon />
         <span className="text-2xl sm:text-3xl font-bold text-foreground">
           {stat.value}
         </span>

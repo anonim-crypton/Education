@@ -21,7 +21,13 @@ import {
   MenuIcon,
   XIcon,
 } from "@/components/animated-icons";
-import { BookAIcon, BookUpIcon, CalculatorIcon, HistoryIcon, ScaleIcon } from "lucide-react";
+import {
+  BookAIcon,
+  BookUpIcon,
+  CalculatorIcon,
+  HistoryIcon,
+  ScaleIcon,
+} from "lucide-react";
 
 const courses = [
   {
@@ -51,7 +57,7 @@ const courses = [
   {
     title: "Huquq",
     description: "Beginer daraja",
-    icon:ScaleIcon ,
+    icon: ScaleIcon,
     href: "/courses/tarix",
   },
 ];
@@ -122,15 +128,15 @@ const NavbarComponent = () => {
             whileTap={{ scale: 0.98 }}
           >
             <motion.div
-              className="w-12 h-12 rounded-lg overflow-hidden flex items-center justify-center shadow-md bg-slate-100 dark:bg-transparent"
+              className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center shadow-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
               whileHover={{ scale: 1.05 }}
             >
               <Image
-                src="/Education.jpg.png"
+                src="/education.png"
                 alt="Edugame"
-                width={48}
-                height={48}
-                className="w-full h-full object-cover dark:brightness-100 brightness-150 contrast-125"
+                width={40}
+                height={40}
+                className="w-full h-full object-cover"
               />
             </motion.div>
             <span className="text-xl font-bold text-foreground">
@@ -331,12 +337,12 @@ const NavbarComponent = () => {
         )}
       </AnimatePresence>
     </motion.nav>
-    );
-    };
+  );
+};
 
-    export const Navbar = memo(NavbarComponent);
+export const Navbar = memo(NavbarComponent);
 
-    const CourseDropdownItem = memo(function CourseDropdownItem({
+const CourseDropdownItem = memo(function CourseDropdownItem({
   course,
   index,
 }: {

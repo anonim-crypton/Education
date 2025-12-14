@@ -27,20 +27,20 @@ interface Particle {
 }
 
 export default function LoginPage() {
-   const [showPassword, setShowPassword] = useState(false)
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const [particles, setParticles] = useState<Particle[]>([])
 
   useEffect(() => {
-    // Generate particles only on client side
-    const generatedParticles: Particle[] = [...Array(20)].map((_, i) => ({
+    // Generate particles only on client side (kamaytirilgan: 20 dan 8 ga)
+    const generatedParticles: Particle[] = [...Array(8)].map((_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
-      duration: 3 + Math.random() * 3,
-      delay: Math.random() * 2,
+      duration: 4 + Math.random() * 2,
+      delay: Math.random() * 1,
     }))
     setParticles(generatedParticles)
   }, [])
@@ -48,9 +48,9 @@ export default function LoginPage() {
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    setTimeout(() => setIsLoading(false), 1500)
-    console.log("Login:", { email, password })
-  }, [email, password])
+    setTimeout(() => setIsLoading(false), 800)
+    console.log("Login:", { username, password })
+  }, [username, password])
 
   return (
     <section className="relative min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center px-4 py-12 overflow-hidden">
@@ -63,22 +63,22 @@ export default function LoginPage() {
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
       />
 
-      {/* Animated Gradient Orbs */}
+      {/* Animated Gradient Orbs (Optimized) */}
       <motion.div
         className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-3xl"
         animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
+          x: [0, 50, 0],
+          y: [0, 25, 0],
         }}
-        transition={{ duration: 10, repeat: Infinity }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-accent/20 to-primary/10 rounded-full blur-3xl"
         animate={{
-          x: [0, -100, 0],
-          y: [0, -50, 0],
+          x: [0, -50, 0],
+          y: [0, -25, 0],
         }}
-        transition={{ duration: 12, repeat: Infinity }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Floating particles */}
@@ -174,23 +174,23 @@ export default function LoginPage() {
             <AnimatePresence mode="wait">
               <form onSubmit={handleSubmit} className="space-y-4" key="login-form">
 
-                {/* Email Input */}
+                {/* Username Input */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="grid gap-2"
                 >
-                  <Label htmlFor="email" className="text-zinc-300">
-                    Email
+                  <Label htmlFor="username" className="text-zinc-300">
+                    Foydalanuvchi nomi
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      id="username"
+                      type="text"
+                      placeholder="Sizning foydalanuvchi nomingiz"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
                       required
                     />

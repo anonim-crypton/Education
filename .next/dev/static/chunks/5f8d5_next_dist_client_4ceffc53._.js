@@ -3175,6 +3175,7 @@ function AppContainer({ children }) {
                                             ("TURBOPACK compile-time value", 3840)
                                         ]),
                                         "imageSizes": ("TURBOPACK compile-time value", [
+                                            ("TURBOPACK compile-time value", 16),
                                             ("TURBOPACK compile-time value", 32),
                                             ("TURBOPACK compile-time value", 48),
                                             ("TURBOPACK compile-time value", 64),
@@ -3189,7 +3190,7 @@ function AppContainer({ children }) {
                                         "path": ("TURBOPACK compile-time value", "/_next/image"),
                                         "loader": ("TURBOPACK compile-time value", "default"),
                                         "dangerouslyAllowSVG": ("TURBOPACK compile-time value", false),
-                                        "unoptimized": ("TURBOPACK compile-time value", true),
+                                        "unoptimized": ("TURBOPACK compile-time value", false),
                                         "domains": ("TURBOPACK compile-time value", []),
                                         "remotePatterns": ("TURBOPACK compile-time value", []),
                                         "localPatterns": ("TURBOPACK compile-time value", [

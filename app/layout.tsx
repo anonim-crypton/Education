@@ -1,12 +1,17 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Geist_Mono } from "next/font/google"
+import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { PageTransitionLoader } from "@/components/page-transition-loader"
 import "./globals.css"
 
-const _inter = Inter({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const inter = Inter({ 
+  subsets: ["latin"], 
+  preload: true, 
+  variable: "--font-sans",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "EduLearn - Ta'lim Platformasi",
@@ -14,7 +19,19 @@ export const metadata: Metadata = {
   generator: 'v0.app',
   icons: {
     icon: "/Education.jpg.png",
-  }
+  },
+  openGraph: {
+    title: "EduLearn - Ta'lim Platformasi",
+    description: "Zamonaviy onlayn ta'lim platformasi",
+    type: "website",
+  },
+}
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
@@ -23,9 +40,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="uz" suppressHydrationWarning>
-      <body className="font-sans antialiased">
+    <html lang="uz" suppressHydrationWarning style={{ colorScheme: "light dark" }}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      </head>
+      <body className="font-sans antialiased bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <PageTransitionLoader />
           {children}
         </ThemeProvider>
         <Analytics />
