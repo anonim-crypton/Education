@@ -24,7 +24,7 @@ const FloatingAiAssistant = () => {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const maxChars = 2000;
-  const chatRef = useRef(null);
+  const chatRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
 

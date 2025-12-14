@@ -1,52 +1,53 @@
-# EduLearn - Ta'lim Platformasi
+# EduLearn - Onlayn Ta'lim Platformasi
 
-A modern online education platform with secure user authentication and Google OAuth integration.
+Zamonaviy onlayn ta'lim platformasi, foydalanuvchi autentifikatsiyasi va Google OAuth integratsiyasi bilan.
 
-## Tech Stack
+## Texnologiyalar
 
 ### Frontend
-- **Next.js 16** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Animation library
-- **React OAuth Google** - Google authentication
+- **Next.js 16** – App Router bilan React framework
+- **TypeScript** – Type-safe rivojlantirish
+- **Tailwind CSS** – Utility-first CSS framework
+- **Framer Motion** – Animatsiya kutubxonasi
+- **React OAuth Google** – Google autentifikatsiyasi
 
 ### Backend
-- **Django 5.2** - Python web framework
-- **Django REST Framework** - RESTful API
-- **SQLite** - Database (development)
-- **Token Authentication** - Secure API endpoints
+- **Python** – Versiya 3.11.4
+- **Django** – Versiya 5.2.9
+- **Django REST Framework** – RESTful API yaratish uchun
+- **SQLite** – Ma’lumotlar bazasi (ishlab chiqish uchun)
+- **Token Authentication** – API endpointlarni xavfsiz qilish
 
-## Features Implemented
+## Amalga oshirilgan funksiyalar
 
-### Authentication
-- ✅ User registration with validation
-- ✅ User login with secure tokens
-- ✅ Google OAuth 2.0 integration
-- ✅ Password strength validation (8+ chars, uppercase, lowercase, number, special char)
-- ✅ School name tracking during registration
-- ✅ Token-based API authentication
+### Autentifikatsiya
+- ✅ Foydalanuvchi ro‘yxatdan o‘tishi (validatsiya bilan)
+- ✅ Foydalanuvchi tizimga kirishi (token bilan)
+- ✅ Google OAuth 2.0 integratsiyasi
+- ✅ Parol kuchi tekshiruvi (kamida 8 ta belgidan, katta va kichik harf, raqam, maxsus belgi)
+- ✅ Ro‘yxatdan o‘tishda maktab nomi saqlash
+- ✅ Token asosidagi API autentifikatsiyasi
 
-### User Management
-- ✅ Custom user model with school information
-- ✅ User profile endpoint
-- ✅ Logout functionality
-- ✅ Admin panel for user management
+### Foydalanuvchi boshqaruvi
+- ✅ Maxsus foydalanuvchi modeli (maktab ma’lumotlari bilan)
+- ✅ Foydalanuvchi profili API endpoint
+- ✅ Chiqish (logout) funksiyasi
+- ✅ Admin paneli orqali foydalanuvchilarni boshqarish
 
-### Security
-- ✅ CORS protection
-- ✅ Token-based authentication
-- ✅ Password hashing
-- ✅ Input validation
+### Xavfsizlik
+- ✅ CORS himoyasi
+- ✅ Token asosidagi autentifikatsiya
+- ✅ Parol hashing
+- ✅ Kiruvchi ma’lumotlarni validatsiya qilish
 
-## Quick Start
+## Tez ishga tushirish
 
-### Prerequisites
+### Talablar
 - Python 3.11+
 - Node.js 18+
-- Google OAuth Client ID (for Google login)
+- Google OAuth Client ID (Google login uchun)
 
-### Backend Setup
+### Backend sozlash
 
 ```bash
 cd edu_game
@@ -55,122 +56,44 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
-```
 
-Backend runs at: `http://localhost:8000`
 
-### Frontend Setup
+### Frontend sozlash 
 
-```bash
 npm install
 npm run dev
-```
 
-Frontend runs at: `http://localhost:3000`
 
-## Environment Variables
-
-### Frontend (.env.local)
-```
-NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
-```
-
-### Backend (edu_game/.env)
-```
-DJANGO_SECRET_KEY=your-secret-key
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-```
-
-## API Documentation
-
-See [SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md) for detailed API endpoints and testing instructions.
-
-## Project Structure
-
-```
+### Loyihaning tuzilishi 
 Education/
-├── app/                           # Next.js app directory
-│   ├── login/                     # Login page
-│   ├── register/                  # Register page
-│   ├── layout.tsx                 # Root layout with Google OAuth
+├── app/                           # Next.js ilova katalogi
+│   ├── login/                     # Login sahifa
+│   ├── register/                  # Ro‘yxatdan o‘tish sahifasi
+│   ├── layout.tsx                 # Google OAuth bilan root layout
 │   └── ...
-├── components/                    # React components
-├── lib/                           # Utilities
-│   └── api.ts                     # API client functions
-├── edu_game/                      # Django project
+├── components/                    # Qayta ishlatiladigan React komponentlari
+├── lib/                           # Foydali utilitilar
+│   └── api.ts                     # API client funksiyalari
+├── edu_game/                      # Django loyihasi
 │   ├── users/                     # Users app
-│   │   ├── models.py              # CustomUser model
+│   │   ├── models.py              # CustomUser modeli
 │   │   ├── views.py               # API views
-│   │   ├── serializers.py         # DRF serializers
-│   │   ├── urls.py                # App URLs
-│   │   ├── admin.py               # Admin configuration
-│   │   └── signals.py             # Token creation signal
+│   │   ├── serializers.py         # DRF serializerlar
+│   │   ├── urls.py                # App URL-lari
+│   │   ├── admin.py               # Admin konfiguratsiyasi
+│   │   └── signals.py             # Token yaratish signalari
 │   ├── edu_game/                  # Project settings
-│   │   ├── settings.py            # Django settings
-│   │   └── urls.py                # Project URLs
+│   │   ├── settings.py            # Django sozlamalari
+│   │   └── urls.py                # Project URL-lari
 │   └── manage.py
-├── SETUP_INSTRUCTIONS.md          # Detailed setup guide
+├── SETUP_INSTRUCTIONS.md          # Batafsil sozlash ko‘rsatmalari
 └── README.md
-```
 
-## Key Changes Made
 
-1. **Django Backend**
-   - Created `CustomUser` model extending Django's AbstractUser with `school_name`
-   - Implemented REST API endpoints for registration, login, and Google OAuth
-   - Added CORS headers for frontend communication
-   - Configured token-based authentication
 
-2. **Frontend Integration**
-   - Updated Login/Register pages to use API endpoints
-   - Implemented Google OAuth using `@react-oauth/google`
-   - Added proper error handling and validation
-   - Store authentication tokens in localStorage
 
-3. **API Client**
-   - Created `lib/api.ts` with functions for all auth operations
-   - Support for traditional and Google OAuth flows
-   - Token management utilities
 
-## Database Schema
 
-### CustomUser
-- Extends Django's AbstractUser
-- `school_name` - CharField, required
-- `created_at` - DateTime (auto)
-- `updated_at` - DateTime (auto)
 
-## Next Steps
-
-1. Configure Google OAuth credentials
-2. Deploy to production
-3. Add password reset functionality
-4. Implement email verification
-5. Add two-factor authentication
-
-## Troubleshooting
-
-### CORS Errors
-Ensure Django settings include your frontend URL in `CORS_ALLOWED_ORIGINS`
-
-### Database Errors
-```bash
-cd edu_game
-python manage.py makemigrations users
-python manage.py migrate
-```
-
-### Google OAuth Not Working
-- Verify Google Client ID in `.env.local`
-- Check redirect URIs in Google Cloud Console
-- Clear browser cache and try again
-
-## Support
-
-For detailed setup instructions, see [SETUP_INSTRUCTIONS.md](./SETUP_INSTRUCTIONS.md)
-
-## License
-
-MIT
+### Eng muximi
+Kod ishlashi uchun ikkala server ham run qilinishi kerak Backend ham Frontend ham chunarlimi !!!!

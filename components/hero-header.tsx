@@ -336,7 +336,7 @@ const StatItem = memo(function StatItem({
   stat,
   index,
 }: {
-  stat: (typeof stats)[0];
+  stat: typeof stats[number];
   index: number;
 }) {
   const [isHovered, setIsHovered] = useState(false);
