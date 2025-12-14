@@ -99,6 +99,17 @@ def logout_view(request):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def dashboard_view(request):
+    """Get user dashboard data"""
+    serializer = UserSerializer(request.user)
+    return Response({
+        'success': True,
+        'user': serializer.data
+    }, status=status.HTTP_200_OK)
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def google_login_view(request):

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { getAccessToken, clearTokens } from "@/lib/api";
 import {
   HomeIcon,
   BookOpenIcon,
@@ -28,6 +29,7 @@ import {
   CalculatorIcon,
   HistoryIcon,
   ScaleIcon,
+  LogOut,
 } from "lucide-react";
 
 const courses = [
@@ -76,9 +78,12 @@ const NavbarComponent = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const accountMenuRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -96,10 +101,41 @@ const NavbarComponent = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Check if user is logged in and open mobile menu if needed
+  // Check if user is logged in and fetch user data
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedIn);
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+
+    const token = getAccessToken();
+    
+    if (token) {
+      setIsLoggedIn(true);
+      // Fetch user profile data
+      fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/users/profile/`,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`API error: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          if (data.user) {
+            setUserData(data.user);
+          }
+        })
+        .catch((err) => console.log("Error fetching profile:", err));
+    } else {
+      setIsLoggedIn(false);
+    }
 
     const shouldOpen = localStorage.getItem("shouldOpenNav") === "true";
     if (shouldOpen && window.innerWidth < 1024) {
@@ -120,6 +156,26 @@ const NavbarComponent = () => {
       setIsDropdownOpen(false);
     }, 150);
   };
+
+  // Handle account menu click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        accountMenuRef.current &&
+        !accountMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsAccountMenuOpen(false);
+      }
+    };
+
+    if (isAccountMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAccountMenuOpen]);
 
   return (
     <motion.nav
@@ -244,78 +300,209 @@ const NavbarComponent = () => {
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
             {/* Auth Buttons */}
-            <div className="hidden sm:flex items-center gap-2">
-              {isLoggedIn ? (
-                <>
-                  <span className="text-sm text-foreground/70">
-                    {localStorage.getItem("username")}
-                  </span>
-                  <motion.button
-                    onClick={() => {
-                      localStorage.removeItem("isLoggedIn")
-                      localStorage.removeItem("username")
-                      localStorage.removeItem("shouldOpenNav")
-                      window.location.href = "/"
-                    }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
-                  >
-                    Chiqish
-                  </motion.button>
-                </>
-              ) : (
-                <>
-                  <Link href="/login">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
-                    >
-                      Kirish
-                    </motion.button>
-                  </Link>
-                  <Link href="/register">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
-                    >
-                      Ro'yxatdan o'tish
-                    </motion.button>
-                  </Link>
-                </>
-              )}
-            </div>
+              <div className="hidden sm:flex items-center gap-3">
+                {/* Conditional: Show Login/Register when not logged in */}
+                {!isLoggedIn && (
+                  <>
+                    <Link href="/login">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                      >
+                        Kirish
+                      </motion.button>
+                    </Link>
+                    <Link href="/register">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                      >
+                        Ro'yxatdan o'tish
+                      </motion.button>
+                    </Link>
+                  </>
+                )}
 
-            {/* Mobile Register/Auth Button */}
-            <div className="sm:hidden">
-              {isLoggedIn ? (
-                <motion.button
-                  onClick={() => {
-                    localStorage.removeItem("isLoggedIn")
-                    localStorage.removeItem("username")
-                    localStorage.removeItem("shouldOpenNav")
-                    window.location.href = "/"
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
-                >
-                  Chiqish
-                </motion.button>
-              ) : (
-                <Link href="/register">
+                {/* Show Teacher button and Account when logged in */}
+                {isLoggedIn && (
+                  <>
+                    {/* O'qituvchi bo'lish button */}
+                    <Link href="/become-teacher">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="rounded-xl bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                      >
+                        O'qituvchi bo'lish
+                      </motion.button>
+                    </Link>
+                  </>
+                )}
+
+                {/* User Account Menu - Only show when logged in */}
+                {isLoggedIn && (
+                <div className="relative" ref={accountMenuRef}>
                   <motion.button
+                    onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
+                    className={cn(
+                      "flex items-center gap-2.5 pl-3 border-l border-border rounded-xl px-2.5 py-1.5 transition-all duration-200",
+                      isAccountMenuOpen
+                        ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-500/50 shadow-lg shadow-blue-500/20"
+                        : "hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 hover:border-blue-500/30"
+                    )}
                   >
-                    Ro'yxatdan o'tish
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-semibold shadow-md ring-2 ring-blue-500/30">
+                      {userData?.first_name
+                        ? userData.first_name.charAt(0).toUpperCase()
+                        : userData?.username?.charAt(0).toUpperCase() || "U"}
+                    </div>
+                    <span className="text-sm font-medium text-foreground truncate max-w-[120px]">
+                      {userData?.first_name ||
+                        userData?.username ||
+                        "Foydalanuvchi"}
+                    </span>
+                    <svg
+                      className={cn(
+                        "w-4 h-4 transition-transform duration-200",
+                        isAccountMenuOpen && "rotate-180"
+                      )}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                      />
+                    </svg>
                   </motion.button>
-                </Link>
-              )}
-            </div>
+
+                  {/* Account Dropdown Menu */}
+                  <AnimatePresence>
+                    {isAccountMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.92 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.92 }}
+                        transition={{ duration: 0.25 }}
+                        className="absolute top-full right-0 mt-3 w-56 bg-card rounded-2xl shadow-2xl border border-blue-500/30 overflow-hidden backdrop-blur-sm bg-card/95"
+                      >
+                        {/* Header Section */}
+                        <div className="p-4 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-b border-blue-500/20">
+                          <p className="text-xs font-semibold text-blue-400 uppercase tracking-wide mb-2">
+                            Hisobingiz
+                          </p>
+                          <p className="text-sm font-bold text-foreground mb-1">
+                            {userData?.first_name || userData?.username || "Foydalanuvchi"}
+                          </p>
+                          {userData?.email && (
+                            <p className="text-xs text-muted-foreground">
+                              {userData.email}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Menu Items */}
+                        <div className="p-2 space-y-1">
+                          {isLoggedIn && (
+                            <>
+                              <Link href="/account-settings">
+                                <motion.button
+                                  whileHover={{ x: 4 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-foreground hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-blue-400/10 hover:text-blue-400 rounded-lg transition-all duration-200 text-left group"
+                                >
+                                  <svg
+                                    className="w-4 h-4 group-hover:text-blue-400 transition-colors"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                    />
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
+                                  </svg>
+                                  <span>Hisobni sozlash</span>
+                                </motion.button>
+                              </Link>
+
+                              <div className="my-2 border-t border-border/50"></div>
+
+                              <motion.button
+                                onClick={() => {
+                                  clearTokens();
+                                  setIsAccountMenuOpen(false);
+                                  router.push("/");
+                                }}
+                                whileHover={{ x: 4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-400 hover:bg-gradient-to-r hover:from-red-500/20 hover:to-red-400/10 hover:text-red-300 rounded-lg transition-all duration-200 text-left group"
+                              >
+                                <LogOut className="w-4 h-4 group-hover:text-red-300 transition-colors" />
+                                <span>Hisobdan chiqish</span>
+                              </motion.button>
+                            </>
+                          )}
+                          {!isLoggedIn && (
+                            <>
+                              <Link href="/login">
+                                <motion.button
+                                  whileHover={{ x: 4 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-foreground hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-blue-400/10 hover:text-blue-400 rounded-lg transition-all duration-200 text-left"
+                                >
+                                  <span>Kirish</span>
+                                </motion.button>
+                              </Link>
+                              <Link href="/register">
+                                <motion.button
+                                  whileHover={{ x: 4 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-blue-400 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-blue-400/10 rounded-lg transition-all duration-200 text-left"
+                                >
+                                  <span>Ro'yxatdan o'tish</span>
+                                </motion.button>
+                              </Link>
+                            </>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  </div>
+                  )}
+                  </div>
+
+            {/* Mobile Account Menu Button - Only show when logged in */}
+             {isLoggedIn && (
+             <div className="sm:hidden">
+               <motion.button
+                 onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.95 }}
+                 className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold shadow-lg"
+               >
+                 {userData?.first_name
+                   ? userData.first_name.charAt(0).toUpperCase()
+                   : userData?.username?.charAt(0).toUpperCase() || "U"}
+               </motion.button>
+             </div>
+             )}
 
             {/* Mobile Menu Button */}
             <motion.button

@@ -50,3 +50,239 @@
 [00:17:01.903] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765726787181}
 [00:17:05.117] Server  LOG      ✓ Compiled in 2.6s
 [00:17:21.250] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765726806498}
+[00:21:02.225] Server  LOG      ✓ Compiled in 344ms
+[00:21:28.173] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:29.324] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:21:29.834] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:21:29.834] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:21:29.835] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727055158}
+[00:21:32.320] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727057616}
+[00:21:48.236] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727073489}
+[00:23:24.143] Server  ERROR   (node:5972) Warning: Failed to load the ES module: C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__30b9674b._.js. Make sure to set "type": "module" in the nearest package.json file or use the .mjs extension.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[00:23:24.264] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.307] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.313] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.325] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.372] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.381] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.412] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.446] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.462] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.479] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.496] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.530] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__30b9674b._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.545] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.559] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.575] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.578] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.593] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.597] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.614] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.626] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.629] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.639] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.645] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:24.660] Server  ERROR    ⨯ Error: Failed to load chunk server/chunks/ssr/[root-of-the-server]__30b9674b._.js from runtime for chunk server/app/page.js
+[00:23:24.753] Server  LOG      ✓ Compiled in 1534ms
+[00:23:27.761] Server  LOG      ○ Compiling /_error ...
+[00:23:33.992] Server  ERROR   (node:5972) Warning: Failed to load the ES module: C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__30b9674b._.js. Make sure to set "type": "module" in the nearest package.json file or use the .mjs extension.
+[00:23:34.009] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.014] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.026] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.027] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.044] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.058] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.072] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.076] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.088] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.112] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.125] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.159] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__30b9674b._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.180] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.227] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.313] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.394] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.445] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.507] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.545] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.589] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.609] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.625] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.643] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:23:34.663] Server  ERROR    ⨯ Error: Failed to load chunk server/chunks/ssr/[root-of-the-server]__30b9674b._.js from runtime for chunk server/app/page.js
+[00:23:35.936] Browser ERROR   uncaughtError: Error: Failed to load chunk server/chunks/ssr/[root-of-the-server]__30b9674b._.js from runtime for chunk server/app/page.js
+[00:23:37.724] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:23:39.044] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:23:40.312] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:41.048] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:23:41.048] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:23:41.048] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:23:41.048] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727186372}
+[00:23:51.550] Server  LOG      ✓ Compiled in 1219ms
+[00:25:50.296] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:25:52.109] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:25:52.109] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:25:52.109] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727316594}
+[00:26:27.091] Server  LOG      ✓ Compiled in 582ms
+[00:26:32.344] Server  LOG      ✓ Compiled in 625ms
+[00:26:36.257] Server  LOG      ✓ Compiled in 551ms
+[00:27:24.538] Server  LOG      ✓ Compiled in 817ms
+[00:27:25.095] Browser LOG     Error fetching profile: {}
+[00:27:28.147] Server  LOG      ✓ Compiled in 907ms
+[00:27:28.373] Browser LOG     Error fetching profile: {}
+[00:27:39.310] Server  LOG      ✓ Compiled in 1108ms
+[00:27:59.166] Server  LOG      ✓ Compiled in 1695ms
+[00:28:08.107] Browser LOG     Error fetching profile: {}
+[00:28:08.107] Browser LOG     Error fetching profile: {}
+[00:28:49.295] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:50.845] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:28:50.845] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:28:50.845] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727496056}
+[00:28:50.845] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:28:51.210] Browser LOG     Error fetching profile: {}
+[00:29:04.292] Server  LOG      ✓ Compiled in 1398ms
+[00:29:07.427] Browser LOG     Error fetching profile: {}
+[00:29:07.427] Browser LOG     Error fetching profile: {}
+[00:29:09.586] Server  LOG      ✓ Compiled in 1038ms
+[00:30:36.099] Server  LOG      ✓ Compiled in 351ms
+[00:30:46.591] Server  LOG      ✓ Compiled in 973ms
+[00:30:50.325] Browser LOG     Error fetching profile: {}
+[00:30:50.325] Browser LOG     Error fetching profile: {}
+[00:30:52.483] Server  LOG      ✓ Compiled in 817ms
+[00:30:56.259] Server  LOG      ✓ Compiled in 922ms
+[00:32:57.247] Browser ERROR   {}
+[00:32:57.247] Browser LOG     Error fetching profile: {}
+[00:32:57.247] Browser LOG     Error fetching profile: {}
+[00:33:05.032] Server  LOG      ○ Compiling /account-settings ...
+[00:33:13.144] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727758394}
+[00:33:14.141] Browser ERROR   {}
+[00:33:14.141] Browser ERROR   {}
+[00:34:35.540] Server  LOG      ✓ Compiled in 386ms
+[00:34:36.096] Browser LOG     Error fetching profile: {}
+[00:34:40.035] Server  LOG      ✓ Compiled in 820ms
+[00:34:42.758] Server  LOG      ✓ Compiled in 540ms
+[00:34:57.902] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:59.095] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:34:59.095] Browser LOG     Error fetching profile: {}
+[00:34:59.095] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:34:59.095] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:34:59.095] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765727864148}
+[00:35:25.740] Server  LOG      ✓ Compiled in 448ms
+[00:36:45.888] Server  LOG      ✓ Compiled in 336ms
+[00:36:49.735] Server  LOG      ✓ Compiled in 384ms
+[00:36:52.425] Server  LOG      ✓ Compiled in 375ms
+[00:36:54.190] Browser LOG     Error fetching profile: {}
+[00:38:29.032] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:30.055] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:38:30.055] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:38:30.055] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:38:30.055] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728075381}
+[00:40:09.603] Server  LOG      ✓ Compiled in 601ms
+[00:40:32.067] Server  LOG      ✓ Compiled in 603ms
+[00:43:09.865] Server  LOG      ✓ Compiled in 438ms
+[00:45:28.948] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728494216}
+[00:45:31.079] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728496332}
+[00:45:45.500] Server  LOG      ✓ Compiled in 766ms
+[00:45:45.592] Browser ERROR   ./OneDrive/Documents/GitHub/Education/components/navbar.tsx:483:16
+Parsing ecmascript source code failed
+  481 |                   </AnimatePresence>
+  482 |                 </div>
+> 483 |               </div>
+      |                ^^^^^
+  484 |
+  485 |             {/* Mobile Account Menu Button */}
+  486 |              <div className="sm:hidden">
+
+Unterminated regexp literal
+
+Import trace:
+  Server Component:
+    ./OneDrive/Documents/GitHub/Education/components/navbar.tsx
+    ./OneDrive/Documents/GitHub/Education/app/page.tsx
+[00:45:46.309] Browser ERROR   ./OneDrive/Documents/GitHub/Education/components/navbar.tsx:483:16
+Parsing ecmascript source code failed
+  481 |                   </AnimatePresence>
+  482 |                 </div>
+> 483 |               </div>
+      |                ^^^^^
+  484 |
+  485 |             {/* Mobile Account Menu Button */}
+  486 |              <div className="sm:hidden">
+
+Unterminated regexp literal
+
+Import trace:
+  Server Component:
+    ./OneDrive/Documents/GitHub/Education/components/navbar.tsx
+    ./OneDrive/Documents/GitHub/Education/app/page.tsx
+[00:45:47.131] Browser ERROR   ./OneDrive/Documents/GitHub/Education/components/navbar.tsx:483:16
+Parsing ecmascript source code failed
+  481 |                   </AnimatePresence>
+  482 |                 </div>
+> 483 |               </div>
+      |                ^^^^^
+  484 |
+  485 |             {/* Mobile Account Menu Button */}
+  486 |              <div className="sm:hidden">
+
+Unterminated regexp literal
+
+Import trace:
+  Server Component:
+    ./OneDrive/Documents/GitHub/Education/components/navbar.tsx
+    ./OneDrive/Documents/GitHub/Education/app/page.tsx
+[00:46:00.363] Server  LOG      ✓ Compiled in 1158ms
+[00:46:17.495] Server  LOG      ✓ Compiled in 1778ms
+[00:46:18.398] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728543683}
+[00:46:20.692] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728545925}
+[00:46:27.086] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728552360}
+[00:46:28.913] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728554169}
+[00:46:33.758] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/register color: rgb(120, 120, 120) color: inherit {"dp":"/register","o":"http://localhost:3000/register","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728559043}
+[00:46:37.456] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728562703}
+[00:46:39.963] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728565255}
+[00:46:52.524] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728577709}
+[00:46:52.524] Browser ERROR   {}
+[00:46:52.675] Browser ERROR   {}
+[00:46:52.675] Browser LOG     Error fetching profile: {}
+[00:46:52.676] Browser LOG     Error fetching profile: {}
+[00:47:56.069] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728641338}
+[00:47:58.618] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728643743}
+[00:47:59.129] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728644418}
+[00:48:13.403] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:48:14.559] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:48:14.560] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:48:14.560] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:48:14.560] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728659889}
+[00:48:14.560] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728659890}
+[00:48:29.692] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728674914}
+[00:48:29.692] Browser ERROR   {}
+[00:48:29.880] Browser ERROR   {}
+[00:48:29.880] Browser LOG     Error fetching profile: {}
+[00:48:29.997] Browser LOG     Error fetching profile: {}
+[00:48:38.747] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:48:39.685] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:48:39.686] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:48:39.686] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:48:39.686] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728685008}
+[00:48:39.686] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728685009}
+[00:48:52.199] Server  LOG      ✓ Compiled in 757ms
+[00:49:05.962] Server  LOG      ✓ Compiled in 606ms
+[00:49:16.377] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728721697}
+[00:49:16.927] Browser ERROR   Error fetching profile: {}
+[00:49:16.927] Browser ERROR   Error fetching profile: {}
+[00:49:16.927] Browser LOG     Error fetching profile: {}
+[00:49:17.075] Browser LOG     Error fetching profile: {}
+[00:49:27.990] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:28.062] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728733154}
+[00:49:28.229] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:49:30.291] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:49:30.292] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:49:30.292] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728735612}
+[00:49:30.801] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728736043}
+[00:49:48.592] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:49.540] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:49:49.540] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:49:49.540] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765728754871}
+[00:50:00.839] Server  LOG      ✓ Compiled in 873ms
+[00:50:10.655] Server  LOG      ✓ Compiled in 854ms

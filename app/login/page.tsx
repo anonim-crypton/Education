@@ -73,8 +73,10 @@ export default function LoginPage() {
       try {
         const response = await login({ username, password });
         storeTokens(response.access, response.refresh);
+        // Loading animatsiya dashboard-ga redirect bo'lgungacha davom etadi
         router.push("/dashboard");
       } catch (error: unknown) {
+        setIsLoading(false);
         const apiError = error as ApiError;
         if (apiError.errors) {
           const formattedErrors: Record<string, string> = {};
@@ -87,8 +89,6 @@ export default function LoginPage() {
         } else {
           setErrors({ general: "Login failed. Please try again." });
         }
-      } finally {
-        setIsLoading(false);
       }
     },
     [username, password, router]
