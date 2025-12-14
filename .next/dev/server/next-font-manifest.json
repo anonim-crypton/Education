@@ -1,9 +1,12 @@
 {
   "app": {
-    "[project]/OneDrive/Documents/GitHub/Education/app/login/page": [
+    "[project]/OneDrive/Documents/GitHub/Education/app/contact/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
     "[project]/OneDrive/Documents/GitHub/Education/app/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/OneDrive/Documents/GitHub/Education/app/register/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ]
   },

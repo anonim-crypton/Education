@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, memo, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -71,10 +72,12 @@ const navLinks = [
 ];
 
 const NavbarComponent = () => {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -91,6 +94,18 @@ const NavbarComponent = () => {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Check if user is logged in and open mobile menu if needed
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+
+    const shouldOpen = localStorage.getItem("shouldOpenNav") === "true";
+    if (shouldOpen && window.innerWidth < 1024) {
+      setIsMobileMenuOpen(true);
+      localStorage.removeItem("shouldOpenNav");
+    }
   }, []);
 
   const handleMouseEnter = () => {
@@ -230,37 +245,76 @@ const NavbarComponent = () => {
           <div className="flex items-center gap-3">
             {/* Auth Buttons */}
             <div className="hidden sm:flex items-center gap-2">
-              <Link href="/login">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
-                >
-                  Kirish
-                </motion.button>
-              </Link>
-              <Link href="/register">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
-                >
-                  Ro'yxatdan o'tish
-                </motion.button>
-              </Link>
+              {isLoggedIn ? (
+                <>
+                  <span className="text-sm text-foreground/70">
+                    {localStorage.getItem("username")}
+                  </span>
+                  <motion.button
+                    onClick={() => {
+                      localStorage.removeItem("isLoggedIn")
+                      localStorage.removeItem("username")
+                      localStorage.removeItem("shouldOpenNav")
+                      window.location.href = "/"
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                  >
+                    Chiqish
+                  </motion.button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                    >
+                      Kirish
+                    </motion.button>
+                  </Link>
+                  <Link href="/register">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                    >
+                      Ro'yxatdan o'tish
+                    </motion.button>
+                  </Link>
+                </>
+              )}
             </div>
 
-            {/* Mobile Register Button */}
+            {/* Mobile Register/Auth Button */}
             <div className="sm:hidden">
-              <Link href="/register">
+              {isLoggedIn ? (
                 <motion.button
+                  onClick={() => {
+                    localStorage.removeItem("isLoggedIn")
+                    localStorage.removeItem("username")
+                    localStorage.removeItem("shouldOpenNav")
+                    window.location.href = "/"
+                  }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
+                  className="rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
                 >
-                  Ro'yxatdan o'tish
+                  Chiqish
                 </motion.button>
-              </Link>
+              ) : (
+                <Link href="/register">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
+                  >
+                    Ro'yxatdan o'tish
+                  </motion.button>
+                </Link>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -292,15 +346,17 @@ const NavbarComponent = () => {
           >
             <div className="px-4 py-4 space-y-2">
               {/* Mobile Login Button */}
-              <motion.a
-                href="/login"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0 }}
-                className="w-full rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer block text-center"
-              >
-                Kirish
-              </motion.a>
+              {!isLoggedIn && (
+                <motion.a
+                  href="/login"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0 }}
+                  className="w-full rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer block text-center"
+                >
+                  Kirish
+                </motion.a>
+              )}
 
               {navLinks.map((link, index) => (
                 <motion.div
@@ -349,20 +405,31 @@ const CourseDropdownItem = memo(function CourseDropdownItem({
   course: (typeof courses)[0];
   index: number;
 }) {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleCourseClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      router.push(course.href);
+    } else {
+      router.push("/register");
+    }
+  };
+
   return (
-    <motion.a
-      href={course.href}
+    <motion.div
+      onClick={handleCourseClick}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="flex items-start gap-3 p-3 rounded-xl hover:bg-secondary transition-colors group"
+      className="flex items-start gap-3 p-3 rounded-xl hover:bg-secondary transition-colors group cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-        <course.icon className="w-5 h-5 text-primary" isHovered={isHovered} />
+        <course.icon className="w-5 h-5 text-primary" />
       </div>
       <div>
         <h4 className="text-sm font-medium text-foreground">{course.title}</h4>
@@ -370,6 +437,6 @@ const CourseDropdownItem = memo(function CourseDropdownItem({
           {course.description}
         </p>
       </div>
-    </motion.a>
+    </motion.div>
   );
 });

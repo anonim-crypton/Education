@@ -3185,7 +3185,30 @@ function AppContainer({ children }) {
                                             ("TURBOPACK compile-time value", 384)
                                         ]),
                                         "qualities": ("TURBOPACK compile-time value", [
-                                            ("TURBOPACK compile-time value", 75)
+                                            ("TURBOPACK compile-time value", 75),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70),
+                                            ("TURBOPACK compile-time value", 70)
                                         ]),
                                         "path": ("TURBOPACK compile-time value", "/_next/image"),
                                         "loader": ("TURBOPACK compile-time value", "default"),
@@ -3444,7 +3467,9 @@ function doRender(input) {
                 callback,
                 onRootCommit
             ],
-            children: ("TURBOPACK compile-time falsy", 0) ? /*#__PURE__*/ "TURBOPACK unreachable" : elem
+            children: ("TURBOPACK compile-time truthy", 1) ? /*#__PURE__*/ (0, _jsxruntime.jsx)(_react.default.StrictMode, {
+                children: elem
+            }) : "TURBOPACK unreachable"
         }));
     return renderPromise;
 }

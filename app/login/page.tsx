@@ -1,10 +1,21 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback, memo } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import Link from "next/link"
-import { Lock, Mail, Eye, EyeOff, ArrowLeft, Sparkles, User, Send, Chrome, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect, useCallback, memo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import {
+  Lock,
+  Mail,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+  User,
+  Send,
+  Chrome,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
 import {
   Card,
   CardHeader,
@@ -12,26 +23,29 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface Particle {
-  id: number
-  left: number
-  top: number
-  duration: number
-  delay: number
+  id: number;
+  left: number;
+  top: number;
+  duration: number;
+  delay: number;
 }
 
 export default function LoginPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const [particles, setParticles] = useState<Particle[]>([])
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  // Form validation
+  const isFormValid = username.trim() && password.trim();
 
   useEffect(() => {
     // Generate particles only on client side (kamaytirilgan: 20 dan 8 ga)
@@ -41,16 +55,19 @@ export default function LoginPage() {
       top: Math.random() * 100,
       duration: 4 + Math.random() * 2,
       delay: Math.random() * 1,
-    }))
-    setParticles(generatedParticles)
-  }, [])
+    }));
+    setParticles(generatedParticles);
+  }, []);
 
-  const handleSubmit = useCallback((e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setTimeout(() => setIsLoading(false), 800)
-    console.log("Login:", { username, password })
-  }, [username, password])
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setTimeout(() => setIsLoading(false), 800);
+      console.log("Login:", { username, password });
+    },
+    [username, password]
+  );
 
   return (
     <section className="relative min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center px-4 py-12 overflow-hidden">
@@ -109,13 +126,15 @@ export default function LoginPage() {
         <span className="text-xs tracking-[0.14em] uppercase text-zinc-400">
           Edugame
         </span>
-        <Button
-          variant="outline"
-          className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/80"
-        >
-          <span className="mr-2">Aloqa</span>
-          <ArrowRight className="h-4 w-4" />
-        </Button>
+        <Link href="/contact">
+          <Button
+            variant="outline"
+            className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/80 cursor-pointer"
+          >
+            <span className="mr-2">Aloqa</span>
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
       </header>
 
       {/* Centered Login Card */}
@@ -156,24 +175,27 @@ export default function LoginPage() {
             </div>
 
             <AnimatePresence mode="wait">
-               <motion.div
-                 key="login"
-                 initial={{ opacity: 0, y: -10 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 exit={{ opacity: 0, y: -10 }}
-               >
-                 <CardTitle className="text-2xl">Xush kelibsiz</CardTitle>
-                 <CardDescription className="text-zinc-400">
-                   Akkauntingizga kiring va o'qishni boshlang
-                 </CardDescription>
-               </motion.div>
-             </AnimatePresence>
+              <motion.div
+                key="login"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+              >
+                <CardTitle className="text-2xl">Xush kelibsiz</CardTitle>
+                <CardDescription className="text-zinc-400">
+                  Akkauntingizga kiring va o'qishni boshlang
+                </CardDescription>
+              </motion.div>
+            </AnimatePresence>
           </CardHeader>
 
           <CardContent className="grid gap-4">
             <AnimatePresence mode="wait">
-              <form onSubmit={handleSubmit} className="space-y-4" key="login-form">
-
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4"
+                key="login-form"
+              >
                 {/* Username Input */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -181,14 +203,14 @@ export default function LoginPage() {
                   className="grid gap-2"
                 >
                   <Label htmlFor="username" className="text-zinc-300">
-                    Foydalanuvchi nomi
+                    Username
                   </Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                     <Input
                       id="username"
                       type="text"
-                      placeholder="Sizning foydalanuvchi nomingiz"
+                      placeholder="Username"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
@@ -219,7 +241,9 @@ export default function LoginPage() {
                     />
                     <button
                       type="button"
-                      aria-label={showPassword ? "Hide password" : "Show password"}
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                       className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
                       onClick={() => setShowPassword((v) => !v)}
                     >
@@ -243,11 +267,17 @@ export default function LoginPage() {
                       id="remember"
                       className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
                     />
-                    <Label htmlFor="remember" className="text-zinc-400 cursor-pointer">
+                    <Label
+                      htmlFor="remember"
+                      className="text-zinc-400 cursor-pointer"
+                    >
                       Eslab qol
                     </Label>
                   </div>
-                  <a href="#" className="text-sm text-zinc-300 hover:text-zinc-100">
+                  <a
+                    href="#"
+                    className="text-sm text-zinc-300 hover:text-zinc-100"
+                  >
                     Parolni unitdingizmi?
                   </a>
                 </motion.div>
@@ -255,24 +285,16 @@ export default function LoginPage() {
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  disabled={isLoading}
+                  disabled={isLoading || !isFormValid}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                  className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2 flex items-center justify-center"
                 >
                   {isLoading ? (
-                     <span className="flex items-center justify-center gap-2">
-                       <motion.div
-                         animate={{ rotate: 360 }}
-                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                       >
-                         <Sparkles className="w-4 h-4" />
-                       </motion.div>
-                       Yuklanmoqda...
-                     </span>
-                   ) : (
-                     "Kirish"
-                   )}
+                    <Loader className="w-5 h-5 text-zinc-900" />
+                  ) : (
+                    "Kirish"
+                  )}
                 </motion.button>
 
                 {/* Divider */}
@@ -316,12 +338,15 @@ export default function LoginPage() {
 
           <CardFooter className="flex items-center justify-center text-sm text-zinc-400">
             Akkauntingiz yo'qmi?
-            <Link href="/register" className="ml-1 text-zinc-200 hover:underline">
+            <Link
+              href="/register"
+              className="ml-1 text-zinc-200 hover:underline"
+            >
               Ro'yxatdan o'tish
             </Link>
           </CardFooter>
         </Card>
       </motion.div>
     </section>
-  )
+  );
 }

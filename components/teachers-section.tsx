@@ -3,6 +3,7 @@
 import { useState, memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 const teachers = [
@@ -10,28 +11,28 @@ const teachers = [
     id: 1,
     name: "Abdullayev Shavkat",
     subject: "Dasturlash",
-    image: "/Education.jpg.png",
+    image: "/professional-avatar.png",
     bio: "10+ yillik tajribaga ega",
   },
   {
     id: 2,
     name: "Hamrayeva Gulnoza",
     subject: "Ingliz tili",
-    image: "/Education.jpg.png",
+    image: "/professional-avatar.png",
     bio: "Sertifikali o'qituvchi",
   },
   {
     id: 3,
     name: "Mirzoev Rustam",
     subject: "Matematika",
-    image: "/Education.jpg.png",
+    image: "/professional-avatar.png",
     bio: "Fani ustasi",
   },
   {
     id: 4,
     name: "Karimova Dilfuza",
     subject: "Tarix",
-    image: "/Education.jpg.png",
+    image: "/professional-avatar.png",
     bio: "Tarix fani mutaxassisi",
   },
 ];
@@ -81,10 +82,12 @@ const TeachersSection = memo(function TeachersSection() {
             </motion.button>
           </Link>
         </motion.div>
-      </div>
-    </section>
-  );
-});
+
+
+        </div>
+        </section>
+        );
+        });
 
 const TeacherCard = memo(function TeacherCard({
   teacher,
@@ -93,7 +96,18 @@ const TeacherCard = memo(function TeacherCard({
   teacher: (typeof teachers)[0];
   index: number;
 }) {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleProfileClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      router.push(`/teachers/${teacher.id}`);
+    } else {
+      router.push("/register");
+    }
+  };
 
   return (
     <motion.div
@@ -137,15 +151,14 @@ const TeacherCard = memo(function TeacherCard({
           <p className="text-sm text-primary font-semibold mb-3">
             {teacher.subject}
           </p>
-          <Link href={`/teachers/${teacher.id}`}>
-            <motion.button
-              whileHover={{ x: 4 }}
-              className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors flex items-center gap-2"
-            >
-              Profil
-              <span className="text-xs">→</span>
-            </motion.button>
-          </Link>
+          <motion.button
+            onClick={handleProfileClick}
+            whileHover={{ x: 4 }}
+            className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors flex items-center gap-2 cursor-pointer"
+          >
+            Profil
+            <span className="text-xs">→</span>
+          </motion.button>
         </div>
       </div>
     </motion.div>

@@ -9,13 +9,13 @@ import {
   Eye,
   EyeOff,
   ArrowLeft,
-  Sparkles,
   User,
   Send,
   Chrome,
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
 import {
   Card,
   CardHeader,
@@ -40,10 +40,11 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
   const [schoolName, setSchoolName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Password validation
   const passwordRequirements = {
@@ -56,7 +57,7 @@ export default function RegisterPage() {
 
   const isPasswordValid = Object.values(passwordRequirements).every(Boolean);
   const isFormValid =
-    fullName.trim() && schoolName.trim() && email.trim() && isPasswordValid;
+    username.trim() && schoolName.trim() && email.trim() && isPasswordValid;
 
   useEffect(() => {
     // Generate particles only on client side (kamaytirilgan: 20 dan 8 ga)
@@ -75,11 +76,21 @@ export default function RegisterPage() {
       e.preventDefault();
       if (!isFormValid) return;
       setIsLoading(true);
-      setTimeout(() => setIsLoading(false), 800);
-      console.log("Sign Up:", { fullName, schoolName, email, password });
+      setTimeout(() => {
+        console.log("Sign Up:", { username, schoolName, email, password });
+        // Show success modal
+        setShowSuccessModal(true);
+        setIsLoading(false);
+      }, 800);
     },
-    [email, password, fullName, schoolName, isFormValid]
+    [email, password, username, schoolName, isFormValid]
   );
+
+  const handleModalClose = () => {
+    setShowSuccessModal(false);
+    // Redirect to login page
+    window.location.href = "/login";
+  };
 
   return (
     <section className="relative min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center px-4 py-12 overflow-hidden">
@@ -138,13 +149,15 @@ export default function RegisterPage() {
         <span className="text-xs tracking-[0.14em] uppercase text-zinc-400">
           Edugame
         </span>
-        <Button
-          variant="outline"
-          className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/80"
-        >
-          <span className="mr-2">Aloqa</span>
-          <ArrowRight className="h-4 w-4" />
-        </Button>
+        <Link href="/contact">
+          <Button
+            variant="outline"
+            className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/80 cursor-pointer"
+          >
+            <span className="mr-2">Aloqa</span>
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
       </header>
 
       {/* Centered Register Card */}
@@ -178,23 +191,23 @@ export default function RegisterPage() {
                 className="space-y-4"
                 key="signup-form"
               >
-                {/* Full Name */}
+                {/* Username */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="grid gap-2"
                 >
-                  <Label htmlFor="name" className="text-zinc-300">
-                    To'liq ismi
+                  <Label htmlFor="username" className="text-zinc-300">
+                    Username
                   </Label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                     <Input
-                      id="name"
+                      id="username"
                       type="text"
-                      placeholder="Sizning ismingiz"
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
                       required
                     />
@@ -215,7 +228,7 @@ export default function RegisterPage() {
                     <Input
                       id="school"
                       type="text"
-                      placeholder="Masalan: 1-maktab, Xorazm maktabi"
+                      placeholder=" 1-maktab, Zomin  maktabi"
                       value={schoolName}
                       onChange={(e) => setSchoolName(e.target.value)}
                       className={`pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600 ${
@@ -414,22 +427,10 @@ export default function RegisterPage() {
                   disabled={isLoading || !isFormValid}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                  className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2 flex items-center justify-center"
                 >
                   {isLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 1,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      >
-                        <Sparkles className="w-4 h-4" />
-                      </motion.div>
-                      Yuklanmoqda...
-                    </span>
+                    <Loader className="w-5 h-5 text-zinc-900" />
                   ) : (
                     "Ro'yxatdan o'tish"
                   )}
@@ -482,6 +483,67 @@ export default function RegisterPage() {
           </CardFooter>
         </Card>
       </motion.div>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-zinc-900 rounded-2xl border border-zinc-800 p-8 max-w-sm mx-4 shadow-2xl"
+            >
+              <div className="text-center">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                  className="w-16 h-16 bg-green-500/20 border border-green-500/50 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <svg
+                    className="w-8 h-8 text-green-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </motion.div>
+
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Tabriklaymiz!
+                </h3>
+                <p className="text-zinc-300 mb-6">
+                  Akauntingiz muvaffaqiyatli yaratildi.
+                </p>
+                <p className="text-sm text-zinc-400 mb-6">
+                  Endi login saxifaga o'tishingiz mumkin
+                </p>
+
+                <motion.button
+                  onClick={handleModalClose}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full bg-zinc-50 text-zinc-900 hover:bg-zinc-200 font-semibold py-2 px-4 rounded-lg transition-all"
+                >
+                  Login saxifasiga o'tish
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

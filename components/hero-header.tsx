@@ -2,6 +2,7 @@
 
 import { useState, memo, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   GraduationCapIcon,
@@ -65,6 +66,7 @@ const stats = [
 ] as const;
 
 const HeroHeaderContent = memo(function HeroHeaderContent() {
+  const router = useRouter();
   const [isPlayHovered, setIsPlayHovered] = useState(false);
   const [isStartHovered, setIsStartHovered] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -72,6 +74,15 @@ const HeroHeaderContent = memo(function HeroHeaderContent() {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+
+  const handleStartClick = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      router.push("/dashboard");
+    } else {
+      router.push("/register");
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 lg:pt-0">
@@ -174,7 +185,8 @@ const HeroHeaderContent = memo(function HeroHeaderContent() {
             >
               <Button
                 size="lg"
-                className="rounded-xl h-14 px-8 text-base font-semibold bg-primary hover:bg-primary/90 group"
+                onClick={handleStartClick}
+                className="rounded-xl h-14 px-8 text-base font-semibold bg-primary hover:bg-primary/90 group cursor-pointer"
                 onMouseEnter={() => setIsStartHovered(true)}
                 onMouseLeave={() => setIsStartHovered(false)}
               >
