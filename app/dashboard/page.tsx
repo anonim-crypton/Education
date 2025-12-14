@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAccessToken, clearTokens } from "@/lib/api";
+import { Navbar } from "@/components/navbar";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LogOut, ArrowRight } from "lucide-react";
@@ -40,21 +41,9 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50">
-      {/* Header - Login page style-da */}
-      <header className="fixed left-0 right-0 top-0 flex items-center justify-between px-6 py-4 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-sm z-40">
-        <span className="text-xs tracking-[0.14em] uppercase text-zinc-400">
-          Edugame
-        </span>
-        <Button
-          onClick={handleLogout}
-          variant="outline"
-          className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-red-900/30 hover:border-red-500/50 cursor-pointer"
-        >
-          <LogOut className="h-4 w-4 mr-2" />
-          <span>Chiqish</span>
-        </Button>
-      </header>
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navbar from home page */}
+      <Navbar />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 pt-24 pb-12">
