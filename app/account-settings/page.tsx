@@ -32,9 +32,12 @@ export default function AccountSettingsPage() {
         'Authorization': `Token ${token}`
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) return null;
+      return res.json();
+    })
     .then(data => {
-      if (data.user) {
+      if (data && data.user) {
         setUserData(data.user);
         setFormData({
           first_name: data.user.first_name || "",
@@ -44,8 +47,7 @@ export default function AccountSettingsPage() {
       }
     })
     .catch(err => {
-      setError("Profil ma'lumotlarini yuklashda xato");
-      console.error(err);
+      // Silently handle - endpoint may not exist yet
     })
     .finally(() => setIsLoading(false));
   }, [router]);

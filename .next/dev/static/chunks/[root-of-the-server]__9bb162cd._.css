@@ -679,10 +679,6 @@
     visibility: hidden;
   }
 
-  .visible {
-    visibility: visible;
-  }
-
   .sr-only {
     clip-path: inset(50%);
     white-space: nowrap;
@@ -709,10 +705,6 @@
 
   .static {
     position: static;
-  }
-
-  .sticky {
-    position: sticky;
   }
 
   .inset-0 {
@@ -1576,16 +1568,8 @@
     width: calc(var(--spacing) * 16);
   }
 
-  .w-20 {
-    width: calc(var(--spacing) * 20);
-  }
-
   .w-24 {
     width: calc(var(--spacing) * 24);
-  }
-
-  .w-48 {
-    width: calc(var(--spacing) * 48);
   }
 
   .w-56 {
@@ -2862,16 +2846,6 @@
     }
   }
 
-  .bg-zinc-950\/95 {
-    background-color: #09090bf2;
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-zinc-950\/95 {
-      background-color: color-mix(in oklab, var(--color-zinc-950) 95%, transparent);
-    }
-  }
-
   .bg-gradient-to-b {
     --tw-gradient-position: to bottom in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
@@ -3122,11 +3096,6 @@
 
   .from-yellow-50 {
     --tw-gradient-from: var(--color-yellow-50);
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-
-  .from-zinc-800 {
-    --tw-gradient-from: var(--color-zinc-800);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
@@ -3383,11 +3352,6 @@
 
   .to-transparent {
     --tw-gradient-to: transparent;
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-
-  .to-zinc-900 {
-    --tw-gradient-to: var(--color-zinc-900);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
@@ -3653,10 +3617,6 @@
 
   .text-left {
     text-align: left;
-  }
-
-  .text-right {
-    text-align: right;
   }
 
   .align-middle {
@@ -4906,18 +4866,6 @@
   }
 
   @media (hover: hover) {
-    .hover\:border-red-500\/50:hover {
-      border-color: #fb2c3680;
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:border-red-500\/50:hover {
-        border-color: color-mix(in oklab, var(--color-red-500) 50%, transparent);
-      }
-    }
-  }
-
-  @media (hover: hover) {
     .hover\:border-zinc-600\/50:hover {
       border-color: #52525c80;
     }
@@ -4996,18 +4944,6 @@
   }
 
   @media (hover: hover) {
-    .hover\:bg-red-500\/10:hover {
-      background-color: #fb2c361a;
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:bg-red-500\/10:hover {
-        background-color: color-mix(in oklab, var(--color-red-500) 10%, transparent);
-      }
-    }
-  }
-
-  @media (hover: hover) {
     .hover\:bg-red-500\/30:hover {
       background-color: #fb2c364d;
     }
@@ -5020,32 +4956,8 @@
   }
 
   @media (hover: hover) {
-    .hover\:bg-red-900\/30:hover {
-      background-color: #82181a4d;
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:bg-red-900\/30:hover {
-        background-color: color-mix(in oklab, var(--color-red-900) 30%, transparent);
-      }
-    }
-  }
-
-  @media (hover: hover) {
     .hover\:bg-secondary:hover {
       background-color: var(--secondary);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:bg-secondary\/50:hover {
-      background-color: var(--secondary);
-    }
-
-    @supports (color: color-mix(in lab, red, red)) {
-      .hover\:bg-secondary\/50:hover {
-        background-color: color-mix(in oklab, var(--secondary) 50%, transparent);
-      }
     }
   }
 
@@ -5396,12 +5308,6 @@
   @media (hover: hover) {
     .hover\:text-sidebar-accent-foreground:hover {
       color: var(--sidebar-accent-foreground);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:text-zinc-50:hover {
-      color: var(--color-zinc-50);
     }
   }
 
@@ -6608,12 +6514,6 @@
   }
 
   @media (min-width: 40rem) {
-    .sm\:inline {
-      display: inline;
-    }
-  }
-
-  @media (min-width: 40rem) {
     .sm\:w-\[150\%\] {
       width: 150%;
     }
@@ -6751,12 +6651,6 @@
   @media (min-width: 48rem) {
     .md\:flex {
       display: flex;
-    }
-  }
-
-  @media (min-width: 48rem) {
-    .md\:hidden {
-      display: none;
     }
   }
 

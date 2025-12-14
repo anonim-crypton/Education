@@ -45,18 +45,17 @@ export default function DashboardPage() {
       )
         .then((res) => {
           if (!res.ok) {
-            throw new Error(`API error: ${res.status}`);
+            return null;
           }
           return res.json();
         })
         .then((data) => {
-          if (data.user) {
+          if (data && data.user) {
             setUserData(data.user);
           }
         })
         .catch((err) => {
-          console.error("Error fetching profile:", err);
-          // Still set loading to false so page renders
+          // Silently handle errors - endpoint may not exist yet
         })
          .finally(() => {
            clearTimeout(timeoutId);
