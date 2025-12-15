@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.shortcuts import render
 from .serializers import (
     UserSerializer, RegisterSerializer, LoginSerializer,
     GoogleRegisterSerializer, ProfileUpdateSerializer,
@@ -15,6 +16,11 @@ import json
 import requests
 
 User = get_user_model()
+
+
+def api_status(request):
+    """API status page - shows API is connected"""
+    return render(request, 'api_status.html')
 
 
 @api_view(['POST'])

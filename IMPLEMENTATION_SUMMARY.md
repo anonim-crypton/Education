@@ -1,148 +1,148 @@
-# Implementation Summary
+# Amalga Oshirish Xulasasi
 
-## What Was Completed
+## Nima Yakunlashtirildi
 
-### Backend Setup (Django)
+### Backend Sozlash (Django)
 
-1. **Users App Model** (`edu_game/users/models.py`)
-   - Created `CustomUser` model extending Django's AbstractUser
-   - Added `school_name` field (required)
-   - Added timestamps (`created_at`, `updated_at`)
+1. **Foydalanuvchilar Ilovasi Modeli** (`edu_game/users/models.py`)
+   - Django's AbstractUser-ni kengaytiradigan `CustomUser` modeli yaratildi
+   - `school_name` maydoni qo'shildi (talab qiladi)
+   - Vaqt belgisi (`created_at`, `updated_at`) qo'shildi
 
-2. **API Endpoints** (`edu_game/users/views.py`)
-   - `/api/auth/register/` - User registration with validation
-   - `/api/auth/login/` - User login with token generation
-   - `/api/auth/profile/` - Get current user profile (authenticated)
-   - `/api/auth/logout/` - Logout and remove token (authenticated)
-   - `/api/auth/google/` - Google OAuth login/registration
+2. **API Yo'naltiruvchi Nuqtalari** (`edu_game/users/views.py`)
+   - `/api/auth/register/` - Tekshiruvi bilan foydalanuvchi ro'yxatdan o'tishi
+   - `/api/auth/login/` - Token yaratilishi bilan foydalanuvchi tizimga kirishi
+   - `/api/auth/profile/` - Joriy foydalanuvchi profilini olish (autentifikatsiya talab)
+   - `/api/auth/logout/` - Chiqish va token olib tashlash (autentifikatsiya talab)
+   - `/api/auth/google/` - Google OAuth tizimga kirish/ro'yxatdan o'tish
 
-3. **Serializers** (`edu_game/users/serializers.py`)
-   - `UserSerializer` - User data serialization
-   - `RegisterSerializer` - Registration validation
-   - `LoginSerializer` - Login validation
+3. **Serializerlar** (`edu_game/users/serializers.py`)
+   - `UserSerializer` - Foydalanuvchi ma'lumotlar serializatsiyasi
+   - `RegisterSerializer` - Ro'yxatdan o'tish tekshiruvi
+   - `LoginSerializer` - Tizimga kirish tekshiruvi
 
-4. **Configuration**
-   - Updated `settings.py` with:
-     - REST Framework authentication
-     - CORS headers support
-     - Custom user model configuration
-     - Google OAuth placeholders
-   - Updated `urls.py` with API routes
-   - Created `signals.py` for auto token creation
-   - Created `admin.py` for admin panel
+4. **Konfiguratsiya**
+   - `settings.py` yangilandi:
+      - REST Framework autentifikatsiyasi
+      - CORS headers qo'llab-quvvatlashi
+      - Maxsus foydalanuvchi modeli konfiguratsiyasi
+      - Google OAuth zahirlari
+   - `urls.py` yangilandi API marshrutlar bilan
+   - Token avtomatik yaratilishi uchun `signals.py` yaratildi
+   - Administrator paneli uchun `admin.py` yaratildi
 
-5. **Dependencies** (`requirements.txt`)
+5. **Bog'liqliklar** (`requirements.txt`)
    - Django 5.2.9
    - djangorestframework 3.14.0
    - django-cors-headers 4.3.1
 
-### Frontend Implementation
+### Frontend Amalga Oshirish
 
-1. **Login Page** (`app/login/page.tsx`)
-   - Traditional login form (username + password)
-   - Google OAuth integration
-   - Error handling and validation
-   - Loading states
+1. **Tizimga Kirish Sahifasi** (`app/login/page.tsx`)
+   - Odatiy tizimga kirish shakli (username + parol)
+   - Google OAuth integratsiyasi
+   - Xato boshqaruvi va tekshiruvi
+   - Loading holatları
 
-2. **Register Page** (`app/register/page.tsx`)
-   - Registration form (username + email + password + school_name)
-   - Password strength validator
-   - Google OAuth integration
-   - School name field (required for registration)
-   - Success modal
+2. **Ro'yxatdan O'tish Sahifasi** (`app/register/page.tsx`)
+   - Ro'yxatdan o'tish shakli (username + email + parol + maktab_nomi)
+   - Parol mustahkamligi validator
+   - Google OAuth integratsiyasi
+   - Maktab nomi maydoni (ro'yxatdan o'tish uchun talab)
+   - Muvaffaqiyat modali
 
-3. **API Client** (`lib/api.ts`)
-   - `login()` - Traditional login
-   - `register()` - User registration
-   - `googleLogin()` - Google OAuth login
-   - `googleRegister()` - Google OAuth registration
-   - Token management functions
-   - Error handling
+3. **API Mijozi** (`lib/api.ts`)
+   - `login()` - Odatiy tizimga kirish
+   - `register()` - Foydalanuvchi ro'yxatdan o'tishi
+   - `googleLogin()` - Google OAuth tizimga kirish
+   - `googleRegister()` - Google OAuth ro'yxatdan o'tish
+   - Token boshqaruvi funksiyalari
+   - Xato boshqaruvi
 
-4. **Layout Configuration** (`app/layout.tsx`)
-   - Added `GoogleOAuthProvider` wrapper
-   - Google Client ID support via env variable
+4. **Layout Konfiguratsiyasi** (`app/layout.tsx`)
+   - `GoogleOAuthProvider` o'rashi qo'shildi
+   - Atrof-muhit o'zgaruvchisi orqali Google Mijoz ID qo'llab-quvvatlash
 
-5. **Dependencies** (`package.json`)
-   - Added `@react-oauth/google` for Google authentication
+5. **Bog'liqliklar** (`package.json`)
+   - Google autentifikatsiyasi uchun `@react-oauth/google` qo'shildi
 
-### Documentation & Configuration
+### Hujjat va Konfiguratsiya
 
-1. **Setup Instructions** (`SETUP_INSTRUCTIONS.md`)
-   - Step-by-step backend setup
-   - Frontend setup guide
-   - Google OAuth configuration
-   - API endpoint documentation
-   - Testing examples
+1. **Sozlash Ko'rsatmalari** (`SETUP_INSTRUCTIONS.md`)
+   - Addafson-dor backend sozlash
+   - Frontend sozlash qo'llanmasi
+   - Google OAuth konfiguratsiyasi
+   - API yo'naltiruvchi nuqtalari hujjati
+   - Sinov misollari
 
-2. **Deployment Guide** (`DEPLOYMENT.md`)
-   - Docker and Docker Compose setup
-   - Manual deployment instructions
-   - Environment variables
-   - Nginx SSL configuration
-   - Database backup procedures
-   - Security checklist
+2. **Joylashtirish Qo'llanmasi** (`DEPLOYMENT.md`)
+   - Docker va Docker Compose sozlash
+   - Qo'lda joylashtirish ko'rsatmalari
+   - Atrof-muhit o'zgaruvchilari
+   - Nginx SSL konfiguratsiyasi
+   - Ma'lumotlar bazasi zaxiralar protsedurasi
+   - Xavfsizlik tekshirlov ro'yxati
 
 3. **README** (`README.md`)
-   - Project overview
-   - Tech stack details
-   - Quick start guide
-   - Project structure
-   - Troubleshooting guide
+   - Loyiha ko'rinishi
+   - Texnologiya to'plami tafsilotlari
+   - Tez ishga tushirish qo'llanmasi
+   - Loyihaning tuzilishi
+   - Muammolarni hal qilish qo'llanmasi
 
-4. **Environment Templates**
-   - `.env.local.example` - Frontend env template
-   - `edu_game/.env.example` - Django env template
+4. **Atrof-Muhit Shablonlari**
+   - `.env.local.example` - Frontend atrof-muhit shabloni
+   - `edu_game/.env.example` - Django atrof-muhit shabloni
 
-5. **Docker Configuration**
-   - `docker-compose.yml` - Multi-container setup
-   - `Dockerfile` (root) - Next.js container
-   - `edu_game/Dockerfile` - Django container
+5. **Docker Konfiguratsiyasi**
+   - `docker-compose.yml` - Ko'p konteynerli sozlash
+   - `Dockerfile` (root) - Next.js konteyner
+   - `edu_game/Dockerfile` - Django konteyner
 
-6. **GitIgnore Files**
-   - Updated root `.gitignore`
-   - Created `edu_game/.gitignore`
+6. **GitIgnore Fayllar**
+   - Root `.gitignore` yangilandi
+   - `edu_game/.gitignore` yaratildi
 
-### Testing
+### Sinov
 
-1. **Unit Tests** (`edu_game/users/test_auth.py`)
-   - User registration tests
-   - User login tests
-   - Profile endpoint tests
-   - School name storage verification
-   - Error handling tests
+1. **Birlik Testlari** (`edu_game/users/test_auth.py`)
+   - Foydalanuvchi ro'yxatdan o'tishi testlari
+   - Foydalanuvchi tizimga kirishi testlari
+   - Profil yo'naltiruvchi nuqtasi testlari
+   - Maktab nomi saqlashni tekshirish
+   - Xato boshqaruvini sinov qilish
 
-## Database Schema
+## Ma'lumotlar Bazasi Sxemasi
 
 ```sql
-CustomUser (extends Django's User)
-├── id (AutoField, Primary Key)
-├── username (CharField, unique)
-├── email (EmailField, unique)
+CustomUser (Django's User-ni kengaytiradi)
+├── id (AutoField, Asosiy Kalit)
+├── username (CharField, noyob)
+├── email (EmailField, noyob)
 ├── first_name (CharField)
 ├── last_name (CharField)
-├── password (CharField, hashed)
-├── school_name (CharField, required)
+├── password (CharField, shifrlangan)
+├── school_name (CharField, talab qiladi)
 ├── is_active (BooleanField)
 ├── is_staff (BooleanField)
 ├── is_superuser (BooleanField)
 ├── last_login (DateTimeField)
 ├── date_joined (DateTimeField)
-├── created_at (DateTimeField, auto)
-└── updated_at (DateTimeField, auto)
+├── created_at (DateTimeField, avtomatik)
+└── updated_at (DateTimeField, avtomatik)
 
 AuthToken
-├── key (CharField, unique)
+├── key (CharField, noyob)
 └── user (ForeignKey to CustomUser)
 ```
 
-## API Response Format
+## API Javob Formati
 
-### Successful Response
+### Muvaffaq Javob
 ```json
 {
   "success": true,
-  "message": "Operation successful",
+  "message": "Operatsiya muvaffaqiyatli",
   "user": {
     "id": 1,
     "username": "testuser",
@@ -151,147 +151,147 @@ AuthToken
     "last_name": "",
     "school_name": "Test School"
   },
-  "access": "token-key-here",
+  "access": "token-kalit-shunga",
   "refresh": null
 }
 ```
 
-### Error Response
+### Xato Javob
 ```json
 {
   "success": false,
   "errors": {
-    "field_name": ["Error message"]
+    "maydoni_nomi": ["Xato xabari"]
   }
 }
 ```
 
-## Frontend Integration Points
+## Frontend Integratsiyasi Nuqtalari
 
-1. **Authentication Flow**
-   - User fills form → Submit to API
-   - API returns token → Store in localStorage
-   - Redirect to dashboard
+1. **Autentifikatsiya Oqimi**
+   - Foydalanuvchi shakl to'ldiradi → API ga yuborish
+   - API token qaytaradi → localStorage da saqlash
+   - Dashboard ga yo'naltirish
 
-2. **Google OAuth Flow**
-   - Click Google button
-   - Google popup authentication
-   - Token sent to backend
-   - Backend verifies and creates/updates user
-   - User logged in
+2. **Google OAuth Oqimi**
+   - Google tugmasini bosish
+   - Google popap autentifikatsiyasi
+   - Token backend-ga yuborish
+   - Backend tekshiradi va foydalanuvchini yaratadi/yangilaydi
+   - Foydalanuvchi tizimga kiriladi
 
-3. **Error Handling**
-   - Display field-specific errors
-   - Show general error messages
-   - Clear errors on input change
+3. **Xato Boshqaruvi**
+   - Maydon-aniq xatolarni ko'rsatish
+   - Umumiy xato xabarlarini ko'rsatish
+   - Kiritish o'zgarishdagi xatolarni tozalash
 
-## Features Implemented
+## Amalga Oshirilgan Funksiyalar
 
-### Registration
-- ✅ Username validation
-- ✅ Email validation
-- ✅ Password strength validation
-  - Minimum 8 characters
-  - Uppercase letter required
-  - Lowercase letter required
-  - Number required
-  - Special character required
-- ✅ School name (required field)
-- ✅ Password confirmation
-- ✅ Google OAuth registration
-- ✅ Automatic token creation
+### Ro'yxatdan O'tish
+- ✅ Username tekshiruvi
+- ✅ Email tekshiruvi
+- ✅ Parol mustahkamligi tekshiruvi
+   - Minimal 8 belgili
+   - Katta harf talab
+   - Kichik harf talab
+   - Raqam talab
+   - Maxsus belgisi talab
+- ✅ Maktab nomi (talab qiladi)
+- ✅ Parol tasdiqlash
+- ✅ Google OAuth ro'yxatdan o'tish
+- ✅ Avtomatik token yaratish
 
-### Login
-- ✅ Username/password authentication
-- ✅ Token generation
-- ✅ Google OAuth login
-- ✅ Auto token creation
-- ✅ Error messages
+### Tizimga Kirish
+- ✅ Username/parol autentifikatsiyasi
+- ✅ Token yaratilishi
+- ✅ Google OAuth tizimga kirish
+- ✅ Avtomatik token yaratish
+- ✅ Xato xabarlari
 
-### User Management
-- ✅ Profile endpoint
-- ✅ Logout with token deletion
-- ✅ Admin panel for user management
-- ✅ School name tracking
-- ✅ Timestamps
+### Foydalanuvchi Boshqaruvi
+- ✅ Profil yo'naltiruvchi nuqtasi
+- ✅ Chiqish token o'chirilishi bilan
+- ✅ Foydalanuvchilarni boshqarish uchun administrator paneli
+- ✅ Maktab nomi kuzatilishi
+- ✅ Vaqt belggilari
 
-## Security Features
+## Xavfsizlik Xususiyatlari
 
-1. **Password Security**
-   - Django password hashing (PBKDF2)
-   - Strength validation
+1. **Parol Xavfsizligi**
+   - Django parol shifrlashi (PBKDF2)
+   - Mustahkamligi tekshiruvi
 
-2. **API Security**
-   - Token-based authentication
-   - CORS protection
-   - Input validation
+2. **API Xavfsizligi**
+   - Token-asosidagi autentifikatsiya
+   - CORS himoyasi
+   - Kiruvchi tekshiruvi
 
 3. **Google OAuth**
-   - Token verification with Google
-   - Email-based user creation
-   - Automatic school name handling
+   - Google bilan token tekshiruvi
+   - Email-asosidagi foydalanuvchi yaratilishi
+   - Avtomatik maktab nomi boshqaruvi
 
-## Next Steps
+## Keyingi Bosqichlar
 
-1. **Configure Google OAuth**
-   - Get Google Client ID from Google Cloud Console
-   - Add to `.env.local` and Django settings
+1. **Google OAuth Konfiguratsiya**
+   - Google Cloud Konsolidan Google Mijoz ID olish
+   - `.env.local` va Django sozlamalariga qo'shish
 
-2. **Set Up Database**
-   - Run migrations: `python manage.py migrate`
-   - Create superuser: `python manage.py createsuperuser`
+2. **Ma'lumotlar Bazani O'rnatish**
+   - Migratsiyalarni ishga tushirish: `python manage.py migrate`
+   - Superuser yaratish: `python manage.py createsuperuser`
 
-3. **Test the System**
-   - Register new user
-   - Login with credentials
-   - Try Google OAuth
-   - Access profile endpoint
+3. **Tizimni Sinov Qilish**
+   - Yangi foydalanuvchi ro'yxatdan o'tkazish
+   - Identifikatsiyalar bilan tizimga kirish
+   - Google OAuth sinov
+   - Profil yo'naltiruvchi nuqtasiga kirish
 
-4. **Deploy**
-   - Follow DEPLOYMENT.md guide
-   - Set production environment variables
-   - Enable HTTPS
+4. **Joylashtirish**
+   - DEPLOYMENT.md qo'llanmasiga rioya qilish
+   - Ishlab chiqarish atrof-muhiti o'zgaruvchilarini o'rnatish
+   - HTTPS ni faollashtirish
 
-## File Structure Created
+## Yaratilgan Fayl Tuzilishi
 
 ```
 Education/
 ├── app/
-│   ├── login/page.tsx (updated)
-│   ├── register/page.tsx (updated)
-│   └── layout.tsx (updated)
+│   ├── login/page.tsx (yangilandi)
+│   ├── register/page.tsx (yangilandi)
+│   └── layout.tsx (yangilandi)
 ├── lib/
-│   └── api.ts (updated)
+│   └── api.ts (yangilandi)
 ├── edu_game/
 │   ├── users/
-│   │   ├── models.py (created)
-│   │   ├── views.py (created)
-│   │   ├── serializers.py (created)
-│   │   ├── urls.py (created)
-│   │   ├── admin.py (created)
-│   │   ├── apps.py (created)
-│   │   ├── signals.py (created)
-│   │   ├── test_auth.py (created)
-│   │   └── .gitignore (created)
+│   │   ├── models.py (yaratildi)
+│   │   ├── views.py (yaratildi)
+│   │   ├── serializers.py (yaratildi)
+│   │   ├── urls.py (yaratildi)
+│   │   ├── admin.py (yaratildi)
+│   │   ├── apps.py (yaratildi)
+│   │   ├── signals.py (yaratildi)
+│   │   ├── test_auth.py (yaratildi)
+│   │   └── .gitignore (yaratildi)
 │   ├── edu_game/
-│   │   ├── settings.py (updated)
-│   │   └── urls.py (updated)
-│   ├── requirements.txt (created)
-│   ├── Dockerfile (created)
-│   └── .gitignore (created)
-├── .env.local.example (created)
-├── .gitignore (updated)
-├── Dockerfile (created)
-├── docker-compose.yml (created)
-├── SETUP_INSTRUCTIONS.md (created)
-├── DEPLOYMENT.md (created)
-├── README.md (updated)
-└── IMPLEMENTATION_SUMMARY.md (this file)
+│   │   ├── settings.py (yangilandi)
+│   │   └── urls.py (yangilandi)
+│   ├── requirements.txt (yaratildi)
+│   ├── Dockerfile (yaratildi)
+│   └── .gitignore (yaratildi)
+├── .env.local.example (yaratildi)
+├── .gitignore (yangilandi)
+├── Dockerfile (yaratildi)
+├── docker-compose.yml (yaratildi)
+├── SETUP_INSTRUCTIONS.md (yaratildi)
+├── DEPLOYMENT.md (yaratildi)
+├── README.md (yangilandi)
+└── IMPLEMENTATION_SUMMARY.md (bu fayl)
 ```
 
-## Running the Application
+## Ilovani Ishga Tushirish
 
-### Development
+### Ishlab Chiqarish
 
 1. **Backend**
    ```bash
@@ -307,21 +307,21 @@ Education/
    npm run dev
    ```
 
-3. **Access**
+3. **Kirish**
    - Frontend: http://localhost:3000
    - Backend: http://localhost:8000
-   - Admin: http://localhost:8000/admin
+   - Administrator: http://localhost:8000/admin
 
-### Production
+### Ishlab Chiqarish
 
-Follow instructions in `DEPLOYMENT.md`
+DEPLOYMENT.md da ko'rsatmalarga rioya qilish
 
-## Support Files
+## Qo'llab-Quvvatlash Faylları
 
-- `SETUP_INSTRUCTIONS.md` - Detailed setup and API documentation
-- `DEPLOYMENT.md` - Production deployment guide
-- `README.md` - Project overview and quick start
-- `.env.local.example` - Frontend environment template
-- `edu_game/.env.example` - Django environment template
+- `SETUP_INSTRUCTIONS.md` - Batafsil sozlash va API hujjati
+- `DEPLOYMENT.md` - Ishlab chiqarish joylashtirish qo'llanmasi
+- `README.md` - Loyiha ko'rinishi va tez ishga tushirish
+- `.env.local.example` - Frontend atrof-muhit shabloni
+- `edu_game/.env.example` - Django atrof-muhit shabloni
 
-All features are ready to use. Just configure environment variables and run!
+Barcha xususiyatlar ishlatishga tayyoq. Atrof-muhit o'zgaruvchilarini sozlang va ishga tushiring!

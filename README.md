@@ -5,9 +5,9 @@ Zamonaviy onlayn ta'lim platformasi, foydalanuvchi autentifikatsiyasi va Google 
 ## Texnologiyalar
 
 ### Frontend
-- **Next.js 16** – App Router bilan React framework
-- **TypeScript** – Type-safe rivojlantirish
-- **Tailwind CSS** – Utility-first CSS framework
+- **Next.js 16** – Ilovalar yo'naltiruvchisi bilan React ramkasi
+- **TypeScript** – Turi-xavfsiz rivojlantirish
+- **Tailwind CSS** – Foydali-birinchi CSS ramkasi
 - **Framer Motion** – Animatsiya kutubxonasi
 - **React OAuth Google** – Google autentifikatsiyasi
 
@@ -15,37 +15,37 @@ Zamonaviy onlayn ta'lim platformasi, foydalanuvchi autentifikatsiyasi va Google 
 - **Python** – Versiya 3.11.4
 - **Django** – Versiya 5.2.9
 - **Django REST Framework** – RESTful API yaratish uchun
-- **SQLite** – Ma’lumotlar bazasi (ishlab chiqish uchun)
-- **Token Authentication** – API endpointlarni xavfsiz qilish
+- **SQLite** – Ma'lumotlar bazasi (ishlab chiqish uchun)
+- **Token Authentication** – API yo'naltiruvchi nuqtalari xavfsizligi uchun
 
 ## Amalga oshirilgan funksiyalar
 
 ### Autentifikatsiya
-- ✅ Foydalanuvchi ro‘yxatdan o‘tishi (validatsiya bilan)
+- ✅ Foydalanuvchi ro'yxatdan o'tishi (tekshiruvi bilan)
 - ✅ Foydalanuvchi tizimga kirishi (token bilan)
 - ✅ Google OAuth 2.0 integratsiyasi
-- ✅ Parol kuchi tekshiruvi (kamida 8 ta belgidan, katta va kichik harf, raqam, maxsus belgi)
-- ✅ Ro‘yxatdan o‘tishda maktab nomi saqlash
+- ✅ Parol mustahkamligini tekshirish (kamida 8 ta belgidan, katta va kichik harf, raqam, maxsus belgisi)
+- ✅ Ro'yxatdan o'tishda maktab nomi saqlash
 - ✅ Token asosidagi API autentifikatsiyasi
 
 ### Foydalanuvchi boshqaruvi
-- ✅ Maxsus foydalanuvchi modeli (maktab ma’lumotlari bilan)
-- ✅ Foydalanuvchi profili API endpoint
+- ✅ Maxsus foydalanuvchi modeli (maktab ma'lumotlari bilan)
+- ✅ Foydalanuvchi profili API yo'naltiruvchi nuqtasi
 - ✅ Chiqish (logout) funksiyasi
-- ✅ Admin paneli orqali foydalanuvchilarni boshqarish
+- ✅ Administrator paneli orqali foydalanuvchilarni boshqarish
 
 ### Xavfsizlik
 - ✅ CORS himoyasi
 - ✅ Token asosidagi autentifikatsiya
-- ✅ Parol hashing
-- ✅ Kiruvchi ma’lumotlarni validatsiya qilish
+- ✅ Parol shifrlashi
+- ✅ Kiruvchi ma'lumotlarni tekshirish
 
 ## Tez ishga tushirish
 
 ### Talablar
 - Python 3.11+
 - Node.js 18+
-- Google OAuth Client ID (Google login uchun)
+- Google OAuth Mijoz ID (Google tizimiga kirish uchun)
 
 ### Backend sozlash
 
@@ -56,44 +56,41 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
-
+```
 
 ### Frontend sozlash 
 
+```bash
 npm install
 npm run dev
-
+```
 
 ### Loyihaning tuzilishi 
+
+```
 Education/
-├── app/                           # Next.js ilova katalogi
-│   ├── login/                     # Login sahifa
-│   ├── register/                  # Ro‘yxatdan o‘tish sahifasi
-│   ├── layout.tsx                 # Google OAuth bilan root layout
+├── app/                           # Next.js ilovasi katalogi
+│   ├── login/                     # Tizimga kirish sahifasi
+│   ├── register/                  # Ro'yxatdan o'tish sahifasi
+│   ├── layout.tsx                 # Google OAuth bilan asosiy layout
 │   └── ...
 ├── components/                    # Qayta ishlatiladigan React komponentlari
 ├── lib/                           # Foydali utilitilar
-│   └── api.ts                     # API client funksiyalari
+│   └── api.ts                     # API mijozi funksiyalari
 ├── edu_game/                      # Django loyihasi
-│   ├── users/                     # Users app
+│   ├── users/                     # Foydalanuvchilar ilovasi
 │   │   ├── models.py              # CustomUser modeli
-│   │   ├── views.py               # API views
+│   │   ├── views.py               # API ko'rinishlari
 │   │   ├── serializers.py         # DRF serializerlar
-│   │   ├── urls.py                # App URL-lari
-│   │   ├── admin.py               # Admin konfiguratsiyasi
-│   │   └── signals.py             # Token yaratish signalari
-│   ├── edu_game/                  # Project settings
+│   │   ├── urls.py                # Ilovaning URL-lari
+│   │   ├── admin.py               # Administrator konfiguratsiyasi
+│   │   └── signals.py             # Token yaratish signallari
+│   ├── edu_game/                  # Loyiha sozlamalari
 │   │   ├── settings.py            # Django sozlamalari
-│   │   └── urls.py                # Project URL-lari
+│   │   └── urls.py                # Loyiha URL-lari
 │   └── manage.py
-├── SETUP_INSTRUCTIONS.md          # Batafsil sozlash ko‘rsatmalari
+├── SETUP_INSTRUCTIONS.md          # Batafsil sozlash ko'rsatmalari
 └── README.md
 
-
-
-
-
-
-
 ### Eng muximi
-Kod ishlashi uchun ikkala server ham run qilinishi kerak Backend ham Frontend ham chunarlimi !!!!
+Kod ishlashi uchun ikkala server ham run qilinishi kerak - Backend ham Frontend ham !!!!

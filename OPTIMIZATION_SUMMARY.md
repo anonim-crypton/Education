@@ -1,69 +1,69 @@
-# 🚀 Performance Optimization Summary
+# 🚀 Ish Faoliyatini Yaxshilash Xulasasi
 
-## Changes Made
+## Amalga Oshirilgan O'zgarishlar
 
 ### 1. **navbar.tsx** ✅
-**Removed:**
-- Unused `useTheme` hook (theme toggle commented out)
-- Unused imports: `SunIcon`, `MoonIcon`, `useTheme`
-- Commented out theme toggle code (22 lines removed)
-- `mounted` state that was never used
-- Unnecessary `useEffect` for mounting
+**Olib Tashlangan:**
+- Foydalanilmagan `useTheme` hook (tema o'zgartirish sharhli)
+- Foydalanilmagan importlar: `SunIcon`, `MoonIcon`, `useTheme`
+- Sharhli tema o'zgartirish kodi (22 satr o'chirildi)
+- Hech qachon foydalanilmagan `mounted` holati
+- Mounting uchun keraksiz `useEffect`
 
-**Added:**
-- `memo` and `useCallback` imports
-- `memo()` wrapper on `CourseDropdownItem` component to prevent unnecessary re-renders
-- Memoization reduces re-renders when parent updates
+**Qo'shilgan:**
+- `memo` va `useCallback` importlari
+- `memo()` o'rashi `CourseDropdownItem` komponentida keraksiz re-render-larni oldini olish uchun
+- Memoizatsiya parent yangilanganida re-render-larni kamaytiadi
 
-**Impact:**
-- ⚡ **10-15% faster** - Fewer re-renders on scroll/navigation changes
-- 📦 **~5KB smaller** bundle (removed unused imports)
-- ✨ Dropdown items won't re-render unless their props change
+**Ta'siri:**
+- ⚡ **10-15% tezroq** - Scroll/navigatsiya o'zgarishlarida kamroq re-render
+- 📦 **~5KB kichikroq** paket (foydalanilmagan importlarni olib tashlash)
+- ✨ Dropdown elementlari ularning props o'zgarmasa re-render bolmaydi
 
 ---
 
 ### 2. **hero-header.tsx** ✅
-**Removed:**
-- Unused imports (cleaned)
+**Olib Tashlangan:**
+- Foydalanilmagan importlar (tozalash)
 
-**Added:**
-- `memo` import
-- `memo()` wrapper on `HeroHeaderContent` main component
-- `memo()` wrapper on `StatItem` component
-- `as const` on stats array for better type inference
+**Qo'shilgan:**
+- `memo` importi
+- `memo()` o'rashi `HeroHeaderContent` asosiy komponentida
+- `memo()` o'rashi `StatItem` komponentida
+- Yaxshi turi xulosan uchun `as const` stats massivida
 
-**Impact:**
-- ⚡ **8-12% faster** - Component won't re-render when parent updates
-- 🎯 Prevents unnecessary animation recalculations
-- 📦 **~2KB smaller** with better tree-shaking
+**Ta'siri:**
+- ⚡ **8-12% tezroq** - Komponenti parent yangilanganida re-render bolmaydi
+- 🎯 Keraksiz animatsiya qayta hisoblashini oldini olish
+- 📦 Yaxshi tree-shaking bilan **~2KB kichikroq**
 
 ---
 
 ### 3. **login/page.tsx** ✅
-**Improved:**
-- Added `useCallback` to `handleSubmit` to prevent function recreation
-- Added particle generation to avoid `Math.random()` on every render (already had useEffect)
-- Added `memo` import for future optimization
+**Yaxshilangan:**
+- `handleSubmit` uchun `useCallback` qo'shildi funksiya qayta yaratilmasligini oldini olish uchun
+- Har bir render-da `Math.random()` da particles (allaqachon useEffect bor)
+- Kelajakda optimalashtirilish uchun `memo` importi
 
-**Impact:**
-- ⚡ **5-8% faster** - Form submission handler not recreated on every render
-- ✨ Stable function reference for child components
+**Ta'siri:**
+- ⚡ **5-8% tezroq** - Form yuborish handler har render-da qayta yaratilmaydi
+- ✨ Child komponentlar uchun barqaror funksiya havolasi
 
 ---
 
 ### 4. **login-pro/page.tsx** ✅
-**Added:**
-- Dynamic import with `next/dynamic`
-- Loading component for better UX
-- `ssr: false` to prevent server-side rendering of canvas
-- Lazy loads the heavy canvas-based component
+**Qo'shilgan:**
+- `next/dynamic` dan dinamik import
+- Yaxshiroq foydalanuvchi tajribasi uchun loading komponenti
+- Canvas-ni server tomonida renderlashni oldini olish uchun `ssr: false`
+- Og'ir canvas asosidagi komponentni ixcham yuklash
 
-**Impact:**
-- ⚡ **20-30% faster** initial page load
-- 📦 Canvas component (58KB) lazy loaded on demand
-- 🎯 Login page loads without canvas overhead
+**Ta'siri:**
+- ⚡ **20-30% tezroq** dastlabki sahifa yuklashi
+- 📦 Canvas komponenti (58KB) talab bo'lganda ixcham yuklash
+- 🎯 Login sahifasi canvas ortiqchasiz yuklashi
 
-**Code:**
+**Kod:**
 ```tsx
 const LoginCardSection = dynamic(
   () => import("@/components/ui/login-signup"),
@@ -76,93 +76,93 @@ const LoginCardSection = dynamic(
 
 ---
 
-### 5. **login-pro/loading.tsx** ✨ (New)
-**Created:**
-- Loading skeleton for login-pro page
-- Shows spinner while component loads
+### 5. **login-pro/loading.tsx** ✨ (Yangi)
+**Yaratilgan:**
+- login-pro sahifasi uchun loading skeleton
+- Komponenti yuklanayotganda spinner ko'rsatish
 
-**Impact:**
-- 🎯 Better perceived performance
-- ✨ Users see loading state instead of blank page
+**Ta'siri:**
+- 🎯 Yaxshiroq idrok faoliyati
+- ✨ Foydalanuvchilar bo'sh sahifa o'rniga loading holatini ko'radi
 
 ---
 
-## 📊 Performance Improvements
+## 📊 Ish Faoliyatini Yaxshilash
 
-| Metric | Before | After | Improvement |
+| O'lchov | Oldin | Keyin | Yaxshilash |
 |--------|--------|-------|-------------|
-| **First Load (localhost)** | ~2.5s | ~2.0s | **20% faster** |
-| **Time to Interactive (TTI)** | ~3.2s | ~2.5s | **22% faster** |
-| **Initial Bundle (home)** | ~180KB | ~170KB | **5.5% smaller** |
-| **Login-pro initial** | ~240KB | ~150KB | **37.5% smaller** |
-| **Navbar re-renders** | Every 100ms | Every 500ms+ | **5x fewer** |
-| **Total Lighthouse Score** | ~68 | ~78 | **+10 points** |
+| **Birinchi Yuklash (localhost)** | ~2.5s | ~2.0s | **20% tezroq** |
+| **Interaktiv Vaqti (TTI)** | ~3.2s | ~2.5s | **22% tezroq** |
+| **Boshlang'ich Paket (home)** | ~180KB | ~170KB | **5.5% kichikroq** |
+| **Login-pro dastlabki** | ~240KB | ~150KB | **37.5% kichikroq** |
+| **Navbar re-render** | Har 100ms | Har 500ms+ | **5 marta kamroq** |
+| **Umumiy Lighthouse Baholash** | ~68 | ~78 | **+10 ball** |
 
 ---
 
-## 🎯 What Each Optimization Does
+## 🎯 Har Bir Optimalashtirilish Nima Qiladi
 
-### Memoization (memo)
-- Prevents component re-renders when props haven't changed
-- Essential for navbar dropdowns and form components
-- Reduces JavaScript execution time
+### Memoizatsiya (memo)
+- Props o'zgarmasa komponentni re-render qilmaslik
+- Navbar dropdown-lari va forma komponentlari uchun muhim
+- JavaScript bajarilishi vaqtini kamaytirilish
 
 ### useCallback
-- Stabilizes function references
-- Prevents child components from re-rendering
-- Improves form submission performance
+- Funksiya havolalarini barqaror qilish
+- Child komponentlarning re-render qilmasligini oldini olish
+- Forma yuborish faoliyatini yaxshilash
 
-### Dynamic Imports
-- Splits code into separate chunks
-- Heavy components load only when needed
-- Reduces initial bundle size significantly
+### Dinamik Importlar
+- Kodni alohida chunks ga ajratish
+- Og'ir komponentlar faqat zarur bo'lganda yuklanishi
+- Dastlabki paket kattaligini muhim darajada kamaytirish
 
-### Removing Unused Code
-- Smaller JavaScript files
-- Faster parsing and execution
-- Cleaner, more maintainable code
-
----
-
-## ✅ Testing Checklist
-
-- [x] No broken functionality
-- [x] All animations still work smoothly
-- [x] Form submission works
-- [x] Navigation dropdowns function correctly
-- [x] Login page loads properly
-- [x] Responsive design intact
-- [x] No console errors
-- [x] Dark/light theme still works
+### Foydalanilmagan Kodlarni Olib Tashlash
+- Kichikroq JavaScript fayllar
+- Tezroq parsing va bajarilish
+- Toza va boshqarish qiyin kod
 
 ---
 
-## 🔮 Future Optimizations (Optional)
+## ✅ Sinov Ro'yxati
 
-1. **Convert hero-header animations to CSS** - Could reduce Framer Motion bundle
-2. **Move canvas to Web Worker** - Prevent main thread blocking in login-signup
-3. **Image optimization** - Use next/image with proper sizing
-4. **Code splitting for routes** - Each page loads only its dependencies
-5. **Remove unused Radix UI components** - Prune package.json
+- [x] Funksiyoning buzilmaganligini tekshirish
+- [x] Barcha animatsiyalar silliq ishlash
+- [x] Forma yuborish ishlash
+- [x] Navigatsiya dropdown-lari to'g'ri ishlash
+- [x] Login sahifasi to'g'ri yuklanish
+- [x] Responsive dizayn o'rinida qolish
+- [x] Konsolda xato yo'q
+- [x] Qorong'i/yorug' tema hali ham ishlash
 
 ---
 
-## 📝 Commands to Verify
+## 🔮 Kelajakdagi Optimalashtirishlar (Ixtiyoriy)
+
+1. **Hero-header animatsiyalarini CSS ga aylantirish** - Framer Motion paketini kamaytirishi mumkin
+2. **Canvas Web Worker ga o'tkazish** - Login-signup da asosiy thread bloklanishini oldini olish
+3. **Tasvirni optimallashtirish** - next/image dan to'g'ri o'lchov bilan foydalanish
+4. **Marshrutlar uchun Kod ajratilishi** - Har bir sahifa faqat o'z bog'liqliklarini yuklashi
+5. **Foydalanilmagan Radix UI komponentlarini olib tashlash** - package.json kichikligi
+
+---
+
+## 📝 Tekshirilishi Uchun Buyruqlar
 
 ```bash
-# Check build output
+# Qurilish chiqarishini tekshirish
 npm run build
 
-# Analyze bundle size
+# Paket kattaligini tahlil qilish
 npm run build -- --analyze
 
-# Run performance test
+# Ish faoliyatini sinov qilish
 npm run dev
 
-# Check Lighthouse score
-# Open DevTools > Lighthouse > Generate report
+# Lighthouse baholanishini tekshirish
+# DevTools açılış > Lighthouse > Hisobot yaratish
 ```
 
 ---
 
-**Total Time Saved: ~20-22% on initial page load** ⚡
+**Jami Vaqt Tejashni: ~20-22% dastlabki sahifa yuklanishida** ⚡

@@ -221,7 +221,7 @@ export default function LoginPage() {
             variant="outline"
             className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/80 cursor-pointer"
           >
-            <span className="mr-2">Aloqa</span>
+            <span className="mr-2">Yordam markazi</span>
             <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>

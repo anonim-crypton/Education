@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Shield, AlertTriangle, Wrench, MessageSquare, ChevronDown, Flag, TrendingDown, TrendingUp, Zap } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Shield, AlertTriangle, Wrench, MessageSquare, ChevronDown, Flag, TrendingDown, TrendingUp, Zap, AlertCircle } from "lucide-react";
 
 // Social Icons - Icons8 style
 const TelegramIcon = () => (
@@ -82,7 +83,7 @@ const CustomSelect = ({ options, value, onChange, placeholder }: any) => {
     <div className="relative">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-orange-600 text-foreground font-medium cursor-pointer text-left flex items-center justify-between hover:border-orange-600 transition-all duration-200"
+        className="w-full px-4 py-3 rounded-xl bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-foreground font-medium cursor-pointer text-left flex items-center justify-between hover:border-orange-600 transition-all duration-200"
       >
         <span className="flex items-center gap-2">
           {IconComponent && <IconComponent className="w-5 h-5" />}
@@ -268,7 +269,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     placeholder="Ismingizni kiriting"
                     required
-                    className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
+                    className="w-full px-4 py-2.5 rounded-xl bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-colors text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -284,7 +285,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     placeholder="email@example.com"
                     required
-                    className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
+                    className="w-full px-4 py-2.5 rounded-xl bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-colors text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -299,7 +300,7 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+998 99 123 45 67"
-                    className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
+                    className="w-full px-3.5 py-2.5 rounded-xl text-base bg-secondary border-2 border-border focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-foreground placeholder-gray-400 dark:placeholder-gray-500"
                   />
                 </div>
 
@@ -315,7 +316,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     placeholder="Xabaringizning mavzusi"
                     required
-                    className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground"
+                    className="w-full px-4 py-2.5 rounded-xl bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-colors text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -331,7 +332,7 @@ export default function ContactPage() {
                     placeholder="O'z xabaringizni yozing..."
                     rows={5}
                     required
-                    className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted-foreground resize-none"
+                    className="w-full px-4 py-2.5 rounded-xl bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-colors text-foreground placeholder:text-muted-foreground resize-none"
                   />
                 </div>
 
@@ -339,9 +340,7 @@ export default function ContactPage() {
                 <motion.button
                   type="submit"
                   disabled={isLoading}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold py-3 px-4 rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isLoading ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -576,93 +575,7 @@ export default function ContactPage() {
           </div>
         </motion.div>
 
-        {/* Report Form Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-12 bg-card rounded-2xl p-8 sm:p-12 border border-border shadow-xl"
-        >
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-3 mb-8">
-              <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4v2m0 4v2M9 3v16.5a2.25 2.25 0 002.25 2.25h3.75a2.25 2.25 0 002.25-2.25V3" />
-              </svg>
-              <h3 className="text-2xl font-bold text-foreground">Shikoyat va ariza berish</h3>
-            </div>
-
-            <p className="text-muted-foreground mb-8">
-              Agar veb saytda noqulaylik yoki noto'g'ri ishlarni payqasangiz, iltimos, quyidagi forma orqali ariza berinig. Barcha arizalar jiddiy ko'rib chiqiladi.
-            </p>
-
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  placeholder="To'liq ismingiz"
-                  className="px-4 py-3 rounded-lg bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-orange-600 placeholder-gray-400 dark:placeholder-gray-500 text-foreground"
-                />
-                <input
-                  type="email"
-                  placeholder="Email manzilingiz"
-                  className="px-4 py-3 rounded-lg bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-orange-600 placeholder-gray-400 dark:placeholder-gray-500 text-foreground"
-                />
-              </div>
-
-              <input
-                type="text"
-                placeholder="Telefon raqamingiz"
-                className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-orange-600 placeholder-gray-400 dark:placeholder-gray-500 text-foreground"
-              />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <CustomSelect 
-                  options={reportTypes}
-                  value={reportType}
-                  onChange={setReportType}
-                  placeholder="Ariza turini tanlang"
-                />
-                <CustomSelect 
-                  options={priorityLevels}
-                  value={priority}
-                  onChange={setPriority}
-                  placeholder="Arizaning darajasi"
-                />
-              </div>
-
-              <textarea
-                placeholder="Arizaning batafsil tavsifi. Qanday muammo yoki noqulaylikga duch kelganingizni ta'riflab bering."
-                rows={6}
-                className="w-full px-4 py-3 rounded-lg bg-secondary border border-border focus:outline-none focus:ring-2 focus:ring-orange-600 placeholder-gray-400 dark:placeholder-gray-500 text-foreground resize-none"
-              ></textarea>
-
-              <div className="flex items-start gap-3">
-                <input
-                  type="checkbox"
-                  id="agree"
-                  className="w-4 h-4 mt-1 rounded border-border text-orange-600 focus:ring-orange-600"
-                />
-                <label htmlFor="agree" className="text-sm text-muted-foreground">
-                  Arizamni tekshirish jarayoni va natijasini email orqali bilantiring deb roziman.
-                </label>
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold shadow-lg transition-all duration-300"
-              >
-                Arizani yuborish
-              </motion.button>
-            </form>
-
-            <p className="text-xs text-muted-foreground mt-4 text-center">
-              Sizning arizangiz maxfiy saqlanadi va faqat zarur bo'lgan shaxslar tomonidan ko'rib chiqiladi.
-            </p>
-          </div>
-        </motion.div>
+        
       </div>
     </section>
   );

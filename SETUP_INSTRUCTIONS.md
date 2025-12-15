@@ -1,149 +1,149 @@
-# Setup Instructions - Django & Next.js Authentication
+# Sozlash Ko'rsatmalari - Django & Next.js Autentifikatsiyasi
 
-## Backend Setup (Django)
+## Backend Sozlash (Django)
 
-### 1. Install Dependencies
+### 1. Bog'liqliklarni O'rnatish
 
 ```bash
 cd edu_game
 pip install -r requirements.txt
 ```
 
-### 2. Environment Variables
+### 2. Atrof-muhit O'zgaruvchilari
 
-Create a `.env` file in `edu_game/` directory:
+`edu_game/` katalogida `.env` faylini yarating:
 
 ```
-DJANGO_SECRET_KEY=your-secret-key
+DJANGO_SECRET_KEY=siz-maxfiy-kalit
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 ```
 
-### 3. Database Migrations
+### 3. Ma'lumotlar Bazasi Migratsiyalari
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 4. Create Superuser
+### 4. Superuser Yaratish
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### 5. Run Development Server
+### 5. Ishlab Chiqarish Serverini Ishga Tushirish
 
 ```bash
 python manage.py runserver
 ```
 
-The server will run at `http://localhost:8000`
+Server `http://localhost:8000` da ishlaydi
 
-## Frontend Setup (Next.js)
+## Frontend Sozlash (Next.js)
 
-### 1. Environment Variables
+### 1. Atrof-muhit O'zgaruvchilari
 
-Create `.env.local` in the project root:
+Loyihaning asosiy katalogida `.env.local` yarating:
 
 ```
 NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=siz-google-mijoz-id
 ```
 
-### 2. Install Dependencies
+### 2. Bog'liqliklarni O'rnatish
 
 ```bash
 npm install
 ```
 
-### 3. Run Development Server
+### 3. Ishlab Chiqarish Serverini Ishga Tushirish
 
 ```bash
 npm run dev
 ```
 
-The frontend will run at `http://localhost:3000`
+Frontend `http://localhost:3000` da ishlaydi
 
-## Google OAuth Setup
+## Google OAuth Sozlash
 
-### 1. Google Cloud Console
+### 1. Google Cloud Konsoli
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com)
-2. Create a new project or select existing
-3. Enable Google+ API
-4. Go to Credentials → Create Credentials → OAuth 2.0 Client ID
-5. Choose "Web application"
-6. Add authorized redirect URIs:
+1. [Google Cloud Konsoliga](https://console.cloud.google.com) o'ting
+2. Yangi loyiha yarating yoki mavjudini tanlang
+3. Google+ API ni faollashtiring
+4. Identifikatsiyalar → Identifikatsiyalar Yaratish → OAuth 2.0 Mijoz ID ga o'ting
+5. "Veb ilova" ni tanlang
+6. Avtorizatsiya qilingan yo'naltiruvchi URI-larni qo'shing:
    - `http://localhost:3000`
    - `http://localhost:3000/login`
    - `http://localhost:3000/register`
 
-### 2. Add Credentials to Frontend
+### 2. Identifikatsiyalarni Frontend ga Qo'shing
 
-Add your Google Client ID to `.env.local`:
+Google Mijoz ID ni `.env.local` ga qo'shing:
 
 ```
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id-here
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=siz-google-mijoz-id
 ```
 
-## API Endpoints
+## API Yo'naltiruvchi Nuqtalari
 
-### Authentication
+### Autentifikatsiya
 
-- **POST** `/api/auth/register/` - User registration
-  - Body: `{username, email, password, password_confirm, school_name}`
-  - Returns: `{success, message, user, access, refresh}`
+- **POST** `/api/auth/register/` - Foydalanuvchi ro'yxatdan o'tishi
+  - Tanasi: `{username, email, password, password_confirm, school_name}`
+  - Javob: `{success, message, user, access, refresh}`
 
-- **POST** `/api/auth/login/` - User login
-  - Body: `{username, password}`
-  - Returns: `{success, message, user, access, refresh}`
+- **POST** `/api/auth/login/` - Foydalanuvchi tizimga kirishi
+  - Tanasi: `{username, password}`
+  - Javob: `{success, message, user, access, refresh}`
 
 - **POST** `/api/auth/google/` - Google OAuth
-  - Body: `{token, school_name}`
-  - Returns: `{success, message, user, access, refresh}`
+  - Tanasi: `{token, school_name}`
+  - Javob: `{success, message, user, access, refresh}`
 
-- **GET** `/api/auth/profile/` - Get current user (requires token)
-  - Header: `Authorization: Token <access_token>`
-  - Returns: `{success, user}`
+- **GET** `/api/auth/profile/` - Joriy foydalanuvchini olish (token talab qiladi)
+  - Sarlavha: `Authorization: Token <access_token>`
+  - Javob: `{success, user}`
 
-- **POST** `/api/auth/logout/` - Logout (requires token)
-  - Header: `Authorization: Token <access_token>`
-  - Returns: `{success, message}`
+- **POST** `/api/auth/logout/` - Chiqish (token talab qiladi)
+  - Sarlavha: `Authorization: Token <access_token>`
+  - Javob: `{success, message}`
 
-## Database Schema
+## Ma'lumotlar Bazasi Sxemasi
 
-### CustomUser Model
+### CustomUser Modeli
 
 ```python
-- id: AutoField (Primary Key)
-- username: CharField (unique)
-- email: EmailField (unique)
+- id: AutoField (Asosiy Kalit)
+- username: CharField (noyob)
+- email: EmailField (noyob)
 - first_name: CharField
 - last_name: CharField
-- password: CharField (hashed)
-- school_name: CharField (required)
+- password: [REDACTED:password] (shifrlangan)
+- school_name: CharField (talab qiladi)
 - is_active: BooleanField (default=True)
 - created_at: DateTimeField (auto_now_add=True)
 - updated_at: DateTimeField (auto_now=True)
 ```
 
-## Features Implemented
+## Amalga Oshirilgan Funksiyalar
 
-✅ User Registration with validation
-✅ User Login with token-based authentication
-✅ Password validation (min 8 chars, uppercase, lowercase, number, special char)
-✅ Google OAuth Login
-✅ Google OAuth Registration
-✅ School name tracking
-✅ CORS enabled for frontend-backend communication
-✅ Admin panel for user management
-✅ Token-based authentication
-✅ Profile endpoint
+✅ Tekshiruvi bilan foydalanuvchi ro'yxatdan o'tishi
+✅ Token-asosidagi autentifikatsiya bilan foydalanuvchi tizimga kirishi
+✅ Parol tekshiruvi (minimal 8 belgidan, katta harf, kichik harf, raqam, maxsus belgisi)
+✅ Google OAuth Tizimga Kirish
+✅ Google OAuth Ro'yxatdan O'tish
+✅ Maktab nomi kuzatilishi
+✅ Frontend-backend aloqasi uchun CORS ni faollashtirish
+✅ Foydalanuvchilarni boshqarish uchun administrator paneli
+✅ Token-asosidagi autentifikatsiya
+✅ Profil yo'naltiruvchi nuqtasi
 
-## Testing
+## Sinov
 
-### Register a User
+### Foydalanuvchini Ro'yxatdan O'tkazish
 
 ```bash
 curl -X POST http://localhost:8000/api/auth/register/ \
@@ -157,7 +157,7 @@ curl -X POST http://localhost:8000/api/auth/register/ \
   }'
 ```
 
-### Login
+### Tizimga Kirish
 
 ```bash
 curl -X POST http://localhost:8000/api/auth/login/ \
@@ -168,40 +168,40 @@ curl -X POST http://localhost:8000/api/auth/login/ \
   }'
 ```
 
-### Get Profile (with token)
+### Profilni Olish (token bilan)
 
 ```bash
 curl -X GET http://localhost:8000/api/auth/profile/ \
-  -H "Authorization: Token YOUR_TOKEN_HERE"
+  -H "Authorization: Token SIZNING_TOKEN_SOZI_SINI_SHUNGA_ALMASHTIRING"
 ```
 
-## Troubleshooting
+## Muammolarni Hal Qilish
 
-### CORS Errors
+### CORS Xatoliklari
 
-Make sure:
-- `CORS_ALLOWED_ORIGINS` includes your frontend URL in Django settings
-- Frontend is running on allowed port (3000 or 3001)
+Quyidagi narsalarni tekshiring:
+- `CORS_ALLOWED_ORIGINS` Django sozlamalarida siz frontend URL ni o'z ichiga oladi
+- Frontend ruxsat berilgan portda ishlaydi (3000 yoki 3001)
 
-### Database Errors
+### Ma'lumotlar Bazasi Xatoliklari
 
-Run migrations:
+Migratsiyalarni ishga tushiring:
 ```bash
 python manage.py makemigrations users
 python manage.py migrate
 ```
 
-### Google OAuth Issues
+### Google OAuth Muammolari
 
-- Verify Google Client ID is correct
-- Check redirect URIs in Google Cloud Console
-- Ensure `.env.local` has correct `NEXT_PUBLIC_GOOGLE_CLIENT_ID`
+- Google Mijoz ID to'g'ri ekanligini tekshiring
+- Google Cloud Konsolida yo'naltiruvchi URI-larni tekshiring
+- `.env.local` faylida to'g'ri `NEXT_PUBLIC_GOOGLE_CLIENT_ID` ni tekshiring
 
-## Next Steps
+## Keyingi Qadamlar
 
-1. Implement password reset functionality
-2. Add email verification
-3. Implement refresh token rotation
-4. Add user profile editing
-5. Add role-based access control
-6. Implement two-factor authentication
+1. Parolni tiklash funksiyasini amalga oshirish
+2. Elektron pochta tekshirusini qo'shish
+3. Yangilash token aylanishini amalga oshirish
+4. Foydalanuvchi profilini tahrirlashni qo'shish
+5. Rol-asosidagi kirish huquqini qo'shish
+6. Ikki faktorli autentifikatsiyani amalga oshirish

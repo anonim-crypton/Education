@@ -43,28 +43,23 @@ export default function LoginCardSection() {
     setLoading(true);
 
     try {
-      const apiUrl = `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-      }/api/auth/login/`;
-
-      console.log("Login API URL:", apiUrl);
-      console.log("Request body:", { username: email, password: password });
-
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: email,
-          password: password,
-        }),
-      });
-
-      console.log("Response status:", response.status);
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/auth/login/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: email,
+            password: password,
+          }),
+        }
+      );
 
       const data = await response.json();
-      console.log("Response data:", data);
 
       if (!response.ok) {
         // Backend-dan xatolik xabari olish
@@ -94,9 +89,9 @@ export default function LoginCardSection() {
         router.push("/dashboard");
       }
     } catch (err) {
-      const errorMessage =
-        "Server bilan bog'lanish muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring.";
-      setError(errorMessage);
+      setError(
+        "Server bilan bog'lanish muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring."
+      );
       console.error("Login error:", err);
     } finally {
       setLoading(false);

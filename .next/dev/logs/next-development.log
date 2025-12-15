@@ -1,450 +1,799 @@
-[00:00:07.990] Server  LOG      ✓ Ready in 5.5s
-[00:00:11.145] Server  LOG      ○ Compiling /login ...
-[00:00:20.716] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:21.941] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:00:22.059] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:22.059] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:22.059] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793862410}
-[00:00:23.006] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:24.449] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:24.449] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/account-settings","route":"/account-settings"}
-[00:00:24.449] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793863957}
-[00:00:24.493] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793864815}
-[00:00:37.417] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793877696}
-[00:00:40.094] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793880456}
-[00:00:44.041] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793884402}
-[00:00:51.777] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793892139}
-[00:01:19.715] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793920066}
-[00:01:22.416] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793922743}
-[00:01:26.146] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/register color: rgb(120, 120, 120) color: inherit {"dp":"/register","o":"http://localhost:3000/register","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793926479}
-[00:01:41.227] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:42.024] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:01:42.024] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:01:42.024] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793942379}
-[00:01:51.621] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793951942}
-[00:02:21.717] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793982015}
-[00:02:21.717] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:02:23.337] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793983680}
-[00:03:07.592] Server  LOG      ✓ Compiled in 783ms
-[00:03:18.383] Server  LOG      ✓ Compiled in 339ms
-[00:04:36.095] Server  LOG      ✓ Compiled in 990ms
-[00:04:42.368] Server  LOG      ✓ Compiled in 691ms
-[00:04:42.923] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.942] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.953] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.962] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.969] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.971] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.978] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.981] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.989] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
-[00:04:42.995] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.996] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.998] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:42.999] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.002] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.006] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.008] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.009] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.011] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
-[00:04:43.380] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.391] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.396] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.412] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.425] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.441] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.497] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.538] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.570] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
-[00:04:43.626] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.655] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.660] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.672] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.681] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.682] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.689] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.690] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:04:43.691] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
-[00:04:46.432] Browser ERROR   uncaughtError: Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
-[00:04:51.443] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+[00:00:04.330] Server  LOG      ✓ Ready in 3.3s
+[00:00:07.383] Server  LOG      ○ Compiling / ...
+[00:00:15.434] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:17.020] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:00:19.992] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:19.992] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:19.992] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765806589119}
+[00:00:19.992] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765806589500}
+[00:06:17.674] Server  LOG      ✓ Compiled in 1288ms
+[00:06:23.870] Server  LOG      ✓ Compiled in 1790ms
+[00:06:27.477] Server  LOG      ✓ Compiled in 1438ms
+[00:06:32.148] Server  LOG      ✓ Compiled in 975ms
+[00:06:36.456] Server  LOG      ✓ Compiled in 703ms
+[00:06:40.924] Server  LOG      ✓ Compiled in 1138ms
+[00:06:47.240] Server  LOG      ✓ Compiled in 460ms
+[00:06:51.904] Server  LOG      ✓ Compiled in 362ms
+[00:06:58.034] Server  LOG      ✓ Compiled in 253ms
+[00:07:02.587] Server  LOG      ✓ Compiled in 521ms
+[00:08:06.079] Server  LOG      ✓ Compiled in 240ms
+[00:08:59.580] Server  LOG      ✓ Compiled in 953ms
+[00:09:03.571] Server  LOG      ✓ Compiled in 305ms
+[00:09:07.736] Server  LOG      ✓ Compiled in 466ms
+[00:09:11.479] Server  LOG      ✓ Compiled in 316ms
+[00:10:04.352] Server  LOG      ✓ Compiled in 768ms
+[00:10:07.849] Server  LOG      ✓ Compiled in 248ms
+[00:10:11.262] Server  LOG      ✓ Compiled in 404ms
+[00:10:54.839] Server  LOG      ✓ Compiled in 428ms
+[00:10:58.582] Server  LOG      ✓ Compiled in 242ms
+[00:11:02.395] Server  LOG      ✓ Compiled in 187ms
+[00:11:50.420] Server  LOG      ✓ Compiled in 411ms
+[00:11:54.187] Server  LOG      ✓ Compiled in 393ms
+[00:12:27.195] Server  LOG      ✓ Compiled in 390ms
+[00:12:32.202] Server  LOG      ✓ Compiled in 385ms
+[00:12:36.179] Server  LOG      ✓ Compiled in 398ms
+[00:13:38.333] Server  LOG      ✓ Compiled in 465ms
+[00:13:42.896] Server  LOG      ✓ Compiled in 362ms
+[00:13:46.572] Server  LOG      ✓ Compiled in 310ms
+[00:14:29.974] Server  LOG      ✓ Compiled in 455ms
+[00:14:34.835] Server  LOG      ✓ Compiled in 478ms
+[00:14:35.991] Browser ERROR   ./OneDrive/Documents/GitHub/Education/components/navbar.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx [app-ssr] (ecmascript)
+
+Caused by:
+- Expected export to be in eval context "Navbar" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/components/navbar.tsx [app-ssr] (ecmascript)
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "Navbar" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/components/navbar.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/dashboard/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/dashboard/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/components/navbar.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/dashboard/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/dashboard/page.tsx [Server Component]
+[00:14:39.246] Server  LOG      ✓ Compiled in 689ms
+[00:16:53.647] Server  LOG      ✓ Compiled in 756ms
+[00:16:57.023] Server  LOG      ✓ Compiled in 292ms
+[00:17:02.222] Server  LOG      ✓ Compiled in 242ms
+[00:18:57.832] Server  LOG      ✓ Compiled in 336ms
+[00:19:12.681] Server  LOG      ✓ Compiled in 642ms
+[00:19:17.334] Server  LOG      ✓ Compiled in 773ms
+[00:20:20.598] Server  LOG      ✓ Compiled in 574ms
+[00:20:24.839] Server  LOG      ✓ Compiled in 654ms
+[00:20:33.495] Server  LOG      ✓ Compiled in 227ms
+[00:20:37.624] Server  LOG      ✓ Compiled in 425ms
+[00:22:39.833] Server  LOG      ✓ Compiled in 804ms
+[00:22:44.282] Server  LOG      ✓ Compiled in 553ms
+[00:24:37.541] Server  LOG      ✓ Compiled in 502ms
+[00:27:18.570] Server  LOG      ✓ Compiled in 455ms
+[00:27:24.088] Server  LOG      ✓ Compiled in 471ms
+[00:27:29.418] Server  LOG      ✓ Compiled in 509ms
+[00:27:35.953] Server  LOG      ✓ Compiled in 474ms
+[00:27:41.356] Server  LOG      ✓ Compiled in 349ms
+[00:31:51.548] Server  LOG      ✓ Compiled in 300ms
+[00:31:56.752] Server  LOG      ✓ Compiled in 341ms
+[00:44:07.426] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765809216986}
+[00:44:21.953] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765809231473}
+[00:44:24.675] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765809234234}
+[00:45:30.800] Server  LOG      ✓ Compiled in 477ms
+[00:50:29.447] Server  LOG      ✓ Compiled in 892ms
+[00:53:02.159] Server  LOG      ✓ Compiled in 317ms
+[00:53:09.363] Server  LOG      ✓ Compiled in 530ms
+[00:53:15.461] Server  LOG      ✓ Compiled in 475ms
+[00:54:53.938] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765809863487}
+[00:54:57.478] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765809866996}
+[00:55:08.958] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:09.815] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:55:10.063] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:55:10.063] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:55:10.064] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:55:10.064] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765809879565}
+[00:55:10.064] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765809879566}
+[00:55:57.010] Server  LOG      ✓ Compiled in 341ms
+[00:57:06.855] Server  LOG      ✓ Compiled in 183ms
+[00:59:17.141] Server  LOG      ✓ Compiled in 397ms
+[00:59:28.417] Server  LOG      ✓ Compiled in 932ms
+[00:59:34.215] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:59:36.870] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:59:37.112] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:59:37.112] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:59:37.112] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810146667}
+[00:59:37.339] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810146833}
+[00:59:38.393] Server  LOG      ✓ Compiled in 392ms
+[00:59:42.752] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810152248}
+[00:59:49.389] Server  LOG      ○ Compiling /login ...
+[00:59:54.605] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810163964}
+[01:00:54.190] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810223743}
+[01:03:05.578] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810355008}
+[01:03:06.180] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810355645}
+[01:03:19.344] Server  LOG      ✓ Compiled in 754ms
+[01:03:20.596] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810370102}
+[01:03:26.547] Server  LOG      ✓ Compiled in 555ms
+[01:03:32.575] Server  LOG      ✓ Compiled in 481ms
+[01:04:27.150] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:04:27.511] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:04:27.511] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/complaint","route":"/complaint"}
+[01:04:27.512] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/complaint color: rgb(120, 120, 120) color: inherit {"dp":"/complaint","o":"http://localhost:3000/complaint","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810437068}
+[01:04:33.530] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:04:33.987] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:04:33.987] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:04:33.987] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810443506}
+[01:04:37.146] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810446701}
+[01:04:40.950] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810450457}
+[01:05:51.923] Server  LOG      ✓ Compiled in 1378ms
+[01:06:03.111] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810532663}
+[01:06:08.073] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810537632}
+[01:06:14.012] Server  LOG      ○ Compiling /complaint ...
+[01:06:17.876] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:06:18.125] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:06:18.125] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:06:18.125] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810547679}
+[01:06:32.233] Server  LOG      ✓ Compiled in 702ms
+[01:06:43.525] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/complaint color: rgb(120, 120, 120) color: inherit {"dp":"/complaint","o":"http://localhost:3000/complaint","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810573081}
+[01:09:05.284] Server  LOG      ✓ Compiled in 581ms
+[01:09:13.337] Server  LOG      ✓ Compiled in 314ms
+[01:09:16.281] Server  ERROR    ⨯ ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
 Parsing ecmascript source code failed
-  421 |                     Parolni unitdingizmi?
-  422 |                   </a>
-> 423 |                 </motion.div>
-      |                              ^
-> 424 |
+  310 |     </section>
+  311 |   );
+> 312 | }
       | ^
-> 425 |                 {/* Submit Button */}
-      | ^^^^^^^^^^^^^^^^^
-  426 |                 <motion.button
-  427 |                   type="submit"
-  428 |                   disabled={isLoading || !isFormValid}
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+
+[01:09:16.419] Server  ERROR    ⨯ ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
+Parsing ecmascript source code failed
+  310 |     </section>
+  311 |   );
+> 312 | }
+      | ^
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+
+[01:09:19.333] Server  LOG      ○ Compiling /_error ...
+[01:09:22.399] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
+Parsing ecmascript source code failed
+  310 |     </section>
+  311 |   );
+> 312 | }
+      | ^
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:09:22.400] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
+Parsing ecmascript source code failed
+  310 |     </section>
+  311 |   );
+> 312 | }
+      | ^
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:09:24.041] Browser ERROR   uncaughtError: Error: ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
+Parsing ecmascript source code failed
+  310 |     </section>
+  311 |   );
+> 312 | }
+      | ^
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+
+[01:09:28.216] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
+Parsing ecmascript source code failed
+  310 |     </section>
+  311 |   );
+> 312 | }
+      | ^
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:09:28.216] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
+Parsing ecmascript source code failed
+  310 |     </section>
+  311 |   );
+> 312 | }
+      | ^
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:09:28.216] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:312:1
+Parsing ecmascript source code failed
+  310 |     </section>
+  311 |   );
+> 312 | }
+      | ^
+  313 |
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+[01:09:39.995] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:299:17
+Parsing ecmascript source code failed
+  297 |               Sizning arizangiz maxfiy saqlanadi va faqat zarur bo'lgan shaxslar tomonidan ko'rib chiqiladi.
+  298 |             </p>
+> 299 |           </div>
+      |                 ^
+> 300 |         </motion.div>
+      | ^^^^^^^^^
+  301 |       </div>
+  302 |     </section>
+  303 |   );
 
 Expected '</', got 'jsx text (
-
-                )'
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:04:51.443] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+        )'
+[01:09:39.995] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/complaint/page.tsx:299:17
 Parsing ecmascript source code failed
-  421 |                     Parolni unitdingizmi?
-  422 |                   </a>
-> 423 |                 </motion.div>
-      |                              ^
-> 424 |
-      | ^
-> 425 |                 {/* Submit Button */}
-      | ^^^^^^^^^^^^^^^^^
-  426 |                 <motion.button
-  427 |                   type="submit"
-  428 |                   disabled={isLoading || !isFormValid}
+  297 |               Sizning arizangiz maxfiy saqlanadi va faqat zarur bo'lgan shaxslar tomonidan ko'rib chiqiladi.
+  298 |             </p>
+> 299 |           </div>
+      |                 ^
+> 300 |         </motion.div>
+      | ^^^^^^^^^
+  301 |       </div>
+  302 |     </section>
+  303 |   );
 
 Expected '</', got 'jsx text (
+        )'
+[01:09:52.917] Server  LOG      ✓ Compiled in 804ms
+[01:10:29.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:36.577] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:10:36.577] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/complaint","route":"/complaint"}
+[01:10:36.577] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/complaint color: rgb(120, 120, 120) color: inherit {"dp":"/complaint","o":"http://localhost:3000/complaint","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765810806130}
+[01:12:34.018] Server  LOG      ✓ Compiled in 299ms
+[01:12:42.572] Server  LOG      ✓ Compiled in 1071ms
+[01:13:37.074] Server  LOG      ✓ Compiled in 372ms
+[01:13:43.086] Server  LOG      ✓ Compiled in 686ms
+[01:14:14.240] Server  LOG      ✓ Compiled in 689ms
+[01:14:24.094] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.191] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.238] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.286] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.302] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.366] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.407] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.426] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.622] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:14:24.671] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.686] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.689] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.705] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.708] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.709] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.717] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.718] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:24.726] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:14:25.854] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:25.888] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:25.950] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:25.977] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.043] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.075] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.114] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.170] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.209] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:14:26.293] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.326] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.351] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.373] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.394] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.416] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.439] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.460] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.487] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:14:26.987] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:26.993] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.007] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.024] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.040] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.054] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.067] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.074] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.077] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:14:27.104] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.106] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.109] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.111] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.123] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.126] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.138] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.141] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:14:27.152] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:14:28.127] Browser ERROR   uncaughtError: Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:14:54.572] Server  LOG      ✓ Compiled in 590ms
+[01:14:58.963] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:15:08.888] Server  LOG      ✓ Compiled in 428ms
+[01:15:19.989] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:15:19.990] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/complaint","route":"/complaint"}
+[01:15:19.990] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/complaint color: rgb(120, 120, 120) color: inherit {"dp":"/complaint","o":"http://localhost:3000/complaint","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765811089048}
+[01:16:26.160] Server  LOG      ✓ Compiled in 316ms
+[01:16:51.472] Server  LOG      ✓ Compiled in 441ms
+[01:16:57.350] Server  LOG      ✓ Compiled in 348ms
+[01:17:04.675] Server  LOG      ✓ Compiled in 571ms
+[01:17:12.950] Server  LOG      ✓ Compiled in 597ms
+[01:17:53.549] Server  LOG      ✓ Compiled in 569ms
+[01:18:01.731] Server  LOG      ✓ Compiled in 556ms
+[01:18:10.352] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-utils\route-types-utils.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:18:10.369] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:18:10.399] Server  WARN     ⚠ "Failed to reload dynamic routes:" Error: UNKNOWN: unknown error, open 'C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\types\routes.d.ts'
+[01:18:11.529] Server  LOG      ✓ Compiled in 1187ms
+[01:18:18.322] Server  LOG      ✓ Compiled in 526ms
+[01:18:25.866] Server  LOG      ✓ Compiled in 360ms
+[01:18:34.080] Server  LOG      ✓ Compiled in 521ms
+[01:19:58.131] Server  LOG      ✓ Compiled in 713ms
+[01:20:04.311] Server  LOG      ✓ Compiled in 1020ms
+[01:20:12.073] Server  LOG      ✓ Compiled in 1107ms
+[01:20:21.485] Server  LOG      ✓ Compiled in 983ms
+[01:20:28.813] Server  LOG      ✓ Compiled in 586ms
+[01:20:36.711] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-utils\route-types-utils.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:20:36.718] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:20:36.734] Server  WARN     ⚠ "Failed to reload dynamic routes:" Error: UNKNOWN: unknown error, open 'C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\types\validator.ts'
+[01:20:37.596] Server  LOG      ✓ Compiled in 949ms
+[01:21:39.048] Server  LOG      ✓ Compiled in 787ms
+[01:21:45.838] Server  LOG      ✓ Compiled in 926ms
+[01:26:28.565] Server  LOG      ✓ Compiled in 1653ms
+[01:26:30.064] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.127] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.132] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.149] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.179] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.213] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.232] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.249] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.263] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:26:30.326] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.342] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.365] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.398] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.425] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.457] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.505] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.561] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:30.613] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:26:36.664] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:36.681] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:36.747] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:36.778] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:36.828] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:36.872] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:36.897] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.030] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.377] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:26:37.576] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.625] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.688] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.697] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.712] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.787] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.811] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.853] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:26:37.863] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:26:40.045] Browser ERROR   uncaughtError: Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[01:26:48.244] Server  LOG      ✓ Compiled in 2000ms
+[01:27:14.242] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-utils\route-types-utils.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:27:14.284] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-utils\setup-dev-bundler.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:27:14.340] Server  WARN     ⚠ "Failed to reload dynamic routes:" Error: UNKNOWN: unknown error, open 'C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\types\routes.d.ts'
+[01:28:03.082] Server  LOG      ✓ Compiled in 2.4s
+[01:28:16.581] Server  LOG      ✓ Compiled in 2.3s
+[01:34:20.122] Server  LOG      ✓ Compiled in 1510ms
+[01:34:20.925] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:20.939] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:20.941] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:20.944] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.227] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.250] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.302] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:21.306] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.308] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.313] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.329] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.343] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.345] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.364] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:21.448] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.457] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.460] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.472] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.488] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.494] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.507] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:21.527] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.532] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.538] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.544] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.555] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.560] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.573] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:21.626] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.632] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.639] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.658] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.694] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.730] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.776] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:21.797] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.826] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.844] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.858] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.876] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.894] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:21.923] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:22.379] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.380] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.382] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.390] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.394] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.397] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.423] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:22.429] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.432] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.443] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.447] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.460] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.463] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.481] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:22.697] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.741] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.864] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:22.989] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.061] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.139] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.157] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:23.175] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__788e35f1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.190] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.207] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\[root-of-the-server]__72626ed5._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.214] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_75f9dc6a._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.239] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.254] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[01:34:23.279] Server  ERROR    ⨯ ReferenceError: React is not defined
+[01:34:24.219] Browser ERROR   uncaughtError: ReferenceError: React is not defined
+[01:34:31.152] Server  LOG      ✓ Compiled in 4.6s
+[01:34:42.322] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:34:44.552] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:34:44.552] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/complaint","route":"/complaint"}
+[01:34:44.552] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/complaint color: rgb(120, 120, 120) color: inherit {"dp":"/complaint","o":"http://localhost:3000/complaint","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765812254109}
+[01:35:07.259] Server  LOG      ✓ Compiled in 1364ms
+[01:35:27.991] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
 
-                )'
-
-Import traces:
+Import trace:
   Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:35:27.991] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
 
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:04:57.438] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:35:27.991] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:35:30.233] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:35:57.077] Server  LOG      ✓ Compiled in 81ms
+[01:35:57.993] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:35:59.000] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:09.553] Server  LOG      ✓ Compiled in 70ms
+[01:36:10.144] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:12.082] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:14.427] Server  LOG      ✓ Compiled in 45ms
+[01:36:19.968] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:19.968] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:24.703] Server  LOG      ✓ Compiled in 156ms
+[01:36:33.364] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:33.364] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: Package subpath './nesting' is not defined by "exports" in C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\package.json
+    [at exportsNotFound (node:internal/modules/esm/resolve:313:10)]
+    [at packageExportsResolve (node:internal/modules/esm/resolve:661:9)]
+    [at resolveExports (node:internal/modules/cjs/loader:679:36)]
+    [at Module._findPath (node:internal/modules/cjs/loader:746:31)]
+    [at Module._resolveFilename (node:internal/modules/cjs/loader:1406:27)]
+    [at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)]
+    [at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)]
+    [at Module._load (node:internal/modules/cjs/loader:1227:37)]
+    [at TracingChannel.traceSync (node:diagnostics_channel:328:14)]
+    [at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:52.999] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at lt (C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\dist\lib.js:38:1643)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:36:57.044] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at lt (C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\dist\lib.js:38:1643)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:37:05.488] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/globals.css
+Error evaluating Node.js code
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    [at lt (C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\tailwindcss\dist\lib.js:38:1643)]
+    [at <anonymous> (turbopack:///[turbopack-node]/transforms/postcss.ts:56:14)]
+    [at <anonymous>]
+    [at Module.init (turbopack:///[turbopack-node]/transforms/postcss.ts:43:33)]
+    [at run (turbopack:///[turbopack-node]/ipc/evaluate.ts:77:20)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:103:5)]
+
+Import trace:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/globals.css [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/layout.tsx [Server Component]
+[01:37:42.726] Server  LOG      ✓ Compiled in 1878ms
+[01:39:00.021] Server  LOG      ✓ Compiled in 1011ms
+[01:39:06.093] Server  LOG      ✓ Compiled in 707ms
+[01:39:12.776] Server  LOG      ✓ Compiled in 1498ms
+[01:39:17.358] Server  LOG      ✓ Compiled in 370ms
+[01:41:45.815] Server  LOG      ✓ Compiled in 549ms
+[01:47:37.351] Server  LOG      ✓ Compiled in 506ms
+[01:47:37.492] Browser ERROR   uncaughtError: ReferenceError: navLinks is not defined
+[01:47:41.888] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[01:47:41.943] Server  LOG      ✓ Compiled in 463ms
+[01:47:43.527] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/complaint color: rgb(120, 120, 120) color: inherit {"dp":"/complaint","o":"http://localhost:3000/complaint","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765813031632}
+[01:47:44.688] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:47:45.721] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:47:45.721] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/complaint","route":"/complaint"}
+[01:47:45.721] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/complaint color: rgb(120, 120, 120) color: inherit {"dp":"/complaint","o":"http://localhost:3000/complaint","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765813035277}
+[01:47:50.418] Server  LOG      ✓ Compiled in 1809ms
+[01:48:03.297] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765813052833}
+[01:49:03.747] Server  LOG      ✓ Compiled in 627ms
+[01:51:50.657] Server  LOG      ✓ Compiled in 661ms
+[01:52:46.245] Server  LOG      ✓ Compiled in 774ms
+[01:52:52.679] Server  LOG      ✓ Compiled in 456ms
+[01:53:30.594] Server  LOG      ✓ Compiled in 327ms
+[01:53:41.086] Server  LOG      ✓ Compiled in 413ms
+[01:53:51.054] Server  LOG      ✓ Compiled in 511ms
+[01:53:58.933] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx:616:1
 Parsing ecmascript source code failed
-  421 |                     Parolni unitdingizmi?
-  422 |                   </a>
-> 423 |                 </motion.div>
-      |                              ^
-> 424 |
+  614 |     </section>
+  615 |   );
+> 616 | }
       | ^
-> 425 |                 {/* Submit Button */}
-      | ^^^^^^^^^^^^^^^^^
-  426 |                 <motion.button
-  427 |                   type="submit"
-  428 |                   disabled={isLoading || !isFormValid}
+  617 |
 
-Expected '</', got 'jsx text (
-
-                )'
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
 
 Import traces:
   Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Server Component]
 
   Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:04:57.439] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Server Component]
+[01:53:58.933] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx:616:1
 Parsing ecmascript source code failed
-  421 |                     Parolni unitdingizmi?
-  422 |                   </a>
-> 423 |                 </motion.div>
-      |                              ^
-> 424 |
+  614 |     </section>
+  615 |   );
+> 616 | }
       | ^
-> 425 |                 {/* Submit Button */}
-      | ^^^^^^^^^^^^^^^^^
-  426 |                 <motion.button
-  427 |                   type="submit"
-  428 |                   disabled={isLoading || !isFormValid}
+  617 |
 
-Expected '</', got 'jsx text (
-
-                )'
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
 
 Import traces:
   Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Server Component]
 
   Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:05:06.326] Server  LOG      ✓ Compiled in 570ms
-[00:05:07.645] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:05:08.452] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:05:08.452] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
-[00:05:08.452] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794148319}
-[00:05:34.007] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794174329}
-[00:06:04.250] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794204471}
-[00:06:04.301] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:06:05.994] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794206309}
-[00:06:10.799] Server  LOG      ○ Compiling /contact ...
-[00:06:12.486] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794212171}
-[00:06:14.814] Server  LOG      ✓ Compiled in 1627ms
-[00:06:17.419] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:18.085] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:06:18.085] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/contact","route":"/contact"}
-[00:06:18.085] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794218444}
-[00:06:26.916] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:06:27.916] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:27.916] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:28.041] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:28.042] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:28.787] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="/OneDrive/...">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="uz" suppressHydrationWarning={true} style={{...}}>
-                          <head>
-                          <body
-                            className="font-sans antialiased bg-background text-foreground"
--                           style={{padding-right:"15px",overflow-x:"hidden",overflow-y:"hidden"}}
-                          >
-                  ...
-
-[00:06:28.929] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:06:29.139] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:06:29.139] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:06:29.139] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794229504}
-[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
-Code generation for chunk item errored
-An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-
-Caused by:
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Debug info:
-- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
-- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
-- Execution of *EcmascriptChunkItemContent::new failed
-- Execution of EcmascriptModuleContent::new failed
-- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
-
-Import traces:
-  Client Component Browser:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
-    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
-[00:06:39.912] Server  LOG      ✓ Compiled in 2.2s
-[00:06:57.380] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794257710}
-[00:09:45.444] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794425724}
-[00:13:18.709] Server  LOG      ✓ Compiled in 1389ms
-[00:13:22.454] Server  LOG      ✓ Compiled in 724ms
-[00:13:26.221] Server  LOG      ✓ Compiled in 648ms
-[00:13:47.729] Server  LOG      ✓ Compiled in 1552ms
-[00:14:34.113] Server  LOG      ✓ Compiled in 406ms
-[00:15:35.995] Server  LOG      ✓ Compiled in 459ms
-[00:16:32.009] Server  LOG      ✓ Compiled in 624ms
-[00:18:53.439] Server  LOG      ✓ Compiled in 566ms
-[00:19:55.794] Server  LOG      ✓ Compiled in 717ms
-[00:20:50.135] Server  LOG      ✓ Compiled in 602ms
-[00:20:58.047] Server  LOG      ○ Compiling /_not-found/page ...
-[00:21:06.732] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:07.449] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:07.449] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/become-teacher","route":"/become-teacher"}
-[00:21:07.449] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795107440}
-[00:21:12.483] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:12.790] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:12.790] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:21:12.790] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795113157}
-[00:21:31.317] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:31.561] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:31.561] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/become-teacher","route":"/become-teacher"}
-[00:21:31.561] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795131919}
-[00:22:08.311] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:22:09.104] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:22:09.104] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:22:09.104] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795169466}
-[00:23:31.809] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:23:32.251] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:23:32.251] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/become-teacher","route":"/become-teacher"}
-[00:23:32.251] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795252613}
-[00:24:04.979] Server  LOG      ✓ Compiled in 712ms
-[00:25:42.282] Server  LOG      ✓ Compiled in 501ms
-[00:25:48.034] Server  LOG      ✓ Compiled in 475ms
-[00:26:23.804] Server  LOG      ✓ Compiled in 605ms
-[00:26:28.539] Server  LOG      ✓ Compiled in 781ms
-[00:26:40.805] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:26:41.637] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:26:41.637] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:26:41.637] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795442002}
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/contact/page.tsx [Server Component]
+[01:54:22.495] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:54:22.894] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:54:22.894] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:54:22.894] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765813432451}
+[01:58:03.925] Server  LOG      ✓ Compiled in 1004ms
+[01:58:09.834] Server  LOG      ✓ Compiled in 694ms
+[01:58:17.754] Server  LOG      ✓ Compiled in 563ms
+[01:58:59.838] Server  LOG      ✓ Compiled in 3.6s

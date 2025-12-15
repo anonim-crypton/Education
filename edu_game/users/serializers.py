@@ -16,13 +16,17 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
     
     def get_avatar_url(self, obj):
-        """Get full avatar URL"""
+        """Get full avatar URL or default avatar"""
         if obj.avatar:
             request = self.context.get('request')
             if request:
                 return request.build_absolute_uri(obj.avatar.url)
             return obj.avatar.url
-        return None
+        # Return default avatar URL
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri('/placeholder-user.jpg')
+        return '/placeholder-user.jpg'
 
 
 class GoogleRegisterSerializer(serializers.Serializer):

@@ -1,94 +1,94 @@
-# Deployment Guide
+# Joylashtirish Qo'llanmasi
 
-## Production Deployment
+## Ishlab Chiqarishda Joylashtirish
 
-### Prerequisites
-- Docker and Docker Compose installed
-- Google OAuth credentials configured
-- Environment variables set up
+### Avvalgi Talablar
+- Docker va Docker Compose o'rnatilgan
+- Google OAuth identifikatsiyalari sozlangan
+- Atrof-muhit o'zgaruvchilari o'rnatilgan
 
-### 1. Build and Run with Docker
+### 1. Docker bilan Qurilish va Ishga Tushirish
 
 ```bash
 docker-compose up -d
 ```
 
-This will start:
-- PostgreSQL database (port 5432)
+Quyidagilar ishga tushadi:
+- PostgreSQL ma'lumotlar bazasi (port 5432)
 - Django backend (port 8000)
 - Next.js frontend (port 3000)
 
-### 2. Manual Deployment (Without Docker)
+### 2. Qo'lda Joylashtirish (Docker siz)
 
-#### Backend Deployment (Django)
+#### Backend Joylashtirish (Django)
 
 ```bash
 cd edu_game
 
-# Install dependencies
+# Bog'liqliklarni o'rnatish
 pip install -r requirements.txt
 
-# Create environment variables file
+# Atrof-muhit o'zgaruvchilari faylini yaratish
 cp .env.example .env
 
-# Run migrations
+# Migratsiyalarni ishga tushirish
 python manage.py migrate
 
-# Collect static files
+# Statik fayllarni yig'ish
 python manage.py collectstatic --noinput
 
-# Create superuser
+# Superuser yaratish
 python manage.py createsuperuser
 
-# Run with production server (e.g., gunicorn)
+# Ishlab chiqarish serveri bilan ishga tushirish (masalan, gunicorn)
 gunicorn edu_game.wsgi:application --bind 0.0.0.0:8000
 ```
 
-#### Frontend Deployment (Next.js)
+#### Frontend Joylashtirish (Next.js)
 
 ```bash
-# Install dependencies
+# Bog'liqliklarni o'rnatish
 npm install
 
-# Create environment variables
+# Atrof-muhit o'zgaruvchilari yaratish
 cp .env.local.example .env.local
 
-# Build for production
+# Ishlab chiqarish uchun qurilish
 npm run build
 
-# Start production server
+# Ishlab chiqarish serverini ishga tushirish
 npm start
 ```
 
-### 3. Environment Variables for Production
+### 3. Ishlab Chiqarish Atrof-Muhiti O'zgaruvchilari
 
 #### Django (.env)
 ```
 DEBUG=False
-SECRET_KEY=your-very-secure-secret-key-here
-ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
-DATABASE_URL=postgresql://user:password@hostname:5432/dbname
-GOOGLE_OAUTH_CLIENT_ID=your-google-client-id
-GOOGLE_OAUTH_CLIENT_SECRET=your-google-client-secret
+SECRET_KEY=siz-juda-xavfsiz-maxfiy-kalit-shunga-shunga
+ALLOWED_HOSTS=siz-domen.com,www.siz-domen.com
+DATABASE_URL=postgresql://foydalanuvchi:parol@hostname:5432/ma'lumotlar-bazasi-nomi
+GOOGLE_OAUTH_CLIENT_ID=siz-google-mijoz-id
+GOOGLE_OAUTH_CLIENT_SECRET=siz-google-mijoz-maxfiy-sozi
 ```
 
 #### Next.js (.env.local)
 ```
-NEXT_PUBLIC_API_URL=https://api.yourdomain.com
-NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
+NEXT_PUBLIC_API_URL=https://api.siz-domen.com
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=siz-google-mijoz-id
 ```
 
-### 4. SSL/HTTPS Configuration
+### 4. SSL/HTTPS Konfiguratsiyasi
 
-#### Using Nginx with Let's Encrypt
+#### Nginx va Let's Encrypt dan Foydalanish
 
 ```nginx
 server {
     listen 443 ssl http2;
-    server_name yourdomain.com;
+    server_name siz-domen.com;
 
-    ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/siz-domen.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/siz-domen.com/privkey.pem;
 
     # Django backend
     location /api/ {
@@ -109,70 +109,73 @@ server {
     }
 }
 
-# Redirect HTTP to HTTPS
+# HTTP-ni HTTPS-ga yo'naltirish
 server {
     listen 80;
-    server_name yourdomain.com;
+    server_name siz-domen.com;
     return 301 https://$server_name$request_uri;
 }
 ```
 
-### 5. Database Backup
+### 5. Ma'lumotlar Bazasini Zaxiralash
 
 ```bash
-# Backup PostgreSQL
+# PostgreSQL-ni zaxiralash
 pg_dump -U edugame -h localhost edugame > backup.sql
 
-# Restore from backup
+# Zaxiradagi nusxadagi ma'lumotlarni qayta tiklash
 psql -U edugame -h localhost edugame < backup.sql
 ```
 
-### 6. Monitoring and Logging
+### 6. Kuzatish va Jurnallashtirish
 
-Set up logging for:
-- Django: Use `logging` configuration in settings.py
-- Frontend: Use application monitoring service
-- System: Use systemd journal or log aggregation
+Quyidagilar uchun jurnallashtirish o'rnatish:
+- Django: settings.py da `logging` konfiguratsiyasidan foydalaning
+- Frontend: Dastur kuzatish xizmati ishlatish
+- Tizim: systemd journal yoki jurnallarni birlash uchun ishlatish
 
-### 7. Scaling Considerations
+### 7. Masshtabiylash Bo'yicha Mulohazalar
 
-For high-traffic scenarios:
-- Use Gunicorn with multiple workers
-- Implement Celery for async tasks
-- Use Redis for caching and sessions
-- Use CDN for static assets
-- Database read replicas
+Yuqori harakatchanlik stsenariylari uchun:
+- Bir nechta ishchilari bilan Gunicorn-dan foydalaning
+- Asinxron vazifalar uchun Celery-ni amalga oshiring
+- Cache va sesiyalar uchun Redis-dan foydalaning
+- Statik aktivlar uchun CDN-dan foydalaning
+- Ma'lumotlar bazasi o'qish nusxalari
 
-## Troubleshooting
+## Muammolarni Hal Qilish
 
-### 502 Bad Gateway
-- Check if backend server is running
-- Verify proxy configuration in Nginx
-- Check logs: `docker logs backend`
+### 502 Yomon Shlyuz
 
-### CORS Errors
-- Verify `CORS_ALLOWED_ORIGINS` includes frontend domain
-- Check if API URL is correct in frontend
+- Backend serveri ishlayotganligini tekshiring
+- Nginx da proksi konfiguratsiyasini tekshiring
+- Jurnal ko'ring: `docker logs backend`
 
-### Database Connection Errors
-- Verify DATABASE_URL format
-- Check database credentials
-- Ensure database is running and accessible
+### CORS Xatoliklari
 
-## Security Checklist
+- `CORS_ALLOWED_ORIGINS` frontend domenini o'z ichiga olganligini tekshiring
+- API URL-i frontend da to'g'ri ekanligini tekshiring
 
-- [ ] DEBUG = False in production
-- [ ] SECRET_KEY is strong and unique
-- [ ] ALLOWED_HOSTS configured correctly
-- [ ] HTTPS/SSL enabled
-- [ ] CORS_ALLOWED_ORIGINS restricted to frontend domain
-- [ ] Database backups enabled
-- [ ] Regular security updates
-- [ ] Rate limiting enabled
-- [ ] Input validation in place
-- [ ] Error messages don't leak sensitive info
+### Ma'lumotlar Bazasi Ulanish Xatoliklari
 
-## Health Checks
+- DATABASE_URL formatini tekshiring
+- Ma'lumotlar bazasi identifikatsiyalarini tekshiring
+- Ma'lumotlar bazasi ishlayotganligini va ulanishini tekshiring
+
+## Xavfsizlik Tekshirlov Ro'yxati
+
+- [ ] Ishlab chiqarishda DEBUG = False
+- [ ] SECRET_KEY mustahkam va noyob
+- [ ] ALLOWED_HOSTS to'g'ri sozlangan
+- [ ] HTTPS/SSL faollashtirilgan
+- [ ] CORS_ALLOWED_ORIGINS frontend domeniga cheklanilgan
+- [ ] Ma'lumotlar bazasi zaxiralari faollashtirilgan
+- [ ] Muntazam xavfsizlik yangilanishlari
+- [ ] Cheklovli tezlik faollashtirilgan
+- [ ] Kiruvchi tekshiruvi o'rinida
+- [ ] Xato xabarlari maxfiy ma'lumotni oshkor qilmaydi
+
+## Salomatlik Tekshiruvi
 
 ```bash
 # Backend
@@ -182,12 +185,12 @@ curl -I http://localhost:8000/api/auth/profile/
 curl -I http://localhost:3000/
 ```
 
-## CI/CD Integration
+## CI/CD Integratsiyasi
 
-Use GitHub Actions, GitLab CI, or similar:
-1. Run tests on push
-2. Build Docker images
-3. Push to registry
-4. Deploy to production
+GitHub Actions, GitLab CI yoki shunga o'xshash dan foydalaning:
+1. Push-da testlarni ishga tushiring
+2. Docker rasimlarini qurilish
+3. Registrga push qilish
+4. Ishlab chiqarishga joylashtirish
 
-Example GitHub Actions workflow can be added.
+Misol GitHub Actions iş oqimi qo'shilishi mumkin.
