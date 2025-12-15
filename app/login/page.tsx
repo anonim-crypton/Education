@@ -48,6 +48,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [rememberMe, setRememberMe] = useState(false);
 
   // Form validation
   const isFormValid = username.trim() && password.trim();
@@ -73,22 +74,52 @@ export default function LoginPage() {
       try {
         const response = await login({ username, password });
         storeTokens(response.access, response.refresh);
+        
+        // Navbar-ni yangilash uchun
+        window.dispatchEvent(new Event("loginSuccess"));
+        
         // Loading animatsiya dashboard-ga redirect bo'lgungacha davom etadi
         router.push("/dashboard");
       } catch (error: unknown) {
         setIsLoading(false);
-        const apiError = error as ApiError;
-        if (apiError.errors) {
-          const formattedErrors: Record<string, string> = {};
-          Object.entries(apiError.errors).forEach(([field, messages]) => {
-            formattedErrors[field] = Array.isArray(messages) 
-              ? messages[0] 
-              : messages as string;
-          });
-          setErrors(formattedErrors);
-        } else {
-          setErrors({ general: "Login failed. Please try again." });
+        
+        const errorObj = error as Record<string, any>;
+        let errorMessage = "Loginni kiritishda xatolik. Iltimos, qayta urinib ko'ring.";
+        const fieldErrors: Record<string, string> = {};
+        
+        // Backend error response-ni tekshirish
+        if (errorObj) {
+          // 1. errors.non_field_errors bo'lsa (noto'g'ri credentials)
+          if (errorObj.errors?.non_field_errors && Array.isArray(errorObj.errors.non_field_errors)) {
+            errorMessage = errorObj.errors.non_field_errors[0];
+          }
+          // 2. errors.[field] bo'lsa (field-specific errors)
+          else if (errorObj.errors && typeof errorObj.errors === 'object') {
+            Object.entries(errorObj.errors).forEach(([field, messages]: [string, any]) => {
+              if (Array.isArray(messages)) {
+                fieldErrors[field] = messages[0] || "Xatolik";
+              } else if (typeof messages === 'string') {
+                fieldErrors[field] = messages;
+              }
+            });
+            // Agar field errors bo'lsa, ularni ko'rsat
+            if (Object.keys(fieldErrors).length > 0) {
+              setErrors(fieldErrors);
+              return;
+            }
+          }
+          // 3. detail xabari bo'lsa
+          else if (errorObj.detail) {
+            errorMessage = errorObj.detail;
+          }
+          // 4. non_field_errors (direct) bo'lsa
+          else if (errorObj.non_field_errors && Array.isArray(errorObj.non_field_errors)) {
+            errorMessage = errorObj.non_field_errors[0] || errorMessage;
+          }
         }
+        
+        // Umumiy xatolik xabarini ko'rsat
+        setErrors({ general: errorMessage });
       }
     },
     [username, password, router]
@@ -350,26 +381,30 @@ export default function LoginPage() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center justify-between"
+                  className="space-y-2"
                 >
-                  <div className="flex items-center gap-2">
-                    <Checkbox
-                      id="remember"
-                      className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
-                    />
-                    <Label
-                      htmlFor="remember"
-                      className="text-zinc-400 cursor-pointer"
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Checkbox
+                        id="remember"
+                        checked={rememberMe}
+                        onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                        className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
+                      />
+                      <Label
+                        htmlFor="remember"
+                        className="text-zinc-400 cursor-pointer"
+                      >
+                        Eslab qol
+                      </Label>
+                    </div>
+                    <a
+                      href="#"
+                      className="text-sm text-zinc-300 hover:text-zinc-100"
                     >
-                      Eslab qol
-                    </Label>
+                      Parolni unitdingizmi?
+                    </a>
                   </div>
-                  <a
-                    href="#"
-                    className="text-sm text-zinc-300 hover:text-zinc-100"
-                  >
-                    Parolni unitdingizmi?
-                  </a>
                 </motion.div>
 
                 {/* Submit Button */}

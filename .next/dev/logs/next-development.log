@@ -1,19 +1,450 @@
-[00:00:05.218] Server  LOG      ✓ Ready in 4.1s
-[00:00:12.860] Server  LOG      ○ Compiling / ...
-[00:00:24.226] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:25.075] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
-[00:00:25.075] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:25.075] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:25.075] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765732074745}
-[00:00:29.425] Server  LOG      ○ Compiling /login ...
-[00:00:30.482] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765732080088}
-[00:00:41.463] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765732090842}
-[00:00:41.463] Browser ERROR   Error fetching profile: {}
-[00:00:41.463] Browser ERROR   Error fetching profile: {}
-[00:00:41.463] Browser LOG     Error fetching profile: {}
-[00:00:41.463] Browser LOG     Error fetching profile: {}
-[00:00:47.190] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765732096856}
-[00:00:47.545] Browser ERROR   {}
-[00:00:47.545] Browser ERROR   {}
-[00:02:03.131] Server  LOG      ✓ Compiled in 1536ms
-[00:02:08.312] Server  LOG      ✓ Compiled in 496ms
+[00:00:07.990] Server  LOG      ✓ Ready in 5.5s
+[00:00:11.145] Server  LOG      ○ Compiling /login ...
+[00:00:20.716] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:21.941] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:00:22.059] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:22.059] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:22.059] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793862410}
+[00:00:23.006] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:24.449] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:24.449] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/account-settings","route":"/account-settings"}
+[00:00:24.449] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793863957}
+[00:00:24.493] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793864815}
+[00:00:37.417] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793877696}
+[00:00:40.094] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793880456}
+[00:00:44.041] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793884402}
+[00:00:51.777] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/account-settings color: rgb(120, 120, 120) color: inherit {"dp":"/account-settings","o":"http://localhost:3000/account-settings","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793892139}
+[00:01:19.715] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793920066}
+[00:01:22.416] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793922743}
+[00:01:26.146] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/register color: rgb(120, 120, 120) color: inherit {"dp":"/register","o":"http://localhost:3000/register","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793926479}
+[00:01:41.227] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:42.024] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:01:42.024] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:01:42.024] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793942379}
+[00:01:51.621] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793951942}
+[00:02:21.717] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793982015}
+[00:02:21.717] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:02:23.337] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765793983680}
+[00:03:07.592] Server  LOG      ✓ Compiled in 783ms
+[00:03:18.383] Server  LOG      ✓ Compiled in 339ms
+[00:04:36.095] Server  LOG      ✓ Compiled in 990ms
+[00:04:42.368] Server  LOG      ✓ Compiled in 691ms
+[00:04:42.923] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.942] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.953] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.962] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.969] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.971] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.978] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.981] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.989] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[00:04:42.995] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.996] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.998] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:42.999] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.002] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.006] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.008] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.009] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.011] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[00:04:43.380] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.391] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.396] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.412] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.425] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.441] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.497] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.538] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.570] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[00:04:43.626] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.655] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\.next\dev\server\chunks\ssr\5f8d5_next_dist_d0ac245d._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.660] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.672] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.681] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.682] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.689] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.690] Server  ERROR   C:\Users\ozodb\OneDrive\Documents\GitHub\Education\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:43.691] Server  ERROR    ⨯ Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[00:04:46.432] Browser ERROR   uncaughtError: Error: Cannot access unstable_prefetch.mode on the server. You cannot dot into a client module from a server component. You can only pass the imported name through.
+[00:04:51.443] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+Parsing ecmascript source code failed
+  421 |                     Parolni unitdingizmi?
+  422 |                   </a>
+> 423 |                 </motion.div>
+      |                              ^
+> 424 |
+      | ^
+> 425 |                 {/* Submit Button */}
+      | ^^^^^^^^^^^^^^^^^
+  426 |                 <motion.button
+  427 |                   type="submit"
+  428 |                   disabled={isLoading || !isFormValid}
+
+Expected '</', got 'jsx text (
+
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:04:51.443] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+Parsing ecmascript source code failed
+  421 |                     Parolni unitdingizmi?
+  422 |                   </a>
+> 423 |                 </motion.div>
+      |                              ^
+> 424 |
+      | ^
+> 425 |                 {/* Submit Button */}
+      | ^^^^^^^^^^^^^^^^^
+  426 |                 <motion.button
+  427 |                   type="submit"
+  428 |                   disabled={isLoading || !isFormValid}
+
+Expected '</', got 'jsx text (
+
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:04:57.438] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+Parsing ecmascript source code failed
+  421 |                     Parolni unitdingizmi?
+  422 |                   </a>
+> 423 |                 </motion.div>
+      |                              ^
+> 424 |
+      | ^
+> 425 |                 {/* Submit Button */}
+      | ^^^^^^^^^^^^^^^^^
+  426 |                 <motion.button
+  427 |                   type="submit"
+  428 |                   disabled={isLoading || !isFormValid}
+
+Expected '</', got 'jsx text (
+
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:04:57.439] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx:423:30
+Parsing ecmascript source code failed
+  421 |                     Parolni unitdingizmi?
+  422 |                   </a>
+> 423 |                 </motion.div>
+      |                              ^
+> 424 |
+      | ^
+> 425 |                 {/* Submit Button */}
+      | ^^^^^^^^^^^^^^^^^
+  426 |                 <motion.button
+  427 |                   type="submit"
+  428 |                   disabled={isLoading || !isFormValid}
+
+Expected '</', got 'jsx text (
+
+                )'
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:05:06.326] Server  LOG      ✓ Compiled in 570ms
+[00:05:07.645] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:08.452] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:05:08.452] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/login","route":"/login"}
+[00:05:08.452] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794148319}
+[00:05:34.007] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794174329}
+[00:06:04.250] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794204471}
+[00:06:04.301] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:06:05.994] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794206309}
+[00:06:10.799] Server  LOG      ○ Compiling /contact ...
+[00:06:12.486] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794212171}
+[00:06:14.814] Server  LOG      ✓ Compiled in 1627ms
+[00:06:17.419] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:18.085] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:06:18.085] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/contact","route":"/contact"}
+[00:06:18.085] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/contact color: rgb(120, 120, 120) color: inherit {"dp":"/contact","o":"http://localhost:3000/contact","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794218444}
+[00:06:26.916] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:06:27.916] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:27.916] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:28.041] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:28.042] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:28.787] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/OneDrive/...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="uz" suppressHydrationWarning={true} style={{...}}>
+                          <head>
+                          <body
+                            className="font-sans antialiased bg-background text-foreground"
+-                           style={{padding-right:"15px",overflow-x:"hidden",overflow-y:"hidden"}}
+                          >
+                  ...
+
+[00:06:28.929] Browser WARN    Image with src "/professional-avatar.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:06:29.139] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:06:29.139] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:06:29.139] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794229504}
+[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy)
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:30.515] Browser ERROR   ./OneDrive/Documents/GitHub/Education/app/login/page.tsx
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+
+Caused by:
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Debug info:
+- An error occurred while generating the chunk item [project]/OneDrive/Documents/GitHub/Education/app/login/page.tsx [app-rsc] (client reference proxy) <module evaluation>
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of *EcmascriptChunkItemContent::new failed
+- Execution of EcmascriptModuleContent::new failed
+- Expected export to be in eval context "default" ImportMap { imports: {}, namespace_imports: {}, reexports: [], references: {}, has_imports: false, has_exports: false, has_top_level_await: false, strict: false, attributes: {}, full_star_imports: {}, exports: {} }
+
+Import traces:
+  Client Component Browser:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component Browser]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Client Component SSR]
+    ./OneDrive/Documents/GitHub/Education/app/login/page.tsx [Server Component]
+[00:06:39.912] Server  LOG      ✓ Compiled in 2.2s
+[00:06:57.380] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794257710}
+[00:09:45.444] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765794425724}
+[00:13:18.709] Server  LOG      ✓ Compiled in 1389ms
+[00:13:22.454] Server  LOG      ✓ Compiled in 724ms
+[00:13:26.221] Server  LOG      ✓ Compiled in 648ms
+[00:13:47.729] Server  LOG      ✓ Compiled in 1552ms
+[00:14:34.113] Server  LOG      ✓ Compiled in 406ms
+[00:15:35.995] Server  LOG      ✓ Compiled in 459ms
+[00:16:32.009] Server  LOG      ✓ Compiled in 624ms
+[00:18:53.439] Server  LOG      ✓ Compiled in 566ms
+[00:19:55.794] Server  LOG      ✓ Compiled in 717ms
+[00:20:50.135] Server  LOG      ✓ Compiled in 602ms
+[00:20:58.047] Server  LOG      ○ Compiling /_not-found/page ...
+[00:21:06.732] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:07.449] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:21:07.449] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/become-teacher","route":"/become-teacher"}
+[00:21:07.449] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795107440}
+[00:21:12.483] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:12.790] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:21:12.790] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:21:12.790] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795113157}
+[00:21:31.317] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:21:31.561] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:21:31.561] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/become-teacher","route":"/become-teacher"}
+[00:21:31.561] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795131919}
+[00:22:08.311] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:22:09.104] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:22:09.104] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:22:09.104] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795169466}
+[00:23:31.809] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:32.251] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:23:32.251] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/become-teacher","route":"/become-teacher"}
+[00:23:32.251] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795252613}
+[00:24:04.979] Server  LOG      ✓ Compiled in 712ms
+[00:25:42.282] Server  LOG      ✓ Compiled in 501ms
+[00:25:48.034] Server  LOG      ✓ Compiled in 475ms
+[00:26:23.804] Server  LOG      ✓ Compiled in 605ms
+[00:26:28.539] Server  LOG      ✓ Compiled in 781ms
+[00:26:40.805] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:26:41.637] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:26:41.637] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:26:41.637] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1765795442002}

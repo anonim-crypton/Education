@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardHeader,
@@ -24,10 +25,83 @@ import {
   Mail,
   ArrowRight,
   Chrome,
+  AlertCircle,
 } from "lucide-react";
 
 export default function LoginCardSection() {
-   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      const apiUrl = `${
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      }/api/auth/login/`;
+
+      console.log("Login API URL:", apiUrl);
+      console.log("Request body:", { username: email, password: password });
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
+      });
+
+      console.log("Response status:", response.status);
+
+      const data = await response.json();
+      console.log("Response data:", data);
+
+      if (!response.ok) {
+        // Backend-dan xatolik xabari olish
+        if (data.detail) {
+          setError(data.detail);
+        } else if (data.username?.[0]) {
+          setError("Bunday username mavjud emas");
+        } else if (data.password?.[0]) {
+          setError("Parol noto'g'ri");
+        } else if (data.non_field_errors?.[0]) {
+          setError(data.non_field_errors[0]);
+        } else {
+          setError("Login muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring.");
+        }
+        return;
+      }
+
+      // Token-ni localStorage-ga saqlash
+      if (data.key || data.token) {
+        localStorage.setItem("authToken", data.key || data.token);
+        localStorage.setItem("isLoggedIn", "true");
+
+        // Navbar-ni yangilash uchun
+        window.dispatchEvent(new Event("loginSuccess"));
+
+        // Dashboard-ga o'tish
+        router.push("/dashboard");
+      }
+    } catch (err) {
+      const errorMessage =
+        "Server bilan bog'lanish muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring.";
+      setError(errorMessage);
+      console.error("Login error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -170,66 +244,95 @@ export default function LoginCardSection() {
           </CardHeader>
 
           <CardContent className="grid gap-5">
-            <div className="grid gap-2">
-              <Label htmlFor="email" className="text-zinc-300">
-                Email
-              </Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                />
+            {/* Xatolik xabari */}
+            {error && (
+              <div className="flex gap-3 p-3 rounded-lg bg-red-500/10 border border-red-500/30">
+                <AlertCircle className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-red-400">{error}</p>
               </div>
-            </div>
+            )}
 
-            <div className="grid gap-2">
-              <Label htmlFor="password" className="text-zinc-300">
-                Password
-              </Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                />
-                <button
-                  type="button"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
-                  onClick={() => setShowPassword((v) => !v)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  id="remember"
-                  className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
-                />
-                <Label htmlFor="remember" className="text-zinc-400">
-                  Remember me
+            <form onSubmit={handleLogin} className="grid gap-5">
+              <div className="grid gap-2">
+                <Label htmlFor="email" className="text-zinc-300">
+                  Username yoki Email
                 </Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                  <Input
+                    id="email"
+                    type="text"
+                    placeholder="username yoki email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                    required
+                  />
+                </div>
               </div>
-              <a href="#" className="text-sm text-zinc-300 hover:text-zinc-100">
-                Forgot password?
-              </a>
-            </div>
 
-            <Button className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200">
-              Continue
-            </Button>
+              <div className="grid gap-2">
+                <Label htmlFor="password" className="text-zinc-300">
+                  Parol
+                </Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
+                    onClick={() => setShowPassword((v) => !v)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="remember"
+                    checked={rememberMe}
+                    onCheckedChange={(checked) =>
+                      setRememberMe(checked as boolean)
+                    }
+                    className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
+                  />
+                  <Label htmlFor="remember" className="text-zinc-400">
+                    Meni eslab qol
+                  </Label>
+                </div>
+                <a
+                  href="#"
+                  className="text-sm text-zinc-300 hover:text-zinc-100"
+                >
+                  Parolni unutdingizmi?
+                </a>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? "Yuborish..." : "Kirish"}
+              </Button>
+            </form>
 
             <div className="relative">
               <Separator className="bg-zinc-800" />
@@ -258,7 +361,7 @@ export default function LoginCardSection() {
 
           <CardFooter className="flex items-center justify-center text-sm text-zinc-400">
             Don't have an account?
-            <Link 
+            <Link
               href="/register"
               className="ml-1 text-zinc-200 hover:underline"
             >

@@ -6,13 +6,15 @@ import { getAccessToken, clearTokens } from "@/lib/api";
 import { Navbar } from "@/components/navbar";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { Input } from "@/components/ui/input";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LogOut,
   ArrowRight,
   BookOpen,
   Settings,
   GraduationCap,
+  X,
 } from "lucide-react";
 
 export default function DashboardPage() {
@@ -20,6 +22,9 @@ export default function DashboardPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>(null);
+  const [showSchoolNameModal, setShowSchoolNameModal] = useState(false);
+  const [schoolName, setSchoolName] = useState("");
+  const [savingSchoolName, setSavingSchoolName] = useState(false);
 
   useEffect(() => {
     const token = getAccessToken();
@@ -52,6 +57,13 @@ export default function DashboardPage() {
         .then((data) => {
           if (data && data.user) {
             setUserData(data.user);
+            // Faqat Google users va school_name "Not specified" bo'lsa, modal ko'rsat
+            if (
+              data.user.is_google_user &&
+              data.user.school_name === "Not specified"
+            ) {
+              setShowSchoolNameModal(true);
+            }
           }
         })
         .catch((err) => {
@@ -66,7 +78,43 @@ export default function DashboardPage() {
 
   const handleLogout = () => {
     clearTokens();
-    router.push("/login");
+    router.push("/");
+  };
+
+  const handleSaveSchoolName = async () => {
+    if (!schoolName.trim()) {
+      return;
+    }
+
+    setSavingSchoolName(true);
+    const token = getAccessToken();
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/users/google/complete/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify({
+            school_name: schoolName,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setUserData(data.user);
+        setShowSchoolNameModal(false);
+        setSchoolName(""); // Input ni tozalash
+      }
+    } catch (error) {
+      console.error("Error saving school name:", error);
+    } finally {
+      setSavingSchoolName(false);
+    }
   };
 
   if (loading) {
@@ -176,7 +224,7 @@ export default function DashboardPage() {
           {/* Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Login Status */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <div className="bg-zinc-900 border border-white/20 rounded-xl p-6 hover:border-white/40 transition-colors">
               <h3 className="text-lg font-semibold mb-2">✅ Login Status</h3>
               <p className="text-green-400 text-sm">Siz tizimga kirgansiz</p>
               <p className="text-zinc-400 text-xs mt-2">
@@ -185,7 +233,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Database Status */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <div className="bg-zinc-900 border border-white/20 rounded-xl p-6 hover:border-white/40 transition-colors">
               <h3 className="text-lg font-semibold mb-2">💾 Database</h3>
               <p className="text-blue-400 text-sm">SQLite3 - Django</p>
               <p className="text-zinc-400 text-xs mt-2">
@@ -194,7 +242,7 @@ export default function DashboardPage() {
             </div>
 
             {/* API Status */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <div className="bg-zinc-900 border border-white/20 rounded-xl p-6 hover:border-white/40 transition-colors">
               <h3 className="text-lg font-semibold mb-2">🔌 API</h3>
               <p className="text-purple-400 text-sm">REST API - Ishlamoqda</p>
               <p className="text-zinc-400 text-xs mt-2">localhost:8000</p>
@@ -202,7 +250,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Features */}
-          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+          <div className="bg-zinc-900 border border-white/20 rounded-xl p-6">
             <h3 className="text-xl font-bold mb-4">
               🎯 Tamom bo'lgan xususiyatlar
             </h3>
@@ -235,7 +283,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Next Steps */}
-          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+          <div className="bg-zinc-900 border border-white/20 rounded-xl p-6">
             <h3 className="text-xl font-bold mb-4">📋 Keyingi bosqichlar</h3>
             <ul className="space-y-2 text-zinc-300">
               <li>• Google OAuth integratsiyasi</li>
@@ -247,6 +295,62 @@ export default function DashboardPage() {
           </div>
         </div>
       </main>
+
+      {/* School Name Modal */}
+      <AnimatePresence>
+        {showSchoolNameModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-zinc-900 rounded-2xl border border-zinc-800 p-8 max-w-sm mx-4 shadow-2xl"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-bold text-white">
+                  Maktab nomini kiriting
+                </h2>
+                <button
+                  onClick={() => setShowSchoolNameModal(false)}
+                  className="text-zinc-400 hover:text-white"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <p className="text-zinc-400 text-sm mb-6">
+                Google orqali kirganingiz uchun maktab nomini kiritish kerak.
+              </p>
+
+              <Input
+                type="text"
+                placeholder="Masalan: Toshkent 1-sonli maktab"
+                value={schoolName}
+                onChange={(e) => setSchoolName(e.target.value)}
+                className="mb-6 bg-zinc-950 border-zinc-800 text-white"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    handleSaveSchoolName();
+                  }
+                }}
+              />
+
+              <Button
+                onClick={handleSaveSchoolName}
+                disabled={!schoolName.trim() || savingSchoolName}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                {savingSchoolName ? "Saqlanmoqda..." : "Saqlash"}
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

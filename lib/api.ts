@@ -51,27 +51,51 @@ export interface ApiError {
 export const login = async (
   credentials: LoginRequest
 ): Promise<LoginResponse> => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/login/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(credentials),
-  });
+  const apiUrl = `${API_BASE_URL}/api/users/login/`;
+  
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
 
-  const data = await response.json();
+    let data: any;
+    const contentType = response.headers.get('content-type');
+    
+    if (contentType?.includes('application/json')) {
+      data = await response.json();
+    } else {
+      data = { detail: await response.text() };
+    }
 
-  if (!response.ok) {
-    throw data;
+    if (!response.ok) {
+      // Log error response structurally
+      if (typeof window !== 'undefined') {
+        const errorMsg = JSON.stringify({
+          status: response.status,
+          data: data
+        }, null, 2);
+        console.warn('BACKEND ERROR:', errorMsg);
+      }
+      throw data;
+    }
+
+    return data;
+  } catch (error) {
+    if (typeof window !== 'undefined') {
+      console.warn('LOGIN EXCEPTION:', JSON.stringify(error, null, 2));
+    }
+    throw error;
   }
-
-  return data;
 };
 
 export const register = async (
   userData: RegisterRequest
 ): Promise<RegisterResponse> => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/register/`, {
+  const response = await fetch(`${API_BASE_URL}/api/users/register/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -90,7 +114,7 @@ export const register = async (
 
 export const logout = async (): Promise<{ success: boolean; message: string }> => {
   const token = getAccessToken();
-  const response = await fetch(`${API_BASE_URL}/api/auth/logout/`, {
+  const response = await fetch(`${API_BASE_URL}/api/users/logout/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -143,7 +167,7 @@ export const isAuthenticated = () => {
 };
 
 export const googleLogin = async (token: string, schoolName?: string): Promise<LoginResponse> => {
-  const response = await fetch(`${API_BASE_URL}/api/auth/google/`, {
+  const response = await fetch(`${API_BASE_URL}/api/users/google/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -167,6 +191,44 @@ export const googleRegister = async (
   token: string,
   schoolName: string
 ): Promise<RegisterResponse> => {
-  // Use google login with school name for registration
-  return googleLogin(token, schoolName) as Promise<RegisterResponse>;
+  const apiUrl = `${API_BASE_URL}/api/users/google/`;
+  
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token,
+        school_name: schoolName || 'Not specified',
+      }),
+    });
+
+    let data: any;
+    const contentType = response.headers.get('content-type');
+    
+    if (contentType?.includes('application/json')) {
+      data = await response.json();
+    } else {
+      data = { detail: await response.text() };
+    }
+
+    if (!response.ok) {
+      if (typeof window !== 'undefined') {
+        console.warn('GOOGLE REGISTER ERROR:', JSON.stringify({
+          status: response.status,
+          data: data
+        }, null, 2));
+      }
+      throw data;
+    }
+
+    return data as RegisterResponse;
+  } catch (error) {
+    if (typeof window !== 'undefined') {
+      console.warn('GOOGLE REGISTER EXCEPTION:', JSON.stringify(error, null, 2));
+    }
+    throw error;
+  }
 };

@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback, memo } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { register, storeTokens, type ApiError } from "@/lib/api";
-// import { useGoogleLogin } from "@react-oauth/google";
+import { register, googleRegister, storeTokens, type ApiError } from "@/lib/api";
+import { useGoogleLogin } from "@react-oauth/google";
 import {
   Lock,
   Mail,
@@ -94,17 +94,51 @@ export default function RegisterPage() {
         });
         setShowSuccessModal(true);
       } catch (error: unknown) {
-        const apiError = error as ApiError;
-        if (apiError.errors) {
-          const formattedErrors: Record<string, string> = {};
-          Object.entries(apiError.errors).forEach(([field, messages]) => {
-            formattedErrors[field] = Array.isArray(messages) 
-              ? messages[0] 
-              : messages as string;
-          });
+        setIsLoading(false);
+        
+        const errorObj = error as Record<string, any>;
+        const formattedErrors: Record<string, string> = {};
+        let hasErrors = false;
+        
+        // Backend error response-ni tekshirish
+        if (errorObj && typeof errorObj === 'object') {
+          // 1. errors object bo'lsa (ApiError structure)
+          if (errorObj.errors && typeof errorObj.errors === 'object') {
+            Object.entries(errorObj.errors).forEach(([field, messages]: [string, any]) => {
+              if (Array.isArray(messages)) {
+                formattedErrors[field] = messages[0] || "Xatolik";
+              } else if (typeof messages === 'string') {
+                formattedErrors[field] = messages;
+              }
+            });
+            hasErrors = true;
+          }
+          // 2. Direct field errors bo'lsa (username, email, password, etc)
+          else if (errorObj.username) {
+            formattedErrors.username = Array.isArray(errorObj.username) 
+              ? errorObj.username[0] 
+              : errorObj.username;
+            hasErrors = true;
+          } else if (errorObj.email) {
+            formattedErrors.email = Array.isArray(errorObj.email) 
+              ? errorObj.email[0] 
+              : errorObj.email;
+            hasErrors = true;
+          } else if (errorObj.password) {
+            formattedErrors.password = Array.isArray(errorObj.password) 
+              ? errorObj.password[0] 
+              : errorObj.password;
+            hasErrors = true;
+          } else if (errorObj.detail) {
+            formattedErrors.general = errorObj.detail;
+            hasErrors = true;
+          }
+        }
+        
+        if (hasErrors) {
           setErrors(formattedErrors);
         } else {
-          setErrors({ general: "Registration failed. Please try again." });
+          setErrors({ general: "Ro'yxatdan o'tishda xatolik. Iltimos, qayta urinib ko'ring." });
         }
       } finally {
         setIsLoading(false);
@@ -119,41 +153,73 @@ export default function RegisterPage() {
     window.location.href = "/login";
   };
 
-  // const googleRegisterHandler = useGoogleLogin({
-  //   onSuccess: async (codeResponse) => {
-  //     try {
-  //       setIsLoading(true);
-  //       setErrors({});
-  //       const response = await googleRegister(codeResponse.access_token, schoolName);
-  //       storeTokens(response.access, response.refresh);
-  //       setShowSuccessModal(true);
-  //       setTimeout(() => {
-  //         router.push("/dashboard");
-  //       }, 2000);
-  //     } catch (error: unknown) {
-  //       const apiError = error as ApiError;
-  //       if (apiError.errors) {
-  //         const formattedErrors: Record<string, string> = {};
-  //         Object.entries(apiError.errors).forEach(([field, messages]) => {
-  //           formattedErrors[field] = Array.isArray(messages)
-  //             ? messages[0]
-  //             : messages as string;
-  //         });
-  //         setErrors(formattedErrors);
-  //       } else {
-  //         setErrors({ general: "Google registration failed. Please try again." });
-  //       }
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   },
-  //   onError: () => {
-  //     setErrors({ general: "Google registration failed" });
-  //   },
-  // });
+  const googleRegisterHandler = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      try {
+        setIsLoading(true);
+        setErrors({});
+        console.log("Google login success, token:", codeResponse.access_token);
+        
+        // schoolName bo'sh bo'lsa, "Not specified" ishlatamiz
+        const finalSchoolName = schoolName.trim() || "Not specified";
+        const response = await googleRegister(codeResponse.access_token, finalSchoolName);
+        console.log("Google register response:", response);
+        
+        storeTokens(response.access, response.refresh);
+        
+        // Navbar-ni yangilash uchun
+        window.dispatchEvent(new Event("loginSuccess"));
+        
+        // Google users uchun success modal o'rniga to'g'ridan to'g'ri dashboard-ga o'tadi
+        // (maktab nomini dashboard-da so'ramiz)
+        router.push("/dashboard");
+      } catch (error: unknown) {
+        setIsLoading(false);
+        console.error("Google register error caught:", error);
+        
+        const errorObj = error as Record<string, any>;
+        const formattedErrors: Record<string, string> = {};
+        let hasErrors = false;
+        
+        // Backend error response-ni tekshirish
+        if (errorObj && typeof errorObj === 'object') {
+          // 1. errors object bo'lsa (ApiError structure)
+          if (errorObj.errors && typeof errorObj.errors === 'object') {
+            Object.entries(errorObj.errors).forEach(([field, messages]: [string, any]) => {
+              if (Array.isArray(messages)) {
+                formattedErrors[field] = messages[0] || "Xatolik";
+              } else if (typeof messages === 'string') {
+                formattedErrors[field] = messages;
+              }
+            });
+            hasErrors = true;
+          }
+          // 2. Direct error bo'lsa
+          else if (errorObj.detail) {
+            formattedErrors.general = errorObj.detail;
+            hasErrors = true;
+          }
+        }
+        
+        if (hasErrors) {
+          setErrors(formattedErrors);
+        } else {
+          setErrors({ general: "Google ro'yxatdan o'tish muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring." });
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    onError: (error) => {
+      console.error("Google login error:", error);
+      setErrors({ general: "Google ro'yxatdan o'tish bekor qilindi yoki xato" });
+    },
+    scope: "openid email profile",
+    flow: "implicit",
+  });
 
   const handleGoogleRegister = () => {
-    setErrors({ general: "Google registration coming soon" });
+    googleRegisterHandler();
   };
 
   return (

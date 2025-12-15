@@ -1,24 +1,33 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { getAccessToken, clearTokens } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { LogOut, ArrowLeft } from "lucide-react";
+import { LogOut, ArrowLeft, Upload, X } from "lucide-react";
 
 export default function AccountSettingsPage() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
   const [userData, setUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
+  
   const [formData, setFormData] = useState<any>({
-    first_name: "",
-    last_name: "",
+    username: "",
+    school_name: "",
     email: "",
   });
 
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+
+  // Fetch user profile
   useEffect(() => {
     const token = getAccessToken();
     if (!token) {
@@ -26,7 +35,6 @@ export default function AccountSettingsPage() {
       return;
     }
 
-    // Fetch user profile
     fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/users/profile/`, {
       headers: {
         'Authorization': `Token ${token}`
@@ -40,14 +48,21 @@ export default function AccountSettingsPage() {
       if (data && data.user) {
         setUserData(data.user);
         setFormData({
-          first_name: data.user.first_name || "",
-          last_name: data.user.last_name || "",
+          username: data.user.username || "",
+          school_name: data.user.school_name || "",
           email: data.user.email || "",
+          current_password: "",
+          new_password: "",
+          confirm_password: "",
         });
+        // Set avatar preview
+        if (data.user.avatar_url) {
+          setAvatarPreview(data.user.avatar_url);
+        }
       }
     })
     .catch(err => {
-      // Silently handle - endpoint may not exist yet
+      console.error(err);
     })
     .finally(() => setIsLoading(false));
   }, [router]);
@@ -58,34 +73,126 @@ export default function AccountSettingsPage() {
       ...prev,
       [name]: value
     }));
+    setError("");
+  };
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setAvatarFile(file);
+      // Preview
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setAvatarPreview(event.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDeleteAvatar = async () => {
+    const token = getAccessToken();
+    if (!token) return;
+
+    if (!confirm("Avatar rasmini o'chirib tashlay?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/users/profile/avatar/delete/`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        }
+      );
+
+      if (response.ok) {
+        setAvatarPreview(null);
+        setAvatarFile(null);
+        setUserData({
+          ...userData,
+          avatar: null,
+          avatar_url: null,
+        });
+        setSuccessMessage("Avatar muvaffaqiyatli o'chirildi");
+        setTimeout(() => setSuccessMessage(""), 3000);
+      } else {
+        setError("Avatar o'chirishda xato yuz berdi");
+      }
+    } catch (err) {
+      setError("Xato yuz berdi");
+      console.error(err);
+    }
   };
 
   const handleSaveProfile = async () => {
     const token = getAccessToken();
     if (!token) return;
 
+    setIsUpdating(true);
     try {
+      const formDataToSend = new FormData();
+      
+      // Faqat o'zgargan fieldlarni qo'shish
+      if (formData.username !== userData.username) {
+        formDataToSend.append('username', formData.username);
+      }
+      
+      if (avatarFile) {
+        formDataToSend.append('avatar', avatarFile);
+      }
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/users/profile/`,
         {
           method: 'PUT',
           headers: {
-            'Authorization': `Token ${token}`,
-            'Content-Type': 'application/json'
+            'Authorization': `Token ${token}`
           },
-          body: JSON.stringify(formData)
+          body: formDataToSend
         }
       );
 
+      const data = await response.json();
+
       if (response.ok) {
         setError("");
-        alert("Profil muvaffaqiyatli yangilandi");
+        setSuccessMessage("Profil muvaffaqiyatli yangilandi");
+        setUserData(data.user);
+        // Avatar URL ni yangilash
+        if (data.user.avatar_url) {
+          setAvatarPreview(data.user.avatar_url);
+        }
+        setFormData({
+          username: data.user.username,
+          school_name: data.user.school_name,
+          email: data.user.email,
+        });
+        setAvatarFile(null);
+        setTimeout(() => setSuccessMessage(""), 3000);
       } else {
-        setError("Profil yangilashda xato yuz berdi");
+        // Handle validation errors
+        if (data.errors) {
+          const errorMessages = Object.entries(data.errors)
+            .map(([field, msgs]) => {
+              if (Array.isArray(msgs)) {
+                return msgs.join(", ");
+              }
+              return msgs;
+            })
+            .join("; ");
+          setError(errorMessages);
+        } else {
+          setError("Profil yangilashda xato yuz berdi");
+        }
       }
     } catch (err) {
       setError("Xato yuz berdi");
       console.error(err);
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -133,6 +240,12 @@ export default function AccountSettingsPage() {
           </div>
         )}
 
+        {successMessage && (
+          <div className="mb-6 p-4 bg-green-500/10 border border-green-500/50 rounded-lg text-green-400">
+            {successMessage}
+          </div>
+        )}
+
         {/* Profile Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -143,50 +256,88 @@ export default function AccountSettingsPage() {
           <h2 className="text-xl font-semibold text-foreground mb-6">Shaxsiy Ma'lumotlar</h2>
 
           <div className="space-y-4">
-            {/* Avatar */}
+            {/* Avatar Section */}
             <div className="flex items-center gap-4 pb-6 border-b border-border">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xl font-semibold">
-                {userData?.first_name ? userData.first_name.charAt(0).toUpperCase() : userData?.username?.charAt(0).toUpperCase() || 'U'}
+              <div className="relative">
+                {avatarPreview ? (
+                  <img 
+                    src={avatarPreview} 
+                    alt="Avatar" 
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xl font-semibold">
+                    {userData?.first_name ? userData.first_name.charAt(0).toUpperCase() : userData?.username?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                )}
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="absolute bottom-0 right-0 p-1.5 rounded-full bg-primary hover:bg-primary/90 text-white transition-colors"
+                  title="Rasm yuklash"
+                >
+                  <Upload className="w-4 h-4" />
+                </button>
               </div>
-              <div>
+              
+              <div className="flex-1">
                 <p className="text-sm font-medium text-foreground">
                   {userData?.first_name || userData?.username}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   @{userData?.username}
                 </p>
+                {avatarPreview && (
+                  <button
+                    onClick={handleDeleteAvatar}
+                    className="text-xs text-red-400 hover:text-red-300 mt-1 transition-colors"
+                  >
+                    Rasmni o'chirish
+                  </button>
+                )}
               </div>
-            </div>
 
-            {/* Form Fields */}
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                Birinchi ism
-              </label>
+              {/* Hidden file input */}
               <input
-                type="text"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                placeholder="Birinchi ismingiz"
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarChange}
+                className="hidden"
               />
             </div>
 
+            {/* Username */}
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
-                Familiya
+                Username
               </label>
               <input
                 type="text"
-                name="last_name"
-                value={formData.last_name}
+                name="username"
+                value={formData.username}
                 onChange={handleInputChange}
                 className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-                placeholder="Familiyangiz"
+                placeholder="Username"
               />
             </div>
 
+            {/* School Name - Read Only */}
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Maktab nomi
+              </label>
+              <input
+                type="text"
+                name="school_name"
+                value={formData.school_name}
+                disabled
+                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none opacity-50 cursor-not-allowed"
+                placeholder="Maktab nomi"
+              />
+              <p className="text-xs text-muted-foreground mt-1">Maktab nomini o'zgartirib bo'lmaydi</p>
+            </div>
+
+            {/* Email - Read Only */}
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">
                 Email
@@ -195,20 +346,24 @@ export default function AccountSettingsPage() {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                disabled
+                className="w-full px-4 py-2.5 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none opacity-50 cursor-not-allowed"
                 placeholder="Email@example.com"
               />
+              <p className="text-xs text-muted-foreground mt-1">Email ni o'zgartirib bo'lmaydi</p>
             </div>
+
+
 
             {/* Save Button */}
             <motion.button
               onClick={handleSaveProfile}
+              disabled={isUpdating}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full mt-6 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium transition-all duration-300 cursor-pointer"
+              className="w-full mt-6 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              O'zgarishlarni saqlash
+              {isUpdating ? "Saqlanmoqda..." : "O'zgarishlarni saqlash"}
             </motion.button>
           </div>
         </motion.div>
