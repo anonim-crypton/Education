@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { login, storeTokens, type ApiError } from "@/lib/api";
-// import { useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import {
   Lock,
   Mail,
@@ -74,34 +74,40 @@ export default function LoginPage() {
       try {
         const response = await login({ username, password });
         storeTokens(response.access, response.refresh);
-        
+
         // Navbar-ni yangilash uchun
         window.dispatchEvent(new Event("loginSuccess"));
-        
+
         // Loading animatsiya dashboard-ga redirect bo'lgungacha davom etadi
         router.push("/dashboard");
       } catch (error: unknown) {
         setIsLoading(false);
-        
+
         const errorObj = error as Record<string, any>;
-        let errorMessage = "Loginni kiritishda xatolik. Iltimos, qayta urinib ko'ring.";
+        let errorMessage =
+          "Loginni kiritishda xatolik. Iltimos, qayta urinib ko'ring.";
         const fieldErrors: Record<string, string> = {};
-        
+
         // Backend error response-ni tekshirish
         if (errorObj) {
           // 1. errors.non_field_errors bo'lsa (noto'g'ri credentials)
-          if (errorObj.errors?.non_field_errors && Array.isArray(errorObj.errors.non_field_errors)) {
+          if (
+            errorObj.errors?.non_field_errors &&
+            Array.isArray(errorObj.errors.non_field_errors)
+          ) {
             errorMessage = errorObj.errors.non_field_errors[0];
           }
           // 2. errors.[field] bo'lsa (field-specific errors)
-          else if (errorObj.errors && typeof errorObj.errors === 'object') {
-            Object.entries(errorObj.errors).forEach(([field, messages]: [string, any]) => {
-              if (Array.isArray(messages)) {
-                fieldErrors[field] = messages[0] || "Xatolik";
-              } else if (typeof messages === 'string') {
-                fieldErrors[field] = messages;
+          else if (errorObj.errors && typeof errorObj.errors === "object") {
+            Object.entries(errorObj.errors).forEach(
+              ([field, messages]: [string, any]) => {
+                if (Array.isArray(messages)) {
+                  fieldErrors[field] = messages[0] || "Xatolik";
+                } else if (typeof messages === "string") {
+                  fieldErrors[field] = messages;
+                }
               }
-            });
+            );
             // Agar field errors bo'lsa, ularni ko'rsat
             if (Object.keys(fieldErrors).length > 0) {
               setErrors(fieldErrors);
@@ -113,11 +119,14 @@ export default function LoginPage() {
             errorMessage = errorObj.detail;
           }
           // 4. non_field_errors (direct) bo'lsa
-          else if (errorObj.non_field_errors && Array.isArray(errorObj.non_field_errors)) {
+          else if (
+            errorObj.non_field_errors &&
+            Array.isArray(errorObj.non_field_errors)
+          ) {
             errorMessage = errorObj.non_field_errors[0] || errorMessage;
           }
         }
-        
+
         // Umumiy xatolik xabarini ko'rsat
         setErrors({ general: errorMessage });
       }
@@ -125,38 +134,63 @@ export default function LoginPage() {
     [username, password, router]
   );
 
-  // const googleLoginHandler = useGoogleLogin({
-  //   onSuccess: async (codeResponse) => {
-  //     try {
-  //       setIsLoading(true);
-  //       setErrors({});
-  //       const response = await googleLogin(codeResponse.access_token);
-  //       storeTokens(response.access, response.refresh);
-  //       router.push("/dashboard");
-  //     } catch (error: unknown) {
-  //       const apiError = error as ApiError;
-  //       if (apiError.errors) {
-  //         const formattedErrors: Record<string, string> = {};
-  //         Object.entries(apiError.errors).forEach(([field, messages]) => {
-  //           formattedErrors[field] = Array.isArray(messages)
-  //             ? messages[0]
-  //             : messages as string;
-  //         });
-  //         setErrors(formattedErrors);
-  //       } else {
-  //         setErrors({ general: "Google login failed. Please try again." });
-  //       }
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   },
-  //   onError: () => {
-  //     setErrors({ general: "Google login failed" });
-  //   },
-  // });
+  const handleGoogleLoginFunc = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      setErrors({});
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+          }/api/users/google/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: codeResponse.access_token,
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setErrors({
+            general:
+              data.errors?.general?.[0] || "Google login muvaffaqiyatsiz",
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        // Token-ni localStorage-ga saqlash
+        if (data.access) {
+          storeTokens(data.access, null);
+
+          // Navbar-ni yangilash uchun
+          window.dispatchEvent(new Event("loginSuccess"));
+
+          // Dashboard-ga o'tish
+          router.push("/dashboard");
+        }
+      } catch (err) {
+        setErrors({
+          general: "Google login xatosi. Iltimos, qayta urinib ko'ring.",
+        });
+        setIsLoading(false);
+        console.error("Google login error:", err);
+      }
+    },
+    onError: () => {
+      setErrors({ general: "Google login bekor qilindi" });
+    },
+    flow: "implicit",
+  });
 
   const handleGoogleLogin = () => {
-    setErrors({ general: "Google login coming soon" });
+    handleGoogleLoginFunc();
   };
 
   return (
@@ -237,32 +271,7 @@ export default function LoginPage() {
         <Card className="border-zinc-800 bg-zinc-900/70 backdrop-blur supports-[backdrop-filter]:bg-zinc-900/60">
           {/* Toggle Tabs */}
           <CardHeader className="space-y-4">
-            <div className="flex gap-3 mb-4">
-              {/* <motion.button
-                onClick={() => setIsLogin(true)}
-                className={`flex-1 py-2.5 px-4 rounded-lg font-semibold transition-all ${
-                  isLogin
-                    ? "bg-zinc-50 text-zinc-900"
-                    : "bg-zinc-800 text-zinc-50 hover:bg-zinc-700"
-                }`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Kirish
-              </motion.button> */}
-              {/* <motion.button
-                onClick={() => setIsLogin(false)}
-                className={`flex-1 py-2.5 px-4 rounded-lg font-semibold transition-all ${
-                  !isLogin
-                    ? "bg-zinc-50 text-zinc-900"
-                    : "bg-zinc-800 text-zinc-50 hover:bg-zinc-700"
-                }`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Ro'yxatdan o'tish
-              </motion.button> */}
-            </div>
+            <div className="flex gap-3 mb-4"></div>
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -388,7 +397,9 @@ export default function LoginPage() {
                       <Checkbox
                         id="remember"
                         checked={rememberMe}
-                        onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                        onCheckedChange={(checked) =>
+                          setRememberMe(checked as boolean)
+                        }
                         className="border-zinc-700 data-[state=checked]:bg-zinc-50 data-[state=checked]:text-zinc-900"
                       />
                       <Label

@@ -57,9 +57,10 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Google OAuth Settings (quyida configure qilishingiz kerak)
-GOOGLE_OAUTH_CLIENT_ID = 'YOUR_GOOGLE_OAUTH_CLIENT_ID'
-GOOGLE_OAUTH_CLIENT_SECRET = 'YOUR_GOOGLE_OAUTH_CLIENT_SECRET'
+# Google OAuth Settings
+import os
+GOOGLE_OAUTH_CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID', '301631056596-t52vlard6tjapc4oakf7cnev6ssugp1r.apps.googleusercontent.com')
+GOOGLE_OAUTH_CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET', '')
 
 
 # Application definition

@@ -1,9 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/account-settings/page": "app/account-settings/page.js",
-  "/complaint/page": "app/complaint/page.js",
-  "/contact/page": "app/contact/page.js",
+  "/courses/page": "app/courses/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/login/page": "app/login/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/teachers/page": "app/teachers/page.js"
 }

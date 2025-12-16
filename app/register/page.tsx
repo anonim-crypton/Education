@@ -165,21 +165,34 @@ export default function RegisterPage() {
         const response = await googleRegister(codeResponse.access_token, finalSchoolName);
         console.log("Google register response:", response);
         
-        storeTokens(response.access, response.refresh);
+        // Response-da access va refresh tokenlarni qidiramiz
+        const accessToken = response.access || response.token || (response as any).access_token;
+        const refreshToken = response.refresh || null;
+        
+        if (!accessToken) {
+          throw new Error("Backend-dan token qaytmadi. Response: " + JSON.stringify(response));
+        }
+        
+        storeTokens(accessToken, refreshToken);
         
         // Navbar-ni yangilash uchun
         window.dispatchEvent(new Event("loginSuccess"));
         
         // Google users uchun success modal o'rniga to'g'ridan to'g'ri dashboard-ga o'tadi
-        // (maktab nomini dashboard-da so'ramiz)
         router.push("/dashboard");
       } catch (error: unknown) {
         setIsLoading(false);
-        console.error("Google register error caught:", error);
         
         const errorObj = error as Record<string, any>;
         const formattedErrors: Record<string, string> = {};
         let hasErrors = false;
+        
+        console.error("Google register error:", JSON.stringify({
+          message: errorObj?.message,
+          detail: errorObj?.detail,
+          errors: errorObj?.errors,
+          fullError: errorObj
+        }, null, 2));
         
         // Backend error response-ni tekshirish
         if (errorObj && typeof errorObj === 'object') {
@@ -194,9 +207,14 @@ export default function RegisterPage() {
             });
             hasErrors = true;
           }
-          // 2. Direct error bo'lsa
+          // 2. detail bo'lsa
           else if (errorObj.detail) {
             formattedErrors.general = errorObj.detail;
+            hasErrors = true;
+          }
+          // 3. message bo'lsa (Error object)
+          else if (errorObj.message) {
+            formattedErrors.general = errorObj.message;
             hasErrors = true;
           }
         }

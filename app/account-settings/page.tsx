@@ -208,7 +208,7 @@ export default function AccountSettingsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-card rounded-xl border border-border p-4 mb-4"
+          className="bg-card rounded-xl border border-white/50 p-4 mb-4"
         >
           {/* Avatar Section */}
           <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border">
@@ -330,28 +330,6 @@ export default function AccountSettingsPage() {
             className="w-full px-4 py-2 text-sm rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isUpdating ? "Saqlanmoqda..." : "Saqlash"}
-          </motion.button>
-        </motion.div>
-
-        {/* Logout Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-card rounded-xl border border-border p-4"
-        >
-          <h2 className="text-sm font-semibold text-foreground mb-2">
-            Chiqish
-          </h2>
-          <p className="text-xs text-muted-foreground mb-3">
-            Barcha aktiv sessiyalar tugatiladi
-          </p>
-          <motion.button
-            onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm rounded-lg bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 text-red-400 hover:text-red-300 font-medium transition-all"
-          >
-            <LogOut className="w-4 h-4" />
-            Hisobdan chiqish
           </motion.button>
         </motion.div>
       </div>

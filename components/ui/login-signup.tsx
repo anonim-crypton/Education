@@ -27,6 +27,7 @@ import {
   Chrome,
   AlertCircle,
 } from "lucide-react";
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function LoginCardSection() {
   const router = useRouter();
@@ -46,7 +47,7 @@ export default function LoginCardSection() {
       const response = await fetch(
         `${
           process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-        }/api/auth/login/`,
+        }/api/users/login/`,
         {
           method: "POST",
           headers: {
@@ -78,8 +79,11 @@ export default function LoginCardSection() {
       }
 
       // Token-ni localStorage-ga saqlash
-      if (data.key || data.token) {
-        localStorage.setItem("authToken", data.key || data.token);
+      if (data.access || data.key || data.token) {
+        localStorage.setItem(
+          "authToken",
+          data.access || data.key || data.token
+        );
         localStorage.setItem("isLoggedIn", "true");
 
         // Navbar-ni yangilash uchun
@@ -97,6 +101,57 @@ export default function LoginCardSection() {
       setLoading(false);
     }
   };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      setError(null);
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+          }/api/users/google/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: codeResponse.access_token,
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setError(data.errors?.general?.[0] || "Google login muvaffaqiyatsiz");
+          return;
+        }
+
+        // Token-ni localStorage-ga saqlash
+        if (data.access) {
+          localStorage.setItem("authToken", data.access);
+          localStorage.setItem("isLoggedIn", "true");
+
+          // Navbar-ni yangilash uchun
+          window.dispatchEvent(new Event("loginSuccess"));
+
+          // Dashboard-ga o'tish
+          router.push("/dashboard");
+        }
+      } catch (err) {
+        setError("Google login xatosi. Iltimos, qayta urinib ko'ring.");
+        console.error("Google login error:", err);
+      } finally {
+        setLoading(false);
+      }
+    },
+    onError: () => {
+      setError("Google login bekor qilindi");
+    },
+    flow: "implicit",
+  });
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -340,13 +395,16 @@ export default function LoginCardSection() {
               <Button
                 variant="outline"
                 className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
+                disabled
               >
                 <Github className="h-4 w-4 mr-2" />
                 GitHub
               </Button>
               <Button
                 variant="outline"
-                className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
+                onClick={handleGoogleLogin}
+                disabled={loading}
+                className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Chrome className="h-4 w-4 mr-2" />
                 Google

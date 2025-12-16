@@ -23,10 +23,133 @@ import {
   Mail,
   ArrowRight,
   Chrome,
+  AlertCircle,
 } from "lucide-react";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useRouter } from "next/navigation";
 
 export default function RegisterCardSection() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/users/register/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            first_name: fullName.split(" ")[0],
+            last_name: fullName.split(" ").slice(1).join(" "),
+            email: email,
+            username: email.split("@")[0],
+            password: password,
+            school_name: "",
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.errors) {
+          const firstError = Object.values(data.errors)[0];
+          setError(
+            Array.isArray(firstError) ? firstError[0] : String(firstError)
+          );
+        } else {
+          setError(
+            "Ro'yxatdan o'tish muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring."
+          );
+        }
+        return;
+      }
+
+      // Token-ni localStorage-ga saqlash
+      if (data.access || data.key) {
+        localStorage.setItem("authToken", data.access || data.key);
+        localStorage.setItem("isLoggedIn", "true");
+
+        // Navbar-ni yangilash uchun
+        window.dispatchEvent(new Event("loginSuccess"));
+
+        // Dashboard-ga o'tish
+        router.push("/dashboard");
+      }
+    } catch (err) {
+      setError(
+        "Server bilan bog'lanish muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring."
+      );
+      console.error("Register error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      setError(null);
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+          }/api/users/google/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: codeResponse.access_token,
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          setError(data.errors?.general?.[0] || "Google login muvaffaqiyatsiz");
+          return;
+        }
+
+        // Token-ni localStorage-ga saqlash
+        if (data.access) {
+          localStorage.setItem("authToken", data.access);
+          localStorage.setItem("isLoggedIn", "true");
+
+          // Navbar-ni yangilash uchun
+          window.dispatchEvent(new Event("loginSuccess"));
+
+          // Dashboard-ga o'tish
+          router.push("/dashboard");
+        }
+      } catch (err) {
+        setError("Google login xatosi. Iltimos, qayta urinib ko'ring.");
+        console.error("Google login error:", err);
+      } finally {
+        setLoading(false);
+      }
+    },
+    onError: () => {
+      setError("Google login bekor qilindi");
+    },
+    flow: "implicit",
+  });
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -169,65 +292,90 @@ export default function RegisterCardSection() {
           </CardHeader>
 
           <CardContent className="grid gap-5">
-            <div className="grid gap-2">
-              <Label htmlFor="name" className="text-zinc-300">
-                Full Name
-              </Label>
-              <div className="relative">
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="John Doe"
-                  className="bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                />
+            {/* Xatolik xabari */}
+            {error && (
+              <div className="flex gap-3 p-3 rounded-lg bg-red-500/10 border border-red-500/30">
+                <AlertCircle className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-red-400">{error}</p>
               </div>
-            </div>
+            )}
 
-            <div className="grid gap-2">
-              <Label htmlFor="email" className="text-zinc-300">
-                Email
-              </Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                />
+            <form onSubmit={handleRegister} className="grid gap-5">
+              <div className="grid gap-2">
+                <Label htmlFor="name" className="text-zinc-300">
+                  Full Name
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="John Doe"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="grid gap-2">
-              <Label htmlFor="password" className="text-zinc-300">
-                Password
-              </Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
-                />
-                <button
-                  type="button"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
-                  onClick={() => setShowPassword((v) => !v)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
+              <div className="grid gap-2">
+                <Label htmlFor="email" className="text-zinc-300">
+                  Email
+                </Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="pl-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            <Button className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200">
-              Create account
-            </Button>
+              <div className="grid gap-2">
+                <Label htmlFor="password" className="text-zinc-300">
+                  Password
+                </Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10 pr-10 bg-zinc-950 border-zinc-800 text-zinc-50 placeholder:text-zinc-600"
+                    required
+                  />
+                  <button
+                    type="button"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md text-zinc-400 hover:text-zinc-200"
+                    onClick={() => setShowPassword((v) => !v)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full h-10 rounded-lg bg-zinc-50 text-zinc-900 hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? "Yaratish..." : "Create account"}
+              </Button>
+            </form>
 
             <div className="relative">
               <Separator className="bg-zinc-800" />
@@ -240,13 +388,16 @@ export default function RegisterCardSection() {
               <Button
                 variant="outline"
                 className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
+                disabled
               >
                 <Github className="h-4 w-4 mr-2" />
                 GitHub
               </Button>
               <Button
                 variant="outline"
-                className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
+                onClick={() => handleGoogleLogin()}
+                disabled={loading}
+                className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Chrome className="h-4 w-4 mr-2" />
                 Google
@@ -256,10 +407,7 @@ export default function RegisterCardSection() {
 
           <CardFooter className="flex items-center justify-center text-sm text-zinc-400">
             Already have an account?
-            <Link 
-              href="/login"
-              className="ml-1 text-zinc-200 hover:underline"
-            >
+            <Link href="/login" className="ml-1 text-zinc-200 hover:underline">
               Sign in
             </Link>
           </CardFooter>

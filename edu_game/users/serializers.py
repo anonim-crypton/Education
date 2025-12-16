@@ -25,8 +25,8 @@ class UserSerializer(serializers.ModelSerializer):
         # Return default avatar URL
         request = self.context.get('request')
         if request:
-            return request.build_absolute_uri('/placeholder-user.jpg')
-        return '/placeholder-user.jpg'
+            return request.build_absolute_uri('/professional-avatar.png')
+        return '/professional-avatar.png'
 
 
 class GoogleRegisterSerializer(serializers.Serializer):

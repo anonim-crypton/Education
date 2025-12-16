@@ -30,6 +30,7 @@ import {
   HistoryIcon,
   ScaleIcon,
   LogOut,
+  User,
 } from "lucide-react";
 
 const courses = [
@@ -66,7 +67,7 @@ const courses = [
 ];
 
 const navLinks = [
-  { title: "Bosh sahifa", href: "/", icon: HomeIcon },
+  { title: "Bosh sahifa", href: "/dashboard", icon: HomeIcon },
   { title: "Kurslar", href: "/courses", icon: BookOpenIcon, hasDropdown: true },
   { title: "O'qituvchilar", href: "/teachers", icon: GraduationCapIcon },
   { title: "Biz haqimizda", href: "/about", icon: UsersIcon },
@@ -314,36 +315,26 @@ const NavbarComponent = () => {
                       className={cn(
                         "flex items-center gap-2.5 pl-3 border-l border-border rounded-xl px-2.5 py-1.5 transition-all duration-200",
                         isAccountMenuOpen
-                          ? "bg-gradient-to-r from-pink-500/30 to-yellow-500/30 border-pink-500/60 shadow-lg shadow-pink-500/30"
-                          : "hover:bg-gradient-to-r hover:from-pink-500/20 hover:to-yellow-500/20 hover:border-pink-500/40"
+                          ? "bg-secondary"
+                          : "hover:bg-secondary"
                       )}
                     >
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 via-purple-500 to-blue-500 flex items-center justify-center text-white text-sm font-semibold shadow-md ring-2 ring-pink-400/40">
-                        {userData?.first_name
-                          ? userData.first_name.charAt(0).toUpperCase()
-                          : userData?.username?.charAt(0).toUpperCase() || "U"}
+                      <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white text-sm font-semibold shadow-md overflow-hidden flex-shrink-0">
+                        {userData?.avatar_url ? (
+                          <img
+                            src={userData.avatar_url}
+                            alt="Avatar"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <User className="w-4 h-4" />
+                        )}
                       </div>
                       <span className="text-sm font-medium text-foreground truncate max-w-[120px]">
                         {userData?.first_name ||
                           userData?.username ||
                           "Foydalanuvchi"}
                       </span>
-                      <svg
-                        className={cn(
-                          "w-4 h-4 transition-transform duration-200",
-                          isAccountMenuOpen && "rotate-180"
-                        )}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                        />
-                      </svg>
                     </motion.button>
 
                     {/* Account Dropdown Menu */}
@@ -354,17 +345,35 @@ const NavbarComponent = () => {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 8, scale: 0.92 }}
                           transition={{ duration: 0.25 }}
-                          className="absolute top-full right-0 mt-3 w-56 bg-zinc-900 rounded-2xl shadow-2xl border-2 border-pink-400 overflow-hidden backdrop-blur-sm"
+                          className="absolute top-full right-0 mt-3 min-w-72 max-w-96 bg-background rounded-2xl shadow-2xl border border-border overflow-hidden backdrop-blur-sm"
                         >
                           {/* Header Section */}
-                          <div className="p-4 bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-b border-pink-400/30">
-                            <p className="text-xs font-semibold text-pink-300 uppercase tracking-wide mb-2">
+                          <div className="p-4 bg-card border-b border-border">
+                            <div className="flex items-center gap-3 mb-3">
+                              <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center text-white font-semibold shadow-md overflow-hidden flex-shrink-0">
+                                {userData?.avatar_url ? (
+                                  <img
+                                    src={userData.avatar_url}
+                                    alt="Avatar"
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <User className="w-5 h-5" />
+                                )}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-bold text-foreground truncate">
+                                  {userData?.first_name || userData?.username}
+                                </p>
+                                <p className="text-xs text-muted-foreground truncate">
+                                  @{userData?.username}
+                                </p>
+                              </div>
+                            </div>
+                            <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
                               Hisobingiz
                             </p>
-                            <p className="text-sm font-bold text-foreground mb-1">
-                              {userData?.first_name || userData?.username}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-muted-foreground break-words">
                               {userData?.email}
                             </p>
                           </div>
@@ -375,10 +384,10 @@ const NavbarComponent = () => {
                               <motion.button
                                 whileHover={{ x: 4 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-zinc-100 hover:bg-gradient-to-r hover:from-pink-500/30 hover:to-purple-500/30 hover:text-pink-200 rounded-lg transition-all duration-200 text-left group"
+                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-all duration-200 text-left group"
                               >
                                 <svg
-                                  className="w-4 h-4 group-hover:text-pink-300 transition-colors"
+                                  className="w-4 h-4 text-foreground/60 group-hover:text-foreground/80 transition-colors flex-shrink-0"
                                   fill="none"
                                   stroke="currentColor"
                                   viewBox="0 0 24 24"
@@ -400,6 +409,52 @@ const NavbarComponent = () => {
                               </motion.button>
                             </Link>
 
+                            <Link href="/complaint">
+                              <motion.button
+                                whileHover={{ x: 4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-all duration-200 text-left group"
+                              >
+                                <svg
+                                  className="w-4 h-4 text-foreground/60 group-hover:text-foreground/80 transition-colors flex-shrink-0"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  />
+                                </svg>
+                                <span>Shikoyat qilish</span>
+                              </motion.button>
+                            </Link>
+
+                            <Link href="/contact">
+                              <motion.button
+                                whileHover={{ x: 4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-all duration-200 text-left group"
+                              >
+                                <svg
+                                  className="w-4 h-4 text-foreground/60 group-hover:text-foreground/80 transition-colors flex-shrink-0"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                                  />
+                                </svg>
+                                <span>Yordam Markazi</span>
+                              </motion.button>
+                            </Link>
+
                             <div className="my-2 border-t border-border/50"></div>
 
                             <motion.button
@@ -410,9 +465,9 @@ const NavbarComponent = () => {
                               }}
                               whileHover={{ x: 4 }}
                               whileTap={{ scale: 0.98 }}
-                              className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-300 hover:bg-gradient-to-r hover:from-red-600/40 hover:to-red-500/30 hover:text-red-100 rounded-lg transition-all duration-200 text-left group"
+                              className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-500 hover:bg-red-500/10 rounded-lg transition-all duration-200 text-left group"
                             >
-                              <LogOut className="w-4 h-4 group-hover:text-red-100 transition-colors" />
+                              <LogOut className="w-4 h-4 text-red-500 group-hover:text-red-400 transition-colors flex-shrink-0" />
                               <span>Hisobdan chiqish</span>
                             </motion.button>
                           </div>
@@ -466,11 +521,17 @@ const NavbarComponent = () => {
                     onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-9 h-9 rounded-lg bg-gradient-to-br from-pink-400 via-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold shadow-lg hover:shadow-xl transition-all"
+                    className="w-9 h-9 rounded-lg bg-slate-700 flex items-center justify-center text-white font-semibold shadow-lg hover:shadow-xl transition-all overflow-hidden"
                   >
-                    {userData?.first_name
-                      ? userData.first_name.charAt(0).toUpperCase()
-                      : userData?.username?.charAt(0).toUpperCase() || "U"}
+                    {userData?.avatar_url ? (
+                      <img
+                        src={userData.avatar_url}
+                        alt="Avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <User className="w-4 h-4" />
+                    )}
                   </motion.button>
 
                   {/* Mobile Account Dropdown Menu */}
@@ -481,17 +542,20 @@ const NavbarComponent = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.92 }}
                         transition={{ duration: 0.25 }}
-                        className="absolute top-full right-0 mt-2 w-48 bg-zinc-900 rounded-2xl shadow-2xl border-2 border-pink-400 overflow-hidden backdrop-blur-sm z-50"
+                        className="absolute top-full right-0 mt-2 min-w-64 max-w-80 bg-background rounded-2xl shadow-2xl border border-border overflow-hidden backdrop-blur-sm z-50"
                       >
                         {/* Header Section */}
-                        <div className="p-3 bg-gradient-to-br from-pink-500/20 to-purple-500/20 border-b border-pink-400/30">
-                          <p className="text-xs font-semibold text-pink-300 uppercase tracking-wide mb-1">
+                        <div className="p-3 bg-card border-b border-border">
+                          <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">
                             Hisobingiz
                           </p>
                           <p className="text-sm font-bold text-foreground">
                             {userData?.first_name ||
                               userData?.username ||
                               "Foydalanuvchi"}
+                          </p>
+                          <p className="text-xs text-muted-foreground break-words mt-1">
+                            {userData?.email}
                           </p>
                         </div>
 
@@ -501,10 +565,10 @@ const NavbarComponent = () => {
                             <motion.button
                               whileHover={{ x: 4 }}
                               whileTap={{ scale: 0.98 }}
-                              className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-zinc-100 hover:bg-gradient-to-r hover:from-pink-500/30 hover:to-purple-500/30 hover:text-pink-200 rounded-lg transition-all duration-200 text-left group"
+                              className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-all duration-200 text-left group"
                             >
                               <svg
-                                className="w-4 h-4 group-hover:text-pink-300 transition-colors"
+                                className="w-4 h-4 text-foreground/60 group-hover:text-foreground/80 transition-colors flex-shrink-0"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -526,6 +590,52 @@ const NavbarComponent = () => {
                             </motion.button>
                           </Link>
 
+                          <Link href="/complaint">
+                            <motion.button
+                              whileHover={{ x: 4 }}
+                              whileTap={{ scale: 0.98 }}
+                              className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-all duration-200 text-left group"
+                            >
+                              <svg
+                                className="w-4 h-4 text-foreground/60 group-hover:text-foreground/80 transition-colors flex-shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span>Shikoyat qilish</span>
+                            </motion.button>
+                          </Link>
+
+                          <Link href="/contact">
+                            <motion.button
+                              whileHover={{ x: 4 }}
+                              whileTap={{ scale: 0.98 }}
+                              className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-foreground hover:bg-secondary rounded-lg transition-all duration-200 text-left group"
+                            >
+                              <svg
+                                className="w-4 h-4 text-foreground/60 group-hover:text-foreground/80 transition-colors flex-shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                                />
+                              </svg>
+                              <span>Yordam Markazi</span>
+                            </motion.button>
+                          </Link>
+
                           <div className="my-1 border-t border-border/50"></div>
 
                           <motion.button
@@ -536,9 +646,9 @@ const NavbarComponent = () => {
                             }}
                             whileHover={{ x: 4 }}
                             whileTap={{ scale: 0.98 }}
-                            className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-red-300 hover:bg-gradient-to-r hover:from-red-600/40 hover:to-red-500/30 hover:text-red-100 rounded-lg transition-all duration-200 text-left group"
+                            className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-red-500 hover:bg-red-500/10 rounded-lg transition-all duration-200 text-left group"
                           >
-                            <LogOut className="w-4 h-4 group-hover:text-red-100 transition-colors" />
+                            <LogOut className="w-4 h-4 text-red-500 group-hover:text-red-400 transition-colors flex-shrink-0" />
                             <span>Hisobdan chiqish</span>
                           </motion.button>
                         </div>
