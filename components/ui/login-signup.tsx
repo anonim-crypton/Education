@@ -26,6 +26,7 @@ import {
   ArrowRight,
   Chrome,
   AlertCircle,
+  BookOpen,
 } from "lucide-react";
 import { useGoogleLogin } from "@react-oauth/google";
 
@@ -66,6 +67,8 @@ export default function LoginCardSection() {
         // Backend-dan xatolik xabari olish
         if (data.detail) {
           setError(data.detail);
+        } else if (data.errors?.general) {
+          setError(data.errors.general);
         } else if (data.username?.[0]) {
           setError("Bunday username mavjud emas");
         } else if (data.password?.[0]) {
@@ -75,6 +78,7 @@ export default function LoginCardSection() {
         } else {
           setError("Login muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring.");
         }
+        setLoading(false);
         return;
       }
 
@@ -85,19 +89,30 @@ export default function LoginCardSection() {
           data.access || data.key || data.token
         );
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userType", data.login_type || "student");
 
         // Navbar-ni yangilash uchun
         window.dispatchEvent(new Event("loginSuccess"));
 
-        // Dashboard-ga o'tish
+        // Teacher bo'lsa Django admin paneliga yo'naltir
+        if (data.login_type === 'teacher') {
+          window.location.href = `${
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+          }/admin/`;
+          return;
+        }
+
+        // Student bo'lsa dashboard-ga o'tish
         router.push("/dashboard");
+      } else {
+        setError("Login muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring.");
+        setLoading(false);
       }
     } catch (err) {
       setError(
         "Server bilan bog'lanish muvaffaqiyatsiz. Iltimos, qayta urinib ko'ring."
       );
       console.error("Login error:", err);
-    } finally {
       setLoading(false);
     }
   };
@@ -133,11 +148,20 @@ export default function LoginCardSection() {
         if (data.access) {
           localStorage.setItem("authToken", data.access);
           localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("userType", data.login_type || "student");
 
           // Navbar-ni yangilash uchun
           window.dispatchEvent(new Event("loginSuccess"));
 
-          // Dashboard-ga o'tish
+          // Teacher bo'lsa Django admin paneliga yo'naltir
+          if (data.login_type === 'teacher') {
+            window.location.href = `${
+              process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+            }/admin/`;
+            return;
+          }
+
+          // Student bo'lsa dashboard-ga o'tish
           router.push("/dashboard");
         }
       } catch (err) {
@@ -272,15 +296,17 @@ export default function LoginCardSection() {
       {/* Header */}
       <header className="absolute left-0 right-0 top-0 flex items-center justify-between px-6 py-4 border-b border-zinc-800/80">
         <span className="text-xs tracking-[0.14em] uppercase text-zinc-400">
-          NOVA
+          Edugame
         </span>
-        <Button
-          variant="outline"
-          className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/80"
-        >
-          <span className="mr-2">Contact</span>
-          <ArrowRight className="h-4 w-4" />
-        </Button>
+        <a href="http://localhost:8000/api/users/teacher/login/">
+          <Button
+            variant="outline"
+            className="h-9 rounded-lg border-amber-600/50 bg-zinc-900 text-zinc-50 hover:bg-amber-600/10 hover:border-amber-600 cursor-pointer transition-all"
+          >
+            <span className="mr-2">👨‍🏫 O'qituvchi Paneli</span>
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </a>
       </header>
 
       {/* Centered Login Card */}
@@ -394,11 +420,30 @@ export default function LoginCardSection() {
             <div className="grid grid-cols-2 gap-3">
               <Button
                 variant="outline"
-                className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80"
-                disabled
+                type="button"
+                className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80 hover:border-amber-600/50 transition-colors"
+                onClick={() => {
+                  const helpElement = document.createElement('div');
+                  helpElement.innerHTML = `
+                    <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 999;" onclick="this.remove()">
+                      <div style="background: #18181b; border: 1px solid #3f3f46; border-radius: 12px; padding: 24px; max-width: 400px; color: #fafafa;">
+                        <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 16px;">O'qituvchilar uchun Login</h2>
+                        <p style="margin-bottom: 12px; color: #d4d4d8;">Siz o'qituvchi bo'lgan taqdirda, o'qituvchi akkauntingiz bilan yuqoridagi forma orqali login qiling.</p>
+                        <p style="margin-bottom: 12px; color: #d4d4d8;">Tizim avtomatik ravishda sizni o'qituvchi ekanligingizni aniqlab, Django Admin paneliga yo'naltiradi.</p>
+                        <div style="background: #27272a; border-left: 3px solid #facc15; padding: 12px; border-radius: 6px; margin-bottom: 16px;">
+                          <strong style="color: #facc15;">⚠️ Eslatma:</strong>
+                          <p style="color: #a1a1aa; font-size: 14px; margin-top: 6px;">O'qituvchi akkauntingiz bilan kirish uchun, avval admin tomonidan tasdiqlangan bo'lishi kerak.</p>
+                        </div>
+                        <p style="color: #71717a; font-size: 14px;">Savollar bo'lsa, admin bilan bog'lanish.</p>
+                        <button onclick="this.parentElement.parentElement.remove()" style="width: 100%; background: #fafafa; color: #09090b; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; margin-top: 16px; transition: all 0.3s;">Tushundim</button>
+                      </div>
+                    </div>
+                  `;
+                  document.body.appendChild(helpElement);
+                }}
               >
-                <Github className="h-4 w-4 mr-2" />
-                GitHub
+                <BookOpen className="h-4 w-4 mr-2" />
+                O'qituvchi Kirish
               </Button>
               <Button
                 variant="outline"

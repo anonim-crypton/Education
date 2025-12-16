@@ -25,6 +25,17 @@ export default function DashboardPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>(null);
+  const [courses, setCourses] = useState<any[]>([]);
+
+  // Icon mapping from backend to frontend
+  const iconMap: { [key: string]: any } = {
+    code: Code,
+    languages: Languages,
+    calculator: Calculator,
+    book: BookA,
+    scale: Scale,
+    "book-open": BookOpen,
+  };
 
   useEffect(() => {
     const token = getAccessToken();
@@ -50,12 +61,33 @@ export default function DashboardPage() {
             setUserData(data.user);
           }
         })
-        .catch((err) => console.error(err))
+        .catch((err) => console.error(err));
+
+      // Fetch courses from API
+      fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/users/courses/`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.courses && data.courses.length > 0) {
+            setCourses(data.courses);
+          } else {
+            // Use default courses if no courses from API
+            setCourses(defaultCourses);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching courses:", err);
+          // Fallback to default courses
+          setCourses(defaultCourses);
+        })
         .finally(() => setLoading(false));
     }
   }, [router]);
 
-  const courses = [
+  const defaultCourses = [
     {
       id: 1,
       title: "Dasturlash",
@@ -103,7 +135,7 @@ export default function DashboardPage() {
       id: 1,
       name: "Ali Qodirov",
       age: 32,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ali",
+      avatar: "/placeholder-user.jpg",
       courses: ["Dasturlash", "Python"],
       experience: "8 yil",
     },
@@ -112,7 +144,7 @@ export default function DashboardPage() {
       id: 2,
       name: "Fotima Shodmonova",
       age: 28,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Fotima",
+      avatar: "/placeholder-user.jpg",
       courses: ["Ingliz tili", "IELTS"],
       experience: "5 yil",
     },
@@ -120,7 +152,7 @@ export default function DashboardPage() {
       id: 3,
       name: "Abdulaziz Olimov",
       age: 35,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Abdulaziz",
+      avatar: "/placeholder-user.jpg",
       courses: ["Matematika", "Algebra"],
       experience: "10 yil",
     },
@@ -128,7 +160,7 @@ export default function DashboardPage() {
       id: 4,
       name: "Shahlo Karimova",
       age: 30,
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Shahlo",
+      avatar: "/placeholder-user.jpg",
       courses: ["Tarix", "O'zbek tarixi"],
       experience: "7 yil",
     },
@@ -222,8 +254,8 @@ export default function DashboardPage() {
           className="mt-12"
         >
           <h2 className="text-3xl font-bold mb-8">Kurslar katalogi</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {courses.map((course, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+            {(courses.length > 0 ? courses : defaultCourses).map((course, index) => (
               <motion.div
                 key={course.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -232,34 +264,47 @@ export default function DashboardPage() {
                 className="group"
               >
                 <Link href="/courses">
-                  <div className="bg-card rounded-xl p-4 h-full border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer hover:shadow-lg">
-                    {/* Icon */}
-                    <div
-                      className={`w-12 h-12 rounded-lg bg-gradient-to-r ${course.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      <course.icon className="w-6 h-6 text-white" />
-                    </div>
+                   <div className="bg-card rounded-xl p-4 h-full border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer hover:shadow-lg">
+                     {/* Teacher Image or Icon */}
+                     <div className="mb-3 w-full flex justify-center group-hover:scale-110 transition-transform duration-300">
+                       {course.teacher_image_url && course.teacher_image_url !== '/placeholder-user.jpg' ? (
+                         <img
+                           src={course.teacher_image_url}
+                           alt={course.teacher}
+                           className="w-12 h-12 rounded-full object-cover border-2 border-primary"
+                         />
+                       ) : (
+                         <div className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center bg-primary/10">
+                           {(() => {
+                             // Handle both API icon string and default icon object
+                             const iconKey = typeof course.icon === 'string' ? course.icon : 'book-open';
+                             const IconComponent = iconMap[iconKey] || Code;
+                             return IconComponent ? <IconComponent className="w-6 h-6 text-primary" /> : null;
+                           })()}
+                         </div>
+                       )}
+                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-bold text-lg mb-2 text-foreground group-hover:text-primary transition-colors">
-                      {course.title}
-                    </h3>
+                     {/* Title */}
+                     <h3 className="font-bold text-lg mb-2 text-foreground group-hover:text-primary transition-colors">
+                       {course.title}
+                     </h3>
 
-                    {/* Teacher */}
-                    <p className="text-sm text-muted-foreground mb-2 truncate">
-                      <span className="font-medium">O'qituvchi:</span>{" "}
-                      {course.teacher}
-                    </p>
+                     {/* Teacher */}
+                     <p className="text-sm text-muted-foreground mb-2 truncate text-foreground">
+                       <span className="font-medium">O'qituvchi:</span>{" "}
+                       {course.teacher}
+                     </p>
 
-                    {/* Lessons Count */}
-                    <div className="flex items-center gap-2 pt-3 border-t border-border">
-                      <BookOpen className="w-4 h-4 text-primary" />
-                      <span className="text-sm font-medium text-foreground">
-                        {course.lessons} dars
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                     {/* Lessons Count */}
+                     <div className="flex items-center gap-2 pt-3 border-t border-border">
+                       <BookOpen className="w-4 h-4 text-primary" />
+                       <span className="text-sm font-medium text-foreground">
+                         {course.lessons} dars
+                       </span>
+                     </div>
+                   </div>
+                 </Link>
               </motion.div>
             ))}
           </div>
@@ -339,6 +384,162 @@ export default function DashboardPage() {
             </motion.div>
           </div>
         </motion.div>
+
+        {/* User Reviews/Feedback Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-16"
+        >
+          <h2 className="text-3xl font-bold mb-8">Foydalanuvchilar fikri</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                id: 1,
+                name: "Aziz Karimov",
+                avatar: "/placeholder-user.jpg",
+                review: "Bu platforma o'z hayotimni o'zgartti! Darslar juda tushunarligunga va o'qituvchilar juda yaxshi. Hammaga tavsiyalayapman!",
+              },
+              {
+                id: 2,
+                name: "Dilora Sattarova",
+                avatar: "/placeholder-user.jpg",
+                review: "Ingliz tilini o'rgandim va endi IELTS imtixoniga tayyor. O'qituvchilar juda professional va yardamchi.",
+              },
+              {
+                id: 3,
+                name: "Rustam Abdullayev",
+                avatar: "/placeholder-user.jpg",
+                review: "Dasturlash darslarini kuzatdim va hozir o'z loyihalarim bo'ylab ishlayapman. Shukriya!",
+              },
+              {
+                id: 4,
+                name: "Madina Normatova",
+                avatar: "/placeholder-user.jpg",
+                review: "Matematika darslar juda aniq va to'la. Imtixonda A oladim. Ajoyib platforma!",
+              },
+            ].map((review) => (
+              <motion.div
+                key={review.id}
+                whileHover={{ scale: 1.02 }}
+                className="group"
+              >
+                <div className="bg-card rounded-xl p-6 border border-border hover:border-primary/50 transition-all duration-300 h-full">
+                  <div className="flex items-center gap-4 mb-4">
+                    <img
+                      src={review.avatar}
+                      alt={review.name}
+                      className="w-14 h-14 rounded-full object-cover border-2 border-primary"
+                    />
+                    <h3 className="font-bold text-lg text-foreground">
+                      {review.name}
+                    </h3>
+                  </div>
+
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                    {review.review}
+                  </p>
+
+                  <Link href="/reviews" className="w-full">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-semibold text-sm transition-all duration-300 opacity-0 group-hover:opacity-100"
+                    >
+                      Batafsil izohlar
+                    </motion.button>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Footer */}
+        <footer className="mt-20 pt-12 border-t border-border">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            {/* Brand */}
+            <div>
+              <h3 className="text-xl font-bold mb-4 text-foreground">Edugame</h3>
+              <p className="text-sm text-muted-foreground">
+                Oilam o'qish platforma - sifatli ta'lim uchun ayni bitta o'rin.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-bold mb-4 text-foreground">Tezkor Havolalar</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link href="/courses" className="text-muted-foreground hover:text-primary transition-colors">
+                    Kurslar
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/teachers" className="text-muted-foreground hover:text-primary transition-colors">
+                    O'qituvchilar
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
+                    Biz haqimizda
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="font-bold mb-4 text-foreground">Resurslar</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                    Aloqa
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/complaint" className="text-muted-foreground hover:text-primary transition-colors">
+                    Shikoyat
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/account-settings" className="text-muted-foreground hover:text-primary transition-colors">
+                    Sozlamalar
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="font-bold mb-4 text-foreground">Bog'laning</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>Email: info@edugame.uz</li>
+                <li>Telefon: +998 90 123 45 67</li>
+                <li>Manzil: Tashkent, O'zbekiston</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-muted-foreground">
+              © 2024 Edugame. Barcha huquqlar himoyalangan.
+            </p>
+            <div className="flex gap-6 mt-4 md:mt-0">
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Maxfiylik
+              </Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Shartlar
+              </Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Saytdan foydalanish
+              </Link>
+            </div>
+          </div>
+        </footer>
       </main>
     </div>
   );

@@ -73,6 +73,14 @@ export default function LoginPage() {
 
       try {
         const response = await login({ username, password });
+        
+        // Teacher akkaunt bo'lsa xato ko'rsat
+        if (response.is_teacher === true) {
+          setErrors({ general: "O'qituvchi akkauntlari uchun Django panelidan foydalaning: http://localhost:8000/api/users/teacher/login/" });
+          setIsLoading(false);
+          return;
+        }
+
         storeTokens(response.access, response.refresh);
 
         // Navbar-ni yangilash uchun
@@ -172,8 +180,20 @@ export default function LoginPage() {
           // Navbar-ni yangilash uchun
           window.dispatchEvent(new Event("loginSuccess"));
 
-          // Dashboard-ga o'tish
-          router.push("/dashboard");
+          console.log("Google login response:", {
+            is_teacher: data.is_teacher,
+            teacher_status: data.teacher_status,
+          });
+
+          // Teacher bo'lsa teacher panel'ga yo'naltirish (only if approved)
+          if (data.is_teacher === true && data.teacher_status === "approved") {
+            console.log("Redirecting to teacher dashboard");
+            router.push("/teacher-dashboard");
+          } else {
+            console.log("Redirecting to student dashboard");
+            // Dashboard-ga o'tish
+            router.push("/dashboard");
+          }
         }
       } catch (err) {
         setErrors({
@@ -250,15 +270,15 @@ export default function LoginPage() {
         <span className="text-xs tracking-[0.14em] uppercase text-zinc-400">
           Edugame
         </span>
-        <Link href="/contact">
+        <a href="http://localhost:8000/api/users/teacher/login/">
           <Button
             variant="outline"
-            className="h-9 rounded-lg border-zinc-800 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/80 cursor-pointer"
+            className="h-9 rounded-lg border-amber-600/50 bg-zinc-900 text-zinc-50 hover:bg-amber-600/10 hover:border-amber-600 cursor-pointer transition-all"
           >
-            <span className="mr-2">Yordam markazi</span>
+            <span className="mr-2"> O'qituvchi Paneli</span>
             <ArrowRight className="h-4 w-4" />
           </Button>
-        </Link>
+        </a>
       </header>
 
       {/* Centered Login Card */}
@@ -271,7 +291,14 @@ export default function LoginPage() {
         <Card className="border-zinc-800 bg-zinc-900/70 backdrop-blur supports-[backdrop-filter]:bg-zinc-900/60">
           {/* Toggle Tabs */}
           <CardHeader className="space-y-4">
-            <div className="flex gap-3 mb-4"></div>
+            {/* <div className="flex gap-3 mb-4">
+              <div className="text-xs text-zinc-400 text-center flex-1">
+                👨‍🎓 Foydalanuvchi
+              </div>
+              <a href="http://localhost:8000/api/users/teacher/login/" className="text-xs text-zinc-400 hover:text-primary transition-colors flex-1 text-center">
+                👨‍🏫 O'qituvchi
+              </a>
+            </div> */}
 
             <AnimatePresence mode="wait">
               <motion.div

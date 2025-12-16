@@ -13,9 +13,10 @@ import {
   Clock,
   Gavel,
   Plus,
+  BookOpen,
 } from "lucide-react";
 
-const coursesData = [
+const defaultCoursesData = [
   {
     id: 1,
     title: "Dasturlash",
@@ -68,10 +69,21 @@ const coursesData = [
   },
 ];
 
+// Icon mapping from backend to frontend
+const iconMap: { [key: string]: any } = {
+  code: Code2,
+  languages: Globe,
+  calculator: Sigma,
+  book: Clock,
+  scale: Gavel,
+  "book-open": BookOpen,
+};
+
 export default function CoursesPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [courses, setCourses] = useState<any[]>(defaultCoursesData);
 
   useEffect(() => {
     const token = getAccessToken();
@@ -79,7 +91,34 @@ export default function CoursesPage() {
       router.push("/login");
     } else {
       setIsAuthenticated(true);
-      setLoading(false);
+
+      // Fetch courses from API
+      fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/users/courses/`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.courses && data.courses.length > 0) {
+            // Map API courses to frontend format
+            const mappedCourses = data.courses.map((course: any) => ({
+              ...course,
+              slug: course.title.toLowerCase().replace(/\s+/g, "-"),
+              teacherAge: 30, // Default if not provided
+              teacherAvatar: course.teacher_image_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${course.teacher}`,
+              icon: iconMap[course.icon] || BookOpen,
+            }));
+            setCourses(mappedCourses);
+          } else {
+            setCourses(defaultCoursesData);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching courses:", err);
+          setCourses(defaultCoursesData);
+        })
+        .finally(() => setLoading(false));
     }
   }, [router]);
 
@@ -115,7 +154,7 @@ export default function CoursesPage() {
 
         {/* Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-           {coursesData.map((course, index) => (
+           {courses.map((course, index) => (
              <motion.div
               key={course.id}
               initial={{ opacity: 0, y: 20 }}

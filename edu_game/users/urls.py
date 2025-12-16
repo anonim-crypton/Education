@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # API endpoints
     path('register/', views.register_view, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
@@ -13,4 +14,16 @@ urlpatterns = [
     # Teacher application endpoints
     path('teachers/apply/', views.teacher_apply_view, name='teacher_apply'),
     path('teachers/status/', views.teacher_application_status_view, name='teacher_status'),
+    # Course endpoints
+    path('courses/', views.courses_list_view, name='courses_list'),
+    path('courses/<int:course_id>/', views.course_detail_view, name='course_detail'),
+    # Teacher course endpoints
+    path('teacher/courses/', views.teacher_courses_view, name='teacher_courses'),
+    
+    # Django Teacher Panel URLs
+    path('teacher/login/', views.teacher_login_view, name='teacher_login'),
+    path('teacher/dashboard/', views.teacher_dashboard, name='teacher_dashboard'),
+    path('teacher/logout/', views.teacher_logout_view, name='teacher_logout'),
+    path('teacher/add-course/', views.teacher_add_course, name='teacher_add_course'),
+    path('teacher/course/<int:course_id>/delete/', views.teacher_delete_course, name='teacher_delete_course'),
 ]

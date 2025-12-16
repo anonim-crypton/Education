@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O'qituvchi Paneli - Edugame</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #1e293b;
+            border-right: 1px solid #334155;
+            padding: 20px;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .sidebar-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-subtitle {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #cbd5e1;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #334155;
+            color: #60a5fa;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 10px 16px;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .account-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: #0f172a;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .account-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            object-fit: cover;
+        }
+
+        .account-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .account-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .account-role {
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .course-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s;
+        }
+
+        .course-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 0 16px rgba(59, 130, 246, 0.1);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 12px;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .course-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .course-description {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .course-info {
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #334155;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .btn-edit {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #2563eb;
+        }
+
+        .btn-delete {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+        }
+
+        /* Add Course Button */
+        .add-course-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-course-btn:hover {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: #1e293b;
+            border: 2px dashed #334155;
+            border-radius: 12px;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .empty-state-text {
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #e2e8f0;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            padding: 10px 16px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 10px 16px;
+            background: #334155;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background: #475569;
+        }
+
+        .image-input-wrapper {
+            border: 2px dashed #334155;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .image-input-wrapper:hover {
+            border-color: #3b82f6;
+            background: #0f172a;
+        }
+
+        .image-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #3b82f6;
+            margin: 0 auto 12px;
+        }
+
+        .image-input {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 200px;
+            }
+
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Edugame</div>
+                <div class="sidebar-subtitle">O'qituvchi Paneli</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" onclick="showDashboard()">
+                    <span>📚</span> Mening Kurslarim
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <form method="POST" action="{% url 'teacher_logout' %}" style="margin: 0;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Chiqish</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-title">Mening Kurslarim</div>
+                <div class="account-menu">
+                    <img src="{{ user.avatar_url|default:'/placeholder-user.jpg' }}" alt="Avatar" class="account-avatar">
+                    <div class="account-info">
+                        <div class="account-name">{{ user.first_name|default:user.username }}</div>
+                        <div class="account-role">O'qituvchi</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <div class="page-header">
+                    <h1 class="page-title">Mening Kurslarim</h1>
+                    <p class="page-subtitle">Sizning yaratilgan barcha kurslaringiz</p>
+                </div>
+
+                <button class="add-course-btn" onclick="openAddCourseModal()">
+                    ➕ Yangi Kurs Qo'shish
+                </button>
+
+                {% if courses %}
+                    <div class="courses-grid">
+                        {% for course in courses %}
+                            <div class="course-card">
+                                {% if course.teacher_image %}
+                                    <img src="{{ course.teacher_image.url }}" alt="{{ course.title }}" class="course-image">
+                                {% else %}
+                                    <div class="course-image">
+                                        {% if course.icon == 'code' %}📝
+                                        {% elif course.icon == 'languages' %}🌍
+                                        {% elif course.icon == 'calculator' %}🔢
+                                        {% elif course.icon == 'book' %}📖
+                                        {% elif course.icon == 'scale' %}⚖️
+                                        {% else %}📚{% endif %}
+                                    </div>
+                                {% endif %}
+                                <h3 class="course-title">{{ course.title }}</h3>
+                                <p class="course-description">{{ course.description }}</p>
+                                <div class="course-info">
+                                    📚 {{ course.lessons }} dars
+                                </div>
+                                <div class="course-actions">
+                                    <button class="btn-small btn-edit" onclick="editCourse({{ course.id }})">
+                                        ✏️ Tahrirlash
+                                    </button>
+                                    <button class="btn-small btn-delete" onclick="deleteCourse({{ course.id }})">
+                                        🗑️ O'chirish
+                                    </button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📚</div>
+                        <h3 class="empty-state-title">Kurslar yo'q</h3>
+                        <p class="empty-state-text">Siz hali hech qanday kurs qo'shmagansiz</p>
+                        <button class="add-course-btn" onclick="openAddCourseModal()">
+                            ➕ Birinchi Kurs Qo'shish
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Course Modal -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <h2 class="modal-title" id="modalTitle">Yangi Kurs Qo'shish</h2>
+            <form id="courseForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label class="form-label">O'qituvchi Rasmi</label>
+                    <div class="image-input-wrapper" onclick="document.getElementById('courseImage').click()">
+                        <img id="imagePreview" class="image-preview" style="display: none;">
+                        <div id="imagePlaceholder">
+                            <div style="font-size: 32px; margin-bottom: 8px;">📷</div>
+                            <div style="color: #94a3b8; font-size: 12px;">Rasmni tanlang</div>
+                        </div>
+                    </div>
+                    <input type="file" id="courseImage" name="teacher_image" class="image-input" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="courseTitle" class="form-label">Kurs Nomi *</label>
+                    <input type="text" id="courseTitle" name="title" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseDescription" class="form-label">Kurs Haqida *</label>
+                    <textarea id="courseDescription" name="description" class="form-textarea" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="courseLessons" class="form-label">Dars Soni</label>
+                    <input type="number" id="courseLessons" name="lessons" class="form-input" value="1" min="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="courseIcon" class="form-label">Icon</label>
+                    <select id="courseIcon" name="icon" class="form-select">
+                        <option value="code">📝 Dasturlash</option>
+                        <option value="languages">🌍 Tillar</option>
+                        <option value="calculator">🔢 Matematika</option>
+                        <option value="book">📖 Tarix</option>
+                        <option value="scale">⚖️ Huquq</option>
+                        <option value="book-open">📚 Boshqa</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Saqlash</button>
+                    <button type="button" class="btn-cancel" onclick="closeCourseModal()">Bekor Qilish</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const TEACHER_ADD_COURSE_URL = "{% url 'teacher_add_course' %}";
+
+        function openAddCourseModal() {
+            document.getElementById('courseModal').classList.add('active');
+            document.getElementById('modalTitle').innerText = 'Yangi Kurs Qo\'shish';
+            document.getElementById('courseForm').action = TEACHER_ADD_COURSE_URL;
+            document.getElementById('courseForm').method = 'POST';
+            document.getElementById('courseForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('imagePlaceholder').style.display = 'block';
+        }
+
+        function closeCourseModal() {
+            document.getElementById('courseModal').classList.remove('active');
+        }
+
+        function editCourse(courseId) {
+            // Load course data and open modal
+            alert('Edit funksiyasi hozircha ishlanmoqda');
+        }
+
+        function deleteCourse(courseId) {
+            if (confirm('Siz rostdan o\'chirmoqchi bo\'lsizmi?')) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/teacher/course/${courseId}/delete/`;
+                
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'csrfmiddlewaretoken';
+                input.value = csrfToken;
+                
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
+        // Image preview
+        document.getElementById('courseImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('imagePreview').src = event.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                    document.getElementById('imagePlaceholder').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function showDashboard() {
+            // Already on dashboard
+        }
+    </script>
+</body>
+</html>

@@ -18,6 +18,8 @@ export interface LoginResponse {
   };
   access: string;
   refresh: string | null;
+  is_teacher?: boolean;
+  teacher_status?: string | null;
 }
 
 export interface RegisterRequest {

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
-from .models import TeacherApplication
+from .models import TeacherApplication, Course
 
 User = get_user_model()
 
@@ -173,3 +173,23 @@ class TeacherApplicationSerializer(serializers.ModelSerializer):
         if not value or len(value.strip()) < 2:
             raise serializers.ValidationError("Fan nomi kamida 2 ta belgidan iborat bo'lishi kerak.")
         return value
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    """Serializer for courses"""
+    teacher_image_url = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Course
+        fields = ['id', 'title', 'teacher', 'lessons', 'icon', 'color', 'description', 'teacher_image', 'teacher_image_url', 'order', 'is_active', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
+    
+    def get_teacher_image_url(self, obj):
+        """Get full teacher image URL or default avatar"""
+        if obj.teacher_image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.teacher_image.url)
+            return obj.teacher_image.url
+        # Return default avatar URL
+        return '/placeholder-user.jpg'
