@@ -62,8 +62,9 @@ const defaultCoursesData = [
   { id: "default-5", subject: "Biologiya", title: "Biology", icon: Leaf, href: "/courses" },
   { id: "default-6", subject: "Ingliz-tili", title: "English Language", icon: Globe, href: "/courses" },
   { id: "default-7", subject: "Rus-tili", title: "Russian Language", icon: Languages, href: "/courses" },
-  { id: "default-8", subject: "O'zbekiston-tarixi", title: "Uzbekistan History", icon: History, href: "/courses" },
-  { id: "default-9", subject: "Geografiya", title: "Geography", icon: Map, href: "/courses" },
+  { id: "default-8", subject: "O'zbek-tili", title: "Uzbek Language", icon: Languages, href: "/courses" },
+  // { id: "default-9", subject: "O'zbekiston-tarixi", title: "Uzbekistan History", icon: History, href: "/courses" },
+  { id: "default-10", subject: "Geografiya", title: "Geography", icon: Map, href: "/courses" },
 ];
 
 // Icon mapping from backend to frontend
@@ -152,29 +153,7 @@ export default function CoursesPage() {
           process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
         }/api/users/courses/`
       )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.courses && Array.isArray(data.courses) && data.courses.length > 0) {
-            // API'dan kelgan courses'larni map qilish - unique ID'lar bilan
-            const apiCourses = data.courses.map((course: any, index: number) => ({
-              id: `api-${course.id}-${index}`, // Unique ID - collision oldini olish
-              title: course.teacher || "Unknown",
-              subject: course.title || "",
-              description: course.description || "",
-              icon: getCourseIcon(course.title || ""),
-              teacherAvatar: course.teacher_image_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${course.teacher}`,
-              videos: course.videos || [],
-              videosCount: course.videos_count || 0,
-              totalViews: course.total_views || 0,
-            }));
-            // Default courses + API courses = barcha courses chiqadi
-            setCourses((prevCourses) => [...prevCourses, ...apiCourses]);
-          }
-        })
-        .catch((err) => {
-          console.error("Error fetching courses:", err);
-          // API xatosi bo'lsa, default courses'ni saqlab qolish
-        });
+     
     }
   }, [router]);
 
@@ -209,7 +188,7 @@ export default function CoursesPage() {
         </motion.div>
 
         {/* Courses Grid */}
-         <div className="space-y-12">
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
            {courses.map((course, index) => {
              const uniqueKey = `${course.id}-${index}`;
              // Icon'ni course'dan olib, agar bo'lmasa defaultCoursesData'dan topish
@@ -226,13 +205,7 @@ export default function CoursesPage() {
              }
 
              return (
-               <motion.div
-                 key={uniqueKey}
-                 initial={{ opacity: 0, y: 20 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                 className="space-y-6"
-               >
+               <div key={uniqueKey} className="flex flex-col h-full">
                  {/* Course Header Card */}
                  <Link href={`/courses/${encodeURIComponent(course.subject)}`}>
                    <div className="bg-card rounded-2xl border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col cursor-pointer group">
@@ -258,19 +231,7 @@ export default function CoursesPage() {
                        {/* Divider */}
                        <div className="mb-3 border-t border-border"></div>
 
-                       {/* Description (if exists) */}
-                       {course.description && (
-                         <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-2 flex-1">
-                           {course.description}
-                         </p>
-                       )}
 
-                       {/* Videos Count */}
-                       {course.videosCount > 0 && (
-                         <p className="text-xs text-blue-500 text-center mb-2">
-                           📹 {course.videosCount} ta video
-                         </p>
-                       )}
 
                        {/* Start Course Button */}
                        <motion.button
@@ -287,11 +248,8 @@ export default function CoursesPage() {
 
                  {/* Teachers Section */}
                  {course.teachers && course.teachers.length > 0 && (
-                   <div className="space-y-4">
-                     <h5 className="text-lg font-semibold text-foreground ml-4">
-                       O'qituvchilar ({course.teachers.length})
-                     </h5>
-                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                   <div className="mt-4 pt-4 border-t border-border">
+                     <div className="grid grid-cols-1 gap-3">
                        {course.teachers.map((teacher) => (
                          <motion.div
                            key={`teacher-${teacher.id}`}
@@ -344,10 +302,10 @@ export default function CoursesPage() {
                      </div>
                    </div>
                  )}
-               </motion.div>
-             );
-           })}
-         </div>
+                 </div>
+                 );
+                 })}
+                 </div>
 
          {/* Empty State */}
          {courses.length === 0 && !loading && (

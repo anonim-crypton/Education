@@ -542,11 +542,215 @@
         transform: translateY(0);
       }
 
-      .admin-create-btn {
-          text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
+      .admin-create-btn .btn-text {
+        display: inline-block;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 32px;
+        max-width: 400px;
+        width: 90%;
+        animation: slideIn 0.3s ease-out;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .modal-header h2 {
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        margin: 0;
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .modal-close:hover {
+        color: var(--text-primary);
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all 0.2s;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--accent-blue);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .form-group input::placeholder {
+        color: var(--text-secondary);
+      }
+
+      .form-error {
+        color: #ef4444;
+        font-size: 0.75rem;
+        margin-top: 6px;
+        display: none;
+      }
+
+      .form-error.active {
+        display: block;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .btn {
+        flex: 1;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.875rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--accent-blue),
+          var(--accent-green)
+        );
+        color: white;
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: var(--bg-card);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--text-secondary);
+        color: var(--text-primary);
+      }
+
+      .success-message {
+        background: transparent;
+        border: none;
+        color: var(--text-primary);
+        padding: 0;
+        border-radius: 0;
+        font-size: 0.875rem;
+        margin-bottom: 16px;
+        display: none;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .success-message.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .loading.active {
+        display: block;
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(59, 130, 246, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--accent-blue);
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       /* Responsive */
@@ -767,9 +971,73 @@
     </div>
 
     <!-- Admin Create Button -->
-    <a href="/api/users/admin/create/" class="admin-create-btn" title="Yangi Admin Yaratish">
+    <button
+      class="admin-create-btn"
+      id="createAdminBtn"
+      title="Yangi Admin Yaratish"
+    >
       <span class="btn-text">Yangi Admin Yaratish</span>
-    </a>
+    </button>
+
+    <!-- Admin Create Modal -->
+    <div class="modal" id="adminModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Yangi Admin Yaratish</h2>
+          <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+
+        <div class="success-message" id="successMessage"></div>
+
+        <div id="formContent">
+          <form id="adminForm">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Adminning username'i"
+                minlength="3"
+                required
+              />
+              <div class="form-error" id="usernameError"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Parol</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Kuchli parol kiriting"
+                minlength="6"
+                required
+              />
+              <div class="form-error" id="passwordError"></div>
+            </div>
+
+            <div class="form-error" id="generalError"></div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn btn-secondary" id="cancelBtn">
+                Bekor qilish
+              </button>
+              <button type="submit" class="btn btn-primary" id="submitBtn">
+                Yaratish
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          <p style="color: var(--text-secondary); margin-top: 12px">
+            Yuklanmoqda...
+          </p>
+        </div>
+      </div>
+    </div>
 
     <script>
       // Generate random response time data for chart
@@ -842,11 +1110,206 @@
         )}`;
       }
 
+      // Admin Modal Functions
+      function initializeAdminModal() {
+        const modal = document.getElementById("adminModal");
+        const openBtn = document.getElementById("createAdminBtn");
+        const closeBtn = document.getElementById("closeModal");
+        const cancelBtn = document.getElementById("cancelBtn");
+        const form = document.getElementById("adminForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        // Modal ochish
+        openBtn.addEventListener("click", () => {
+          modal.classList.add("active");
+          resetForm();
+        });
+
+        // Modal yopish
+        const closeModal = () => {
+          modal.classList.remove("active");
+          resetForm();
+        };
+
+        closeBtn.addEventListener("click", closeModal);
+        cancelBtn.addEventListener("click", closeModal);
+
+        // Modal fonida click qilganda yopish
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        // Form submission
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Clear previous errors
+          document.getElementById("usernameError").classList.remove("active");
+          document.getElementById("passwordError").classList.remove("active");
+          document.getElementById("generalError").classList.remove("active");
+          document.getElementById("successMessage").classList.remove("active");
+
+          // Validation
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+          let hasError = false;
+
+          if (!username) {
+            showError("usernameError", "Username majburiy");
+            hasError = true;
+          }
+          if (username.length < 3) {
+            showError(
+              "usernameError",
+              "Username kamida 3 ta belgidan iborat bo'lishi kerak"
+            );
+            hasError = true;
+          }
+
+          if (!password) {
+            showError("passwordError", "Parol majburiy");
+            hasError = true;
+          }
+          if (password.length < 6) {
+            showError(
+              "passwordError",
+              "Parol kamida 6 ta belgidan iborat bo'lishi kerak"
+            );
+            hasError = true;
+          }
+
+          if (hasError) return;
+
+          // Show loading
+          showLoading(true);
+          submitBtn.disabled = true;
+
+          try {
+            const response = await fetch("/api/users/admin/api/create/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: username,
+                password: password,
+              }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+              // Success
+              document.getElementById("formContent").style.display = "none";
+              const successMsg = document.getElementById("successMessage");
+              successMsg.innerHTML = `
+                            <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid var(--accent-green); padding: 12px; border-radius: 6px; margin-bottom: 16px;">
+                                <strong style="color: var(--accent-green);">✓ Muvaffaqiyatli Yaratildi!</strong>
+                            </div>
+                            <div style="background: var(--bg-card); padding: 12px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;">
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">USERNAME:</div>
+                                <div style="font-family: monospace; color: var(--accent-blue); font-weight: 600;">${data.admin.username}</div>
+                            </div>
+                            <div style="background: var(--bg-card); padding: 12px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 12px;">
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">PAROL:</div>
+                                <div style="font-family: monospace; color: var(--accent-blue); font-weight: 600;" id="displayPassword">${username}</div>
+                                <button type="button" id="togglePassword" style="background: none; border: none; color: var(--accent-green); font-size: 0.7rem; cursor: pointer; margin-top: 6px;">Ko'rsatish</button>
+                            </div>
+                            <div style="color: var(--text-secondary); font-size: 0.75rem; line-height: 1.5;">
+                                <strong>Admin Dashboard'ga avtomatik kirish...</strong><br>
+                                <span id="countdownTimer">2</span> soniyadan keyin...
+                            </div>
+                        `;
+              successMsg.classList.add("active");
+
+              // Password show/hide toggle
+              let passwordVisible = false;
+              const toggleBtn = document.getElementById("togglePassword");
+              const displayField = document.getElementById("displayPassword");
+              if (toggleBtn) {
+                toggleBtn.addEventListener("click", () => {
+                  passwordVisible = !passwordVisible;
+                  displayField.textContent = passwordVisible
+                    ? password
+                    : "•".repeat(password.length);
+                  toggleBtn.textContent = passwordVisible
+                    ? "Yashirish"
+                    : "Ko'rsatish";
+                });
+              }
+
+              // Countdown timer
+              let countdown = 3;
+              const timerElement = document.getElementById("countdownTimer");
+              const timerInterval = setInterval(() => {
+                countdown--;
+                if (timerElement) {
+                  timerElement.textContent = Math.max(0, countdown - 1);
+                }
+                if (countdown <= 0) {
+                  clearInterval(timerInterval);
+                }
+              }, 1000);
+
+              setTimeout(() => {
+                closeModal();
+                // Redirect to admin dashboard
+                const redirectUrl =
+                  data.redirect_url || "/api/users/admin/dashboard/";
+                window.location.href = redirectUrl;
+              }, 3000);
+            } else {
+              // Error
+              const error = data.error || "Noma'lum xato";
+              showError("generalError", error);
+            }
+          } catch (error) {
+            showError("generalError", "Bog'lanish xatosi: " + error.message);
+          } finally {
+            showLoading(false);
+            submitBtn.disabled = false;
+          }
+        });
+      }
+
+      function showError(elementId, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.classList.add("active");
+      }
+
+      function showLoading(show) {
+        const formContent = document.getElementById("formContent");
+        const loading = document.getElementById("loading");
+
+        if (show) {
+          formContent.style.display = "none";
+          loading.classList.add("active");
+        } else {
+          formContent.style.display = "block";
+          loading.classList.remove("active");
+        }
+      }
+
+      function resetForm() {
+        document.getElementById("adminForm").reset();
+        document.getElementById("formContent").style.display = "block";
+        document.getElementById("loading").classList.remove("active");
+        document.getElementById("usernameError").classList.remove("active");
+        document.getElementById("passwordError").classList.remove("active");
+        document.getElementById("generalError").classList.remove("active");
+        document.getElementById("successMessage").classList.remove("active");
+        document.getElementById("submitBtn").disabled = false;
+      }
+
       // Initialize
       document.addEventListener("DOMContentLoaded", () => {
         generateChartData();
         animateNumber(document.getElementById("total-requests"), 1234567, 2000);
         updateTimestamp();
+        initializeAdminModal();
 
         // Refresh data every 30 seconds
         setInterval(() => {

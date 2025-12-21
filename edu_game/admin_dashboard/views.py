@@ -12,9 +12,6 @@ from rest_framework import status
 import secrets
 import string
 
-# API endpoints import
-from .views_api import delete_teacher_api, block_teacher_api
-
 User = get_user_model()
 
 
@@ -33,12 +30,31 @@ def admin_dashboard_view(request):
     approved_teachers = Teacher.objects.all()
     all_users = User.objects.all()
     
+    # Get all teachers and students
+    teacher_ids = Teacher.objects.values_list('user_id', flat=True)
+    teachers = all_users.filter(id__in=teacher_ids)
+    students = all_users.exclude(id__in=teacher_ids).exclude(is_staff=True).exclude(is_superuser=True)
+    
+    # Calculate statistics
+    total_users = all_users.count()
+    teachers_count = teachers.count()
+    students_count = students.count()
+    approved_count = approved_teachers.count()
+    pending_count = pending_applications.count()
+    
+    # Active teachers percentage (approved out of all teachers)
+    active_percentage = int((approved_count / teachers_count * 100)) if teachers_count > 0 else 0
+    
     context = {
         'pending_applications': pending_applications,
         'approved_teachers': approved_teachers,
-        'pending_count': pending_applications.count(),
-        'approved_count': approved_teachers.count(),
-        'user_count': all_users.count(),
+        'pending_count': pending_count,
+        'approved_count': approved_count,
+        'user_count': total_users,
+        'total_users': total_users,
+        'teachers_count': teachers_count,
+        'students_count': students_count,
+        'active_percentage': active_percentage,
     }
     return render(request, 'admin_dashboard/dashboard.html', context)
 

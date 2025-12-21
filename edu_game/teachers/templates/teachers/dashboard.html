@@ -103,7 +103,7 @@
           </a>
 
           <a
-            href="{% url 'teacher_upload_lesson' %}"
+            href="#"
             class="flex items-center gap-3 h-11 px-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition-colors"
           >
             <svg
@@ -203,14 +203,13 @@
                   class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold"
                 >
                   {% if user.avatar %}
-                    <img
-                      src="{{ user.avatar.url }}"
-                      alt="{{ user.get_full_name }}"
-                      class="w-full h-full object-cover rounded-full"
-                    />
-                  {% else %}
-                    {{ user.get_full_name|slice:":1"|upper }}
-                  {% endif %}
+                  <img
+                    src="{{ user.avatar.url }}"
+                    alt="{{ user.get_full_name }}"
+                    class="w-full h-full object-cover rounded-full"
+                  />
+                  {% else %} {{ user.get_full_name|slice:":1"|upper }} {% endif
+                  %}
                 </div>
               </div>
             </div>

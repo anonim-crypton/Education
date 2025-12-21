@@ -15,31 +15,6 @@ from teachers.models import Teacher
 # Sample courses data with teachers
 COURSES_DATA = [
     {
-        'username': 'english_teacher',
-        'first_name': 'John',
-        'last_name': 'Smith',
-        'email': 'john@example.com',
-        'subject': 'Ingliz-tili',
-        'bio': 'Professional English teacher with 15 years experience',
-        'course_title': 'English Fundamentals',
-        'course_icon': 'languages',
-        'course_color': 'from-green-600 to-green-500',
-        'lessons': [
-            {
-                'title': 'English Basics - Lesson 1',
-                'description': 'Introduction to English language and pronunciation',
-            },
-            {
-                'title': 'English Basics - Lesson 2',
-                'description': 'Common English phrases and greetings',
-            },
-            {
-                'title': 'English Basics - Lesson 3',
-                'description': 'Basic grammar rules and sentence structure',
-            },
-        ]
-    },
-    {
         'username': 'math_teacher',
         'first_name': 'Ahmadjon',
         'last_name': 'Karimov',
