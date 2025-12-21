@@ -1,0 +1,282 @@
+{% extends "admin_dashboard/base.html" %}
+
+{% block title %}Foydalanuvchilar - Admin Dashboard{% endblock %}
+{% block page_title %}Foydalanuvchilar{% endblock %}
+
+{% block content %}
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-blue-600 dark:text-blue-400">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+            </div>
+        </div>
+        <h3 class="font-medium text-gray-600 dark:text-gray-400 mb-1">Jami Foydalanuvchilar</h3>
+        <p class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ total_users }}</p>
+        <p class="text-sm text-blue-600 dark:text-blue-400 mt-1">Hammasini</p>
+    </div>
+
+    <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-green-600 dark:text-green-400">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+        </div>
+        <h3 class="font-medium text-gray-600 dark:text-gray-400 mb-1">O'qituvchilar</h3>
+        <p class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ teachers_count }}</p>
+        <p class="text-sm text-green-600 dark:text-green-400 mt-1">Faol o'qituvchilar</p>
+    </div>
+
+    <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-purple-600 dark:text-purple-400">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </div>
+        </div>
+        <h3 class="font-medium text-gray-600 dark:text-gray-400 mb-1">O'quvchilar</h3>
+        <p class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ students_count }}</p>
+        <p class="text-sm text-purple-600 dark:text-purple-400 mt-1">Faol o'quvchilar</p>
+    </div>
+
+    <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between mb-4">
+            <div class="p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-orange-600 dark:text-orange-400">
+                    <polyline points="23 6 13.46 15.88 8 10.33 1 17"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+            </div>
+        </div>
+        <h3 class="font-medium text-gray-600 dark:text-gray-400 mb-1">Faol Nisbati</h3>
+        <p class="text-2xl font-bold text-gray-900 dark:text-gray-100">92%</p>
+        <p class="text-sm text-orange-600 dark:text-orange-400 mt-1">Bu oyda</p>
+    </div>
+</div>
+
+<!-- Tabs -->
+<div class="mb-6 flex gap-2 border-b border-gray-200 dark:border-gray-800">
+     <button onclick="showTab('teachers')" class="tab-button active px-4 py-3 font-semibold text-sm border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 flex items-center gap-2">
+         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+             <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+             <circle cx="12" cy="7" r="4"></circle>
+         </svg>
+         O'qituvchilar ({{ teachers_count }})
+     </button>
+     <button onclick="showTab('students')" class="tab-button px-4 py-3 font-semibold text-sm border-b-2 border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300 flex items-center gap-2">
+         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+             <circle cx="9" cy="7" r="4"></circle>
+             <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+         </svg>
+         O'quvchilar ({{ students_count }})
+     </button>
+</div>
+
+<!-- Teachers Tab -->
+<div id="teachers-tab" class="tab-content">
+    {% if teachers %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for teacher in teachers %}
+                <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
+                    <!-- Avatar -->
+                    <div class="flex justify-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl border-4 border-gray-200 dark:border-gray-700">
+                            {% if teacher.avatar %}
+                                <img src="{{ teacher.avatar.url }}" alt="{{ teacher.get_full_name }}" class="w-full h-full object-cover rounded-full">
+                            {% else %}
+                                {{ teacher.get_full_name|slice:":1"|upper }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Name -->
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 text-center">{{ teacher.get_full_name }}</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 text-center">@{{ teacher.username }}</p>
+
+                    <!-- Divider -->
+                    <div class="my-4 border-t border-gray-200 dark:border-gray-700"></div>
+
+                    <!-- Info -->
+                    <div class="space-y-3 mb-4">
+                        <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Email</p>
+                            <p class="text-sm text-gray-900 dark:text-gray-100 mt-1 break-all">{{ teacher.email }}</p>
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-blue-900/10 rounded-lg border border-blue-200 dark:border-blue-900">
+                             <p class="text-xs font-semibold text-blue-700 dark:text-blue-300 uppercase">Status</p>
+                             <p class="text-sm text-blue-900 dark:text-blue-200 mt-1 flex items-center gap-1">
+                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                     <polyline points="20 6 9 17 4 12"></polyline>
+                                 </svg>
+                                 Tasdiqlanagan
+                             </p>
+                         </div>
+
+                        <div class="p-3 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-200 dark:border-green-900">
+                            <p class="text-xs font-semibold text-green-700 dark:text-green-300 uppercase">Qo'shildi</p>
+                            <p class="text-sm text-green-900 dark:text-green-200 mt-1">{{ teacher.date_joined|date:"d.m.Y" }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <button onclick="alert('Profil ko\'rinish - tez kunda!')" class="flex-1 px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 font-semibold text-sm hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors flex items-center justify-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            Ko'rish
+                        </button>
+                        <button onclick="alert('O\'chirish funktsiyasi tez kunda!')" class="flex-1 px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 font-semibold text-sm hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors flex items-center justify-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                            O'chirish
+                        </button>
+                    </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-12">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4 text-gray-400">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <p class="text-gray-600 dark:text-gray-400 font-semibold">Hozirda o'qituvchilar yo'q</p>
+                    </div>
+                    {% endif %}
+                    </div>
+                    
+                    <!-- Students Tab -->
+                    <div id="students-tab" class="tab-content hidden">
+                    {% if students %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for student in students %}
+                    <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
+                    <!-- Avatar -->
+                    <div class="flex justify-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center text-white font-bold text-xl border-4 border-gray-200 dark:border-gray-700">
+                            {% if student.avatar %}
+                                <img src="{{ student.avatar.url }}" alt="{{ student.get_full_name }}" class="w-full h-full object-cover rounded-full">
+                            {% else %}
+                                {{ student.get_full_name|slice:":1"|upper }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Name -->
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 text-center">{{ student.get_full_name }}</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 text-center">@{{ student.username }}</p>
+                    
+                    <!-- Divider -->
+                    <div class="my-4 border-t border-gray-200 dark:border-gray-700"></div>
+                    
+                    <!-- Info -->
+                    <div class="space-y-3 mb-4">
+                        <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Email</p>
+                            <p class="text-sm text-gray-900 dark:text-gray-100 mt-1 break-all">{{ student.email }}</p>
+                        </div>
+                    
+                        <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Mektabi</p>
+                            <p class="text-sm text-gray-900 dark:text-gray-100 mt-1">{{ student.school_name|default:"Ko'rsatilmagan" }}</p>
+                        </div>
+                    
+                        <div class="p-3 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-200 dark:border-green-900">
+                            <p class="text-xs font-semibold text-green-700 dark:text-green-300 uppercase">Status</p>
+                            <p class="text-sm text-green-900 dark:text-green-200 mt-1 flex items-center gap-1">
+                                {% if student.is_active %}
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    Faol
+                                {% else %}
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                    Nofaol
+                                {% endif %}
+                            </p>
+                        </div>
+                    
+                        <div class="p-3 bg-purple-50 dark:bg-purple-900/10 rounded-lg border border-purple-200 dark:border-purple-900">
+                            <p class="text-xs font-semibold text-purple-700 dark:text-purple-300 uppercase">Qo'shildi</p>
+                            <p class="text-sm text-purple-900 dark:text-purple-200 mt-1">{{ student.date_joined|date:"d.m.Y" }}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="flex gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <button onclick="alert('Profil ko\'rinish - tez kunda!')" class="flex-1 px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 font-semibold text-sm hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors flex items-center justify-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            Ko'rish
+                        </button>
+                        <button onclick="alert('O\'chirish funktsiyasi tez kunda!')" class="flex-1 px-3 py-2 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 font-semibold text-sm hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors flex items-center justify-center gap-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                            O'chirish
+                        </button>
+                    </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-12">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mx-auto mb-4 text-gray-400">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <p class="text-gray-600 dark:text-gray-400 font-semibold">Hozirda o'quvchilar yo'q</p>
+                    </div>
+                    {% endif %}
+                    </div>
+
+<script>
+    function showTab(tabName) {
+        // Hide all tabs
+        document.getElementById('teachers-tab').classList.add('hidden');
+        document.getElementById('students-tab').classList.add('hidden');
+
+        // Show selected tab
+        document.getElementById(tabName + '-tab').classList.remove('hidden');
+
+        // Update active button
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.classList.remove('active', 'border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+            btn.classList.add('border-transparent', 'text-gray-600', 'dark:text-gray-400');
+        });
+        event.target.classList.add('active', 'border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+        event.target.classList.remove('border-transparent', 'text-gray-600', 'dark:text-gray-400');
+    }
+</script>
+{% endblock %}

@@ -54,6 +54,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../../app/admin-login/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/admin-login">> = Specific
+  const handler = {} as typeof import("../../../app/admin-login/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/become-teacher/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/become-teacher">> = Specific
@@ -81,10 +90,28 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../../app/courses/[subject]/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/courses/[subject]">> = Specific
+  const handler = {} as typeof import("../../../app/courses/[subject]/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/courses/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/courses">> = Specific
   const handler = {} as typeof import("../../../app/courses/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/dashboard-demo/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/dashboard-demo">> = Specific
+  const handler = {} as typeof import("../../../app/dashboard-demo/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -157,6 +184,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 {
   type __IsExpected<Specific extends AppPageConfig<"/teacher-dashboard">> = Specific
   const handler = {} as typeof import("../../../app/teacher-dashboard/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/teacher-dashboard/upload-video/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/teacher-dashboard/upload-video">> = Specific
+  const handler = {} as typeof import("../../../app/teacher-dashboard/upload-video/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

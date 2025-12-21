@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Dashboard - Edugame{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950">
+    <div class="flex min-h-screen w-full">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sticky top-0 h-screen shrink-0 border-r border-gray-200 dark:border-gray-800 w-64 bg-white dark:bg-gray-900 p-2 shadow-sm transition-all duration-300 ease-in-out">
+            <!-- Logo Section -->
+            <div class="mb-6 border-b border-gray-200 dark:border-gray-800 pb-4">
+                <div class="flex cursor-pointer items-center justify-between rounded-md p-2 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 shadow-sm flex items-center justify-center flex-shrink-0">
+                            <svg width="20" height="auto" viewBox="0 0 50 39" fill="none" xmlns="http://www.w3.org/2000/svg" class="fill-white">
+                                <path d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"/>
+                                <path d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"/>
+                            </svg>
+                        </div>
+                        <div id="sidebar-text" class="transition-opacity duration-200">
+                            <span class="block text-sm font-semibold text-gray-900 dark:text-gray-100">Edugame</span>
+                            <span class="block text-xs text-gray-500 dark:text-gray-400">Admin Panel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Items -->
+            <div class="space-y-3 mb-8">
+                <a href="{% url 'admin_dashboard:dashboard' %}" class="nav-menu-item relative flex h-11 w-full items-center rounded-md transition-all duration-200 text-gray-600 dark:text-gray-400 border-2 border-gray-300 dark:border-gray-700 hover:bg-blue-500 hover:text-white dark:hover:text-white hover:border-transparent px-3">
+                    <div class="w-12 h-full flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+                            <line x1="12" y1="12" x2="20" y2="7.5"></line>
+                            <line x1="12" y1="12" x2="12" y2="21"></line>
+                            <line x1="12" y1="12" x2="4" y2="7.5"></line>
+                        </svg>
+                    </div>
+                    <span id="sidebar-text" class="text-sm font-medium transition-opacity duration-200">Umumiy Ko'rinish</span>
+                </a>
+
+                <a href="{% url 'admin_dashboard:teacher_requests' %}" class="nav-menu-item relative flex h-11 w-full items-center rounded-md transition-all duration-200 text-gray-600 dark:text-gray-400 border-2 border-gray-300 dark:border-gray-700 hover:bg-blue-500 hover:text-white dark:hover:text-white hover:border-transparent px-3">
+                    <div class="w-12 h-full flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <span id="sidebar-text" class="text-sm font-medium transition-opacity duration-200">O'qituvchi So'rovlari</span>
+                </a>
+
+                <a href="{% url 'admin_dashboard:approved_teachers' %}" class="nav-menu-item relative flex h-11 w-full items-center rounded-md transition-all duration-200 text-gray-600 dark:text-gray-400 border-2 border-gray-300 dark:border-gray-700 hover:bg-blue-500 hover:text-white dark:hover:text-white hover:border-transparent px-3">
+                    <div class="w-12 h-full flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <span id="sidebar-text" class="text-sm font-medium transition-opacity duration-200">Tasdiqlangan O'qituvchilar</span>
+                </a>
+
+                <a href="{% url 'admin_dashboard:users' %}" class="nav-menu-item relative flex h-11 w-full items-center rounded-md transition-all duration-200 text-gray-600 dark:text-gray-400 border-2 border-gray-300 dark:border-gray-700 hover:bg-blue-500 hover:text-white dark:hover:text-white hover:border-transparent px-3">
+                    <div class="w-12 h-full flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <span id="sidebar-text" class="text-sm font-medium transition-opacity duration-200">Foydalanuvchilar</span>
+                </a>
+            </div>
+
+            <!-- Account Section -->
+            <div class="border-t border-gray-200 dark:border-gray-800 pt-4 space-y-3">
+                <a href="{% url 'admin_dashboard:create_teacher' %}" class="menu-item relative flex h-11 w-full items-center rounded-md transition-all duration-200 text-gray-600 dark:text-gray-400 border-2 border-gray-300 dark:border-gray-700 hover:bg-green-500 hover:text-white dark:hover:text-white hover:border-transparent px-3">
+                    <div class="w-12 h-full flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="10" cy="7" r="4"></circle>
+                            <line x1="18" y1="8" x2="18" y2="14"></line>
+                            <line x1="15" y1="11" x2="21" y2="11"></line>
+                        </svg>
+                    </div>
+                    <span id="sidebar-text" class="text-sm font-medium transition-opacity duration-200">O'qituvchi Yaratish</span>
+                </a>
+
+                <button onclick="toggleDarkMode()" class="menu-item relative flex h-11 w-full items-center rounded-md transition-all duration-200 text-gray-600 dark:text-gray-400 border-2 border-gray-300 dark:border-gray-700 hover:bg-blue-500 hover:text-white dark:hover:text-white hover:border-transparent px-3">
+                    <div class="w-12 h-full flex items-center justify-center">
+                        <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </div>
+                    <span id="sidebar-text" class="text-sm font-medium transition-opacity duration-200">Tema</span>
+                </button>
+
+                <button onclick="handleAdminLogout()" class="menu-item relative flex h-11 w-full items-center rounded-md transition-all duration-200 text-gray-600 dark:text-gray-400 border-2 border-gray-300 dark:border-gray-700 hover:bg-red-500 hover:text-white dark:hover:text-white hover:border-transparent px-3">
+                    <div class="w-12 h-full flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </div>
+                    <span id="sidebar-text" class="text-sm font-medium transition-opacity duration-200">Chiqish</span>
+                </button>
+            </div>
+
+            <!-- Toggle Button -->
+            <button onclick="toggleSidebar()" class="absolute bottom-0 left-0 right-0 border-t border-gray-200 dark:border-gray-800 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 w-full flex items-center p-3">
+                <div class="w-10 h-10 flex items-center justify-center">
+                    <svg id="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform duration-300 text-gray-500 dark:text-gray-400">
+                        <polyline points="13 17 20 10 13 3"></polyline>
+                        <polyline points="20 10 0 10"></polyline>
+                    </svg>
+                </div>
+                <span id="sidebar-text" class="text-sm font-medium text-gray-600 dark:text-gray-300 transition-opacity duration-200">Hide</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="flex-1 bg-gray-50 dark:bg-gray-950 overflow-auto">
+            <!-- Header -->
+            <div class="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div class="flex items-center justify-between p-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">{% block page_title %}Dashboard{% endblock %}</h1>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">Salomalekum {{ user.username }}</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button id="notification-btn" class="relative p-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <span id="notif-badge" class="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
+                        </button>
+                        <button class="p-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleIcon = document.getElementById('toggle-icon');
+            sidebar.classList.toggle('w-64');
+            sidebar.classList.toggle('w-20');
+            toggleIcon.style.transform = sidebar.classList.contains('w-20') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        // Theme Toggle
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Active menu item
+        function updateActiveMenu() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('a.nav-menu-item').forEach(item => {
+                // Hamma klassni olib tashla
+                item.classList.remove('bg-blue-500', 'text-white', 'dark:text-white', 'border-transparent');
+                item.classList.add('text-gray-600', 'dark:text-gray-400', 'border-gray-300', 'dark:border-gray-700');
+                
+                const itemPath = item.getAttribute('href');
+                
+                let isActive = false;
+                
+                if (currentPath.includes('teacher_requests') && itemPath && itemPath.includes('teacher_requests')) {
+                    isActive = true;
+                } else if (currentPath.includes('approved_teachers') && itemPath && itemPath.includes('approved_teachers')) {
+                    isActive = true;
+                } else if (currentPath.includes('/users/') && itemPath && itemPath.includes('users') && !currentPath.includes('teacher_requests')) {
+                    isActive = true;
+                } else if ((currentPath === '/admin/dashboard/' || currentPath === '/admin/dashboard') && itemPath && itemPath.includes('dashboard')) {
+                    isActive = true;
+                }
+                
+                if (isActive) {
+                    item.classList.add('bg-blue-500', 'text-white', 'dark:text-white', 'border-transparent');
+                    item.classList.remove('text-gray-600', 'dark:text-gray-400', 'border-gray-300', 'dark:border-gray-700');
+                }
+            });
+        }
+        
+        updateActiveMenu();
+
+        // Load notifications
+        async function loadNotifications() {
+            try {
+                const response = await fetch('{% url "admin_dashboard:api_teacher_requests" %}');
+                const data = await response.json();
+                const badge = document.getElementById('notif-badge');
+                if (data && data.length > 0) {
+                    badge.style.display = 'block';
+                } else {
+                    badge.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Notification load error:', error);
+            }
+        }
+
+        loadNotifications();
+        setInterval(loadNotifications, 10000);
+
+        // Check theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Auto-refresh disabled - prevents form data loss
+        // Note: Form inputs should not be lost due to auto-refresh
+        // If you need to refresh page, use manual refresh button instead
+
+        // Admin Logout Handler
+        function handleAdminLogout() {
+            // Lokalstg-dan token o'chir
+            localStorage.removeItem('admin_token');
+            localStorage.removeItem('is_admin');
+            localStorage.removeItem('admin_username');
+
+            fetch('http://localhost:8000/api/users/admin/api/logout/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include'
+            }).then(response => {
+                console.log('Logout response:', response);
+                // Success yoki fail bo'lsa ham Next.js-ga o'tadi
+                window.location.href = 'http://localhost:3000/admin-login';
+            }).catch(error => {
+                console.error('Logout error:', error);
+                // Error bo'lsa ham Next.js-ga o'tadi
+                window.location.href = 'http://localhost:3000/admin-login';
+            });
+        }
+    </script>
+</body>
+</html>

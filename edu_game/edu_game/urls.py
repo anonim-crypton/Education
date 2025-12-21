@@ -23,7 +23,10 @@ from users.views import api_status
 urlpatterns = [
     path('', api_status, name='api-status'),
     path('admin/', admin.site.urls),
+    path('dashboard/', include('admin_dashboard.urls')),
+    path('users/', include('users.urls')),
     path('api/users/', include('users.urls')),
+    path('api/', include('teachers.urls')),
 ]
 
 # Serve media files in development

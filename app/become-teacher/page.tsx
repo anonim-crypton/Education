@@ -52,16 +52,18 @@ export default function BecomeTeacherPage() {
       
       // Format: +998 XX-XXX-XX-XX
       if (cleaned.length <= 3) {
-        return "+" + cleaned;
-      } else if (cleaned.length <= 5) {
-        return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3);
-      } else if (cleaned.length <= 8) {
-        return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3, 5) + "-" + cleaned.slice(5);
-      } else if (cleaned.length <= 10) {
-        return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3, 5) + "-" + cleaned.slice(5, 8) + "-" + cleaned.slice(8);
-      } else {
-        return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3, 5) + "-" + cleaned.slice(5, 8) + "-" + cleaned.slice(8, 10);
-      }
+         return "+" + cleaned;
+       } else if (cleaned.length <= 5) {
+         return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3);
+       } else if (cleaned.length <= 8) {
+         return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3, 5) + "-" + cleaned.slice(5);
+       } else if (cleaned.length <= 10) {
+         return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3, 5) + "-" + cleaned.slice(5, 8) + "-" + cleaned.slice(8);
+       } else if (cleaned.length <= 12) {
+         return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3, 5) + "-" + cleaned.slice(5, 8) + "-" + cleaned.slice(8, 10) + "-" + cleaned.slice(10);
+       } else {
+         return "+" + cleaned.slice(0, 3) + " " + cleaned.slice(3, 5) + "-" + cleaned.slice(5, 8) + "-" + cleaned.slice(8, 10) + "-" + cleaned.slice(10, 12);
+       }
     }
     return value;
   };
@@ -108,9 +110,9 @@ export default function BecomeTeacherPage() {
     }
 
     try {
-      const token = getAccessToken();
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/teachers/apply/`,
+       const token = getAccessToken();
+       const response = await fetch(
+         `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/users/teachers/apply/`,
         {
           method: "POST",
           headers: {
@@ -122,7 +124,11 @@ export default function BecomeTeacherPage() {
       );
 
       if (response.ok) {
-        setSuccessMessage("O'qituvchi so'rovingiz muvaffaqiyatli yuborildi!");
+        const data = await response.json();
+        const successMsg =
+          data.message ||
+          "O'qituvchi so'rovingiz muvaffaqiyatli yuborildi! Admin ko'rib chiqib, tasdiqlansa sizga notification jo'natiladi.";
+        setSuccessMessage(successMsg);
         setFormData({
           full_name: "",
           subject: "",
@@ -131,13 +137,16 @@ export default function BecomeTeacherPage() {
           bio: "",
           phone: "+998 ",
         });
-        setTimeout(() => router.push("/dashboard"), 2000);
+        setTimeout(() => router.push("/dashboard"), 2500);
       } else {
         const data = await response.json();
-        setErrorMessage(data.message || "Xato yuz berdi");
+        setErrorMessage(
+          data.message || "Xato yuz berdi. Iltimos, qaytadan urinib ko'ring."
+        );
       }
     } catch (error) {
       setErrorMessage("Aloqa xatosi. Iltimos, qaytadan urinib ko'ring.");
+      console.error("Error submitting form:", error);
     } finally {
       setIsSubmitting(false);
     }

@@ -15,6 +15,7 @@ import {
   BookA,
   Scale,
   BookOpen,
+  Plus,
 } from "lucide-react";
 
 export default function TeacherDashboardPage() {
@@ -87,6 +88,20 @@ export default function TeacherDashboardPage() {
       </motion.div>
 
       {/* Courses Grid */}
+
+      {/* Add Course Button */}
+      <div className="mb-8">
+        <Link href="/teacher-dashboard/add-course">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
+          >
+            <Plus className="w-5 h-5" />
+            Yangi Kurs Qo'shish
+          </motion.button>
+        </Link>
+      </div>
 
       {courses.length === 0 ? (
         <motion.div

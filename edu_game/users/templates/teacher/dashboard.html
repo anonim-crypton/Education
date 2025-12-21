@@ -183,6 +183,27 @@
             font-size: 14px;
         }
 
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .course-header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .course-header-subject {
+            background: #3b82f6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
         /* Courses Grid */
         .courses-grid {
             display: grid;
@@ -524,10 +545,6 @@
                     <p class="page-subtitle">Sizning yaratilgan barcha kurslaringiz</p>
                 </div>
 
-                <button class="add-course-btn" onclick="openAddCourseModal()">
-                    ➕ Yangi Kurs Qo'shish
-                </button>
-
                 {% if courses %}
                     <div class="courses-grid">
                         {% for course in courses %}
@@ -544,15 +561,17 @@
                                         {% else %}📚{% endif %}
                                     </div>
                                 {% endif %}
-                                <h3 class="course-title">{{ course.title }}</h3>
+                                <div class="course-header">
+                                    <h3 class="course-header-title">{{ course.title }}</h3>
+                                </div>
                                 <p class="course-description">{{ course.description }}</p>
                                 <div class="course-info">
-                                    📚 {{ course.lessons }} dars
+                                    📚 Darslar: {{ course.videos.count }} ta
                                 </div>
                                 <div class="course-actions">
-                                    <button class="btn-small btn-edit" onclick="editCourse({{ course.id }})">
-                                        ✏️ Tahrirlash
-                                    </button>
+                                    <a href="{% url 'teacher_upload_lesson' %}?course={{ course.id }}" class="btn-small btn-edit" style="text-decoration: none;">
+                                        📹 Yuklash
+                                    </a>
                                     <button class="btn-small btn-delete" onclick="deleteCourse({{ course.id }})">
                                         🗑️ O'chirish
                                     </button>
@@ -564,97 +583,19 @@
                     <div class="empty-state">
                         <div class="empty-state-icon">📚</div>
                         <h3 class="empty-state-title">Kurslar yo'q</h3>
-                        <p class="empty-state-text">Siz hali hech qanday kurs qo'shmagansiz</p>
-                        <button class="add-course-btn" onclick="openAddCourseModal()">
-                            ➕ Birinchi Kurs Qo'shish
-                        </button>
+                        <p class="empty-state-text">Bosh admin sizga hali kurs tayinlamagan. Admin bilan bog'laning.</p>
                     </div>
                 {% endif %}
             </div>
         </div>
     </div>
 
-    <!-- Add/Edit Course Modal -->
-    <div class="modal" id="courseModal">
-        <div class="modal-content">
-            <h2 class="modal-title" id="modalTitle">Yangi Kurs Qo'shish</h2>
-            <form id="courseForm" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                <div class="form-group">
-                    <label class="form-label">O'qituvchi Rasmi</label>
-                    <div class="image-input-wrapper" onclick="document.getElementById('courseImage').click()">
-                        <img id="imagePreview" class="image-preview" style="display: none;">
-                        <div id="imagePlaceholder">
-                            <div style="font-size: 32px; margin-bottom: 8px;">📷</div>
-                            <div style="color: #94a3b8; font-size: 12px;">Rasmni tanlang</div>
-                        </div>
-                    </div>
-                    <input type="file" id="courseImage" name="teacher_image" class="image-input" accept="image/*">
-                </div>
-
-                <div class="form-group">
-                    <label for="courseTitle" class="form-label">Kurs Nomi *</label>
-                    <input type="text" id="courseTitle" name="title" class="form-input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="courseDescription" class="form-label">Kurs Haqida *</label>
-                    <textarea id="courseDescription" name="description" class="form-textarea" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="courseLessons" class="form-label">Dars Soni</label>
-                    <input type="number" id="courseLessons" name="lessons" class="form-input" value="1" min="1">
-                </div>
-
-                <div class="form-group">
-                    <label for="courseIcon" class="form-label">Icon</label>
-                    <select id="courseIcon" name="icon" class="form-select">
-                        <option value="code">📝 Dasturlash</option>
-                        <option value="languages">🌍 Tillar</option>
-                        <option value="calculator">🔢 Matematika</option>
-                        <option value="book">📖 Tarix</option>
-                        <option value="scale">⚖️ Huquq</option>
-                        <option value="book-open">📚 Boshqa</option>
-                    </select>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary">Saqlash</button>
-                    <button type="button" class="btn-cancel" onclick="closeCourseModal()">Bekor Qilish</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        const TEACHER_ADD_COURSE_URL = "{% url 'teacher_add_course' %}";
-
-        function openAddCourseModal() {
-            document.getElementById('courseModal').classList.add('active');
-            document.getElementById('modalTitle').innerText = 'Yangi Kurs Qo\'shish';
-            document.getElementById('courseForm').action = TEACHER_ADD_COURSE_URL;
-            document.getElementById('courseForm').method = 'POST';
-            document.getElementById('courseForm').reset();
-            document.getElementById('imagePreview').style.display = 'none';
-            document.getElementById('imagePlaceholder').style.display = 'block';
-        }
-
-        function closeCourseModal() {
-            document.getElementById('courseModal').classList.remove('active');
-        }
-
-        function editCourse(courseId) {
-            // Load course data and open modal
-            alert('Edit funksiyasi hozircha ishlanmoqda');
-        }
-
         function deleteCourse(courseId) {
             if (confirm('Siz rostdan o\'chirmoqchi bo\'lsizmi?')) {
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = `/teacher/course/${courseId}/delete/`;
+                form.action = `/users/teacher/course/${courseId}/delete/`;
                 
                 const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
                 const input = document.createElement('input');
@@ -667,20 +608,6 @@
                 form.submit();
             }
         }
-
-        // Image preview
-        document.getElementById('courseImage').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById('imagePreview').src = event.target.result;
-                    document.getElementById('imagePreview').style.display = 'block';
-                    document.getElementById('imagePlaceholder').style.display = 'none';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
 
         function showDashboard() {
             // Already on dashboard

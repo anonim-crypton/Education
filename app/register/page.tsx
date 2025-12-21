@@ -162,11 +162,11 @@ export default function RegisterPage() {
         
         // schoolName bo'sh bo'lsa, "Not specified" ishlatamiz
         const finalSchoolName = schoolName.trim() || "Not specified";
-        const response = await googleRegister(codeResponse.access_token, finalSchoolName);
+        const response = (await googleRegister(codeResponse.access_token, finalSchoolName)) as any;
         console.log("Google register response:", response);
         
         // Response-da access va refresh tokenlarni qidiramiz
-        const accessToken = response.access || response.token || (response as any).access_token;
+        const accessToken = response.access || response.token || response.access_token;
         const refreshToken = response.refresh || null;
         
         if (!accessToken) {

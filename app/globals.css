@@ -115,10 +115,31 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+   * {
+     @apply border-border outline-ring/50;
+   }
+   body {
+     @apply bg-background text-foreground;
+   }
+}
+
+/* Custom Scrollbar Styling */
+.scrollbar-thin::-webkit-scrollbar {
+   width: 6px;
+   height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+   background: rgb(39, 39, 42, 0.3);
+   border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+   background: rgb(82, 82, 91);
+   border-radius: 10px;
+   transition: background 0.2s;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+   background: rgb(113, 113, 122);
 }

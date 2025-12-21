@@ -4,6 +4,19 @@ from django.core.validators import MinLengthValidator
 
 class CustomUser(AbstractUser):
     """Extended User model with school information"""
+    SUBJECT_CHOICES = [
+        ('matematika', 'Matematika'),
+        ('fizika', 'Fizika'),
+        ('kimyo', 'Kimyo'),
+        ('biologiya', 'Biologiya'),
+        ('ingliz-tili', 'Ingliz-tili'),
+        ('rus-tili', 'Rus-tili'),
+        ('uzbek-tili', "O'zbek-tili"),
+        ('tarix', "O'zbekiston-tarixi"),
+        ('geografiya', 'Geografiya'),
+        ('dasturlash', 'Web-Dasturlash'),
+    ]
+    
     school_name = models.CharField(
         max_length=255,
         blank=False,
@@ -13,6 +26,13 @@ class CustomUser(AbstractUser):
     is_google_user = models.BooleanField(
         default=False,
         help_text="Whether user registered via Google OAuth"
+    )
+    subject = models.CharField(
+        max_length=50,
+        choices=SUBJECT_CHOICES,
+        null=True,
+        blank=True,
+        help_text="Subject taught by teacher"
     )
     avatar = models.ImageField(
         upload_to='avatars/',
@@ -68,6 +88,12 @@ class TeacherApplication(models.Model):
         max_length=20,
         blank=True,
         help_text="Contact phone number"
+    )
+    assigned_courses = models.ManyToManyField(
+        'Course',
+        blank=True,
+        related_name='teacher_assignments',
+        help_text="Courses assigned to this teacher"
     )
     status = models.CharField(
         max_length=20,
@@ -159,6 +185,51 @@ class Course(models.Model):
         return f"{self.title} - {self.teacher}"
 
 
+class Lesson(models.Model):
+    """Model for video lessons uploaded by teachers"""
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name='videos',
+        help_text="Associated course"
+    )
+    title = models.CharField(
+        max_length=255,
+        help_text="Lesson title"
+    )
+    description = models.TextField(
+        blank=True,
+        help_text="Lesson description/notes"
+    )
+    video_file = models.FileField(
+        upload_to='videos/',
+        help_text="Video file (MP4, WebM, etc.)"
+    )
+    teacher_name = models.CharField(
+        max_length=255,
+        help_text="Teacher name"
+    )
+    views_count = models.PositiveIntegerField(
+        default=0,
+        help_text="Number of times video has been viewed"
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        help_text="Display order in course"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'users_lesson'
+        verbose_name = 'Lesson'
+        verbose_name_plural = 'Lessons'
+        ordering = ['order', 'created_at']
+    
+    def __str__(self):
+        return f"{self.title} - {self.course.title}"
+
+
 class LoginLog(models.Model):
     """Login history for students and teachers"""
     LOGIN_TYPE_CHOICES = [
@@ -201,3 +272,45 @@ class LoginLog(models.Model):
     
     def __str__(self):
         return f"{self.username} ({self.login_type}) - {self.login_time.strftime('%Y-%m-%d %H:%M')}"
+
+
+class Notification(models.Model):
+    """User notifications for teacher approvals/rejections"""
+    NOTIFICATION_TYPES = [
+        ('approval', 'Tasdiqlash'),
+        ('rejection', 'Rad etish'),
+        ('course_created', 'Kurs yaratildi'),
+        ('system', 'Tizim'),
+    ]
+    
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name='notifications'
+    )
+    title = models.CharField(
+        max_length=255,
+        help_text="Notification title"
+    )
+    message = models.TextField(
+        help_text="Notification message"
+    )
+    type = models.CharField(
+        max_length=20,
+        choices=NOTIFICATION_TYPES,
+        default='system'
+    )
+    is_read = models.BooleanField(
+        default=False,
+        help_text="Whether user has read the notification"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        db_table = 'users_notification'
+        verbose_name = 'Notification'
+        verbose_name_plural = 'Notifications'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.title}"

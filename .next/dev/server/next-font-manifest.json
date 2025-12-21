@@ -1,18 +1,18 @@
 {
   "app": {
+    "[project]/OneDrive/Documents/GitHub/Education/app/admin-login/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
+    "[project]/OneDrive/Documents/GitHub/Education/app/courses/[subject]/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
+    ],
     "[project]/OneDrive/Documents/GitHub/Education/app/courses/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
     "[project]/OneDrive/Documents/GitHub/Education/app/dashboard/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ],
-    "[project]/OneDrive/Documents/GitHub/Education/app/login/page": [
-      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
-    ],
     "[project]/OneDrive/Documents/GitHub/Education/app/page": [
-      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
-    ],
-    "[project]/OneDrive/Documents/GitHub/Education/app/register/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2"
     ]
   },

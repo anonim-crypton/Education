@@ -175,13 +175,36 @@ class TeacherApplicationSerializer(serializers.ModelSerializer):
         return value
 
 
+class LessonSerializer(serializers.ModelSerializer):
+    """Serializer for lessons/videos"""
+    video_url = serializers.SerializerMethodField()
+    
+    class Meta:
+        from .models import Lesson
+        model = Lesson
+        fields = ['id', 'title', 'description', 'video_file', 'video_url', 'teacher_name', 'views_count', 'order', 'created_at']
+        read_only_fields = ['id', 'created_at']
+    
+    def get_video_url(self, obj):
+        """Get full video URL"""
+        if obj.video_file:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.video_file.url)
+            return obj.video_file.url
+        return None
+
+
 class CourseSerializer(serializers.ModelSerializer):
     """Serializer for courses"""
     teacher_image_url = serializers.SerializerMethodField()
+    videos_count = serializers.SerializerMethodField()
+    total_views = serializers.SerializerMethodField()
+    videos = serializers.SerializerMethodField()
     
     class Meta:
         model = Course
-        fields = ['id', 'title', 'teacher', 'lessons', 'icon', 'color', 'description', 'teacher_image', 'teacher_image_url', 'order', 'is_active', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'teacher', 'lessons', 'icon', 'color', 'description', 'teacher_image', 'teacher_image_url', 'order', 'is_active', 'videos_count', 'total_views', 'videos', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
     
     def get_teacher_image_url(self, obj):
@@ -193,3 +216,17 @@ class CourseSerializer(serializers.ModelSerializer):
             return obj.teacher_image.url
         # Return default avatar URL
         return '/placeholder-user.jpg'
+    
+    def get_videos_count(self, obj):
+        """Get count of videos in this course"""
+        return obj.videos.count()
+    
+    def get_total_views(self, obj):
+        """Get total views of all videos in this course"""
+        return sum(video.views_count for video in obj.videos.all())
+    
+    def get_videos(self, obj):
+        """Get all videos in this course"""
+        videos = obj.videos.all()
+        request = self.context.get('request')
+        return LessonSerializer(videos, many=True, context={'request': request}).data

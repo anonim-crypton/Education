@@ -62,6 +62,9 @@ export default function LoginCardSection() {
       );
 
       const data = await response.json();
+      console.log("Login response:", data);
+      console.log("login_type:", data.login_type);
+      console.log("is_admin:", data.is_admin);
 
       if (!response.ok) {
         // Backend-dan xatolik xabari olish
@@ -94,11 +97,19 @@ export default function LoginCardSection() {
         // Navbar-ni yangilash uchun
         window.dispatchEvent(new Event("loginSuccess"));
 
-        // Teacher bo'lsa Django admin paneliga yo'naltir
+        // Admin bo'lsa admin panelga yo'naltir
+        if (data.login_type === 'admin' || data.is_admin) {
+          window.location.href = `${
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+          }/users/admin/dashboard/`;
+          return;
+        }
+
+        // Teacher bo'lsa teacher panelga yo'naltir
         if (data.login_type === 'teacher') {
           window.location.href = `${
             process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-          }/admin/`;
+          }/users/teacher/dashboard/`;
           return;
         }
 
@@ -153,11 +164,19 @@ export default function LoginCardSection() {
           // Navbar-ni yangilash uchun
           window.dispatchEvent(new Event("loginSuccess"));
 
-          // Teacher bo'lsa Django admin paneliga yo'naltir
+          // Admin bo'lsa admin panelga yo'naltir
+          if (data.login_type === 'admin' || data.is_admin) {
+            window.location.href = `${
+              process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+            }/users/admin/dashboard/`;
+            return;
+          }
+
+          // Teacher bo'lsa teacher panelga yo'naltir
           if (data.login_type === 'teacher') {
             window.location.href = `${
               process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-            }/admin/`;
+            }/users/teacher/dashboard/`;
             return;
           }
 
@@ -298,15 +317,25 @@ export default function LoginCardSection() {
         <span className="text-xs tracking-[0.14em] uppercase text-zinc-400">
           Edugame
         </span>
-        <a href="http://localhost:8000/api/users/teacher/login/">
-          <Button
-            variant="outline"
-            className="h-9 rounded-lg border-amber-600/50 bg-zinc-900 text-zinc-50 hover:bg-amber-600/10 hover:border-amber-600 cursor-pointer transition-all"
-          >
-            <span className="mr-2">👨‍🏫 O'qituvchi Paneli</span>
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </a>
+        <div className="flex gap-3">
+          <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/users/admin/login/`}>
+            <Button
+              className="h-10 px-4 rounded-lg bg-red-600 text-white hover:bg-red-700 font-bold cursor-pointer transition-all shadow-lg hover:shadow-red-600/50"
+            >
+              <span className="mr-2">🔐 Bosh Admin</span>
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </a>
+          <a href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/users/teacher/login/`}>
+            <Button
+              variant="outline"
+              className="h-10 rounded-lg border-amber-600/50 bg-zinc-900 text-zinc-50 hover:bg-amber-600/10 hover:border-amber-600 cursor-pointer transition-all"
+            >
+              <span className="mr-2">👨‍🏫 O'qituvchi</span>
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </a>
+        </div>
       </header>
 
       {/* Centered Login Card */}
@@ -447,7 +476,7 @@ export default function LoginCardSection() {
               </Button>
               <Button
                 variant="outline"
-                onClick={handleGoogleLogin}
+                onClick={() => handleGoogleLogin()}
                 disabled={loading}
                 className="h-10 rounded-lg border-zinc-800 bg-zinc-950 text-zinc-50 hover:bg-zinc-900/80 disabled:opacity-50 disabled:cursor-not-allowed"
               >

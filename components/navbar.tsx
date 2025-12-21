@@ -33,38 +33,36 @@ import {
   User,
 } from "lucide-react";
 
-const courses = [
-  {
-    title: "Dasturlash",
-    description: "Python, JavaScript, React va boshqalar",
-    icon: CodeIcon,
-    href: "/courses/programming",
-  },
-  {
-    title: "Ingliz tili",
-    description: "Beginer daraja",
-    icon: LanguagesIcon,
-    href: "/courses/ingliz tili",
-  },
-  {
-    title: "Matematika ",
-    description: "Beginer daraja",
-    icon: CalculatorIcon,
-    href: "/courses/matematika",
-  },
-  {
-    title: "Tarix",
-    description: "Beginer daraja",
-    icon: BookAIcon,
-    href: "/courses/tarix",
-  },
-  {
-    title: "Huquq",
-    description: "Beginer daraja",
-    icon: ScaleIcon,
-    href: "/courses/tarix",
-  },
-];
+const getCourseIcon = (subject: string) => {
+  const subjectLower = subject.toLowerCase();
+  if (
+    subjectLower.includes("dastur") ||
+    subjectLower.includes("code") ||
+    subjectLower.includes("program")
+  ) {
+    return CodeIcon;
+  } else if (
+    subjectLower.includes("til") ||
+    subjectLower.includes("language")
+  ) {
+    return LanguagesIcon;
+  } else if (
+    subjectLower.includes("math") ||
+    subjectLower.includes("riyoziy")
+  ) {
+    return CalculatorIcon;
+  } else if (
+    subjectLower.includes("tarix") ||
+    subjectLower.includes("history")
+  ) {
+    return HistoryIcon;
+  } else if (subjectLower.includes("huquq") || subjectLower.includes("law")) {
+    return ScaleIcon;
+  }
+  return BookOpenIcon;
+};
+
+const courses = [];
 
 const navLinks = [
   { title: "Bosh sahifa", href: "/dashboard", icon: HomeIcon },
@@ -83,6 +81,8 @@ const NavbarComponent = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const [teachersCourses, setTeachersCourses] = useState<any[]>([]);
+  const [dropdownCourses, setDropdownCourses] = useState<any[]>([]);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const accountMenuRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -133,6 +133,92 @@ const NavbarComponent = () => {
       setIsMobileMenuOpen(true);
       localStorage.removeItem("shouldOpenNav");
     }
+
+    // Hardcoded courses list with 10 subjects
+    const hardcodedCourses = [
+      {
+        id: 1,
+        title: "Web-Dasturlash",
+        subject: "Dasturlash",
+        description: "Web saytlari yaratish",
+        icon: CodeIcon,
+        href: "/courses/1",
+      },
+      {
+        id: 2,
+        title: "Matematika",
+        subject: "Matematika",
+        description: "Riyoziyat asoslari",
+        icon: CalculatorIcon,
+        href: "/courses/2",
+      },
+      {
+        id: 3,
+        title: "Fizika",
+        subject: "Fizika",
+        description: "Tabiat qonunlari",
+        icon: BookOpenIcon,
+        href: "/courses/3",
+      },
+      {
+        id: 4,
+        title: "Kimyo",
+        subject: "Kimyo",
+        description: "Moddalar va reaksiyalar",
+        icon: BookAIcon,
+        href: "/courses/4",
+      },
+      {
+        id: 5,
+        title: "Biologiya",
+        subject: "Biologiya",
+        description: "Tirik organizmlari",
+        icon: BookAIcon,
+        href: "/courses/5",
+      },
+      {
+        id: 6,
+        title: "Ingliz-tili",
+        subject: "Til",
+        description: "Ingliz tili o'rganish",
+        icon: LanguagesIcon,
+        href: "/courses/6",
+      },
+      {
+        id: 7,
+        title: "Rus-tili",
+        subject: "Til",
+        description: "Rus tili o'rganish",
+        icon: LanguagesIcon,
+        href: "/courses/7",
+      },
+      {
+        id: 8,
+        title: "O'zbekiston tarixi",
+        subject: "Tarix",
+        description: "O'zbekiston tarixiy hodisalari",
+        icon: HistoryIcon,
+        href: "/courses/8",
+      },
+      {
+        id: 9,
+        title: "Geografiya",
+        subject: "Geografiya",
+        description: "Yer va hududlar",
+        icon: BookOpenIcon,
+        href: "/courses/9",
+      },
+      {
+        id: 10,
+        title: "Iqtisodiyot",
+        subject: "Iqtisodiyot",
+        description: "Iqtisodiyat asoslari",
+        icon: TrendingUpIcon,
+        href: "/courses/10",
+      },
+    ];
+    
+    setDropdownCourses(hardcodedCourses);
   }, []);
 
   const handleMouseEnter = () => {
@@ -258,23 +344,29 @@ const NavbarComponent = () => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 w-80 p-2 bg-card rounded-2xl shadow-xl border border-border"
+                        className="absolute top-full left-0 mt-2 w-96 p-3 bg-background/95 backdrop-blur-sm rounded-2xl shadow-xl border border-primary/30 max-h-96 overflow-y-auto dropdown-scrollbar"
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                       >
-                        <div className="grid gap-1">
-                          {courses.map((course, index) => (
-                            <CourseDropdownItem
-                              key={course.title}
-                              course={course}
-                              index={index}
-                            />
-                          ))}
+                        <div className="space-y-1">
+                          {dropdownCourses.length > 0 ? (
+                            dropdownCourses.map((course, index) => (
+                              <CourseDropdownItem
+                                key={course.id}
+                                course={course}
+                                index={index}
+                              />
+                            ))
+                          ) : (
+                            <div className="px-3 py-6 text-center text-sm text-muted-foreground bg-primary/10 border border-primary/50 rounded-xl">
+                              Kurslar yuklangan'yaponaqdi...
+                            </div>
+                          )}
                         </div>
-                        <div className="mt-2 pt-2 border-t border-border">
+                        <div className="mt-3 pt-3 border-t border-primary/50">
                           <a
                             href="/courses"
-                            className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-primary hover:bg-primary/10 rounded-xl transition-colors"
+                            className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-primary hover:bg-primary/20 bg-primary/10 rounded-xl transition-colors border border-primary/50"
                           >
                             <BookOpenIcon className="w-4 h-4" />
                             Barcha kurslarni ko'rish
@@ -313,10 +405,10 @@ const NavbarComponent = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className={cn(
-                        "flex items-center gap-2.5 pl-3 border-l border-border rounded-xl px-2.5 py-1.5 transition-all duration-200",
+                        "flex items-center gap-2.5 px-3 py-1.5 border rounded-xl transition-all duration-200",
                         isAccountMenuOpen
-                          ? "bg-secondary"
-                          : "hover:bg-secondary"
+                          ? "bg-slate-700/30 border-slate-600/60"
+                          : "bg-transparent border-slate-700/40 hover:bg-slate-700/20 hover:border-slate-600/50"
                       )}
                     >
                       <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white text-sm font-semibold shadow-md overflow-hidden flex-shrink-0">
@@ -457,6 +549,54 @@ const NavbarComponent = () => {
 
                             <div className="my-2 border-t border-border/50"></div>
 
+                            <Link href="/admin-login">
+                              <motion.button
+                                whileHover={{ x: 4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-amber-500 hover:bg-amber-500/10 rounded-lg transition-all duration-200 text-left group"
+                              >
+                                <svg
+                                  className="w-4 h-4 text-amber-500 group-hover:text-amber-400 transition-colors flex-shrink-0"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                                  />
+                                </svg>
+                                <span>Bosh Admin Panel</span>
+                              </motion.button>
+                            </Link>
+
+                            <a href="http://localhost:8000/api/users/teacher/login/">
+                              <motion.button
+                                whileHover={{ x: 4 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-blue-500 hover:bg-blue-500/10 rounded-lg transition-all duration-200 text-left group"
+                              >
+                                <svg
+                                  className="w-4 h-4 text-blue-500 group-hover:text-blue-400 transition-colors flex-shrink-0"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                                  />
+                                </svg>
+                                <span>O'qituvchi Panel</span>
+                              </motion.button>
+                            </a>
+
+                            <div className="my-2 border-t border-border/50"></div>
+
                             <motion.button
                               onClick={() => {
                                 clearTokens();
@@ -478,6 +618,16 @@ const NavbarComponent = () => {
                 </>
               ) : (
                 <>
+                  {/* Admin Panel button - shown when not logged in */}
+                  <Link href="/admin-login">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white shadow-lg font-medium text-sm px-4 py-2 transition-all duration-300 cursor-pointer"
+                    >
+                      Bosh Admin Panel
+                    </motion.button>
+                  </Link>
                   <Link href="/login">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
@@ -638,6 +788,31 @@ const NavbarComponent = () => {
 
                           <div className="my-1 border-t border-border/50"></div>
 
+                          <Link href="/admin-login">
+                            <motion.button
+                              whileHover={{ x: 4 }}
+                              whileTap={{ scale: 0.98 }}
+                              className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-amber-500 hover:bg-amber-500/10 rounded-lg transition-all duration-200 text-left group"
+                            >
+                              <svg
+                                className="w-4 h-4 text-amber-500 group-hover:text-amber-400 transition-colors flex-shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                                />
+                              </svg>
+                              <span>Bosh Admin Panel</span>
+                            </motion.button>
+                          </Link>
+
+                          <div className="my-1 border-t border-border/50"></div>
+
                           <motion.button
                             onClick={() => {
                               clearTokens();
@@ -659,16 +834,34 @@ const NavbarComponent = () => {
               </div>
             )}
 
-            {/* Mobile Auth - Register only for non-logged users */}
+            {/* Mobile Auth - Buttons for non-logged users */}
             {!isLoggedIn && (
-              <div className="sm:hidden">
+              <div className="sm:hidden flex items-center gap-2">
+                <Link href="/admin-login">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="rounded-lg bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white shadow-lg font-medium text-xs px-2 py-2 transition-all duration-300 cursor-pointer"
+                  >
+                    Admin
+                  </motion.button>
+                </Link>
+                <Link href="/login">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="rounded-lg bg-white text-black hover:bg-white/80 border border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-xs px-2 py-2 transition-all duration-300 cursor-pointer"
+                  >
+                    Kirish
+                  </motion.button>
+                </Link>
                 <Link href="/register">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 cursor-pointer"
+                    className="rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white shadow-md font-medium text-xs px-2 py-2 transition-all duration-300 cursor-pointer"
                   >
-                    Ro'yxatdan o'tish
+                    Ro'yxat
                   </motion.button>
                 </Link>
               </div>
@@ -702,17 +895,18 @@ const NavbarComponent = () => {
             className="lg:hidden bg-background border-t border-border overflow-hidden"
           >
             <div className="px-4 py-4 space-y-2">
-              {/* Mobile Login Button */}
+              {/* Mobile Admin Panel Button */}
               {!isLoggedIn && (
-                <motion.a
-                  href="/login"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0 }}
-                  className="w-full rounded-xl bg-white text-black hover:bg-white/80 border-2 border-blue-500 dark:bg-slate-900 dark:text-white dark:border-blue-400 shadow-md font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer block text-center"
-                >
-                  Kirish
-                </motion.a>
+                <Link href="/admin-login">
+                  <motion.button
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0 }}
+                    className="w-full rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white shadow-lg font-medium text-sm px-4 py-2.5 transition-all duration-300 mb-2 cursor-pointer text-center"
+                  >
+                    Bosh Admin Panel
+                  </motion.button>
+                </Link>
               )}
 
               {navLinks.map((link, index) => (
@@ -731,16 +925,25 @@ const NavbarComponent = () => {
                   </a>
                   {link.hasDropdown && (
                     <div className="ml-8 mt-1 space-y-1">
-                      {courses.map((course) => (
-                        <a
-                          key={course.title}
-                          href={course.href}
-                          className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          <course.icon className="w-4 h-4" />
-                          {course.title}
-                        </a>
-                      ))}
+                      {dropdownCourses.length > 0 ? (
+                        dropdownCourses.map((course) => (
+                          <a
+                            key={course.id}
+                            href={course.href}
+                            className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <course.icon className="w-4 h-4" />
+                            <span>{course.title}</span>
+                            <span className="text-xs text-muted-foreground ml-auto">
+                              ({course.subject})
+                            </span>
+                          </a>
+                        ))
+                      ) : (
+                        <div className="px-3 py-2 text-xs text-muted-foreground">
+                          Kurslar yuklangan'yaponaqdi...
+                        </div>
+                      )}
                     </div>
                   )}
                 </motion.div>
@@ -781,19 +984,16 @@ const CourseDropdownItem = memo(function CourseDropdownItem({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
-      className="flex items-start gap-3 p-3 rounded-xl hover:bg-secondary transition-colors group cursor-pointer"
+      className="flex items-center gap-3 p-3 rounded-xl hover:bg-secondary transition-colors group cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-        <course.icon className="w-5 h-5 text-primary" />
+      <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+        <course.icon className="w-5 h-5 text-blue-400" />
       </div>
-      <div>
-        <h4 className="text-sm font-medium text-foreground">{course.title}</h4>
-        <p className="text-xs text-muted-foreground mt-0.5">
-          {course.description}
-        </p>
-      </div>
+      <h4 className="text-sm font-medium text-foreground">
+        {course.title}
+      </h4>
     </motion.div>
   );
 });

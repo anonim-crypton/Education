@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Darslik Yuklash - Edugame</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-950">
+    <div class="flex min-h-screen w-full">
+      <!-- Sidebar -->
+      <nav
+        class="sticky top-0 h-screen shrink-0 border-r border-gray-200 dark:border-gray-800 w-64 bg-white dark:bg-gray-900 p-4 shadow-sm"
+      >
+        <!-- Logo -->
+        <div class="flex items-center gap-3 mb-8 p-2 rounded-lg">
+          <div
+            class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0"
+          >
+            <svg
+              width="20"
+              height="auto"
+              viewBox="0 0 50 39"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="fill-white"
+            >
+              <path d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z" />
+              <path
+                d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
+              />
+            </svg>
+          </div>
+          <div>
+            <span
+              class="block text-sm font-semibold text-gray-900 dark:text-gray-100"
+              >Edugame</span
+            >
+            <span class="block text-xs text-gray-500 dark:text-gray-400"
+              >O'qituvchi</span
+            >
+          </div>
+        </div>
+
+        <!-- Menu -->
+        <div class="space-y-3 mb-8">
+          <a
+            href="{% url 'teacher_dashboard' %}"
+            class="flex items-center gap-3 h-11 px-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition-colors"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline
+                points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"
+              ></polyline>
+            </svg>
+            <span>Dashboard</span>
+          </a>
+
+          <a
+            href="#"
+            class="flex items-center gap-3 h-11 px-3 rounded-lg bg-blue-500 text-white font-medium transition-colors"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>Darslik Yuklash</span>
+          </a>
+        </div>
+
+        <!-- Logout -->
+        <div class="border-t border-gray-200 dark:border-gray-800 pt-4">
+          <a
+            href="{% url 'teacher_logout' %}"
+            class="flex items-center gap-3 h-11 px-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-red-500 hover:text-white font-medium transition-colors"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            <span>Chiqish</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="flex-1 bg-gray-50 dark:bg-gray-950 overflow-auto">
+        <!-- Header -->
+        <div
+          class="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 sticky top-0 z-10"
+        >
+          <div class="flex items-center justify-between p-6">
+            <div>
+              <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Darslik Yuklash
+              </h1>
+              <p class="text-gray-600 dark:text-gray-400 mt-1">
+                Video darslikni yuklab, o'quvchilar bilan ulashing
+              </p>
+            </div>
+            <div class="flex items-center gap-6">
+              <div
+                class="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800"
+              >
+                <div
+                  class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="text-blue-600 dark:text-blue-400"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                </div>
+                <div class="text-right">
+                  <p
+                    class="text-sm font-semibold text-gray-900 dark:text-gray-100"
+                  >
+                    {{ teacher.subject }}
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">Fani</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+          <!-- Messages -->
+          {% if messages %} {% for message in messages %} {% if message.tags %}
+          <div
+            class="rounded-xl border border-green-200 bg-green-50 dark:bg-green-900/20 p-4 mb-6 flex gap-4"
+          >
+            <div class="flex-1">
+              <p class="text-sm text-green-800 dark:text-green-200">
+                {{ message }}
+              </p>
+            </div>
+          </div>
+          {% else %}
+          <div
+            class="rounded-xl border border-red-200 bg-red-50 dark:bg-red-900/20 p-4 mb-6 flex gap-4"
+          >
+            <div class="flex-1">
+              <p class="text-sm text-red-800 dark:text-red-200">
+                {{ message }}
+              </p>
+            </div>
+          </div>
+          {% endif %} {% endfor %} {% endif %}
+
+          <!-- Upload Form -->
+          <div
+            class="max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-8"
+          >
+            <h2
+              class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6"
+            >
+              Video Darslik Yuklash
+            </h2>
+
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+              {% csrf_token %}
+
+              <!-- O'qituvchi Info -->
+              <div
+                class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4"
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      class="text-blue-600 dark:text-blue-400"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                  </div>
+                  <div>
+                    <p
+                      class="text-sm font-semibold text-blue-900 dark:text-blue-100"
+                    >
+                      {{ teacher.user.get_full_name }}
+                    </p>
+                    <p class="text-xs text-blue-700 dark:text-blue-300">
+                      {{ teacher.subject }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kurs Tanlash -->
+              <div>
+                <label
+                  for="course_id"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Kurs Tanlang *
+                </label>
+                <select
+                  id="course_id"
+                  name="course_id"
+                  required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                >
+                  <option value="">-- Kurs Tanlang --</option>
+                  {% for course in courses %}
+                  <option value="{{ course.id }}">{{ course.title }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- Dars Nomi -->
+              <div>
+                <label
+                  for="title"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Dars Nomi *
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  required
+                  placeholder="Masalan: Dasturlashning Asoslari"
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                />
+              </div>
+
+              <!-- Dars Tavsifi -->
+              <div>
+                <label
+                  for="description"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Dars Tavsifi
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="5"
+                  placeholder="Dars haqida ma'lumot yozing..."
+                  class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition resize-none"
+                ></textarea>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Dars haqida qo'shimcha ma'lumot yozing (ixtiyoriy)
+                </p>
+              </div>
+
+              <!-- Video Upload -->
+              <div>
+                <label
+                  for="video_file"
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
+                  Video Fayli *
+                </label>
+                <div
+                  class="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 dark:hover:border-blue-400 transition"
+                  id="drop-zone"
+                >
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="mx-auto mb-3 text-gray-400 dark:text-gray-600"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  <p
+                    class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1"
+                  >
+                    Video faylni shu yerga torting yoki
+                  </p>
+                  <label
+                    for="video_file"
+                    class="text-blue-600 dark:text-blue-400 font-medium cursor-pointer hover:underline"
+                  >
+                    faylni tanlang
+                  </label>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    MP4, WebM, MOV (maksimal 1GB)
+                  </p>
+                  <input
+                    type="file"
+                    id="video_file"
+                    name="video_file"
+                    accept="video/*"
+                    required
+                    class="hidden"
+                    onchange="handleFileSelect(event)"
+                  />
+                </div>
+                <div
+                  id="file-info"
+                  class="mt-3 text-sm text-gray-600 dark:text-gray-400"
+                ></div>
+              </div>
+
+              <!-- Submit Buttons -->
+              <div class="flex gap-4">
+                <button
+                  type="submit"
+                  class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="inline mr-2"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  Yukla
+                </button>
+                <a
+                  href="{% url 'teacher_dashboard' %}"
+                  class="flex-1 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 font-medium py-3 rounded-lg transition text-center"
+                >
+                  Bekor qilish
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Check theme preference
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+
+      // File upload handler
+      const dropZone = document.getElementById("drop-zone");
+      const fileInput = document.getElementById("video_file");
+      const fileInfo = document.getElementById("file-info");
+
+      dropZone.addEventListener("click", () => fileInput.click());
+
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.classList.add("border-blue-500", "dark:border-blue-400");
+      });
+
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("border-blue-500", "dark:border-blue-400");
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.classList.remove("border-blue-500", "dark:border-blue-400");
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+          handleFileSelect({ target: { files: files } });
+        }
+      });
+
+      function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+          fileInfo.innerHTML = `
+            <span class="text-green-600 dark:text-green-400 font-medium">✓ Tanlanagan:</span> 
+            ${file.name} (${sizeMB} MB)
+          `;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -6,6 +6,7 @@ import { getAccessToken, clearTokens } from "@/lib/api";
 import { Navbar } from "@/components/navbar";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Hero } from "@/components/ui/hero-with-group-of-images-text-and-two-buttons";
 import { motion } from "framer-motion";
 import {
   LogOut,
@@ -26,6 +27,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any[]>([]);
+  const [teachers, setTeachers] = useState<any[]>([]);
 
   // Icon mapping from backend to frontend
   const iconMap: { [key: string]: any } = {
@@ -37,132 +39,135 @@ export default function DashboardPage() {
     "book-open": BookOpen,
   };
 
+  const fetchData = async (token: string) => {
+    // Fetch user profile
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      }/api/users/profile/`,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          const contentType = res.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            return res.json();
+          }
+        }
+        return null;
+      })
+      .then((data) => {
+        if (data && data.user) {
+          setUserData(data.user);
+        }
+      })
+      .catch((err) => console.error(err));
+
+    // Fetch courses from API - `/api/users/courses/` dan
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      }/api/users/courses/`,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          const contentType = res.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            return res.json();
+          }
+        }
+        return null;
+      })
+      .then((data) => {
+        if (data) {
+          if (data.courses && Array.isArray(data.courses) && data.courses.length > 0) {
+            setCourses(data.courses);
+          } else if (Array.isArray(data)) {
+            setCourses(data);
+          } else if (data.results && Array.isArray(data.results)) {
+            setCourses(data.results);
+          } else {
+            setCourses(defaultCourses);
+          }
+        } else {
+          setCourses(defaultCourses);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching courses:", err);
+        setCourses(defaultCourses);
+      });
+
+    // Fetch teachers from API
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+      }/api/teachers/`,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          const contentType = res.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            return res.json();
+          }
+        }
+        return null;
+      })
+      .then((data) => {
+        if (data) {
+          console.log("Teachers data:", data);
+          if (Array.isArray(data)) {
+            setTeachers(data);
+          } else if (data.results) {
+            setTeachers(data.results);
+          }
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching teachers:", err);
+      });
+  };
+
   useEffect(() => {
     const token = getAccessToken();
     if (!token) {
       router.push("/login");
     } else {
       setIsAuthenticated(true);
+      fetchData(token);
+      setLoading(false);
 
-      // Fetch user profile
-      fetch(
-        `${
-          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-        }/api/users/profile/`,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.user) {
-            setUserData(data.user);
-          }
-        })
-        .catch((err) => console.error(err));
+      // Auto-refresh har 5 sekundda
+      const interval = setInterval(() => {
+        fetchData(token);
+      }, 5000);
 
-      // Fetch courses from API
-      fetch(
-        `${
-          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-        }/api/users/courses/`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.courses && data.courses.length > 0) {
-            setCourses(data.courses);
-          } else {
-            // Use default courses if no courses from API
-            setCourses(defaultCourses);
-          }
-        })
-        .catch((err) => {
-          console.error("Error fetching courses:", err);
-          // Fallback to default courses
-          setCourses(defaultCourses);
-        })
-        .finally(() => setLoading(false));
+      return () => clearInterval(interval);
     }
   }, [router]);
 
   const defaultCourses = [
     {
-      id: 1,
-      title: "Dasturlash",
-      teacher: "Ali Qodirov",
-      lessons: 24,
-      icon: Code,
-      color: "from-blue-600 to-blue-500",
-    },
-    {
-      id: 2,
+      id: 6,
       title: "Ingliz tili",
-      teacher: "Fotima Shodmonova",
-      lessons: 18,
+      subject: "Ingliz tili",
+      description: "Ingliz tili o'rganish",
       icon: Languages,
-      color: "from-green-600 to-green-500",
-    },
-    {
-      id: 3,
-      title: "Matematika",
-      teacher: "Abdulaziz Olimov",
-      lessons: 30,
-      icon: Calculator,
-      color: "from-purple-600 to-purple-500",
-    },
-    {
-      id: 4,
-      title: "Tarix",
-      teacher: "Shahlo Karimova",
-      lessons: 15,
-      icon: BookA,
-      color: "from-orange-600 to-orange-500",
-    },
-    {
-      id: 5,
-      title: "Huquq",
-      teacher: "Oleg Petrov",
-      lessons: 12,
-      icon: Scale,
-      color: "from-red-600 to-red-500",
-    },
-  ];
-
-  const teachers = [
-    {
-      id: 1,
-      name: "Ali Qodirov",
-      age: 32,
-      avatar: "/placeholder-user.jpg",
-      courses: ["Dasturlash", "Python"],
-      experience: "8 yil",
-    },
-    
-    {
-      id: 2,
-      name: "Fotima Shodmonova",
-      age: 28,
-      avatar: "/placeholder-user.jpg",
-      courses: ["Ingliz tili", "IELTS"],
-      experience: "5 yil",
-    },
-    {
-      id: 3,
-      name: "Abdulaziz Olimov",
-      age: 35,
-      avatar: "/placeholder-user.jpg",
-      courses: ["Matematika", "Algebra"],
-      experience: "10 yil",
-    },
-    {
-      id: 4,
-      name: "Shahlo Karimova",
-      age: 30,
-      avatar: "/placeholder-user.jpg",
-      courses: ["Tarix", "O'zbek tarixi"],
-      experience: "7 yil",
+      lessons: 20,
     },
   ];
 
@@ -190,61 +195,19 @@ export default function DashboardPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 pt-24 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Buttons Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="flex flex-col gap-4 lg:order-2 lg:col-span-1 h-fit lg:pt-16"
-          >
-            {/* Courses Catalog Button */}
-            <Link href="/courses" className="w-full">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full flex items-center justify-center gap-3 px-6 py-5 rounded-xl bg-gradient-to-r from-pink-600 to-pink-500 hover:from-pink-700 hover:to-pink-600 text-white font-semibold transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
-              >
-                <BookOpen className="w-5 h-5" />
-                <span>Kurslar katalogi</span>
-              </motion.button>
-            </Link>
-
-            {/* Teachers List Button */}
-            <Link href="/teachers" className="w-full">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full flex items-center justify-center gap-3 px-6 py-5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-700 hover:to-indigo-600 text-white font-semibold transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl"
-              >
-                <GraduationCap className="w-5 h-5" />
-                <span>O'qituvchilar ro'yxati</span>
-              </motion.button>
-            </Link>
-          </motion.div>
-
-          {/* Video Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="lg:col-span-3 lg:order-2"
-          >
-            <div className="bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-indigo-900/30 rounded-2xl p-6 backdrop-blur-sm h-full">
-              <h3 className="text-2xl font-bold mb-4">Sayt qanday ishlatiladi?</h3>
-              <div className="w-full" style={{ aspectRatio: "16 / 9" }}>
-                <iframe
-                  className="w-full h-full rounded-lg"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="Vebsayt qo'llanmasi"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        {/* Hero Section - Full Width */}
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.4 }}
+           className="w-full mb-16"
+         >
+           <Hero 
+             coursesCount={courses.length} 
+             teachersCount={teachers.length}
+             studentsCount={1000}
+           />
+         </motion.div>
 
         {/* Courses Catalog Section */}
         <motion.div
@@ -254,59 +217,76 @@ export default function DashboardPage() {
           className="mt-12"
         >
           <h2 className="text-3xl font-bold mb-8">Kurslar katalogi</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-            {(courses.length > 0 ? courses : defaultCourses).map((course, index) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group"
-              >
-                <Link href="/courses">
-                   <div className="bg-card rounded-xl p-4 h-full border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer hover:shadow-lg">
-                     {/* Teacher Image or Icon */}
-                     <div className="mb-3 w-full flex justify-center group-hover:scale-110 transition-transform duration-300">
-                       {course.teacher_image_url && course.teacher_image_url !== '/placeholder-user.jpg' ? (
-                         <img
-                           src={course.teacher_image_url}
-                           alt={course.teacher}
-                           className="w-12 h-12 rounded-full object-cover border-2 border-primary"
-                         />
-                       ) : (
-                         <div className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center bg-primary/10">
-                           {(() => {
-                             // Handle both API icon string and default icon object
-                             const iconKey = typeof course.icon === 'string' ? course.icon : 'book-open';
-                             const IconComponent = iconMap[iconKey] || Code;
-                             return IconComponent ? <IconComponent className="w-6 h-6 text-primary" /> : null;
-                           })()}
-                         </div>
-                       )}
-                     </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {(courses.length > 0 ? courses : defaultCourses).map(
+              (course, index) => {
+                // Icon'ni course'dan olib, agar bo'lmasa default'dan topish
+                let IconComponent = BookOpen;
+                if (course.icon) {
+                  IconComponent = course.icon;
+                }
 
-                     {/* Title */}
-                     <h3 className="font-bold text-lg mb-2 text-foreground group-hover:text-primary transition-colors">
-                       {course.title}
-                     </h3>
+                return (
+                <motion.div
+                  key={course.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="group"
+                >
+                  <Link href="/courses">
+                    <div className="bg-card rounded-2xl border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col">
+                      {/* Icon Section */}
+                      <div className="p-8 flex justify-center border-b border-border bg-gradient-to-br from-card to-secondary">
+                        <div className="flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 group-hover:scale-110 transition-transform duration-300">
+                          <IconComponent className="w-12 h-12 text-primary" />
+                        </div>
+                      </div>
 
-                     {/* Teacher */}
-                     <p className="text-sm text-muted-foreground mb-2 truncate text-foreground">
-                       <span className="font-medium">O'qituvchi:</span>{" "}
-                       {course.teacher}
-                     </p>
+                      {/* Content Section */}
+                      <div className="p-5 flex-1 flex flex-col">
+                        {/* Subject Name */}
+                        <h4 className="font-bold text-lg text-foreground text-center mb-2 line-clamp-2">
+                          {course.subject || course.title}
+                        </h4>
 
-                     {/* Lessons Count */}
-                     <div className="flex items-center gap-2 pt-3 border-t border-border">
-                       <BookOpen className="w-4 h-4 text-primary" />
-                       <span className="text-sm font-medium text-foreground">
-                         {course.lessons} dars
-                       </span>
-                     </div>
-                   </div>
-                 </Link>
-              </motion.div>
-            ))}
+                        {/* English Title */}
+                        <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-1">
+                          {course.title}
+                        </p>
+
+                        {/* Divider */}
+                        <div className="mb-3 border-t border-border"></div>
+
+                        {/* Description (if exists) */}
+                        {course.description && (
+                          <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-2 flex-1">
+                            {course.description}
+                          </p>
+                        )}
+
+                        {/* Lessons Count */}
+                        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
+                          <BookOpen className="w-4 h-4" />
+                          <span>{course.lessons || 0} dars</span>
+                        </div>
+
+                        {/* Start Course Button */}
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="w-full mt-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold text-sm transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-500/30"
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                          Kursni boshlash
+                        </motion.button>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+                );
+              }
+            )}
           </div>
         </motion.div>
 
@@ -318,71 +298,61 @@ export default function DashboardPage() {
           className="mt-16"
         >
           <h2 className="text-3xl font-bold mb-8">Bizning O'qituvchilar</h2>
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-6"
-              animate={{ x: [0, -1200] }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
-              {[...teachers, ...teachers].map((teacher, index) => (
+          {teachers.length === 0 ? (
+            <div className="text-center py-12 bg-card rounded-2xl border border-border">
+              <p className="text-lg text-muted-foreground">
+                Hozircha tasdiqlangan o'qituvchilar yo'q
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {teachers.map((teacher, index) => (
                 <motion.div
-                  key={`${teacher.id}-${index}`}
-                  className="flex-shrink-0 w-72"
-                  whileHover={{ scale: 1.05 }}
+                  key={teacher.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex flex-col h-full bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 border border-zinc-700 rounded-xl p-6 hover:border-blue-600/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all"
                 >
-                  <div className="bg-card rounded-2xl p-6 border border-border hover:border-primary/50 transition-all duration-300 h-full shadow-md hover:shadow-xl">
-                    {/* Avatar */}
-                    <div className="flex justify-center mb-4">
-                      <img
-                        src={teacher.avatar}
-                        alt={teacher.name}
-                        className="w-24 h-24 rounded-full object-cover border-4 border-primary"
-                      />
-                    </div>
+                  {/* Avatar */}
+                  <div className="flex justify-center mb-3">
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0"
+                    >
+                      {teacher.full_name
+                        ?.split(" ")
+                        .map((n: string) => n[0])
+                        .join("")}
+                    </motion.div>
+                  </div>
 
-                    {/* Name */}
-                    <h3 className="text-xl font-bold text-center text-foreground mb-1">
-                      {teacher.name}
-                    </h3>
+                  {/* Name */}
+                  <p className="text-center font-semibold text-white text-lg">
+                    {teacher.full_name}
+                  </p>
+                  <p className="text-center text-xs text-zinc-400 mb-3 h-4">
+                    {teacher.email}
+                  </p>
 
-                    {/* Age */}
-                    <p className="text-center text-sm text-muted-foreground mb-4">
-                      {teacher.age} yosh
+                  {/* Divider */}
+                  <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent mb-3" />
+
+                  {/* Subject */}
+                  <p className="text-center text-sm text-blue-300 px-3 py-2 bg-blue-500/10 rounded-lg font-medium mb-4 line-clamp-2">
+                    🎓 {teacher.subject}
+                  </p>
+
+                  {/* Bio */}
+                  <div className="flex-1 flex items-center">
+                    <p className="text-center text-xs text-zinc-400 w-full">
+                      {teacher.bio || "Bio bo'sh"}
                     </p>
-
-                    {/* Courses */}
-                    <div className="mb-4">
-                      <p className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
-                        O'rgatadigan Fanlari
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {teacher.courses.map((course) => (
-                          <span
-                            key={course}
-                            className="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full font-medium"
-                          >
-                            {course}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Experience */}
-                    <div className="pt-4 border-t border-border">
-                      <p className="text-center text-sm font-semibold text-foreground">
-                        <span className="text-primary">Tajribasi:</span>{" "}
-                        {teacher.experience}
-                      </p>
-                    </div>
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
-          </div>
+            </div>
+          )}
         </motion.div>
 
         {/* User Reviews/Feedback Section */}
@@ -399,25 +369,29 @@ export default function DashboardPage() {
                 id: 1,
                 name: "Aziz Karimov",
                 avatar: "/placeholder-user.jpg",
-                review: "Bu platforma o'z hayotimni o'zgartti! Darslar juda tushunarligunga va o'qituvchilar juda yaxshi. Hammaga tavsiyalayapman!",
+                review:
+                  "Bu platforma o'z hayotimni o'zgartti! Darslar juda tushunarligunga va o'qituvchilar juda yaxshi. Hammaga tavsiyalayapman!",
               },
               {
                 id: 2,
                 name: "Dilora Sattarova",
                 avatar: "/placeholder-user.jpg",
-                review: "Ingliz tilini o'rgandim va endi IELTS imtixoniga tayyor. O'qituvchilar juda professional va yardamchi.",
+                review:
+                  "Ingliz tilini o'rgandim va endi IELTS imtixoniga tayyor. O'qituvchilar juda professional va yardamchi.",
               },
               {
                 id: 3,
                 name: "Rustam Abdullayev",
                 avatar: "/placeholder-user.jpg",
-                review: "Dasturlash darslarini kuzatdim va hozir o'z loyihalarim bo'ylab ishlayapman. Shukriya!",
+                review:
+                  "Dasturlash darslarini kuzatdim va hozir o'z loyihalarim bo'ylab ishlayapman. Shukriya!",
               },
               {
                 id: 4,
                 name: "Madina Normatova",
                 avatar: "/placeholder-user.jpg",
-                review: "Matematika darslar juda aniq va to'la. Imtixonda A oladim. Ajoyib platforma!",
+                review:
+                  "Matematika darslar juda aniq va to'la. Imtixonda A oladim. Ajoyib platforma!",
               },
             ].map((review) => (
               <motion.div
@@ -461,7 +435,9 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             {/* Brand */}
             <div>
-              <h3 className="text-xl font-bold mb-4 text-foreground">Edugame</h3>
+              <h3 className="text-xl font-bold mb-4 text-foreground">
+                Edugame
+              </h3>
               <p className="text-sm text-muted-foreground">
                 Oilam o'qish platforma - sifatli ta'lim uchun ayni bitta o'rin.
               </p>
@@ -469,20 +445,31 @@ export default function DashboardPage() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-bold mb-4 text-foreground">Tezkor Havolalar</h4>
+              <h4 className="font-bold mb-4 text-foreground">
+                Tezkor Havolalar
+              </h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/courses" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    href="/courses"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     Kurslar
                   </Link>
                 </li>
                 <li>
-                  <Link href="/teachers" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    href="/teachers"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     O'qituvchilar
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    href="/about"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     Biz haqimizda
                   </Link>
                 </li>
@@ -494,17 +481,26 @@ export default function DashboardPage() {
               <h4 className="font-bold mb-4 text-foreground">Resurslar</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    href="/contact"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     Aloqa
                   </Link>
                 </li>
                 <li>
-                  <Link href="/complaint" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    href="/complaint"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     Shikoyat
                   </Link>
                 </li>
                 <li>
-                  <Link href="/account-settings" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link
+                    href="/account-settings"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
                     Sozlamalar
                   </Link>
                 </li>
@@ -528,13 +524,22 @@ export default function DashboardPage() {
               © 2024 Edugame. Barcha huquqlar himoyalangan.
             </p>
             <div className="flex gap-6 mt-4 md:mt-0">
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link
+                href="#"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
                 Maxfiylik
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link
+                href="#"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
                 Shartlar
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link
+                href="#"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
                 Saytdan foydalanish
               </Link>
             </div>

@@ -13,6 +13,7 @@ import {
   Settings,
   BookOpen,
   Plus,
+  Video,
 } from "lucide-react";
 
 export default function TeacherLayout({
@@ -92,6 +93,12 @@ export default function TeacherLayout({
             <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-green-600/10 text-green-600 transition-colors cursor-pointer font-semibold">
               <Plus className="w-5 h-5" />
               <span>Yangi Kurs</span>
+            </div>
+          </Link>
+          <Link href="/teacher-dashboard/upload-video">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-600/10 text-purple-600 transition-colors cursor-pointer font-semibold">
+              <Video className="w-5 h-5" />
+              <span>Video Yuklash</span>
             </div>
           </Link>
         </nav>

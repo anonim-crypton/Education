@@ -97,7 +97,6 @@ const TeacherCard = memo(function TeacherCard({
   index: number;
 }) {
   const router = useRouter();
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleProfileClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -115,51 +114,62 @@ const TeacherCard = memo(function TeacherCard({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       viewport={{ once: true }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group relative"
+      className="group"
     >
-      <div className="relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 shadow-lg transition-all duration-300 hover:shadow-2xl">
-        {/* Teacher Image */}
-        <div className="relative h-64 w-full overflow-hidden bg-secondary">
-          <Image
-            src={teacher.image}
-            alt={teacher.name}
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-300"
-            priority={index < 2}
-            quality={75}
-          />
-          {/* Overlay */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end"
-          >
-            <div className="w-full p-4">
-              <p className="text-white text-sm italic">{teacher.bio}</p>
-            </div>
-          </motion.div>
+      <div className="p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300">
+        {/* Avatar */}
+        <div className="flex justify-center mb-4">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-2xl border-4 border-border overflow-hidden flex-shrink-0">
+            <Image
+              src={teacher.image}
+              alt={teacher.name}
+              width={80}
+              height={80}
+              className="w-full h-full object-cover"
+              priority={index < 2}
+              quality={75}
+            />
+          </div>
         </div>
 
-        {/* Teacher Info */}
-        <div className="p-4">
-          <h3 className="text-lg font-bold text-foreground mb-1">
-            {teacher.name}
-          </h3>
-          <p className="text-sm text-primary font-semibold mb-3">
+        {/* Name */}
+        <h3 className="text-lg font-bold text-foreground text-center">
+          {teacher.name}
+        </h3>
+
+        {/* Subject Badge */}
+        <div className="flex justify-center mt-3 mb-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
             {teacher.subject}
-          </p>
-          <motion.button
-            onClick={handleProfileClick}
-            whileHover={{ x: 4 }}
-            className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors flex items-center gap-2 cursor-pointer"
-          >
-            Profil
-            <span className="text-xs">→</span>
-          </motion.button>
+          </span>
         </div>
+
+        {/* Divider */}
+        <div className="my-4 border-t border-border"></div>
+
+        {/* Bio */}
+        <div className="p-3 bg-primary/5 rounded-lg mb-4 border border-primary/10">
+          <p className="text-xs font-semibold text-primary uppercase mb-2">Ta'rif</p>
+          <p className="text-sm text-foreground/80">{teacher.bio}</p>
+        </div>
+
+        {/* Profile Button */}
+        <motion.button
+          onClick={handleProfileClick}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full px-3 py-2 rounded-lg bg-primary/10 text-primary text-center font-semibold text-sm hover:bg-primary/20 transition-colors flex items-center justify-center gap-2"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          Profil
+        </motion.button>
       </div>
     </motion.div>
   );
