@@ -39,8 +39,8 @@ urlpatterns = [
     path('admin/login/', views.admin_login_view, name='admin_login'),
     path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('admin/logout/', views.admin_logout_view, name='admin_logout'),
-    path('admin/teacher/<int:application_id>/approve/', views.approve_teacher_view, name='approve_teacher'),
-    path('admin/teacher/<int:application_id>/reject/', views.reject_teacher_view, name='reject_teacher'),
+    path('admin/teacher/<int:application_id>/approve/', views.approve_teacher_view, name='admin_approve_teacher'),
+    path('admin/teacher/<int:application_id>/reject/', views.reject_teacher_view, name='admin_reject_teacher'),
     
     # Teacher API Endpoints
     path('teacher/api/login/', views.teacher_login_api, name='teacher_login_api'),

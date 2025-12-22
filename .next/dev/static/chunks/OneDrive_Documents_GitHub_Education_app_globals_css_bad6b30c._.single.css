@@ -8880,10 +8880,6 @@
     border-color: var(--color-amber-800);
   }
 
-  .dark\:border-amber-900:is(.dark *) {
-    border-color: var(--color-amber-900);
-  }
-
   .dark\:border-blue-400:is(.dark *) {
     border-color: var(--color-blue-400);
   }

@@ -346,22 +346,47 @@ def google_login_view(request):
 @permission_classes([IsAuthenticated])
 def teacher_apply_view(request):
     """Endpoint for applying to become a teacher"""
-    # Create new teacher application
-    data = request.data.copy()
-    data['user'] = request.user.id
-    
-    serializer = TeacherApplicationSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save(user=request.user)
+    try:
+        # Tekshirish: foydalanuvchi allaqachon so'rov bermibmi?
+        existing = TeacherRequest.objects.filter(
+            user=request.user,
+            status='pending'
+        ).first()
+        
+        if existing:
+            return Response(
+                {
+                    'message': 'Siz allaqachon so\'rov bermishsiz. Iltimos, natijani kuting.'
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Create new teacher request
+        data = request.data.copy()
+        data['user'] = request.user.id
+        
+        serializer = TeacherRequestSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response({
+                'message': 'O\'qituvchi so\'rovingiz muvaffaqiyatli yuborildi!',
+                **serializer.data
+            }, status=status.HTTP_201_CREATED)
+        
+        # Xato detallari frontend uchun
+        print(f"Serializer errors: {serializer.errors}")
+        print(f"Request data: {data}")
         return Response({
-            'message': 'O\'qituvchi so\'rovingiz muvaffaqiyatli yuborildi.',
-            'application': serializer.data
-        }, status=status.HTTP_201_CREATED)
+            'message': 'Validation xatosi',
+            'errors': serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
     
-    return Response({
-        'message': 'Xato yuz berdi',
-        'errors': serializer.errors
-    }, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        print(f"Exception in teacher_apply_view: {str(e)}")
+        return Response(
+            {'message': str(e)},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 
 
 @api_view(['GET'])
@@ -829,69 +854,24 @@ def admin_approve_teacher_view(request, request_id):
             }, status=status.HTTP_400_BAD_REQUEST)
         
         with transaction.atomic():
-            # Generate username and password
-            def _generate_username(full_name):
-                base = full_name.lower().replace(' ', '_')
-                username = base
-                counter = 1
-                while User.objects.filter(username=username).exists():
-                    username = f"{base}{counter}"
-                    counter += 1
-                return username
-            
-            def _generate_password(length=12):
-                characters = string.ascii_letters + string.digits
-                return ''.join(secrets.choice(characters) for _ in range(length))
-            
-            username = _generate_username(teacher_request.full_name)
-            password = _generate_password()
-            
-            # Update user account to teacher
-            user = teacher_request.user
-            user.username = username
-            user.set_password(password)
-            # Full name'ni User model'da saqlash
-            if not user.first_name and not user.last_name:
-                name_parts = teacher_request.full_name.split(' ', 1)
-                user.first_name = name_parts[0]
-                if len(name_parts) > 1:
-                    user.last_name = name_parts[1]
-            user.save()
-            
-            # Teacher profile yaratish
-            teacher, created = Teacher.objects.get_or_create(user=user)
-            teacher.subject = teacher_request.subject
-            teacher.bio = teacher_request.bio
-            teacher.experience_years = teacher_request.experience_years
-            teacher.save()
-            
-            # Update application status
+            # Update application status only - do NOT create user account or teacher profile
+            # User remains as regular user, not a teacher yet
             teacher_request.status = 'approved'
             teacher_request.approved_at = timezone.now()
             teacher_request.approved_by = request.user
-            teacher_request.username = username
             teacher_request.save()
             
             # Send notification
             Notification.objects.create(
-                user=user,
+                user=teacher_request.user,
                 title="So'rovingiz Tasdiqlandi",
-                message="Sizning o'qituvchi so'rovingiz tasdiqlandi! Endi kurs yarata olasiz.",
+                message="Sizning o'qituvchi so'rovingiz tasdiqlandi! Admin sizni o'qituvchi sifatida qo'shadi.",
                 type='approval'
             )
         
         return Response({
             'success': True,
-            'message': 'O\'qituvchi tasdiqlandi! Username va parol yaratildi.',
-            'username': username,
-            'password': password,
-            'user': {
-                'id': user.id,
-                'username': user.username,
-                'email': user.email,
-                'full_name': user.get_full_name(),
-                'is_teacher': True
-            }
+            'message': 'O\'qituvchi so\'rovi tasdiqlandi. Admin sizni o\'qituvchi sifatida qo\'shadi.',
         }, status=status.HTTP_200_OK)
     
     except TeacherRequest.DoesNotExist:
@@ -929,7 +909,7 @@ def admin_reject_teacher_view(request, request_id):
             'message': 'Teacher request rejected'
         }, status=status.HTTP_200_OK)
     
-    except TeacherApplication.DoesNotExist:
+    except TeacherRequest.DoesNotExist:
         return Response({
             'success': False,
             'error': 'Teacher request not found'
@@ -1009,7 +989,7 @@ def admin_login_view(request):
             if user.check_password(password):
                 if user.is_staff or user.is_superuser:
                     login(request, user)
-                    return redirect('admin_dashboard')
+                    return redirect('admin_dashboard:dashboard')
                 else:
                     error_msg = "Siz admin emadasiz"
             else:
@@ -1040,47 +1020,35 @@ def admin_dashboard(request):
 
 @login_required(login_url='admin_login')
 def approve_teacher_view(request, application_id):
-    """Approve teacher application and create credentials"""
+    """Approve teacher application - Legacy view, redirects to admin dashboard"""
     if not (request.user.is_staff or request.user.is_superuser):
         return redirect('admin_login')
     
-    application = get_object_or_404(TeacherApplication, id=application_id)
-    
-    if request.method == 'POST':
-        # Get form data
-        action = request.POST.get('action')
+    try:
+        application = TeacherRequest.objects.get(id=application_id)
         
-        if action == 'create_course':
-            # Create new course for this teacher
-            course_title = request.POST.get('course_title')
-            course_description = request.POST.get('course_description')
+        if request.method == 'POST':
+            action = request.POST.get('action')
             
-            if course_title:
-                course = Course.objects.create(
-                    title=course_title,
-                    teacher=application.full_name,
-                    description=course_description or '',
-                    teacher_user=application.user,
-                    is_active=True,
-                    order=0
-                )
-                application.assigned_courses.add(course)
-        
-        elif action == 'approve':
-            # Approve teacher and finalize
-            application.status = 'approved'
-            application.save()
+            if action == 'approve':
+                # Approve teacher using the API function logic
+                from django.db import transaction
+                
+                with transaction.atomic():
+                    # Update application status only - do NOT create user account or teacher profile
+                    # User remains as regular user, not a teacher yet
+                    application.status = 'approved'
+                    application.approved_at = timezone.now()
+                    application.approved_by = request.user
+                    application.save()
             
             return redirect('admin_dashboard')
-    
-    # GET request or POST create_course
-    assigned_courses = application.assigned_courses.all()
-    
-    return render(request, 'admin/approve_teacher.html', {
-        'application': application,
-        'assigned_courses': assigned_courses,
-        'subject': application.subject,
-    })
+        
+        # GET request - redirect to dashboard
+        return redirect('admin_dashboard')
+        
+    except TeacherRequest.DoesNotExist:
+        return redirect('admin_dashboard')
 
 
 @login_required(login_url='admin_login')
@@ -1090,7 +1058,7 @@ def reject_teacher_view(request, application_id):
     if not (request.user.is_staff or request.user.is_superuser):
         return redirect('admin_login')
     
-    application = get_object_or_404(TeacherApplication, id=application_id)
+    application = get_object_or_404(TeacherRequest, id=application_id)
     application.status = 'rejected'
     application.save()
     

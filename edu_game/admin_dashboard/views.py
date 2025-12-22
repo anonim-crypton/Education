@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.utils import timezone
 from teachers.models import TeacherRequest, Teacher
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -28,12 +29,18 @@ def admin_dashboard_view(request):
     # GET request - Dashboard ko'rsatish
     pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
     approved_teachers = Teacher.objects.all()
-    all_users = User.objects.all()
+    
+    # Exclude admin and staff
+    all_users = User.objects.exclude(is_staff=True).exclude(is_superuser=True)
     
     # Get all teachers and students
     teacher_ids = Teacher.objects.values_list('user_id', flat=True)
+    
+    # Get user IDs with pending teacher requests
+    pending_teacher_request_ids = TeacherRequest.objects.filter(status='pending').values_list('user_id', flat=True)
+    
     teachers = all_users.filter(id__in=teacher_ids)
-    students = all_users.exclude(id__in=teacher_ids).exclude(is_staff=True).exclude(is_superuser=True)
+    students = all_users.exclude(id__in=teacher_ids).exclude(id__in=pending_teacher_request_ids)
     
     # Calculate statistics
     total_users = all_users.count()
@@ -172,12 +179,14 @@ def create_teacher_view(request):
 def teacher_requests_view(request):
     """Teacher requests tab"""
     pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
-    approved_teachers = Teacher.objects.all()
+    approved_requests = TeacherRequest.objects.filter(status='approved')
+    all_requests = TeacherRequest.objects.all()
     
     context = {
         'pending_applications': pending_applications,
         'pending_count': pending_applications.count(),
-        'approved_count': approved_teachers.count(),
+        'approved_count': approved_requests.count(),
+        'all_requests_count': all_requests.count(),
     }
     return render(request, 'admin_dashboard/teacher_requests.html', context)
 
@@ -185,18 +194,20 @@ def teacher_requests_view(request):
 @login_required(login_url='/users/admin/login/')
 @user_passes_test(is_admin)
 def approved_teachers_view(request):
-    """Approved teachers tab"""
-    approved_teachers = Teacher.objects.all()
+    """View approved teacher requests (not actual teacher accounts)"""
+    # Show TeacherRequest with status="approved" (not Teacher model)
+    approved_requests = TeacherRequest.objects.filter(status='approved').select_related('user').order_by('-approved_at')
     pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
     
-    # Get all users that are NOT teachers
+    # Get all users that are NOT teachers and NOT pending teacher requests
     teacher_ids = Teacher.objects.values_list('user_id', flat=True)
-    total_students = User.objects.exclude(id__in=teacher_ids).exclude(is_staff=True).exclude(is_superuser=True).count()
+    pending_teacher_request_ids = TeacherRequest.objects.filter(status='pending').values_list('user_id', flat=True)
+    total_students = User.objects.exclude(id__in=teacher_ids).exclude(id__in=pending_teacher_request_ids).exclude(is_staff=True).exclude(is_superuser=True).count()
     
     context = {
-        'approved_teachers': approved_teachers,
+        'approved_teachers': approved_requests,  # TeacherRequest objects with status='approved'
         'pending_count': pending_applications.count(),
-        'approved_count': approved_teachers.count(),
+        'approved_count': approved_requests.count(),
         'total_students': total_students,
     }
     return render(request, 'admin_dashboard/approved_teachers.html', context)
@@ -232,26 +243,32 @@ def get_approved_teachers_api(request):
 
 @login_required(login_url='/users/admin/login/')
 @user_passes_test(is_admin)
+def teachers_view(request):
+    """Yangi yaratilgan o'qituvchilar - Teachers model"""
+    new_teachers = Teacher.objects.select_related('user').order_by('-created_at')
+    pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
+    
+    context = {
+        'new_teachers': new_teachers,
+        'new_teachers_count': new_teachers.count(),
+        'pending_count': pending_applications.count(),
+        'approved_count': Teacher.objects.all().count(),
+    }
+    return render(request, 'admin_dashboard/teachers.html', context)
+
+
+@login_required(login_url='/users/admin/login/')
+@user_passes_test(is_admin)
 def users_view(request):
-    """All users - Students and Teachers"""
-    all_users = User.objects.all().order_by('-date_joined')
+    """All registered users from the website"""
+    # Exclude admin and staff
+    all_users = User.objects.exclude(is_staff=True).exclude(is_superuser=True).order_by('-date_joined')
     pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
     approved_teachers = Teacher.objects.all()
     
-    # Separate users into teachers and students
-    teacher_ids = Teacher.objects.values_list('user_id', flat=True)
-    
-    # Teachers - users that have Teacher relation
-    teachers = all_users.filter(id__in=teacher_ids)
-    
-    # Students - users that are NOT teachers, NOT admin, NOT staff
-    students = all_users.exclude(id__in=teacher_ids).exclude(is_staff=True).exclude(is_superuser=True)
-    
     context = {
-        'teachers': teachers,
-        'students': students,
-        'teachers_count': teachers.count(),
-        'students_count': students.count(),
+        'users': all_users,
+        'users_count': all_users.count(),
         'total_users': all_users.count(),
         'pending_count': pending_applications.count(),
         'approved_count': approved_teachers.count(),
@@ -326,3 +343,63 @@ def assign_teacher_credentials_view(request, user_id):
     }
     
     return render(request, 'admin_dashboard/credentials.html', context)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def block_teacher_api(request, teacher_id):
+    """Block a teacher"""
+    if not (request.user.is_staff or request.user.is_superuser):
+        return Response({'error': 'Admin huquqlari kerak'}, status=status.HTTP_403_FORBIDDEN)
+    
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    teacher.is_blocked = True
+    teacher.blocked_at = timezone.now()
+    teacher.save()
+    
+    return Response({'success': True, 'message': f'{teacher.user.get_full_name()} blokirovka qilindi'})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def unblock_teacher_api(request, teacher_id):
+    """Unblock a teacher"""
+    if not (request.user.is_staff or request.user.is_superuser):
+        return Response({'error': 'Admin huquqlari kerak'}, status=status.HTTP_403_FORBIDDEN)
+    
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    teacher.is_blocked = False
+    teacher.blocked_at = None
+    teacher.save()
+    
+    return Response({'success': True, 'message': f'{teacher.user.get_full_name()} blokirovkasi ochildi'})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def delete_teacher_api(request, teacher_id):
+    """Delete a teacher"""
+    if not (request.user.is_staff or request.user.is_superuser):
+        return Response({'error': 'Admin huquqlari kerak'}, status=status.HTTP_403_FORBIDDEN)
+    
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    teacher_name = teacher.user.get_full_name()
+    teacher.is_deleted = True
+    teacher.deleted_at = timezone.now()
+    teacher.save()
+    
+    return Response({'success': True, 'message': f'{teacher_name} o\'chirildi'})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def delete_user_api(request, user_id):
+    """Delete a user"""
+    if not (request.user.is_staff or request.user.is_superuser):
+        return Response({'error': 'Admin huquqlari kerak'}, status=status.HTTP_403_FORBIDDEN)
+    
+    user = get_object_or_404(User, id=user_id)
+    user_name = user.get_full_name() or user.username
+    user.delete()
+    
+    return Response({'success': True, 'message': f'{user_name} foydalanuvchisi o\'chirildi'})

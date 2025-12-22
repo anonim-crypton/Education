@@ -208,9 +208,10 @@
                     alt="{{ user.get_full_name }}"
                     class="w-full h-full object-cover rounded-full"
                   />
-                  {% else %} {{ user.get_full_name|slice:":1"|upper }} {% endif
-                  %}
-                </div>
+                  {% else %}
+                  {{ user.get_full_name|slice:":1"|upper }}
+                  {% endif %}
+                  </div>
               </div>
             </div>
           </div>
