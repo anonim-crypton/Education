@@ -414,44 +414,77 @@ def teacher_login_view(request):
 
 @login_required(login_url='teacher_login')
 def teacher_dashboard_view(request):
-    """O'qituvchi dashboard"""
-    # Check if user is a teacher
-    if not hasattr(request.user, 'teacher_profile'):
-        messages.error(request, 'Siz o\'qituvchi emassiz')
-        return redirect('teacher_login')
-    
-    teacher = request.user.teacher_profile
-    
-    # Get lessons count (if Lesson model exists)
-    lessons_count = 0
-    students_count = 0
-    
-    try:
-        from users.models import Lesson, CustomUser
-        # Count lessons for this teacher's courses
-        from users.models import Course
-        teacher_courses = Course.objects.filter(teacher_user=request.user)
-        lessons_count = Lesson.objects.filter(course__in=teacher_courses).count()
-        # Count all regular users (students)
-        students_count = CustomUser.objects.filter(is_staff=False, is_superuser=False).count()
-    except ImportError:
-        pass
-    
-    context = {
-        'teacher': teacher,
-        'lessons_count': lessons_count,
-        'students_count': students_count,
-    }
-    
-    return render(request, 'teachers/dashboard.html', context)
+     """O'qituvchi dashboard"""
+     # Check if user is a teacher
+     if not hasattr(request.user, 'teacher_profile'):
+         messages.error(request, 'Siz o\'qituvchi emassiz')
+         return redirect('teacher_login')
+     
+     teacher = request.user.teacher_profile
+     
+     # Get lessons count (if Lesson model exists)
+     lessons_count = 0
+     students_count = 0
+     courses = None
+     
+     try:
+         from users.models import Lesson, CustomUser, Course
+         # Count lessons for this teacher's courses
+         teacher_courses = Course.objects.filter(teacher_user=request.user)
+         lessons_count = Lesson.objects.filter(course__in=teacher_courses).count()
+         # Count all regular users (students)
+         students_count = CustomUser.objects.filter(is_staff=False, is_superuser=False).count()
+         # Get teacher's courses or courses matching their subject
+         courses = Course.objects.filter(title__icontains=teacher.subject) | Course.objects.filter(teacher_user=request.user)
+         courses = courses.distinct().order_by('title')
+     except ImportError:
+         pass
+     
+     context = {
+         'teacher': teacher,
+         'lessons_count': lessons_count,
+         'students_count': students_count,
+         'courses': courses,
+     }
+     
+     return render(request, 'teachers/dashboard.html', context)
+
+
+@login_required(login_url='teacher_login')
+def teacher_lessons_list_view(request):
+     """O'qituvchi yuklagan darslarini ko'rsatish"""
+     # Check if user is a teacher
+     if not hasattr(request.user, 'teacher_profile'):
+         messages.error(request, 'Siz o\'qituvchi emassiz')
+         return redirect('teacher_login')
+     
+     teacher = request.user.teacher_profile
+     from users.models import Lesson, Course
+     
+     # Teacher'ning barcha Kurslarini olish
+     teacher_courses = Course.objects.filter(teacher_user=request.user)
+     
+     # Barcha yuklangan darslarni olish
+     lessons = Lesson.objects.filter(
+         course__in=teacher_courses
+     ).select_related('course').order_by('-created_at')
+     
+     context = {
+         'teacher': teacher,
+         'lessons': lessons,
+         'lessons_count': lessons.count(),
+         'courses': teacher_courses,
+     }
+     
+     return render(request, 'teachers/lessons_list.html', context)
 
 
 @login_required(login_url='teacher_login')
 def teacher_logout_view(request):
-    """O'qituvchi chiqish"""
-    logout(request)
-    messages.success(request, 'Siz chiqib ketdingiz')
-    return redirect('teacher_login')
+     """O'qituvchi chiqish"""
+     logout(request)
+     messages.success(request, 'Siz chiqib ketdingiz')
+     return redirect('teacher_login')
 
 
 def all_teachers_view(request):
@@ -468,64 +501,103 @@ def all_teachers_view(request):
 
 @login_required(login_url='teacher_login')
 def teacher_upload_lesson_view(request):
-    """O'qituvchi darslik yuklash sahifasi"""
-    # Check if user is a teacher
-    if not hasattr(request.user, 'teacher_profile'):
-        messages.error(request, 'Siz o\'qituvchi emassiz')
-        return redirect('teacher_login')
-    
-    teacher = request.user.teacher_profile
-    
-    if request.method == 'POST':
-        try:
-            # Form datani o'qish
-            title = request.POST.get('title', '').strip()
-            description = request.POST.get('description', '').strip()
-            video_file = request.FILES.get('video_file')
-            
-            # Validation
-            if not title:
-                messages.error(request, 'Dars nomini to\'ldiring')
-                return render(request, 'teachers/upload_lesson.html', {'teacher': teacher})
-            
-            if not video_file:
-                messages.error(request, 'Video faylini tanlanig')
-                return render(request, 'teachers/upload_lesson.html', {'teacher': teacher})
-            
-            # Lesson yaratish uchun Course bo'lishi kerak
-            from users.models import Course, Lesson
-            
-            # Default course yaratish yoki oldingi course'ni olish
-            course, created = Course.objects.get_or_create(
-                teacher_user=request.user,
-                defaults={
-                    'title': f"{teacher.subject} - Kurs",
-                    'teacher': teacher.user.get_full_name(),
-                    'icon': 'book-open',
-                    'color': 'from-blue-600 to-blue-500',
-                    'description': teacher.bio or '',
-                }
-            )
-            
-            # Lesson yaratish
-            lesson = Lesson.objects.create(
-                course=course,
-                title=title,
-                description=description,
-                video_file=video_file,
-                teacher_name=teacher.user.get_full_name(),
-                order=Lesson.objects.filter(course=course).count() + 1
-            )
-            
-            messages.success(request, f"Dars '{title}' muvaffaqiyatli yuklandi!")
-            return redirect('teacher_dashboard')
-            
-        except Exception as e:
-            messages.error(request, f'Xato: {str(e)}')
-            return render(request, 'teachers/upload_lesson.html', {'teacher': teacher})
-    
-    context = {
-        'teacher': teacher,
-    }
-    
-    return render(request, 'teachers/upload_lesson.html', context)
+     """O'qituvchi darslik yuklash sahifasi - faqat o'z faniga mos Kursga video yuklay oladi"""
+     # Check if user is a teacher
+     if not hasattr(request.user, 'teacher_profile'):
+         messages.error(request, 'Siz o\'qituvchi emassiz')
+         return redirect('teacher_login')
+     
+     teacher = request.user.teacher_profile
+     from users.models import Course, Lesson
+     
+     # Teacher'ning faniga mos barcha Kurslarni olish
+     # Fani teacher'ning faniga mos bo'lgan kurslar
+     courses = Course.objects.filter(title__icontains=teacher.subject) | Course.objects.filter(teacher_user=request.user)
+     courses = courses.distinct().order_by('title')
+     
+     if request.method == 'POST':
+         try:
+             # Form datani o'qish
+             course_id = request.POST.get('course_id')
+             title = request.POST.get('title', '').strip()
+             description = request.POST.get('description', '').strip()
+             video_file = request.FILES.get('video_file')
+             
+             # Validation
+             if not title:
+                 messages.error(request, 'Dars nomini to\'ldiring')
+                 return render(request, 'teachers/upload_lesson.html', {
+                     'teacher': teacher,
+                     'courses': courses
+                 })
+             
+             if not video_file:
+                 messages.error(request, 'Video faylini tanlang')
+                 return render(request, 'teachers/upload_lesson.html', {
+                     'teacher': teacher,
+                     'courses': courses
+                 })
+             
+             if not course_id:
+                 messages.error(request, 'Kurs tanlanmagan')
+                 return render(request, 'teachers/upload_lesson.html', {
+                     'teacher': teacher,
+                     'courses': courses
+                 })
+             
+             # Tanlangan Kurs'ni tekshirish - teacher faqat o'z faniga mos Kursga video yuklay oladi
+             course = Course.objects.get(id=course_id)
+             
+             # Kurs teacher'ning faniga mos bo'lishini tekshirish
+             is_matching = (teacher.subject.lower() in course.title.lower() or 
+                          course.teacher_user == request.user)
+             
+             if not is_matching:
+                 messages.error(request, 'Siz faqat o\'z faniga mos Kursga video yuklay olasiz')
+                 return render(request, 'teachers/upload_lesson.html', {
+                     'teacher': teacher,
+                     'courses': courses
+                 })
+             
+             # Agár course'da teacher bo'lmasa, teacher'ni assign qilish
+             if not course.teacher_user:
+                 course.teacher_user = request.user
+                 course.teacher = teacher.user.get_full_name()
+                 course.save()
+             
+             # Lesson yaratish
+             lesson = Lesson.objects.create(
+                 course=course,
+                 title=title,
+                 description=description,
+                 video_file=video_file,
+                 teacher_name=teacher.user.get_full_name(),
+                 order=Lesson.objects.filter(course=course).count() + 1
+             )
+             
+             # Course darslar sonini update qilish
+             course.lessons = Lesson.objects.filter(course=course).count()
+             course.save()
+             
+             messages.success(request, f"Dars '{title}' muvaffaqiyatli yuklandi!")
+             return redirect('teacher_dashboard')
+             
+         except Course.DoesNotExist:
+             messages.error(request, 'Tanlangan Kurs topilmadi')
+             return render(request, 'teachers/upload_lesson.html', {
+                 'teacher': teacher,
+                 'courses': courses
+             })
+         except Exception as e:
+             messages.error(request, f'Xato: {str(e)}')
+             return render(request, 'teachers/upload_lesson.html', {
+                 'teacher': teacher,
+                 'courses': courses
+             })
+     
+     context = {
+         'teacher': teacher,
+         'courses': courses,
+     }
+     
+     return render(request, 'teachers/upload_lesson.html', context)

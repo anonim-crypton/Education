@@ -260,20 +260,32 @@ def teachers_view(request):
 @login_required(login_url='/users/admin/login/')
 @user_passes_test(is_admin)
 def users_view(request):
-    """All registered users from the website"""
-    # Exclude admin and staff
-    all_users = User.objects.exclude(is_staff=True).exclude(is_superuser=True).order_by('-date_joined')
-    pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
-    approved_teachers = Teacher.objects.all()
-    
-    context = {
-        'users': all_users,
-        'users_count': all_users.count(),
-        'total_users': all_users.count(),
-        'pending_count': pending_applications.count(),
-        'approved_count': approved_teachers.count(),
-    }
-    return render(request, 'admin_dashboard/users.html', context)
+     """All registered users from the website"""
+     # Exclude admin and staff
+     all_users = User.objects.exclude(is_staff=True).exclude(is_superuser=True).order_by('-date_joined')
+     
+     # Get teacher user IDs
+     teacher_user_ids = Teacher.objects.values_list('user_id', flat=True)
+     
+     # O'quvchilar - foydalanuvchilar teacher bo'lmagan
+     students = all_users.exclude(id__in=teacher_user_ids)
+     
+     # O'qituvchilar - Teacher profile bo'lgan foydalanuvchilar
+     teachers = all_users.filter(id__in=teacher_user_ids)
+     
+     pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
+     approved_teachers = Teacher.objects.all()
+     
+     context = {
+         'users': all_users,
+         'users_count': all_users.count(),
+         'total_users': all_users.count(),
+         'students_count': students.count(),
+         'teachers_count': teachers.count(),
+         'pending_count': pending_applications.count(),
+         'approved_count': approved_teachers.count(),
+     }
+     return render(request, 'admin_dashboard/users.html', context)
 
 
 @login_required(login_url='/users/admin/login/')
