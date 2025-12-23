@@ -7,8 +7,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   LogOut,
-  Menu,
-  X,
   User,
   Settings,
   BookOpen,
@@ -24,7 +22,6 @@ export default function TeacherLayout({
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userData, setUserData] = useState<any>(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -70,8 +67,8 @@ export default function TeacherLayout({
     <div className="min-h-screen bg-background text-foreground flex">
       {/* Sidebar */}
       <motion.aside
-        initial={{ x: -300 }}
-        animate={{ x: sidebarOpen ? 0 : -300 }}
+        initial={{ x: 0 }}
+        animate={{ x: 0 }}
         transition={{ duration: 0.3 }}
         className="fixed left-0 top-0 h-screen w-64 bg-card border-r border-border z-40 overflow-y-auto"
       >
@@ -82,25 +79,40 @@ export default function TeacherLayout({
         </div>
 
         {/* Navigation */}
-        <nav className="p-6 space-y-2">
-          <Link href="/teacher-dashboard">
-            <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 text-foreground transition-colors cursor-pointer">
-              <BookOpen className="w-5 h-5" />
-              <span>Mening Kurslarim</span>
-            </div>
-          </Link>
-          <Link href="/teacher-dashboard/add-course">
-            <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-green-600/10 text-green-600 transition-colors cursor-pointer font-semibold">
-              <Plus className="w-5 h-5" />
-              <span>Yangi Kurs</span>
-            </div>
-          </Link>
-          <Link href="/teacher-dashboard/upload-video">
-            <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-600/10 text-purple-600 transition-colors cursor-pointer font-semibold">
-              <Video className="w-5 h-5" />
-              <span>Video Yuklash</span>
-            </div>
-          </Link>
+        <nav className="p-6 space-y-2 flex flex-col h-full">
+          <div className="space-y-2 flex-1">
+            <Link href="/teacher-dashboard">
+              <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 text-foreground transition-colors cursor-pointer">
+                <BookOpen className="w-5 h-5" />
+                <span>Mening Kurslarim</span>
+              </div>
+            </Link>
+            <Link href="/teacher-dashboard/lessons">
+              <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-600/10 text-blue-600 transition-colors cursor-pointer font-semibold">
+                <Video className="w-5 h-5" />
+                <span>Darslar</span>
+              </div>
+            </Link>
+            <Link href="/teacher-dashboard/students">
+              <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600/10 text-indigo-600 transition-colors cursor-pointer font-semibold">
+                <User className="w-5 h-5" />
+                <span>O'quvchilar</span>
+              </div>
+            </Link>
+            <div className="border-t border-border my-4" />
+            <Link href="/teacher-dashboard/add-course">
+              <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-green-600/10 text-green-600 transition-colors cursor-pointer font-semibold">
+                <Plus className="w-5 h-5" />
+                <span>Yangi Kurs</span>
+              </div>
+            </Link>
+            <Link href="/teacher-dashboard/upload-video">
+              <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-purple-600/10 text-purple-600 transition-colors cursor-pointer font-semibold">
+                <Video className="w-5 h-5" />
+                <span>Darsni Yuklash</span>
+              </div>
+            </Link>
+          </div>
         </nav>
 
         {/* Sidebar Footer */}
@@ -116,23 +128,9 @@ export default function TeacherLayout({
       </motion.aside>
 
       {/* Main Content */}
-      <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"}`}>
+      <div className="flex-1 transition-all duration-300 ml-64">
         {/* Top Header */}
-        <header className="sticky top-0 h-16 bg-card border-b border-border flex items-center justify-between px-6 z-30">
-          {/* Menu Button */}
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-lg hover:bg-primary/10 transition-colors"
-          >
-            {sidebarOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </motion.button>
-
+        <header className="sticky top-0 h-16 bg-card border-b border-border flex items-center justify-end px-6 z-30">
           {/* Account Menu */}
           <div className="relative">
             <motion.button

@@ -217,6 +217,10 @@ class Lesson(models.Model):
         default=0,
         help_text="Display order in course"
     )
+    duration = models.PositiveIntegerField(
+        default=0,
+        help_text="Video duration in seconds"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

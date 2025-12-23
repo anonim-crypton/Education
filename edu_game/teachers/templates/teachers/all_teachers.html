@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -30,15 +31,15 @@
                 {% for teacher in teachers %}
                     <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-shadow">
                         <!-- Avatar -->
-                        <div class="flex justify-center mb-4">
-                            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-2xl border-4 border-gray-200 dark:border-gray-700 flex-shrink-0">
-                                {% if teacher.user.avatar %}
-                                    <img src="{{ teacher.user.avatar.url }}" alt="{{ teacher.user.get_full_name }}" class="w-full h-full object-cover rounded-full">
-                                {% else %}
-                                    {{ teacher.user.get_full_name|slice:":1"|upper }}
-                                {% endif %}
-                            </div>
-                        </div>
+                         <div class="flex justify-center mb-4">
+                             <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-2xl border-4 border-gray-200 dark:border-gray-700 flex-shrink-0 overflow-hidden">
+                                 {% if teacher.user.avatar %}
+                                     <img src="{{ teacher.user.avatar.url }}" alt="{{ teacher.user.get_full_name }}" class="w-full h-full object-cover">
+                                 {% else %}
+                                     <img src="{% static 'placeholder-user.jpg' %}" alt="Default avatar" class="w-full h-full object-cover">
+                                 {% endif %}
+                             </div>
+                         </div>
 
                         <!-- Name -->
                         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 text-center">{{ teacher.user.get_full_name }}</h3>

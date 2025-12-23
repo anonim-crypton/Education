@@ -1,437 +1,99 @@
-[00:00:06.646] Server  LOG      ✓ Ready in 5.1s
-[00:00:09.832] Server  LOG      ○ Compiling / ...
-[00:00:32.875] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:36.571] Server  LOG      ○ Compiling /dashboard ...
-[00:00:38.457] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:38.457] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:38.457] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766410932523}
-[00:00:38.457] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766410932631}
-[00:00:38.457] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:00:38.457] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:00:44.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:00:47.846] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:00:52.290] Server  LOG      ○ Compiling /admin-login ...
-[00:00:53.304] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:00:54.435] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766410948731}
-[00:01:19.271] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:19.774] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:01:19.774] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:01:19.774] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766410974657}
-[00:04:16.510] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:16.837] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:04:16.837] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:04:16.837] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411151719}
-[00:04:20.304] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:20.683] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:04:20.683] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:04:20.683] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411155567}
-[00:08:49.655] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:08:52.893] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:08:52.894] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:08:52.894] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411427765}
-[00:08:53.265] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411427939}
-[00:08:53.692] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:08:53.692] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:08:57.174] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411431979}
-[00:09:22.117] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:09:22.636] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:09:22.636] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:09:22.636] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411457519}
-[00:12:54.039] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:12:55.027] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:12:55.027] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:12:55.027] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411669908}
-[00:14:40.029] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:14:41.926] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:14:41.926] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:14:41.926] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411776494}
-[00:14:41.926] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411776638}
-[00:14:42.050] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:14:42.050] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:14:46.881] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:14:51.912] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:14:56.820] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:15:01.881] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:15:06.881] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:15:11.984] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:15:16.908] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:15:18.006] Server  LOG      ✓ Compiled in 2.7s
-[00:15:21.338] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411816046}
-[00:15:22.179] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411816763}
-[00:15:22.179] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:15:22.179] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:15:29.436] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766411823586}
-[00:15:29.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:16:04.657] Server  LOG      ✓ Compiled in 459ms
-[00:18:37.085] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:18:37.457] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:18:37.457] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:18:37.457] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766412012335}
-[00:21:24.784] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:25.206] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:25.206] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:21:25.206] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766412180085}
-[00:21:49.004] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:50.005] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:50.005] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin-login","route":"/admin-login"}
-[00:21:50.005] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin-login color: rgb(120, 120, 120) color: inherit {"dp":"/admin-login","o":"http://localhost:3000/admin-login","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766412204837}
-[00:42:56.321] Server  LOG      ✓ Compiled in 765ms
-[00:43:01.238] Server  LOG      ✓ Compiled in 750ms
-[00:44:42.192] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:44:43.306] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:44:43.306] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:44:43.306] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413578188}
-[00:44:50.108] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/register color: rgb(120, 120, 120) color: inherit {"dp":"/register","o":"http://localhost:3000/register","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413584956}
-[00:44:59.585] Browser LOG     Google login success, token: ya29.A0Aa7pCA8cKoTh_35aL_8kF8hCRizLYaKvoJppnIe3zQmcjlKYzaIwwgbQQLGsNGcySku3ur3S02sRoqG2lbg53AZi1KcCN234CzY4KetRJFx5-Lb9uVSTtELKUEl9v7R03njPqTmHGbUmml1zZ4PYR5q9-R1TaHDUwoxsemh72KBmk2nhniJMrQWMzxnNyVGPGJnHcGamrSLFC8w2qUg6w-Y__bNBOd2_Gb09xDNP0EJZu4Ap2hjB4oD-Jo-uOeMEZnkTVU8mq-XHharvi411QHOSbAkWaCgYKAXESARcSFQHGX2Miy_x7MqbOSlZbmnGHsgzFxQ0291
-[00:45:02.462] Browser LOG     Google register response: {"access":"af135e8940959b902053d1bed6ece0dd7f1d7584","is_new_user":true,"is_teacher":false,"message":"Google login successful","needs_school_name":true,"refresh":null,"success":true,"teacher_status":null,"user":{"avatar":null,"avatar_url":"/professional-avatar.png","email":"webdeweloper001@gmail.com","first_name":"web","id":24,"last_name":"web","school_name":"Not specified","username":"webdeweloper001"}}
-[00:45:04.049] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413598850}
-[00:45:04.362] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:04.362] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:09.125] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:12.078] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:45:12.635] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:12.784] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:45:12.784] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:45:12.784] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413607659}
-[00:45:18.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:23.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:28.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:33.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:38.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:43.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:48.472] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:53.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:45:56.560] Server  LOG      ✓ Compiled in 397ms
-[00:45:57.441] Browser ERROR   uncaughtError: ReferenceError: useRef is not defined
-[00:46:00.197] Server  LOG      ✓ Compiled in 331ms
-[00:46:00.203] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:46:01.344] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:46:02.229] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:02.373] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:46:02.374] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:46:02.374] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413657259}
-[00:46:06.836] Server  LOG      ✓ Compiled in 570ms
-[00:46:09.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:13.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:13.661] Server  LOG      ✓ Compiled in 300ms
-[00:46:18.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:21.942] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:27.154] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:29.747] Server  LOG      ✓ Compiled in 2.4s
-[00:46:33.450] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:38.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:43.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:47.446] Browser ERROR   uncaughtError: ReferenceError: AdminNavbar is not defined
-[00:46:51.918] Server  LOG      ✓ Compiled in 446ms
-[00:46:53.408] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:46:53.755] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413706968}
-[00:46:54.722] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:46:56.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:46:56.441] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:46:56.441] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
-[00:46:56.441] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413710635}
-[00:47:00.196] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:47:05.209] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:47:06.756] Server  LOG      ○ Compiling /become-teacher ...
-[00:47:10.271] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413725026}
-[00:47:10.423] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:47:46.314] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766413760984}
-[00:47:46.314] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:47:46.314] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:47:52.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:47:56.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:02.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:07.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:12.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:17.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:22.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:27.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:32.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:37.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:42.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:47.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:52.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:48:57.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:02.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:07.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:12.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:17.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:22.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:27.340] Server  LOG      ✓ Compiled in 647ms
-[00:49:27.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:32.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:37.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:42.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:47.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:52.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:49:57.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:02.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:07.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:12.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:17.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:22.432] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:27.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:32.544] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:37.432] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:42.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:47.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:52.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:50:57.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:02.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:07.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:12.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:17.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:22.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:27.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:32.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:37.474] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:42.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:47.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:52.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:51:57.599] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:02.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:07.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:12.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:17.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:22.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:27.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:32.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:37.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:42.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:47.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:52.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:52:57.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:02.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:07.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:12.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:17.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:22.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:28.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:32.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:37.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:42.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:47.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:52.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:53:57.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:54:02.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:54:07.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:54:12.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:54:17.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:54:52.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:54:55.001] Server  LOG      ✓ Compiled in 522ms
-[00:55:52.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:56:52.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:57:52.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:58:52.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[00:59:52.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:00:52.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:01:52.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:02:52.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:23.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:27.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:32.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:37.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:42.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:47.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:52.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:03:57.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:02.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:07.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:12.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:17.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:22.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:27.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:32.432] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:37.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:42.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:47.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:52.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:04:57.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:02.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:07.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:12.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:17.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:22.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:27.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:32.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:37.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:42.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:47.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:52.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:05:57.432] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:02.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:07.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:12.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:17.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:22.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:27.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:32.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:37.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:42.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:47.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:52.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:06:57.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:02.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:07.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:12.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:17.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:22.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:27.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:32.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:37.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:42.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:47.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:52.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:07:57.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:08:02.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:08:07.435] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:08:12.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:08:17.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:08:22.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:08:52.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:09:52.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:10:52.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:11:52.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:11:56.231] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:11:57.166] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766415212005}
-[01:18:09.433] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766415584198}
-[01:18:09.645] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:09.645] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:15.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:20.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:24.480] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:30.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:35.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:40.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:45.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:50.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:18:55.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:00.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:05.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:10.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:15.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:20.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:25.594] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:30.569] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:35.449] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:42.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:45.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:19:52.448] Browser ERROR   {}
-[01:19:52.448] Browser ERROR   Error fetching courses: {}
-[01:19:52.448] Browser ERROR   Error fetching teachers: {}
-[01:19:55.544] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:00.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:05.442] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:11.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:15.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:21.436] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:25.439] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:30.437] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:35.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:40.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:45.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:50.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:20:55.434] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:21:00.445] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:21:05.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:21:12.439] Browser ERROR   {}
-[01:21:12.439] Browser ERROR   Error fetching courses: {}
-[01:21:12.439] Browser ERROR   Error fetching teachers: {}
-[01:21:17.439] Browser ERROR   {}
-[01:21:17.439] Browser ERROR   Error fetching courses: {}
-[01:21:17.439] Browser ERROR   Error fetching teachers: {}
-[01:21:22.447] Browser ERROR   {}
-[01:21:22.447] Browser ERROR   Error fetching courses: {}
-[01:21:22.447] Browser ERROR   Error fetching teachers: {}
-[01:21:27.446] Browser ERROR   {}
-[01:21:27.446] Browser ERROR   Error fetching courses: {}
-[01:21:27.446] Browser ERROR   Error fetching teachers: {}
-[01:21:32.444] Browser ERROR   {}
-[01:21:32.444] Browser ERROR   Error fetching courses: {}
-[01:21:32.444] Browser ERROR   Error fetching teachers: {}
-[01:21:37.445] Browser ERROR   {}
-[01:21:37.445] Browser ERROR   Error fetching courses: {}
-[01:21:37.445] Browser ERROR   Error fetching teachers: {}
-[01:21:42.442] Browser ERROR   {}
-[01:21:42.442] Browser ERROR   Error fetching courses: {}
-[01:21:42.442] Browser ERROR   Error fetching teachers: {}
-[01:21:47.433] Browser ERROR   {}
-[01:21:47.433] Browser ERROR   Error fetching courses: {}
-[01:21:47.433] Browser ERROR   Error fetching teachers: {}
-[01:21:52.439] Browser ERROR   {}
-[01:21:52.439] Browser ERROR   Error fetching courses: {}
-[01:21:52.439] Browser ERROR   Error fetching teachers: {}
-[01:21:57.434] Browser ERROR   {}
-[01:21:57.434] Browser ERROR   Error fetching courses: {}
-[01:21:57.434] Browser ERROR   Error fetching teachers: {}
-[01:22:02.439] Browser ERROR   {}
-[01:22:02.439] Browser ERROR   Error fetching courses: {}
-[01:22:02.439] Browser ERROR   Error fetching teachers: {}
-[01:22:05.457] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:22:10.449] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:22:15.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:22:20.438] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:22:25.443] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[01:48:48.971] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:48:49.978] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:48:49.978] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[01:48:49.978] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766417424843}
-[01:48:50.304] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766417425005}
-[01:48:50.582] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"salom","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:17:53.471691+05:00","deleted_at":null,"email":"webdeweloper001@gmail.com","experience_years":2,"full_name":"web web","id":14,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"Matematika","updated_at":"2025-12-22T20:17:53.472692+05:00","user_id":24,"username":"ismoil"}]}
-[01:48:50.582] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"salom","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:17:53.471691+05:00","deleted_at":null,"email":"webdeweloper001@gmail.com","experience_years":2,"full_name":"web web","id":14,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"Matematika","updated_at":"2025-12-22T20:17:53.472692+05:00","user_id":24,"username":"ismoil"}]}
-[01:48:51.732] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/become-teacher color: rgb(120, 120, 120) color: inherit {"dp":"/become-teacher","o":"http://localhost:3000/become-teacher","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766417426597}
-[02:00:47.486] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766418141536}
-[02:00:47.486] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:00:47.486] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:00:53.432] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:00:58.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:03.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:09.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:13.447] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:18.448] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:23.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:28.446] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:33.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:38.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:43.441] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:01:52.440] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:02:52.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:03:52.444] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:04:52.433] Browser LOG     Teachers data: {"count":0,"next":null,"previous":null,"results":[]}
-[02:05:52.447] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:06:52.440] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:07:52.250] Server  LOG      ✓ Compiled in 640ms
-[02:07:52.441] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:08:20.975] Server  LOG      ✓ Compiled in 744ms
-[02:08:52.446] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:09:52.446] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:10:52.434] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:11:52.447] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:12:52.433] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:13:52.436] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:14:52.436] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:15:52.443] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:16:52.434] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:17:52.465] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:18:52.437] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:19:52.439] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:20:39.333] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:33:36.020] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:33:37.161] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[02:33:37.161] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[02:33:37.161] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766420111797}
-[02:33:37.162] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766420111882}
-[02:33:37.520] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:33:37.520] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:33:42.535] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:33:43.639] Server  LOG      ○ Compiling /courses ...
-[02:33:47.062] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
-[02:33:50.038] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:33:50.611] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[02:33:50.611] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/courses","route":"/courses"}
-[02:33:50.611] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/courses color: rgb(120, 120, 120) color: inherit {"dp":"/courses","o":"http://localhost:3000/courses","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766420125495}
-[02:33:56.923] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/courses/Ingliz-tili color: rgb(120, 120, 120) color: inherit {"dp":"/courses/[subject]","o":"http://localhost:3000/courses/Ingliz-tili","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766420131760}
-[02:34:35.449] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:34:35.758] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[02:34:35.759] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/courses/Ingliz-tili","route":"/courses/[subject]"}
-[02:34:35.759] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/courses/Ingliz-tili color: rgb(120, 120, 120) color: inherit {"dp":"/courses/[subject]","o":"http://localhost:3000/courses/Ingliz-tili","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766420170641}
+[00:00:02.736] Server  LOG      ✓ Ready in 1984ms
+[00:00:06.266] Server  LOG      ○ Compiling / ...
+[00:00:12.493] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:15.575] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:15.575] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:15.576] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:15.576] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:15.576] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[00:00:15.576] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766475519330}
+[00:00:15.576] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766475519331}
+[00:00:21.551] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:26.549] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:31.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:36.573] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:41.562] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:46.767] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:51.549] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:00:56.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:01.563] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:06.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:11.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:16.560] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:21.552] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:26.564] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:31.561] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:36.561] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:41.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:46.562] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:51.558] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:01:56.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:01.562] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:06.551] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:11.562] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:16.551] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:21.563] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:26.558] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:31.550] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:36.551] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:41.561] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:46.563] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:51.555] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:02:56.549] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:01.553] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:06.560] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:11.562] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:16.549] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:21.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:26.559] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:31.563] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:36.557] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:41.561] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:46.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:51.559] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:03:56.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:01.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:06.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:11.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:16.564] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:21.558] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:26.558] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:31.561] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[00:04:34.890] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:02:30.732] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:32.122] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:02:32.275] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:02:32.387] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:02:32.387] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:02:32.387] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/dashboard","route":"/dashboard"}
+[01:02:32.387] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766479256432}
+[01:02:32.387] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/dashboard color: rgb(120, 120, 120) color: inherit {"dp":"/dashboard","o":"http://localhost:3000/dashboard","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766479256433}
+[01:02:38.553] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:02:43.558] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:02:48.558] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:02:53.560] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:02:58.558] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:03:03.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:03:08.559] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:03:13.560] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:03:18.555] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:03:23.562] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:03:28.552] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:03:33.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:04:00.565] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:00.560] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:20.303] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:23.880] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:28.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:33.551] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:38.555] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:43.552] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:48.554] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:54.561] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:05:58.993] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:06:03.555] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:06:08.552] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:06:13.555] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:06:17.556] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:07:00.568] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}
+[01:08:00.565] Browser LOG     Teachers data: {"count":1,"next":null,"previous":null,"results":[{"avatar":null,"bio":"","blocked_at":null,"blocked_reason":null,"created_at":"2025-12-22T20:46:42.717782+05:00","deleted_at":null,"email":"","experience_years":0,"full_name":"Ozodbek User","id":15,"is_blocked":false,"is_deleted":false,"rating":5,"students_count":0,"subject":"ingliz-tili","updated_at":"2025-12-22T20:46:42.717782+05:00","user_id":25,"username":"Ozodbek-2008"}]}

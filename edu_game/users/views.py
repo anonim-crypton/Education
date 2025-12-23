@@ -214,9 +214,24 @@ def logout_view(request):
 def dashboard_view(request):
     """Get user dashboard data"""
     serializer = UserSerializer(request.user)
+    
+    # Get courses count for teachers
+    courses_count = 0
+    courses = []
+    
+    try:
+        user_courses = Course.objects.filter(teacher_user=request.user, is_active=True)
+        courses_count = user_courses.count()
+        courses_serializer = CourseSerializer(user_courses, many=True, context={'request': request})
+        courses = courses_serializer.data
+    except Exception as e:
+        print(f"Error fetching courses: {e}")
+    
     return Response({
         'success': True,
-        'user': serializer.data
+        'user': serializer.data,
+        'courses_count': courses_count,
+        'courses': courses
     }, status=status.HTTP_200_OK)
 
 
@@ -307,6 +322,8 @@ def google_login_view(request):
             # School name hozircha bo'sh - keyin profile update endpoint orqali o'rnatiladi
             user.school_name = 'Not specified'
             user.is_google_user = True
+            # Set default avatar
+            user.avatar = 'avatars/placeholder-user.jpg'
             user.save()
         
         # Create or get token
@@ -564,6 +581,60 @@ def teacher_courses_view(request):
                 'success': False,
                 'errors': {'general': str(e)}
             }, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def teacher_students_view(request):
+    """Get all students enrolled in teacher's courses"""
+    try:
+        # Get all courses for this teacher
+        teacher_courses = Course.objects.filter(teacher_user=request.user, is_active=True)
+        
+        # Get all students (for now, return all non-staff, non-superuser users)
+        # In a more advanced version, you would track actual enrollments
+        students = User.objects.filter(
+            is_staff=False, 
+            is_superuser=False
+        ).order_by('first_name', 'last_name')
+        
+        # Prepare student data
+        students_data = []
+        for student in students:
+            student_info = {
+                'id': student.id,
+                'username': student.username,
+                'first_name': student.first_name,
+                'last_name': student.last_name,
+                'email': student.email,
+                'school_name': getattr(student, 'school_name', ''),
+                'avatar_url': getattr(student, 'avatar_url', None) if hasattr(student, 'avatar_url') else None,
+            }
+            
+            # Try to get avatar from profile if it exists
+            try:
+                if hasattr(student, 'avatar') and student.avatar:
+                    student_info['avatar_url'] = request.build_absolute_uri(student.avatar.url)
+            except:
+                pass
+            
+            students_data.append(student_info)
+        
+        return Response({
+            'success': True,
+            'count': len(students_data),
+            'students': students_data,
+            'courses_count': teacher_courses.count()
+        }, status=status.HTTP_200_OK)
+    
+    except Exception as e:
+        import traceback
+        print(f"Error fetching students: {str(e)}")
+        traceback.print_exc()
+        return Response({
+            'success': False,
+            'error': str(e)
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -1189,28 +1260,98 @@ def user_notifications_view(request):
     }, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def lessons_list_view(request):
-    """Get all lessons/videos, optionally filtered by course or subject"""
+    """Get all lessons/videos for the logged-in teacher, or upload a new lesson"""
     try:
+        # Handle POST - Upload new lesson
+        if request.method == 'POST':
+            course_id = request.data.get('course_id')
+            title = request.data.get('title', '').strip()
+            description = request.data.get('description', '').strip()
+            video_file = request.FILES.get('video_file')
+            duration = request.data.get('duration', 0)
+            
+            # Validate required fields
+            if not title:
+                return Response({
+                    'success': False,
+                    'error': 'Video sarlavhasi majburiy'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            if not video_file:
+                return Response({
+                    'success': False,
+                    'error': 'Video fayli majburiy'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            if not course_id:
+                return Response({
+                    'success': False,
+                    'error': 'Kurs tanlang'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Get course and verify it belongs to teacher
+            try:
+                course = Course.objects.get(id=course_id, teacher_user=request.user)
+            except Course.DoesNotExist:
+                return Response({
+                    'success': False,
+                    'error': 'Kurs topilmadi yoki sizga tegishli emas'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Create lesson
+            try:
+                lesson = Lesson.objects.create(
+                    title=title,
+                    description=description,
+                    video_file=video_file,
+                    course=course,
+                    teacher_name=f"{request.user.first_name} {request.user.last_name}".strip() or request.user.username,
+                    duration=int(duration) if duration else 0,
+                    order=Lesson.objects.filter(course=course).count() + 1
+                )
+                
+                from .serializers import LessonSerializer
+                serializer = LessonSerializer(lesson, context={'request': request})
+                return Response({
+                    'success': True,
+                    'message': 'Video muvaffaqiyatli yuklandi',
+                    'lesson': serializer.data
+                }, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                return Response({
+                    'success': False,
+                    'error': f'Video saqlashda xato: {str(e)}'
+                }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Handle GET - Retrieve lessons
         # Get query parameters
         subject = request.query_params.get('subject', '').strip()
         course_id = request.query_params.get('course_id')
+        public = request.query_params.get('public', '').lower() == 'true'
         
-        # Start with all lessons
-        queryset = Lesson.objects.select_related('course').order_by('order', 'created_at')
+        # If public=true, allow anyone to see lessons. Otherwise, only authenticated teachers see their own
+        if public:
+            # Public mode - show all lessons
+            queryset = Lesson.objects.select_related('course').order_by('order', 'created_at')
+        else:
+            # Teacher mode - show only their lessons
+            queryset = Lesson.objects.filter(
+                course__teacher_user=request.user
+            ).select_related('course').order_by('order', 'created_at')
         
         # Filter by subject (if provided)
         if subject:
             # Filter by course title or course teacher (subject-like filtering)
             queryset = queryset.filter(
                 course__title__icontains=subject
-            ) | Lesson.objects.filter(
+            ) | queryset.filter(
                 course__teacher__icontains=subject
-            ).select_related('course')
+            )
             
-            # Also try matching by teacher subject through TeacherApplication
+            # Also try matching by teacher subject through Teacher model
             from teachers.models import Teacher
             teachers = Teacher.objects.filter(subject__icontains=subject).values_list('user_id', flat=True)
             if teachers:
@@ -1220,22 +1361,25 @@ def lessons_list_view(request):
         if course_id:
             queryset = queryset.filter(course_id=course_id)
         
-        # Serialize data
+        # Serialize data with comprehensive information
         lessons_data = []
         for lesson in queryset:
             lessons_data.append({
                 'id': lesson.id,
                 'title': lesson.title,
                 'description': lesson.description,
+                'video_url': request.build_absolute_uri(lesson.video_file.url) if lesson.video_file else None,
                 'video_file': request.build_absolute_uri(lesson.video_file.url) if lesson.video_file else None,
                 'duration': getattr(lesson, 'duration', None),
                 'views_count': lesson.views_count,
                 'rating': getattr(lesson, 'rating', 4.5),
                 'teacher_name': lesson.teacher_name,
                 'course_id': lesson.course_id,
-                'course_title': lesson.course.title,
+                'course_title': lesson.course.title if lesson.course else 'Unknown',
+                'course_name': lesson.course.title if lesson.course else 'Unknown',
                 'order': lesson.order,
-                'created_at': lesson.created_at,
+                'created_at': lesson.created_at.isoformat() if lesson.created_at else None,
+                'uploaded_date': lesson.created_at.isoformat() if lesson.created_at else None,
             })
         
         return Response({
@@ -1455,6 +1599,7 @@ def create_teacher_user(request):
                 last_name=last_name or 'User',
                 school_name=school_name or 'School',
                 subject=subject,
+                avatar='avatars/placeholder-user.jpg',
                 is_staff=False,
                 is_superuser=False,
                 is_active=True

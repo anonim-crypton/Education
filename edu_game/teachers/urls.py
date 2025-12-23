@@ -8,7 +8,8 @@ from .views import (
     teacher_logout_view, 
     all_teachers_view,
     teacher_upload_lesson_view,
-    teacher_lessons_list_view
+    teacher_lessons_list_view,
+    teacher_students_list_view
 )
 
 router = DefaultRouter()
@@ -19,6 +20,7 @@ urlpatterns = [
      path('login/', teacher_login_view, name='teacher_login'),
      path('dashboard/', teacher_dashboard_view, name='teacher_dashboard'),
      path('lessons/', teacher_lessons_list_view, name='teacher_lessons_list'),
+     path('students/', teacher_students_list_view, name='teacher_students_list'),
      path('logout/', teacher_logout_view, name='teacher_logout'),
      path('list/', all_teachers_view, name='all_teachers'),
      path('upload-lesson/', teacher_upload_lesson_view, name='teacher_upload_lesson'),

@@ -180,10 +180,28 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../../app/teacher-dashboard/lessons/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/teacher-dashboard/lessons">> = Specific
+  const handler = {} as typeof import("../../../app/teacher-dashboard/lessons/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/teacher-dashboard/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/teacher-dashboard">> = Specific
   const handler = {} as typeof import("../../../app/teacher-dashboard/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/teacher-dashboard/students/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/teacher-dashboard/students">> = Specific
+  const handler = {} as typeof import("../../../app/teacher-dashboard/students/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -222,10 +240,46 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
   type __Unused = __Check
 }
 
+// Validate ../../../app/teacher-dashboard/add-course/layout.tsx
+{
+  type __IsExpected<Specific extends LayoutConfig<"/teacher-dashboard/add-course">> = Specific
+  const handler = {} as typeof import("../../../app/teacher-dashboard/add-course/layout.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/teacher-dashboard/layout.tsx
 {
   type __IsExpected<Specific extends LayoutConfig<"/teacher-dashboard">> = Specific
   const handler = {} as typeof import("../../../app/teacher-dashboard/layout.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/teacher-dashboard/lessons/layout.tsx
+{
+  type __IsExpected<Specific extends LayoutConfig<"/teacher-dashboard/lessons">> = Specific
+  const handler = {} as typeof import("../../../app/teacher-dashboard/lessons/layout.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/teacher-dashboard/students/layout.tsx
+{
+  type __IsExpected<Specific extends LayoutConfig<"/teacher-dashboard/students">> = Specific
+  const handler = {} as typeof import("../../../app/teacher-dashboard/students/layout.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/teacher-dashboard/upload-video/layout.tsx
+{
+  type __IsExpected<Specific extends LayoutConfig<"/teacher-dashboard/upload-video">> = Specific
+  const handler = {} as typeof import("../../../app/teacher-dashboard/upload-video/layout.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

@@ -25,8 +25,8 @@ class UserSerializer(serializers.ModelSerializer):
         # Return default avatar URL
         request = self.context.get('request')
         if request:
-            return request.build_absolute_uri('/professional-avatar.png')
-        return '/professional-avatar.png'
+            return request.build_absolute_uri('/placeholder-user.jpg')
+        return '/placeholder-user.jpg'
 
 
 class GoogleRegisterSerializer(serializers.Serializer):
@@ -77,6 +77,10 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('password_confirm')
         user = User.objects.create_user(**validated_data)
+        # Set default avatar if not provided
+        if not user.avatar:
+            user.avatar = 'avatars/placeholder-user.jpg'
+            user.save()
         return user
 
 
@@ -178,11 +182,13 @@ class TeacherApplicationSerializer(serializers.ModelSerializer):
 class LessonSerializer(serializers.ModelSerializer):
     """Serializer for lessons/videos"""
     video_url = serializers.SerializerMethodField()
+    course_id = serializers.IntegerField(source='course.id', read_only=True)
+    course_title = serializers.CharField(source='course.title', read_only=True)
     
     class Meta:
         from .models import Lesson
         model = Lesson
-        fields = ['id', 'title', 'description', 'video_file', 'video_url', 'teacher_name', 'views_count', 'order', 'created_at']
+        fields = ['id', 'title', 'description', 'video_file', 'video_url', 'teacher_name', 'views_count', 'order', 'created_at', 'duration', 'course_id', 'course_title']
         read_only_fields = ['id', 'created_at']
     
     def get_video_url(self, obj):

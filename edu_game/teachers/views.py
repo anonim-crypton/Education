@@ -500,6 +500,32 @@ def all_teachers_view(request):
 
 
 @login_required(login_url='teacher_login')
+def teacher_students_list_view(request):
+     """O'quvchilar ro'yxatini ko'rsatish"""
+     # Check if user is a teacher
+     if not hasattr(request.user, 'teacher_profile'):
+          messages.error(request, 'Siz o\'qituvchi emassiz')
+          return redirect('teacher_login')
+     
+     teacher = request.user.teacher_profile
+     from users.models import CustomUser
+     
+     # Barcha oddiy foydalanuvchilarni (o'quvchilarni) olish
+     students = CustomUser.objects.filter(
+          is_staff=False,
+          is_superuser=False
+     ).order_by('first_name', 'last_name')
+     
+     context = {
+          'teacher': teacher,
+          'students': students,
+          'students_count': students.count(),
+     }
+     
+     return render(request, 'teachers/students_list.html', context)
+
+
+@login_required(login_url='teacher_login')
 def teacher_upload_lesson_view(request):
      """O'qituvchi darslik yuklash sahifasi - faqat o'z faniga mos Kursga video yuklay oladi"""
      # Check if user is a teacher

@@ -25,14 +25,24 @@ interface TeacherData {
   };
 }
 
+interface Course {
+  id: number;
+  title: string;
+  description: string;
+  lessons: number;
+}
+
 export default function UploadVideoPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [teacher, setTeacher] = useState<TeacherData | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState("");
+  const [videoDuration, setVideoDuration] = useState(0);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -40,6 +50,7 @@ export default function UploadVideoPage() {
     description: "",
     video_file: null as File | null,
     thumbnail: null as File | null,
+    course_id: null as number | null,
   });
 
   useEffect(() => {
@@ -49,6 +60,7 @@ export default function UploadVideoPage() {
     } else {
       setIsAuthenticated(true);
       fetchTeacherData(token);
+      fetchTeacherCourses(token);
     }
   }, [router]);
 
@@ -76,6 +88,33 @@ export default function UploadVideoPage() {
     }
   };
 
+  const fetchTeacherCourses = async (token: string) => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/teacher/courses/`,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.courses && data.courses.length > 0) {
+          setCourses(data.courses);
+          // Auto-select first course
+          setFormData((prev) => ({
+            ...prev,
+            course_id: data.courses[0].id,
+          }));
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -88,10 +127,20 @@ export default function UploadVideoPage() {
     fileType: "video_file" | "thumbnail"
   ) => {
     if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
       setFormData((prev) => ({
         ...prev,
-        [fileType]: e.target.files![0],
+        [fileType]: file,
       }));
+
+      // Get video duration if it's a video file
+      if (fileType === "video_file" && file.type.startsWith("video/")) {
+        const video = document.createElement("video");
+        video.onloadedmetadata = () => {
+          setVideoDuration(Math.round(video.duration));
+        };
+        video.src = URL.createObjectURL(file);
+      }
     }
   };
 
@@ -99,6 +148,7 @@ export default function UploadVideoPage() {
     e.preventDefault();
     setUploadError("");
     setUploadSuccess(false);
+    setUploadProgress(0);
 
     if (!formData.title.trim()) {
       setUploadError("Video sarlavhasi majburiy");
@@ -107,6 +157,11 @@ export default function UploadVideoPage() {
 
     if (!formData.video_file) {
       setUploadError("Video faylini tanlang");
+      return;
+    }
+
+    if (!formData.course_id) {
+      setUploadError("Kurs tanlang");
       return;
     }
 
@@ -129,11 +184,23 @@ export default function UploadVideoPage() {
       formDataToSend.append("description", formData.description);
       formDataToSend.append("subject", teacher.subject);
       formDataToSend.append("teacher_id", teacher.id.toString());
+      formDataToSend.append("course_id", formData.course_id.toString());
       formDataToSend.append("video_file", formData.video_file);
+      formDataToSend.append("duration", videoDuration.toString());
 
       if (formData.thumbnail) {
         formDataToSend.append("thumbnail", formData.thumbnail);
       }
+
+      // Simulate progress based on video duration
+      const progressInterval = setInterval(() => {
+        setUploadProgress((prev) => {
+          if (prev >= 90) {
+            return prev;
+          }
+          return prev + Math.random() * 30;
+        });
+      }, 500);
 
       const res = await fetch(
         `${
@@ -148,6 +215,9 @@ export default function UploadVideoPage() {
         }
       );
 
+      clearInterval(progressInterval);
+      setUploadProgress(100);
+
       if (res.ok) {
         setUploadSuccess(true);
         setFormData({
@@ -155,7 +225,9 @@ export default function UploadVideoPage() {
           description: "",
           video_file: null,
           thumbnail: null,
+          course_id: courses.length > 0 ? courses[0].id : null,
         });
+        setVideoDuration(0);
 
         // Reset form inputs
         const videoInput = document.getElementById(
@@ -169,7 +241,7 @@ export default function UploadVideoPage() {
 
         // Redirect after 2 seconds
         setTimeout(() => {
-          router.push("/teacher-dashboard");
+          router.push("/teacher-dashboard/lessons");
         }, 2000);
       } else {
         const errorData = await res.json();
@@ -182,6 +254,7 @@ export default function UploadVideoPage() {
       setUploadError("Server xatosi. Iltimos qayta urinib ko'ring.");
     } finally {
       setUploading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -316,6 +389,36 @@ export default function UploadVideoPage() {
             />
           </div>
 
+          {/* Course Selection */}
+          <div>
+            <label className="block text-sm font-semibold text-foreground mb-2">
+              Kurs *
+            </label>
+            <select
+              value={formData.course_id || ""}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  course_id: parseInt(e.target.value) || null,
+                }))
+              }
+              disabled={uploading || courses.length === 0}
+              className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all disabled:opacity-50"
+            >
+              <option value="">Kurs tanlang...</option>
+              {courses.map((course) => (
+                <option key={course.id} value={course.id}>
+                  {course.title} ({course.lessons} dars)
+                </option>
+              ))}
+            </select>
+            {courses.length === 0 && (
+              <p className="text-xs text-muted-foreground mt-2">
+                Avval kurs yarating, keyin video yuklay olasiz
+              </p>
+            )}
+          </div>
+
           {/* Video File Upload */}
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">
@@ -342,10 +445,17 @@ export default function UploadVideoPage() {
                   MP4, WebM, Ogg va boshqa video formatlar qo'llaniladi
                 </p>
                 {formData.video_file && (
-                  <p className="text-xs text-green-600 mt-2 font-semibold">
-                    ✓ {formData.video_file.name}
-                  </p>
-                )}
+                   <div className="mt-2 w-full">
+                     <p className="text-xs text-green-600 font-semibold mb-2">
+                       ✓ {formData.video_file.name}
+                     </p>
+                     {videoDuration > 0 && (
+                       <p className="text-xs text-muted-foreground">
+                         Davomiyligi: {Math.floor(videoDuration / 60)}:{String(videoDuration % 60).padStart(2, "0")}
+                       </p>
+                     )}
+                   </div>
+                 )}
               </label>
             </div>
           </div>
@@ -384,12 +494,43 @@ export default function UploadVideoPage() {
             </div>
           </div>
 
+          {/* Upload Progress Bar */}
+          {uploading && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-2"
+            >
+              <div className="flex justify-between items-center">
+                <p className="text-sm font-semibold text-foreground">
+                  Yuklash jarayoni
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {Math.round(uploadProgress)}%
+                </p>
+              </div>
+              <div className="w-full h-3 rounded-full bg-border overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${uploadProgress}%` }}
+                  transition={{ duration: 0.3 }}
+                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                />
+              </div>
+              {videoDuration > 0 && (
+                <p className="text-xs text-muted-foreground">
+                  Video davomiyligi: {Math.floor(videoDuration / 60)}:{String(videoDuration % 60).padStart(2, "0")}
+                </p>
+              )}
+            </motion.div>
+          )}
+
           {/* Submit Button */}
           <motion.button
             type="submit"
-            disabled={uploading}
-            whileHover={{ scale: uploading ? 1 : 1.05 }}
-            whileTap={{ scale: uploading ? 1 : 0.95 }}
+            disabled={uploading || courses.length === 0}
+            whileHover={{ scale: uploading || courses.length === 0 ? 1 : 1.05 }}
+            whileTap={{ scale: uploading || courses.length === 0 ? 1 : 0.95 }}
             className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {uploading ? (

@@ -24,6 +24,7 @@ urlpatterns = [
     path('courses/<str:subject>/teachers/', views.get_teachers_by_subject, name='get_teachers_by_subject'),
     # Teacher course endpoints
     path('teacher/courses/', views.teacher_courses_view, name='teacher_courses'),
+    path('teacher/students/', views.teacher_students_view, name='teacher_students'),
     # Lesson/Video endpoints
     path('lessons/', views.lessons_list_view, name='lessons_list'),
     
