@@ -17,6 +17,7 @@ import {
   XIcon,
 } from "@/components/animated-icons";
 import { Bell, LogOut, User } from "lucide-react";
+import { AvatarWithFallback } from "@/components/ui/avatar-with-fallback";
 
 const navLinks = [
   { title: "Bosh sahifa", href: "/dashboard", icon: HomeIcon },
@@ -365,17 +366,11 @@ const AdminNavbarComponent = () => {
                         : "bg-transparent border-slate-700/40 hover:bg-slate-700/20 hover:border-slate-600/50"
                     )}
                   >
-                    <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white text-sm font-semibold shadow-md overflow-hidden flex-shrink-0">
-                      {userData?.avatar_url ? (
-                        <img
-                          src={userData.avatar_url}
-                          alt="Avatar"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <User className="w-4 h-4" />
-                      )}
-                    </div>
+                    <AvatarWithFallback
+                      src={userData?.avatar_url}
+                      alt="Avatar"
+                      size="sm"
+                    />
                     <span className="text-sm font-medium text-foreground truncate max-w-[120px]">
                       {userData?.first_name ||
                         userData?.username ||
@@ -396,17 +391,11 @@ const AdminNavbarComponent = () => {
                         {/* Header Section */}
                         <div className="p-4 bg-card border-b border-border">
                           <div className="flex items-center gap-3 mb-3">
-                            <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center text-white font-semibold shadow-md overflow-hidden flex-shrink-0">
-                              {userData?.avatar_url ? (
-                                <img
-                                  src={userData.avatar_url}
-                                  alt="Avatar"
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <User className="w-5 h-5" />
-                              )}
-                            </div>
+                            <AvatarWithFallback
+                              src={userData?.avatar_url}
+                              alt="Avatar"
+                              size="md"
+                            />
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-bold text-foreground truncate">
                                 {userData?.first_name || userData?.username}

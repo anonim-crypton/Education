@@ -1,5 +1,65 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 from .models import TeacherRequest, Teacher
+from users.models import Course, Lesson
+import os
+
+
+def delete_teacher_completely(modeladmin, request, queryset):
+    """O'qituvchini butunlay o'chirish - ma'lumot, videolar, barcha bog'lanishlar"""
+    count = 0
+    deleted_courses = 0
+    deleted_lessons = 0
+    
+    for teacher in queryset:
+        teacher_name = teacher.user.get_full_name() or teacher.user.username
+        
+        # O'qituvchi o'z kurslarini topish
+        courses = Course.objects.filter(teacher_user=teacher.user)
+        
+        for course in courses:
+            # Kursning barcha videolarini o'chirish
+            lessons = course.videos.all()
+            for lesson in lessons:
+                # Video faylni o'chirish
+                if lesson.video_file and os.path.exists(lesson.video_file.path):
+                    try:
+                        os.remove(lesson.video_file.path)
+                    except Exception as e:
+                        print(f"Video o'chirishda xato: {e}")
+                deleted_lessons += 1
+            
+            # Teacher rasmi o'chirish
+            if course.teacher_image and os.path.exists(course.teacher_image.path):
+                try:
+                    os.remove(course.teacher_image.path)
+                except Exception as e:
+                    print(f"Rasm o'chirishda xato: {e}")
+            
+            course.delete()
+            deleted_courses += 1
+        
+        # Avatar o'chirish
+        if teacher.user.avatar and os.path.exists(teacher.user.avatar.path):
+            try:
+                os.remove(teacher.user.avatar.path)
+            except Exception as e:
+                print(f"Avatar o'chirishda xato: {e}")
+        
+        # O'qituvchi profilini o'chirish
+        teacher.delete()
+        
+        # CustomUser accountini o'chirish
+        teacher.user.delete()
+        
+        count += 1
+    
+    modeladmin.message_user(
+        request, 
+        f"✓ {count}ta o'qituvchi ({deleted_courses}ta kurs, {deleted_lessons}ta video) butunlay o'chirildi."
+    )
+
+delete_teacher_completely.short_description = _("🗑️ O'qituvchini TO'LIQ o'chirish (barcha ma'lumot va videolar)")
 
 
 @admin.register(TeacherRequest)
@@ -24,6 +84,7 @@ class TeacherAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'user__first_name', 'user__last_name', 'subject', 'bio')
     readonly_fields = ('created_at', 'updated_at', 'blocked_at', 'deleted_at')
     ordering = ['-created_at']
+    actions = [delete_teacher_completely]
     
     fieldsets = (
         ('Foydalanuvchi', {

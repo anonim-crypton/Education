@@ -34,9 +34,9 @@
                          <div class="flex justify-center mb-4">
                              <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-2xl border-4 border-gray-200 dark:border-gray-700 flex-shrink-0 overflow-hidden">
                                  {% if teacher.user.avatar %}
-                                     <img src="{{ teacher.user.avatar.url }}" alt="{{ teacher.user.get_full_name }}" class="w-full h-full object-cover">
+                                     <img src="{{ teacher.user.avatar.url }}" alt="{{ teacher.user.get_full_name }}" class="w-full h-full object-cover" onerror="this.src='/placeholder-user.jpg'">
                                  {% else %}
-                                     <img src="{% static 'placeholder-user.jpg' %}" alt="Default avatar" class="w-full h-full object-cover">
+                                     <img src="/placeholder-user.jpg" alt="Default avatar" class="w-full h-full object-cover">
                                  {% endif %}
                              </div>
                          </div>

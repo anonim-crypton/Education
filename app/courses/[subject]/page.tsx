@@ -58,7 +58,8 @@ export default function CoursePage() {
       setLoading(true);
       setError(null);
 
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
       // 1. Fetch kurslar API'dan - kurs title'i subject'ga mos kelsin
       const coursesRes = await fetch(`${baseUrl}/api/users/courses/`, {
@@ -69,28 +70,56 @@ export default function CoursePage() {
 
       if (coursesRes.ok) {
         const coursesData = await coursesRes.json();
-        const coursesList = Array.isArray(coursesData.courses) ? coursesData.courses : [];
+        const coursesList = Array.isArray(coursesData.courses)
+          ? coursesData.courses
+          : [];
 
         // Course title'i (kurs nomi) subject'ga mos kelsin
         // Title boshida subject bo'lsa match qil (masalan "Ingliz-tili" match "Ingliz-tili - Kurs" bilan)
-        const foundCourse = coursesList.find(
-          (c: any) => {
-            const courseTitle = c.title?.toLowerCase().trim() || '';
-            const courseSubjectLower = courseSubject.toLowerCase().trim();
-            return courseTitle === courseSubjectLower || courseTitle.startsWith(courseSubjectLower + ' ') || courseTitle.includes(courseSubjectLower);
-          }
-        );
+        const foundCourse = coursesList.find((c: any) => {
+          const courseTitle = c.title?.toLowerCase().trim() || "";
+          const courseSubjectLower = courseSubject.toLowerCase().trim();
+          return (
+            courseTitle === courseSubjectLower ||
+            courseTitle.startsWith(courseSubjectLower + " ") ||
+            courseTitle.includes(courseSubjectLower)
+          );
+        });
 
         if (foundCourse) {
-          // Teacher info'ni course'dan olib
-          const teacherInfo: Teacher = {
-            id: foundCourse.id,
-            full_name: foundCourse.teacher || "Nomalum",
-            subject: foundCourse.title,
-            bio: foundCourse.description || "",
-            avatar_url: foundCourse.teacher_image_url || generateAvatarUrl(foundCourse.teacher),
-          };
-          setTeacher(teacherInfo);
+          // Teacher info'ni course'dan olib (teacher_info'dan birinchi, keyin fallback)
+          const tInfo = foundCourse.teacher_info || {};
+
+          // O'chirilgan yoki bloklangan o'qituvchilarni skip qilish
+          if (tInfo.is_deleted || tInfo.is_blocked) {
+            // O'chirilgan o'qituvchi - fallback ma'lumot qo'llanish
+            const teacherInfo: Teacher = {
+              id: foundCourse.id,
+              full_name: foundCourse.teacher || "Nomalum",
+              subject: foundCourse.title,
+              bio: foundCourse.description || "",
+              avatar_url:
+                foundCourse.teacher_image_url ||
+                generateAvatarUrl(foundCourse.teacher),
+            };
+            setTeacher(teacherInfo);
+          } else {
+            const teacherInfo: Teacher = {
+              id: tInfo.id || foundCourse.id,
+              full_name: tInfo.full_name || foundCourse.teacher || "Nomalum",
+              subject: tInfo.subject || foundCourse.title,
+              bio: tInfo.bio || foundCourse.description || "",
+              avatar_url:
+                tInfo.avatar ||
+                foundCourse.teacher_image_url ||
+                generateAvatarUrl(tInfo.username || foundCourse.teacher),
+              user: {
+                avatar: tInfo.avatar,
+                username: tInfo.username,
+              },
+            };
+            setTeacher(teacherInfo);
+          }
 
           // Videolar course'dan
           if (foundCourse.videos && Array.isArray(foundCourse.videos)) {
@@ -100,11 +129,16 @@ export default function CoursePage() {
           }
         } else {
           // Agar course topilmasa, lessons API'dan subject bo'yicha qidirish
-          const videosRes = await fetch(`${baseUrl}/api/lessons/?subject=${encodeURIComponent(courseSubject)}`, {
-            headers: {
-              Authorization: `Token ${token}`,
-            },
-          });
+          const videosRes = await fetch(
+            `${baseUrl}/api/lessons/?subject=${encodeURIComponent(
+              courseSubject
+            )}`,
+            {
+              headers: {
+                Authorization: `Token ${token}`,
+              },
+            }
+          );
 
           if (videosRes.ok) {
             const videosData = await videosRes.json();
@@ -150,7 +184,9 @@ export default function CoursePage() {
   // Dummy avatar yaratish (DiceBear API)
   const generateAvatarUrl = (username?: string) => {
     const seed = username || "default";
-    return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}`;
+    return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(
+      seed
+    )}`;
   };
 
   if (loading) {
@@ -249,7 +285,9 @@ export default function CoursePage() {
                   </p>
                   {teacher.bio && (
                     <p className="text-muted-foreground">
-                      <span className="font-semibold text-foreground">Bio:</span>{" "}
+                      <span className="font-semibold text-foreground">
+                        Bio:
+                      </span>{" "}
                       {teacher.bio}
                     </p>
                   )}
@@ -330,8 +368,7 @@ export default function CoursePage() {
                       {/* Stats */}
                       <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-border pt-3">
                         <span className="flex items-center gap-1">
-                          👁{" "}
-                          {(video.views_count || 0).toLocaleString()}
+                          👁 {(video.views_count || 0).toLocaleString()}
                         </span>
                         {video.rating && (
                           <span className="flex items-center gap-1">

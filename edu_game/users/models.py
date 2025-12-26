@@ -183,6 +183,32 @@ class Course(models.Model):
     
     def __str__(self):
         return f"{self.title} - {self.teacher}"
+    
+    def get_active_teacher(self):
+        """O'chirilgan o'qituvchi bo'lsa, faol o'qituvchini qaytarish"""
+        if self.teacher_user:
+            from teachers.models import Teacher
+            try:
+                teacher_profile = self.teacher_user.teacher_profile
+                # Agar o'qituvchi o'chirilgan yoki blokirovka qilindi bo'lsa
+                if teacher_profile.is_deleted or teacher_profile.is_blocked:
+                    # Shu fan bo'yicha birinchi faol o'qituvchini topish
+                    active_teacher = Teacher.objects.filter(
+                        subject__iexact=teacher_profile.subject.strip() if teacher_profile.subject else '',
+                        is_deleted=False,
+                        is_blocked=False
+                    ).exclude(user=self.teacher_user).first()
+                    
+                    if active_teacher:
+                        return active_teacher.user
+                    
+                # Agar o'qituvchi faol bo'lsa, o'zini qaytarish
+                if not teacher_profile.is_deleted and not teacher_profile.is_blocked:
+                    return self.teacher_user
+            except:
+                pass
+        
+        return self.teacher_user
 
 
 class Lesson(models.Model):

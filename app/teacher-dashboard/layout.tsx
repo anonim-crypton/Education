@@ -13,6 +13,7 @@ import {
   Plus,
   Video,
 } from "lucide-react";
+import { AvatarWithFallback } from "@/components/ui/avatar-with-fallback";
 
 export default function TeacherLayout({
   children,
@@ -139,13 +140,12 @@ export default function TeacherLayout({
               onClick={() => setShowAccountMenu(!showAccountMenu)}
               className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-primary/10 transition-colors"
             >
-              {userData?.avatar_url && (
-                <img
-                  src={userData.avatar_url}
-                  alt={userData.username}
-                  className="w-8 h-8 rounded-full object-cover border border-primary"
-                />
-              )}
+              <AvatarWithFallback
+                src={userData?.avatar_url}
+                alt={userData?.username}
+                size="sm"
+                className="border border-primary"
+              />
               <div className="text-left">
                 <p className="text-sm font-semibold text-foreground">
                   {userData?.first_name || userData?.username}

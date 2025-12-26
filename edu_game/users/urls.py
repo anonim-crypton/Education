@@ -27,6 +27,7 @@ urlpatterns = [
     path('teacher/students/', views.teacher_students_view, name='teacher_students'),
     # Lesson/Video endpoints
     path('lessons/', views.lessons_list_view, name='lessons_list'),
+    path('lessons/<int:lesson_id>/delete/', views.delete_lesson_view, name='delete_lesson'),
     
     # Django Teacher Panel URLs
     path('teacher/login/', views.teacher_login_view, name='teacher_login'),

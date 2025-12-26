@@ -161,7 +161,7 @@
                 <div class="flex items-center justify-between p-6">
                     <div>
                         <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">{% block page_title %}Dashboard{% endblock %}</h1>
-                        <p class="text-gray-600 dark:text-gray-400 mt-1">Salomalekum {{ user.username }}</p>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">Assalomu Aleykum  {{ user.username }}</p>
                     </div>
                     <div class="flex items-center gap-4">
                          <!-- Notification Dropdown -->
@@ -357,16 +357,28 @@
                  
                  let isActive = false;
                  
-                 // Agar URL ro'yxat bo'lsa (requests, teachers, users kabi)
-                 if (currentPath.includes('/requests/') && itemPath && itemPath.includes('/requests/')) {
+                 // Agar URL approved-teachers bo'lsa
+                 if (currentPath.includes('/approved-teachers/') && itemPath && itemPath.includes('/approved-teachers/')) {
                      isActive = true;
-                 } else if (currentPath.includes('/teachers/') && itemPath && itemPath.includes('/teachers/') && !itemPath.includes('/requests/')) {
+                 }
+                 // Agar URL requests bo'lsa
+                 else if (currentPath.includes('/requests/') && itemPath && itemPath.includes('/requests/')) {
                      isActive = true;
-                 } else if (currentPath.includes('/users/') && itemPath && itemPath.includes('/users/')) {
+                 }
+                 // Agar URL teachers bo'lsa va requests/approved-teachers bo'lmasa
+                 else if (currentPath.includes('/teachers/') && itemPath && itemPath.includes('/teachers/') && !itemPath.includes('/requests/') && !itemPath.includes('/approved-teachers/')) {
                      isActive = true;
-                 } else if (currentPath.includes('create-teacher') && itemPath && itemPath.includes('create-teacher')) {
+                 }
+                 // Agar URL users bo'lsa
+                 else if (currentPath.includes('/users/') && itemPath && itemPath.includes('/users/') && !itemPath.includes('/requests/')) {
                      isActive = true;
-                 } else if ((currentPath === '/dashboard/' || currentPath === '/dashboard') && itemPath && itemPath.includes('/dashboard/') && !itemPath.includes('/requests/') && !itemPath.includes('/teachers/') && !itemPath.includes('/users/') && !itemPath.includes('create')) {
+                 }
+                 // Agar URL create-teacher bo'lsa
+                 else if (currentPath.includes('create-teacher') && itemPath && itemPath.includes('create-teacher')) {
+                     isActive = true;
+                 }
+                 // Bosh sahifa - faqat /dashboard/ bo'lsa va boshqa URL pattern'lari bo'lmasa
+                 else if ((currentPath === '/dashboard/' || currentPath === '/dashboard') && itemPath && itemPath.includes('/dashboard/') && !itemPath.includes('/requests/') && !itemPath.includes('/teachers/') && !itemPath.includes('/users/') && !itemPath.includes('/approved-teachers/') && !itemPath.includes('create')) {
                      isActive = true;
                  }
                  

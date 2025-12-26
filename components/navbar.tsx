@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { getAccessToken, clearTokens } from "@/lib/api";
+import { useTheme } from "next-themes";
 import {
   HomeIcon,
   BookOpenIcon,
@@ -32,6 +33,7 @@ import {
   LogOut,
   User,
 } from "lucide-react";
+import { AvatarWithFallback } from "@/components/ui/avatar-with-fallback";
 
 const getCourseIcon = (subject: string) => {
   const subjectLower = subject.toLowerCase();
@@ -74,6 +76,7 @@ const navLinks = [
 
 const NavbarComponent = () => {
   const router = useRouter();
+  const { theme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -86,6 +89,9 @@ const NavbarComponent = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const accountMenuRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Get appropriate placeholder image based on theme
+  const placeholderImage = theme === 'dark' ? '/placeholder-user.jpg' : '/placeholder-user-light.svg';
 
   useEffect(() => {
     let ticking = false;
@@ -134,7 +140,40 @@ const NavbarComponent = () => {
       localStorage.removeItem("shouldOpenNav");
     }
 
-    // Hardcoded courses list with 10 subjects
+    // Fetch courses from API
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+          }/api/users/courses/`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const coursesList = Array.isArray(data.courses) ? data.courses : [];
+          
+          if (coursesList.length > 0) {
+            const apiCourses = coursesList.map((course: any) => ({
+              id: course.id,
+              title: course.title,
+              subject: course.title || "Kurs",
+              description: course.description || "",
+              icon: getCourseIcon(course.title || ""),
+              href: `/courses/${encodeURIComponent(course.title)}`,
+            }));
+            setDropdownCourses(apiCourses);
+          }
+        } else {
+          console.error("Failed to fetch courses:", response.status);
+        }
+      } catch (err) {
+        console.log("Error fetching courses:", err);
+      }
+    };
+
+    fetchCourses();
+
+    // Hardcoded courses list with 10 subjects as fallback
     const hardcodedCourses = [
       {
         id: 1,
@@ -218,7 +257,10 @@ const NavbarComponent = () => {
       },
     ];
     
-    setDropdownCourses(hardcodedCourses);
+    // Only use hardcoded if API courses weren't fetched
+    if (dropdownCourses.length === 0) {
+      setDropdownCourses(hardcodedCourses);
+    }
   }, []);
 
   const handleMouseEnter = () => {
@@ -411,17 +453,11 @@ const NavbarComponent = () => {
                           : "bg-transparent border-slate-700/40 hover:bg-slate-700/20 hover:border-slate-600/50"
                       )}
                     >
-                      <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white text-sm font-semibold shadow-md overflow-hidden flex-shrink-0">
-                        {userData?.avatar_url ? (
-                          <img
-                            src={userData.avatar_url}
-                            alt="Avatar"
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <User className="w-4 h-4" />
-                        )}
-                      </div>
+                      <AvatarWithFallback
+                        src={userData?.avatar_url || userData?.avatar}
+                        alt="Avatar"
+                        size="sm"
+                      />
                       <span className="text-sm font-medium text-foreground truncate max-w-[120px]">
                         {userData?.first_name ||
                           userData?.username ||
@@ -442,17 +478,11 @@ const NavbarComponent = () => {
                           {/* Header Section */}
                           <div className="p-4 bg-card border-b border-border">
                             <div className="flex items-center gap-3 mb-3">
-                              <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center text-white font-semibold shadow-md overflow-hidden flex-shrink-0">
-                                {userData?.avatar_url ? (
-                                  <img
-                                    src={userData.avatar_url}
-                                    alt="Avatar"
-                                    className="w-full h-full object-cover"
-                                  />
-                                ) : (
-                                  <User className="w-5 h-5" />
-                                )}
-                              </div>
+                              <AvatarWithFallback
+                                src={userData?.avatar_url || userData?.avatar}
+                                alt="Avatar"
+                                size="md"
+                              />
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-bold text-foreground truncate">
                                   {userData?.first_name || userData?.username}
@@ -671,17 +701,14 @@ const NavbarComponent = () => {
                     onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-9 h-9 rounded-lg bg-slate-700 flex items-center justify-center text-white font-semibold shadow-lg hover:shadow-xl transition-all overflow-hidden"
+                    className="rounded-lg shadow-lg hover:shadow-xl transition-all"
                   >
-                    {userData?.avatar_url ? (
-                      <img
-                        src={userData.avatar_url}
-                        alt="Avatar"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <User className="w-4 h-4" />
-                    )}
+                    <AvatarWithFallback
+                      src={userData?.avatar_url || userData?.avatar}
+                      alt="Avatar"
+                      size="sm"
+                      className="!rounded-lg"
+                    />
                   </motion.button>
 
                   {/* Mobile Account Dropdown Menu */}

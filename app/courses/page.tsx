@@ -55,16 +55,70 @@ const getCourseIcon = (subject: string) => {
 };
 
 const defaultCoursesData = [
-  { id: "default-1", subject: "Web-Dasturlash", title: "Web Development", icon: Code2, href: "/courses" },
-  { id: "default-2", subject: "Matematika", title: "Mathematics", icon: Calculator, href: "/courses" },
-  { id: "default-3", subject: "Fizika", title: "Physics", icon: Beaker, href: "/courses" },
-  { id: "default-4", subject: "Kimyo", title: "Chemistry", icon: Atom, href: "/courses" },
-  { id: "default-5", subject: "Biologiya", title: "Biology", icon: Leaf, href: "/courses" },
-  { id: "default-6", subject: "Ingliz-tili", title: "English Language", icon: Globe, href: "/courses" },
-  { id: "default-7", subject: "Rus-tili", title: "Russian Language", icon: Languages, href: "/courses" },
-  { id: "default-8", subject: "O'zbek-tili", title: "Uzbek Language", icon: Languages, href: "/courses" },
+  {
+    id: "default-1",
+    subject: "Web-Dasturlash",
+    title: "Web Development",
+    icon: Code2,
+    href: "/courses",
+  },
+  {
+    id: "default-2",
+    subject: "Matematika",
+    title: "Mathematics",
+    icon: Calculator,
+    href: "/courses",
+  },
+  {
+    id: "default-3",
+    subject: "Fizika",
+    title: "Physics",
+    icon: Beaker,
+    href: "/courses",
+  },
+  {
+    id: "default-4",
+    subject: "Kimyo",
+    title: "Chemistry",
+    icon: Atom,
+    href: "/courses",
+  },
+  {
+    id: "default-5",
+    subject: "Biologiya",
+    title: "Biology",
+    icon: Leaf,
+    href: "/courses",
+  },
+  {
+    id: "default-6",
+    subject: "Ingliz-tili",
+    title: "English Language",
+    icon: Globe,
+    href: "/courses",
+  },
+  {
+    id: "default-7",
+    subject: "Rus-tili",
+    title: "Russian Language",
+    icon: Languages,
+    href: "/courses",
+  },
+  {
+    id: "default-8",
+    subject: "O'zbek-tili",
+    title: "Uzbek Language",
+    icon: Languages,
+    href: "/courses",
+  },
   // { id: "default-9", subject: "O'zbekiston-tarixi", title: "Uzbekistan History", icon: History, href: "/courses" },
-  { id: "default-10", subject: "Geografiya", title: "Geography", icon: Map, href: "/courses" },
+  {
+    id: "default-10",
+    subject: "Geografiya",
+    title: "Geography",
+    icon: Map,
+    href: "/courses",
+  },
 ];
 
 // Icon mapping from backend to frontend
@@ -82,9 +136,13 @@ interface Teacher {
   username: string;
   full_name: string;
   subject: string;
-  avatar: string;
-  school: string;
-  courses: any[];
+  avatar?: string;
+  school?: string;
+  bio?: string;
+  email?: string;
+  courses?: any[];
+  is_deleted?: boolean;
+  is_blocked?: boolean;
 }
 
 interface CourseWithTeachers {
@@ -100,7 +158,8 @@ export default function CoursesPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [courses, setCourses] = useState<CourseWithTeachers[]>(defaultCoursesData);
+  const [courses, setCourses] =
+    useState<CourseWithTeachers[]>(defaultCoursesData);
 
   useEffect(() => {
     const token = getAccessToken();
@@ -113,47 +172,97 @@ export default function CoursesPage() {
       setCourses(defaultCoursesData);
       setLoading(false);
 
-      // Har bir course uchun teachers'ni fetch qilish
-      const fetchTeachersForCourses = async () => {
+      // API'dan kurslar va teacher_info bilan data fetch qilish
+      const fetchCoursesWithTeachers = async () => {
         try {
-          const coursesWithTeachers = await Promise.all(
-            defaultCoursesData.map(async (course) => {
-              try {
-                const response = await fetch(
-                  `${
-                    process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-                  }/api/users/courses/${encodeURIComponent(course.subject)}/teachers/`
-                );
-                const data = await response.json();
-                return {
-                  ...course,
-                  teachers: data.teachers || []
-                };
-              } catch (err) {
-                console.error(`Error fetching teachers for ${course.subject}:`, err);
-                return {
-                  ...course,
-                  teachers: []
+          const baseUrl =
+            process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+          // Fetch courses with teacher_info
+          const response = await fetch(`${baseUrl}/api/users/courses/`, {
+            headers: {
+              Authorization: `Token ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            const coursesList = Array.isArray(data.courses)
+              ? data.courses
+              : Array.isArray(data)
+              ? data
+              : [];
+
+            // Group courses by subject and extract unique teachers
+            const coursesBySubject: {
+              [key: string]: CourseWithTeachers & { allTeachers: Teacher[] };
+            } = {};
+
+            coursesList.forEach((course: any) => {
+              const subject = course.title || "Unknown";
+
+              if (!coursesBySubject[subject]) {
+                coursesBySubject[subject] = {
+                  id: subject,
+                  subject: subject,
+                  title: subject,
+                  icon: getCourseIcon(subject),
+                  href: `/courses/${encodeURIComponent(subject)}`,
+                  teachers: [],
+                  allTeachers: [],
                 };
               }
-            })
-          );
-          
-          setCourses(coursesWithTeachers);
+
+              // Extract teacher info from course
+              if (
+                course.teacher_info &&
+                typeof course.teacher_info === "object"
+              ) {
+                const teacherExists = coursesBySubject[
+                  subject
+                ].allTeachers.some((t) => t.id === course.teacher_info.id);
+
+                if (!teacherExists) {
+                  coursesBySubject[subject].allTeachers.push({
+                    id: course.teacher_info.id,
+                    username: course.teacher_info.username,
+                    full_name: course.teacher_info.full_name,
+                    subject: course.teacher_info.subject,
+                    avatar: course.teacher_info.avatar,
+                    bio: course.teacher_info.bio,
+                    email: course.teacher_info.email,
+                    is_deleted: course.teacher_info.is_deleted,
+                    is_blocked: course.teacher_info.is_blocked,
+                    courses: [],
+                  });
+                }
+              }
+            });
+
+            // Convert to array format
+            const coursesWithTeachers = defaultCoursesData.map(
+              (defaultCourse) => {
+                const courseData = coursesBySubject[defaultCourse.subject];
+                return courseData
+                  ? {
+                      ...defaultCourse,
+                      teachers: courseData.allTeachers,
+                    }
+                  : {
+                      ...defaultCourse,
+                      teachers: [],
+                    };
+              }
+            );
+
+            setCourses(coursesWithTeachers);
+          }
         } catch (err) {
-          console.error("Error fetching teachers:", err);
+          console.error("Error fetching courses with teachers:", err);
         }
       };
 
-      fetchTeachersForCourses();
-
-      // API'dan kurslar va videolar bilan data fetch qilish
-      fetch(
-        `${
-          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-        }/api/users/courses/`
-      )
-     
+      fetchCoursesWithTeachers();
     }
   }, [router]);
 
@@ -183,157 +292,167 @@ export default function CoursesPage() {
         >
           <h1 className="text-4xl font-bold mb-2">Barcha Kurslar</h1>
           <p className="text-lg text-muted-foreground">
-            Siz uchun mavjud bo'lgan barcha kurslarni ko'ring va o'qishni boshlang
+            Siz uchun mavjud bo'lgan barcha kurslarni ko'ring va o'qishni
+            boshlang
           </p>
         </motion.div>
 
         {/* Courses Grid */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-           {courses.map((course, index) => {
-             const uniqueKey = `${course.id}-${index}`;
-             // Icon'ni course'dan olib, agar bo'lmasa defaultCoursesData'dan topish
-             let IconComponent = BookOpen;
-             
-             if (course.icon) {
-               IconComponent = course.icon;
-             } else {
-               // API'dan data kelsa, subject bo'yicha icon topish
-               const defaultCourse = defaultCoursesData.find(c => c.subject === course.subject);
-               if (defaultCourse && defaultCourse.icon) {
-                 IconComponent = defaultCourse.icon;
-               }
-             }
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {courses.map((course, index) => {
+            const uniqueKey = `${course.id}-${index}`;
+            // Icon'ni course'dan olib, agar bo'lmasa defaultCoursesData'dan topish
+            let IconComponent = BookOpen;
 
-             return (
-               <div key={uniqueKey} className="flex flex-col h-full">
-                 {/* Course Header Card */}
-                 <Link href={`/courses/${encodeURIComponent(course.subject)}`}>
-                   <div className="bg-card rounded-2xl border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col cursor-pointer group">
-                     {/* Icon Section */}
-                     <div className="p-8 flex justify-center border-b border-border bg-gradient-to-br from-card to-secondary">
-                       <div className="flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 group-hover:scale-110 transition-transform duration-300">
-                         <IconComponent className="w-12 h-12 text-primary" />
-                       </div>
-                     </div>
+            if (course.icon) {
+              IconComponent = course.icon;
+            } else {
+              // API'dan data kelsa, subject bo'yicha icon topish
+              const defaultCourse = defaultCoursesData.find(
+                (c) => c.subject === course.subject
+              );
+              if (defaultCourse && defaultCourse.icon) {
+                IconComponent = defaultCourse.icon;
+              }
+            }
 
-                     {/* Content Section */}
-                     <div className="p-5 flex-1 flex flex-col">
-                       {/* Subject Name */}
-                       <h4 className="font-bold text-lg text-foreground text-center mb-2 line-clamp-2">
-                         {course.subject}
-                       </h4>
+            return (
+              <div key={uniqueKey} className="flex flex-col h-full">
+                {/* Course Header Card */}
+                <Link href={`/courses/${encodeURIComponent(course.subject)}`}>
+                  <div className="bg-card rounded-2xl border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-xl flex flex-col cursor-pointer group">
+                    {/* Icon Section */}
+                    <div className="p-8 flex justify-center border-b border-border bg-gradient-to-br from-card to-secondary">
+                      <div className="flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 group-hover:scale-110 transition-transform duration-300">
+                        <IconComponent className="w-12 h-12 text-primary" />
+                      </div>
+                    </div>
 
-                       {/* English Title */}
-                       <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-1">
-                         {course.title}
-                       </p>
+                    {/* Content Section */}
+                    <div className="p-5 flex-1 flex flex-col">
+                      {/* Subject Name */}
+                      <h4 className="font-bold text-lg text-foreground text-center mb-2 line-clamp-2">
+                        {course.subject}
+                      </h4>
 
-                       {/* Divider */}
-                       <div className="mb-3 border-t border-border"></div>
+                      {/* English Title */}
+                      <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-1">
+                        {course.title}
+                      </p>
 
+                      {/* Divider */}
+                      <div className="mb-3 border-t border-border"></div>
 
+                      {/* Start Course Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full mt-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold text-sm transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-500/30"
+                      >
+                        <Play className="w-4 h-4" />
+                        Kursni boshlash
+                      </motion.button>
+                    </div>
+                  </div>
+                </Link>
 
-                       {/* Start Course Button */}
-                       <motion.button
-                         whileHover={{ scale: 1.05 }}
-                         whileTap={{ scale: 0.95 }}
-                         className="w-full mt-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold text-sm transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-500/30"
-                       >
-                         <Play className="w-4 h-4" />
-                         Kursni boshlash
-                       </motion.button>
-                     </div>
-                   </div>
-                 </Link>
+                {/* Teachers Section */}
+                {course.teachers && course.teachers.length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <div className="grid grid-cols-1 gap-3">
+                      {course.teachers.map((teacher) => {
+                        // Skip deleted or blocked teachers
+                        if (teacher.is_deleted || teacher.is_blocked) {
+                          return null;
+                        }
 
-                 {/* Teachers Section */}
-                 {course.teachers && course.teachers.length > 0 && (
-                   <div className="mt-4 pt-4 border-t border-border">
-                     <div className="grid grid-cols-1 gap-3">
-                       {course.teachers.map((teacher) => (
-                         <motion.div
-                           key={`teacher-${teacher.id}`}
-                           initial={{ opacity: 0, y: 10 }}
-                           animate={{ opacity: 1, y: 0 }}
-                           transition={{ duration: 0.3 }}
-                           className="bg-card rounded-xl border border-border p-4 hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
-                         >
-                           {/* Teacher Avatar */}
-                           <div className="flex justify-center mb-3">
-                             <img
-                               src={teacher.avatar}
-                               alt={teacher.full_name}
-                               className="w-16 h-16 rounded-full border-2 border-primary/20 object-cover"
-                             />
-                           </div>
+                        return (
+                          <motion.div
+                            key={`teacher-${teacher.id}`}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="bg-card rounded-xl border border-border p-4 hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                          >
+                            {/* Teacher Avatar */}
+                            <div className="flex justify-center mb-3">
+                              {teacher.avatar ? (
+                                <img
+                                  src={teacher.avatar}
+                                  alt={teacher.full_name}
+                                  className="w-16 h-16 rounded-full border-2 border-primary/20 object-cover"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${teacher.username}`;
+                                  }}
+                                />
+                              ) : (
+                                <div className="w-16 h-16 rounded-full border-2 border-primary/20 bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-white font-bold">
+                                  {teacher.full_name
+                                    ?.split(" ")
+                                    .map((n) => n[0])
+                                    .join("")}
+                                </div>
+                              )}
+                            </div>
 
-                           {/* Teacher Name */}
-                           <h6 className="font-semibold text-center text-foreground text-sm mb-1 line-clamp-2">
-                             {teacher.full_name}
-                           </h6>
+                            {/* Teacher Name */}
+                            <h6 className="font-semibold text-center text-foreground text-sm mb-1 line-clamp-2">
+                              {teacher.full_name}
+                            </h6>
 
-                           {/* School */}
-                           <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-1">
-                             {teacher.school}
-                           </p>
+                            {/* Bio */}
+                            <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-2">
+                              {teacher.bio || "Bio bo'sh"}
+                            </p>
 
-                           {/* Courses Count */}
-                           {teacher.courses.length > 0 && (
-                             <div className="text-center mb-3 p-2 bg-primary/5 rounded-lg">
-                               <p className="text-xs text-primary font-semibold">
-                                 📚 {teacher.courses.length} ta kurs
-                               </p>
-                               <p className="text-xs text-muted-foreground mt-1">
-                                 {teacher.courses.reduce((sum, c: any) => sum + (c.videos_count || 0), 0)} ta video
-                               </p>
-                             </div>
-                           )}
+                            {/* View Profile Button */}
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-primary/80 to-primary/70 hover:from-primary hover:to-primary/80 text-white font-semibold text-xs transition-all duration-300"
+                            >
+                              Profilni ko'rish
+                            </motion.button>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
 
-                           {/* View Profile Button */}
-                           <motion.button
-                             whileHover={{ scale: 1.05 }}
-                             whileTap={{ scale: 0.95 }}
-                             className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-primary/80 to-primary/70 hover:from-primary hover:to-primary/80 text-white font-semibold text-xs transition-all duration-300"
-                           >
-                             Profilni ko'rish
-                           </motion.button>
-                         </motion.div>
-                       ))}
-                     </div>
-                   </div>
-                 )}
-                 </div>
-                 );
-                 })}
-                 </div>
-
-         {/* Empty State */}
-         {courses.length === 0 && !loading && (
-           <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.4 }}
-             className="text-center py-16"
-           >
-             <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground opacity-50" />
-             <h2 className="text-2xl font-bold text-foreground mb-2">
-               Hozircha kurslar yo'q
-             </h2>
-             <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-               Tez orada yangi o'qituvchilar qo'shiladi. Iltimos kuting yoki boshqa sahifalarga o'ting.
-             </p>
-             <Link href="/teachers">
-               <motion.button
-                 whileHover={{ scale: 1.05 }}
-                 whileTap={{ scale: 0.95 }}
-                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-semibold transition-all duration-300"
-               >
-                 O'qituvchilar sahifasiga
-               </motion.button>
-             </Link>
-           </motion.div>
-         )}
-         </main>
+        {/* Empty State */}
+        {courses.length === 0 && !loading && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-center py-16"
+          >
+            <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground opacity-50" />
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Hozircha kurslar yo'q
+            </h2>
+            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+              Tez orada yangi o'qituvchilar qo'shiladi. Iltimos kuting yoki
+              boshqa sahifalarga o'ting.
+            </p>
+            <Link href="/teachers">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-semibold transition-all duration-300"
+              >
+                O'qituvchilar sahifasiga
+              </motion.button>
+            </Link>
+          </motion.div>
+        )}
+      </main>
 
       {/* Footer */}
       <footer className="mt-20 pt-12 border-t border-border max-w-7xl mx-auto px-6 pb-12">

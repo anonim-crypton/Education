@@ -77,10 +77,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('password_confirm')
         user = User.objects.create_user(**validated_data)
-        # Set default avatar if not provided
-        if not user.avatar:
-            user.avatar = 'avatars/placeholder-user.jpg'
-            user.save()
         return user
 
 
@@ -207,14 +203,23 @@ class CourseSerializer(serializers.ModelSerializer):
     videos_count = serializers.SerializerMethodField()
     total_views = serializers.SerializerMethodField()
     videos = serializers.SerializerMethodField()
+    teacher_info = serializers.SerializerMethodField()
     
     class Meta:
         model = Course
-        fields = ['id', 'title', 'teacher', 'lessons', 'icon', 'color', 'description', 'teacher_image', 'teacher_image_url', 'order', 'is_active', 'videos_count', 'total_views', 'videos', 'created_at', 'updated_at']
+        fields = ['id', 'title', 'teacher', 'lessons', 'icon', 'color', 'description', 'teacher_image', 'teacher_image_url', 'order', 'is_active', 'videos_count', 'total_views', 'videos', 'teacher_info', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
     
     def get_teacher_image_url(self, obj):
         """Get full teacher image URL or default avatar"""
+        # O'chirilgan o'qituvchi bo'lsa, faol o'qituvchini avatar'ini qaytarish
+        active_teacher = obj.get_active_teacher()
+        if active_teacher and hasattr(active_teacher, 'avatar') and active_teacher.avatar:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(active_teacher.avatar.url)
+            return active_teacher.avatar.url
+        
         if obj.teacher_image:
             request = self.context.get('request')
             if request:
@@ -236,3 +241,43 @@ class CourseSerializer(serializers.ModelSerializer):
         videos = obj.videos.all()
         request = self.context.get('request')
         return LessonSerializer(videos, many=True, context={'request': request}).data
+    
+    def get_teacher_info(self, obj):
+        """O'chirilgan o'qituvchi bo'lsa, faol o'qituvchini ma'lumotlarini qaytarish"""
+        active_teacher = obj.get_active_teacher()
+        if active_teacher:
+            try:
+                teacher_profile = active_teacher.teacher_profile
+                return {
+                    'id': active_teacher.id,
+                    'username': active_teacher.username,
+                    'full_name': active_teacher.get_full_name(),
+                    'email': active_teacher.email,
+                    'subject': teacher_profile.subject,
+                    'bio': teacher_profile.bio,
+                    'avatar': active_teacher.avatar.url if active_teacher.avatar else None,
+                    'is_deleted': teacher_profile.is_deleted,
+                    'is_blocked': teacher_profile.is_blocked
+                }
+            except:
+                pass
+        
+        # Fallback - original teacher info
+        if obj.teacher_user:
+            try:
+                teacher_profile = obj.teacher_user.teacher_profile
+                return {
+                    'id': obj.teacher_user.id,
+                    'username': obj.teacher_user.username,
+                    'full_name': obj.teacher_user.get_full_name(),
+                    'email': obj.teacher_user.email,
+                    'subject': teacher_profile.subject,
+                    'bio': teacher_profile.bio,
+                    'avatar': obj.teacher_user.avatar.url if obj.teacher_user.avatar else None,
+                    'is_deleted': teacher_profile.is_deleted,
+                    'is_blocked': teacher_profile.is_blocked
+                }
+            except:
+                pass
+        
+        return None

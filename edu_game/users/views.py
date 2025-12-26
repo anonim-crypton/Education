@@ -32,7 +32,14 @@ def api_status(request):
 
 
 def admin_create_page(request):
-    """Admin creation page"""
+    """Admin creation page - faqat birinchi admin yaratish uchun"""
+    # Tekshirish: admin allaqachon mavjud bo'lsa, admin panelga redirect qil
+    admin_count = User.objects.filter(is_staff=True, is_superuser=True).count()
+    
+    if admin_count > 0 and not request.user.is_authenticated:
+        # Admin mavjud, lekin user login qilmagan
+        return redirect('/admin/login/')
+    
     return render(request, 'admin_create.html')
 
 
@@ -1522,6 +1529,50 @@ def create_admin_user(request):
                 'redirect_url': '/api/users/admin/dashboard/'
             }, status=status.HTTP_201_CREATED)
     
+    except Exception as e:
+        return Response({
+            'success': False,
+            'error': f'Xato: {str(e)}'
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_lesson_view(request, lesson_id):
+    """O'qituvchi o'z darsini o'chirishi"""
+    try:
+        lesson = Lesson.objects.get(id=lesson_id)
+        
+        # Tekshirish: faqat dars teacher_user bo'lgan o'qituvchi o'chirishi mumkin
+        if lesson.course.teacher_user != request.user:
+            return Response({
+                'success': False,
+                'error': 'Siz bu darsni o\'chira olmaysiz'
+            }, status=status.HTTP_403_FORBIDDEN)
+        
+        # Video faylni o'chirish
+        if lesson.video_file:
+            import os
+            if os.path.exists(lesson.video_file.path):
+                os.remove(lesson.video_file.path)
+        
+        course = lesson.course
+        lesson.delete()
+        
+        # Course darslar sonini update qilish
+        course.lessons = Lesson.objects.filter(course=course).count()
+        course.save()
+        
+        return Response({
+            'success': True,
+            'message': 'Dars muvaffaqiyatli o\'chirildi'
+        }, status=status.HTTP_200_OK)
+    
+    except Lesson.DoesNotExist:
+        return Response({
+            'success': False,
+            'error': 'Dars topilmadi'
+        }, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         return Response({
             'success': False,

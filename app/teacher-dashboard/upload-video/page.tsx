@@ -67,7 +67,9 @@ export default function UploadVideoPage() {
   const fetchTeacherData = async (token: string) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/users/teacher/profile/`,
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/users/teacher/profile/`,
         {
           headers: {
             Authorization: `Token ${token}`,
@@ -91,7 +93,9 @@ export default function UploadVideoPage() {
   const fetchTeacherCourses = async (token: string) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/teacher/courses/`,
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/teacher/courses/`,
         {
           headers: {
             Authorization: `Token ${token}`,
@@ -192,15 +196,25 @@ export default function UploadVideoPage() {
         formDataToSend.append("thumbnail", formData.thumbnail);
       }
 
-      // Simulate progress based on video duration
+      // Simulate progress based on video size and duration
+      // Larger files = slower upload (realistic estimation)
+      const fileSize = formData.video_file.size; // bytes
+      const fileSizeMB = fileSize / (1024 * 1024);
+
+      // Estimate: ~5MB/second upload speed (adjust based on your needs)
+      const estimatedUploadTime = Math.max(2000, (fileSizeMB / 5) * 1000); // milliseconds
+      const interval = estimatedUploadTime / 80; // Update every 1.25% of progress
+
       const progressInterval = setInterval(() => {
         setUploadProgress((prev) => {
           if (prev >= 90) {
             return prev;
           }
-          return prev + Math.random() * 30;
+          // Gradually increase progress, faster at start, slower at end
+          const remaining = 90 - prev;
+          return prev + remaining * 0.1 + Math.random() * 5;
         });
-      }, 500);
+      }, interval);
 
       const res = await fetch(
         `${
@@ -246,7 +260,8 @@ export default function UploadVideoPage() {
       } else {
         const errorData = await res.json();
         setUploadError(
-          errorData.detail || "Video yukladiqda xato ro'y berdi. Iltimos qayta urinib ko'ring."
+          errorData.detail ||
+            "Video yukladiqda xato ro'y berdi. Iltimos qayta urinib ko'ring."
         );
       }
     } catch (error) {
@@ -313,7 +328,10 @@ export default function UploadVideoPage() {
               {teacher.user?.first_name} {teacher.user?.last_name}
             </p>
             <p className="text-sm text-muted-foreground">
-              Fani: <span className="font-medium text-foreground">{teacher.subject}</span>
+              Fani:{" "}
+              <span className="font-medium text-foreground">
+                {teacher.subject}
+              </span>
             </p>
           </div>
         </div>
@@ -445,17 +463,18 @@ export default function UploadVideoPage() {
                   MP4, WebM, Ogg va boshqa video formatlar qo'llaniladi
                 </p>
                 {formData.video_file && (
-                   <div className="mt-2 w-full">
-                     <p className="text-xs text-green-600 font-semibold mb-2">
-                       ✓ {formData.video_file.name}
-                     </p>
-                     {videoDuration > 0 && (
-                       <p className="text-xs text-muted-foreground">
-                         Davomiyligi: {Math.floor(videoDuration / 60)}:{String(videoDuration % 60).padStart(2, "0")}
-                       </p>
-                     )}
-                   </div>
-                 )}
+                  <div className="mt-2 w-full">
+                    <p className="text-xs text-green-600 font-semibold mb-2">
+                      ✓ {formData.video_file.name}
+                    </p>
+                    {videoDuration > 0 && (
+                      <p className="text-xs text-muted-foreground">
+                        Davomiyligi: {Math.floor(videoDuration / 60)}:
+                        {String(videoDuration % 60).padStart(2, "0")}
+                      </p>
+                    )}
+                  </div>
+                )}
               </label>
             </div>
           </div>
@@ -514,14 +533,35 @@ export default function UploadVideoPage() {
                   initial={{ width: 0 }}
                   animate={{ width: `${uploadProgress}%` }}
                   transition={{ duration: 0.3 }}
-                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg shadow-blue-500/50"
                 />
               </div>
-              {videoDuration > 0 && (
-                <p className="text-xs text-muted-foreground">
-                  Video davomiyligi: {Math.floor(videoDuration / 60)}:{String(videoDuration % 60).padStart(2, "0")}
-                </p>
-              )}
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                {videoDuration > 0 && (
+                  <div className="bg-card/50 rounded p-2 border border-border/50">
+                    <p className="text-muted-foreground">Davomiyligi</p>
+                    <p className="font-semibold text-foreground">
+                      {Math.floor(videoDuration / 60)}:
+                      {String(videoDuration % 60).padStart(2, "0")}
+                    </p>
+                  </div>
+                )}
+                {formData.video_file && (
+                  <div className="bg-card/50 rounded p-2 border border-border/50">
+                    <p className="text-muted-foreground">Hajmi</p>
+                    <p className="font-semibold text-foreground">
+                      {(formData.video_file.size / (1024 * 1024)).toFixed(1)} MB
+                    </p>
+                  </div>
+                )}
+                <div className="bg-card/50 rounded p-2 border border-border/50">
+                  <p className="text-muted-foreground">Holati</p>
+                  <p className="font-semibold text-blue-500 flex items-center gap-1">
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                    Yuklash
+                  </p>
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -556,8 +596,9 @@ export default function UploadVideoPage() {
         className="mt-8 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20"
       >
         <p className="text-sm text-muted-foreground">
-          <span className="font-semibold text-blue-600">Eslatma:</span> Siz faqat "{teacher.subject}" fani 
-          uchun video yuklay olasiz. Boshqa fanga video yuklay olmaysiz.
+          <span className="font-semibold text-blue-600">Eslatma:</span> Siz
+          faqat "{teacher.subject}" fani uchun video yuklay olasiz. Boshqa fanga
+          video yuklay olmaysiz.
         </p>
       </motion.div>
     </>

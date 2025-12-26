@@ -1,0 +1,28 @@
+{% extends "admin/index.html" %}
+{% load static %}
+
+{% block content %}
+<div id="content-main" style="margin-bottom: 30px;">
+  <!-- Admin Yaratish Qisimi -->
+  <div style="margin-bottom: 30px;">
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 8px; color: white; border-radius: 10px;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <h2 style="margin: 0 0 10px 0; font-size: 28px; color: white; font-weight: 600;">🔐 Admin Yaratish</h2>
+          <p style="margin: 0; color: rgba(255,255,255,0.95); font-size: 15px;">Yangi Bosh Admin yaratish uchun pastdagi tugmani bosing</p>
+        </div>
+        <a href="/users/admin/create/" style="display: inline-block; padding: 14px 32px; background-color: rgba(255,255,255,0.25); border: 2px solid white; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 15px; transition: all 0.3s; cursor: pointer; margin-left: 20px; white-space: nowrap;">
+          ➕ Yangi Admin Yaratish
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #content-main > div:first-child a:hover {
+    background-color: rgba(255,255,255,0.4) !important;
+    transform: translateY(-2px);
+  }
+</style>
+{% endblock %}

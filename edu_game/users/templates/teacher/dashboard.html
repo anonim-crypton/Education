@@ -530,7 +530,7 @@
             <div class="header">
                 <div class="header-title">Mening Kurslarim</div>
                 <div class="account-menu">
-                    <img src="{{ user.avatar_url|default:'/placeholder-user.jpg' }}" alt="Avatar" class="account-avatar">
+                    <img src="{% if user.avatar_url %}{{ user.avatar_url }}{% else %}/placeholder-user.jpg{% endif %}" alt="Avatar" class="account-avatar" onerror="this.src='/placeholder-user.jpg'">
                     <div class="account-info">
                         <div class="account-name">{{ user.first_name|default:user.username }}</div>
                         <div class="account-role">O'qituvchi</div>

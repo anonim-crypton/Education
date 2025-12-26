@@ -162,13 +162,20 @@ export default function TeacherDashboardPage() {
                   {course.description}
                 </p>
 
-                {/* Lessons Count */}
+                {/* Videos Count */}
                 <div className="flex items-center gap-2 pt-3 border-t border-border">
                   <BookOpen className="w-4 h-4 text-primary" />
                   <span className="text-sm font-medium text-foreground">
-                    {course.lessons} dars
+                    {course.videos_count || course.lessons || 0} video
                   </span>
                 </div>
+
+                {/* Course Info */}
+                {course.total_views && (
+                  <div className="flex items-center justify-between pt-2 text-xs text-muted-foreground">
+                    <span>👁 {course.total_views} ko'rish</span>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

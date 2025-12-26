@@ -215,7 +215,7 @@ class TeacherRequestViewSet(viewsets.ModelViewSet):
 
 class TeacherViewSet(viewsets.ModelViewSet):
     """Tasdiqlangan o'qituvchilarni ko'rish va boshqarish"""
-    queryset = Teacher.objects.select_related('user').all()
+    queryset = Teacher.objects.filter(is_deleted=False).select_related('user').all()
     serializer_class = TeacherSerializer
     permission_classes = []  # No authentication required for public teachers list
     
@@ -352,7 +352,7 @@ class TeacherViewSet(viewsets.ModelViewSet):
             # Teacher ma'lumotlarini o'chirish (O'qituvchi profili o'chib ketadi)
             teacher.is_deleted = True
             teacher.deleted_at = timezone.now()
-            teacher.subject = "[O'chirilgan]"
+            teacher.subject = ""  # Fan bo'sh qilish
             teacher.bio = ""
             teacher.save()
             
@@ -395,9 +395,18 @@ def teacher_login_view(request):
         if user is not None:
             # Check if user is a teacher
             if hasattr(user, 'teacher_profile'):
-                login(request, user)
-                messages.success(request, f'Xush kelibsiz, {user.get_full_name()}!')
-                return redirect('teacher_dashboard')
+                teacher = user.teacher_profile
+                # Check if teacher is deleted or blocked
+                if teacher.is_deleted:
+                    messages.error(request, 'Bu o\'qituvchi o\'chirilgan')
+                elif teacher.is_blocked:
+                    messages.error(request, 'Bu o\'qituvchi blokirovka qilindi')
+                elif not user.is_active:
+                    messages.error(request, 'Sizning akkauntingiz faolsiz')
+                else:
+                    login(request, user)
+                    messages.success(request, f'Xush kelibsiz, {user.get_full_name()}!')
+                    return redirect('teacher_dashboard')
             else:
                 messages.error(request, 'Siz o\'qituvchi emassiz')
         else:
@@ -421,6 +430,17 @@ def teacher_dashboard_view(request):
          return redirect('teacher_login')
      
      teacher = request.user.teacher_profile
+     
+     # Check if teacher is deleted or blocked
+     if teacher.is_deleted:
+         logout(request)
+         messages.error(request, 'Bu o\'qituvchi o\'chirilgan')
+         return redirect('teacher_login')
+     
+     if teacher.is_blocked:
+         logout(request)
+         messages.error(request, 'Bu o\'qituvchi blokirovka qilindi')
+         return redirect('teacher_login')
      
      # Get lessons count (if Lesson model exists)
      lessons_count = 0
@@ -489,7 +509,7 @@ def teacher_logout_view(request):
 
 def all_teachers_view(request):
     """Barcha o'qituvchilarni ko'rish"""
-    teachers = Teacher.objects.select_related('user').all().order_by('user__first_name')
+    teachers = Teacher.objects.filter(is_deleted=False).select_related('user').all().order_by('user__first_name')
     
     context = {
         'teachers': teachers,

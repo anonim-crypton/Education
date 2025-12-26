@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { AvatarWithFallback } from "@/components/ui/avatar-with-fallback";
 
 function TeachersPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,9 +19,11 @@ function TeachersPage() {
       subject: "Dasturlash",
       bio: "10+ yillik tajribaga ega bo'lgan dasturlash mutaxassisi",
       avatar_url: null,
+      courses: [],
     },
   ]);
   const [loading, setLoading] = useState(true);
+  const [expandedTeacher, setExpandedTeacher] = useState<number | null>(null);
 
   useEffect(() => {
     // Fetch teachers from API
@@ -31,9 +34,9 @@ function TeachersPage() {
             process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
           }/api/teachers/`,
           {
-            method: 'GET',
+            method: "GET",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         );
@@ -41,8 +44,41 @@ function TeachersPage() {
           const data = await response.json();
           console.log("Teachers API Response:", data);
           const teachers = Array.isArray(data) ? data : data.results || [];
-          console.log("First teacher:", teachers[0]);
-          setAllTeachers(teachers);
+
+          // Har bir o'qituvchi uchun kurslarni fetch qilish
+          const teachersWithCourses = await Promise.all(
+            teachers.map(async (teacher: any) => {
+              try {
+                const coursesRes = await fetch(
+                  `${
+                    process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+                  }/api/teachers/${teacher.id}/courses/`,
+                  {
+                    method: "GET",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  }
+                );
+                if (coursesRes.ok) {
+                  const coursesData = await coursesRes.json();
+                  const courses = Array.isArray(coursesData)
+                    ? coursesData
+                    : coursesData.results || [];
+                  return { ...teacher, courses };
+                }
+              } catch (error) {
+                console.error(
+                  `Error fetching courses for teacher ${teacher.id}:`,
+                  error
+                );
+              }
+              return { ...teacher, courses: [] };
+            })
+          );
+
+          console.log("Teachers with courses:", teachersWithCourses);
+          setAllTeachers(teachersWithCourses);
         } else {
           console.error("Failed to fetch teachers:", response.status);
           setAllTeachers([]);
@@ -81,7 +117,8 @@ function TeachersPage() {
               Bizning o'qituvchilar
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Tajribali va sertifikali o'qituvchilar tomonidan yuqori sifatli ta'lim
+              Tajribali va sertifikali o'qituvchilar tomonidan yuqori sifatli
+              ta'lim
             </p>
 
             {/* Search Bar */}
@@ -119,20 +156,13 @@ function TeachersPage() {
                   <div className="p-6 rounded-xl border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300">
                     {/* Avatar */}
                     <div className="flex justify-center mb-4">
-                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-2xl border-4 border-border overflow-hidden flex-shrink-0">
-                        {teacher.avatar || teacher.avatar_url ? (
-                          <img
-                            src={teacher.avatar || teacher.avatar_url}
-                            alt={teacher.full_name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              // Fallback to initials if image fails to load
-                              e.currentTarget.style.display = 'none';
-                            }}
-                          />
-                        ) : (
-                          teacher.full_name?.charAt(0).toUpperCase()
-                        )}
+                      <div className="relative">
+                        <AvatarWithFallback
+                          src={teacher.avatar || teacher.avatar_url}
+                          alt={teacher.full_name}
+                          size="lg"
+                          className="border-4 border-border bg-gradient-to-br from-blue-500 to-purple-600"
+                        />
                       </div>
                     </div>
 
@@ -144,7 +174,14 @@ function TeachersPage() {
                     {/* Subject Badge */}
                     <div className="flex justify-center mt-3 mb-4">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 gap-2">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
                           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                         </svg>
@@ -158,14 +195,49 @@ function TeachersPage() {
                     {/* Bio */}
                     {teacher.bio && (
                       <div className="p-3 bg-primary/5 rounded-lg mb-4 border border-primary/10">
-                        <p className="text-xs font-semibold text-primary uppercase mb-2">Ta'rif</p>
-                        <p className="text-sm text-foreground/80">{teacher.bio.substring(0, 60)}...</p>
+                        <p className="text-xs font-semibold text-primary uppercase mb-2">
+                          Ta'rif
+                        </p>
+                        <p className="text-sm text-foreground/80">
+                          {teacher.bio.substring(0, 60)}...
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Courses Count */}
+                    {teacher.courses && teacher.courses.length > 0 && (
+                      <div className="mb-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
+                        <p className="text-xs font-semibold text-primary uppercase mb-2">
+                          📚 Kurslar
+                        </p>
+                        <div className="space-y-2">
+                          {teacher.courses.slice(0, 2).map((course: any) => (
+                            <div
+                              key={course.id}
+                              className="text-xs text-foreground/80 truncate"
+                            >
+                              • {course.title || course.subject}
+                            </div>
+                          ))}
+                          {teacher.courses.length > 2 && (
+                            <p className="text-xs text-primary/70 font-medium">
+                              +{teacher.courses.length - 2} ta kurs
+                            </p>
+                          )}
+                        </div>
                       </div>
                     )}
 
                     {/* Action Button */}
                     <button className="w-full px-3 py-2 rounded-lg bg-primary/10 text-primary text-center font-semibold text-sm hover:bg-primary/20 transition-colors flex items-center justify-center gap-2">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                       </svg>
@@ -181,7 +253,8 @@ function TeachersPage() {
                 Qidiruvga mos o'qituvchi topilmadi
               </p>
               <p className="text-sm text-muted-foreground">
-                Boshqa so'z bilan qidiring yoki barcha o'qituvchilarni ko'rish uchun izoh o'chirib tashlang
+                Boshqa so'z bilan qidiring yoki barcha o'qituvchilarni ko'rish
+                uchun izoh o'chirib tashlang
               </p>
             </div>
           )}

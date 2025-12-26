@@ -5,13 +5,17 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils import timezone
+from django.http import JsonResponse
 from teachers.models import TeacherRequest, Teacher
+from users.models import Course, Lesson
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 import secrets
 import string
+import json
+import os
 
 User = get_user_model()
 
@@ -163,8 +167,8 @@ def create_teacher_view(request):
                   messages.error(request, f'Xatolik: {str(e)}')
     
     # GET request - Show form
-    # Get all teachers with their assigned subjects
-    assigned_teachers = Teacher.objects.filter(subject__isnull=False).exclude(subject='').values('subject')
+    # Get all active (not deleted) teachers with their assigned subjects
+    assigned_teachers = Teacher.objects.filter(subject__isnull=False, is_deleted=False).exclude(subject='').values('subject')
     
     context = {
         'pending_count': TeacherRequest.objects.filter(status='pending').count(),
@@ -245,11 +249,24 @@ def get_approved_teachers_api(request):
 @user_passes_test(is_admin)
 def teachers_view(request):
     """Yangi yaratilgan o'qituvchilar - Teachers model"""
-    new_teachers = Teacher.objects.select_related('user').order_by('-created_at')
+    new_teachers = Teacher.objects.filter(is_deleted=False).select_related('user').order_by('-created_at')
     pending_applications = TeacherRequest.objects.filter(status='pending').order_by('-created_at')
+    
+    # O'qituvchilar uchun kurslar va videolarni qo'shish
+    teachers_with_courses = []
+    for teacher in new_teachers:
+        courses = Course.objects.filter(teacher_user=teacher.user, is_active=True)
+        videos = Lesson.objects.filter(course__teacher_user=teacher.user)
+        teachers_with_courses.append({
+            'teacher': teacher,
+            'courses': courses,
+            'videos': videos,
+            'videos_count': videos.count(),
+        })
     
     context = {
         'new_teachers': new_teachers,
+        'teachers_with_courses': teachers_with_courses,
         'new_teachers_count': new_teachers.count(),
         'pending_count': pending_applications.count(),
         'approved_count': Teacher.objects.all().count(),
@@ -406,12 +423,129 @@ def delete_teacher_api(request, teacher_id):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def delete_user_api(request, user_id):
-    """Delete a user"""
-    if not (request.user.is_staff or request.user.is_superuser):
-        return Response({'error': 'Admin huquqlari kerak'}, status=status.HTTP_403_FORBIDDEN)
-    
-    user = get_object_or_404(User, id=user_id)
-    user_name = user.get_full_name() or user.username
-    user.delete()
-    
-    return Response({'success': True, 'message': f'{user_name} foydalanuvchisi o\'chirildi'})
+     """Delete a user"""
+     if not (request.user.is_staff or request.user.is_superuser):
+         return Response({'error': 'Admin huquqlari kerak'}, status=status.HTTP_403_FORBIDDEN)
+     
+     user = get_object_or_404(User, id=user_id)
+     user_name = user.get_full_name() or user.username
+     user.delete()
+     
+     return Response({'success': True, 'message': f'{user_name} foydalanuvchisi o\'chirildi'})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def delete_video_api(request, video_id):
+     """Delete a video lesson completely from disk and database"""
+     if not (request.user.is_staff or request.user.is_superuser):
+         return Response({'error': 'Admin huquqlari kerak'}, status=status.HTTP_403_FORBIDDEN)
+     
+     lesson = get_object_or_404(Lesson, id=video_id)
+     video_title = lesson.title
+     
+     # Video faylni disk'dan o'chirish
+     if lesson.video_file and os.path.exists(lesson.video_file.path):
+         try:
+             os.remove(lesson.video_file.path)
+         except Exception as e:
+             return Response({
+                 'success': False,
+                 'error': f'Video faylini o\'chirishda xato: {str(e)}'
+             }, status=status.HTTP_400_BAD_REQUEST)
+     
+     # Database'dan lesson o'chirish
+     lesson.delete()
+     
+     return Response({
+         'success': True,
+         'message': f'Video "{video_title}" butunlay o\'chirildi'
+     })
+
+
+@login_required(login_url='/users/admin/login/')
+@user_passes_test(is_admin)
+@require_http_methods(["POST"])
+def create_teacher_api(request):
+     """API endpoint o'qituvchi yaratish uchun"""
+     try:
+         data = json.loads(request.body)
+         
+         username = data.get('username', '').strip()
+         password = data.get('password', '').strip()
+         subject = data.get('subject', '').strip()
+         first_name = data.get('first_name', 'Teacher').strip()
+         last_name = data.get('last_name', 'User').strip()
+         
+         # Validate required fields
+         if not username:
+             return JsonResponse({
+                 'success': False,
+                 'error': 'Username talab qilinadi'
+             }, status=400)
+         
+         if not password:
+             return JsonResponse({
+                 'success': False,
+                 'error': 'Parol talab qilinadi'
+             }, status=400)
+         
+         # Check if username exists
+         if User.objects.filter(username=username).exists():
+             return JsonResponse({
+                 'success': False,
+                 'error': f'Username "{username}" allaqachon mavjud'
+             }, status=400)
+         
+         # Check if subject is already assigned to another teacher (exclude deleted teachers)
+         if subject and subject != '':
+             existing_teacher = Teacher.objects.filter(subject=subject, is_deleted=False).first()
+             if existing_teacher:
+                 return JsonResponse({
+                     'success': False,
+                     'error': f'Fan "{subject}" allaqachon boshqa o\'qituvchiga tayinlangan'
+                 }, status=400)
+         
+         # Create user
+         user = User.objects.create_user(
+             username=username,
+             password=password,
+             first_name=first_name,
+             last_name=last_name
+         )
+         
+         # Mark user as teacher (staff)
+         user.is_staff = True
+         user.save()
+         
+         # Create teacher profile
+         teacher = Teacher.objects.create(
+             user=user,
+             subject=subject or 'Umum',
+             bio=''
+         )
+         
+         return JsonResponse({
+             'success': True,
+             'message': f'O\'qituvchi "{username}" muvaffaqiyatli yaratildi',
+             'teacher': {
+                 'id': teacher.id,
+                 'username': user.username,
+                 'first_name': user.first_name,
+                 'last_name': user.last_name,
+                 'subject': teacher.subject
+             }
+         })
+         
+     except json.JSONDecodeError:
+         return JsonResponse({
+             'success': False,
+             'error': 'Noto\'g\'ri JSON format'
+         }, status=400)
+     except Exception as e:
+         import traceback
+         traceback.print_exc()
+         return JsonResponse({
+             'success': False,
+             'error': str(e)
+         }, status=400)

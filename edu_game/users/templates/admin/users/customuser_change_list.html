@@ -1,0 +1,18 @@
+{% extends "admin/change_list.html" %}
+{% load admin_urls static %}
+
+{% block content %}
+<div style="margin-bottom: 20px; padding: 15px; background-color: #e8f4f8; border-radius: 8px; border: 2px solid #417690;">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div>
+            <h3 style="margin: 0 0 5px 0; color: #333;">🔐 Admin Yaratish Xizmati</h3>
+            <p style="margin: 0; color: #666; font-size: 13px;">
+                Yangi Bosh Admin yaratish uchun tugmani bosing. Username va parol bilan /admin/ ga kirish mumkin bo'ladi.
+            </p>
+        </div>
+        <a href="/users/admin/create/" style="display: inline-block; padding: 10px 20px; background-color: #417690; color: white; text-decoration: none; border-radius: 4px; font-weight: bold; transition: background-color 0.3s; cursor: pointer; white-space: nowrap; margin-left: 20px;">
+            ➕ Admin Yaratish
+        </a>
+    </div>
+</div>
+{{ block.super }}

@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LogOut, Upload, X, ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/navbar";
+import { AvatarWithFallback } from "@/components/ui/avatar-with-fallback";
 
 export default function AccountSettingsPage() {
   const router = useRouter();
@@ -213,19 +214,12 @@ export default function AccountSettingsPage() {
           {/* Avatar Section */}
           <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border">
             <div className="relative flex-shrink-0">
-              {avatarPreview ? (
-                <img
-                  src={avatarPreview}
-                  alt="Avatar"
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-              ) : (
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-semibold">
-                  {userData?.first_name
-                    ? userData.first_name.charAt(0).toUpperCase()
-                    : userData?.username?.charAt(0).toUpperCase() || "U"}
-                </div>
-              )}
+              <AvatarWithFallback
+                src={avatarPreview || userData?.avatar_url}
+                alt="Avatar"
+                size="md"
+                className="bg-gradient-to-br from-blue-500 to-purple-600"
+              />
               <button
                 onClick={() => fileInputRef.current?.click()}
                 className="absolute bottom-0 right-0 p-1 rounded-full bg-primary hover:bg-primary/90 text-white transition-colors"

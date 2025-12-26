@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 import { getAccessToken, clearTokens } from "@/lib/api";
 import { Navbar } from "@/components/navbar";
 import Link from "next/link";
@@ -23,11 +24,16 @@ import {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { theme } = useTheme();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState<any>(null);
   const [courses, setCourses] = useState<any[]>([]);
   const [teachers, setTeachers] = useState<any[]>([]);
+
+  // Get appropriate placeholder image based on theme
+  const placeholderImage =
+    theme === "dark" ? "/placeholder-user.jpg" : "/placeholder-user-light.svg";
 
   // Icon mapping from backend to frontend
   const iconMap: { [key: string]: any } = {
@@ -40,106 +46,134 @@ export default function DashboardPage() {
   };
 
   const fetchData = async (token: string) => {
-    // Fetch user profile
-    fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-      }/api/users/profile/`,
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          const contentType = res.headers.get("content-type");
-          if (contentType && contentType.includes("application/json")) {
-            return res.json();
+    try {
+      // Fetch user profile
+      const profileRes = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/users/profile/`,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+
+      if (profileRes.ok) {
+        const contentType = profileRes.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await profileRes.json();
+          if (data && data.user) {
+            setUserData(data.user);
           }
         }
-        return null;
-      })
-      .then((data) => {
-        if (data && data.user) {
-          setUserData(data.user);
-        }
-      })
-      .catch((err) => console.error(err));
+      } else {
+        console.error(
+          "Profile fetch failed:",
+          profileRes.status,
+          profileRes.statusText
+        );
+      }
+    } catch (err) {
+      console.error("Profile fetch error:", err);
+    }
 
     // Fetch courses from API - `/api/users/courses/` dan
-    fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-      }/api/users/courses/`,
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          const contentType = res.headers.get("content-type");
-          if (contentType && contentType.includes("application/json")) {
-            return res.json();
+    try {
+      const coursesRes = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/users/courses/`,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+
+      if (coursesRes.ok) {
+        const contentType = coursesRes.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await coursesRes.json();
+          if (data) {
+            let courseList: any[] = [];
+            if (
+              data.courses &&
+              Array.isArray(data.courses) &&
+              data.courses.length > 0
+            ) {
+              courseList = data.courses;
+            } else if (Array.isArray(data)) {
+              courseList = data;
+            } else if (data.results && Array.isArray(data.results)) {
+              courseList = data.results;
+            } else {
+              courseList = defaultCourses;
+            }
+
+            // Add teacher_info to each course if available
+            const enhancedCourses = courseList.map((course) => ({
+              ...course,
+              teacher_full_name:
+                course.teacher_info?.full_name || course.teacher,
+              teacher_bio: course.teacher_info?.bio || course.description,
+              teacher_avatar:
+                course.teacher_info?.avatar ||
+                (course.teacher_image_url ? course.teacher_image_url : null),
+            }));
+
+            setCourses(enhancedCourses);
           }
         }
-        return null;
-      })
-      .then((data) => {
-        if (data) {
-          if (data.courses && Array.isArray(data.courses) && data.courses.length > 0) {
-            setCourses(data.courses);
-          } else if (Array.isArray(data)) {
-            setCourses(data);
-          } else if (data.results && Array.isArray(data.results)) {
-            setCourses(data.results);
-          } else {
-            setCourses(defaultCourses);
-          }
-        } else {
-          setCourses(defaultCourses);
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching courses:", err);
+      } else {
+        console.error(
+          "Courses fetch failed:",
+          coursesRes.status,
+          coursesRes.statusText
+        );
         setCourses(defaultCourses);
-      });
+      }
+    } catch (err) {
+      console.error("Error fetching courses:", err);
+      setCourses(defaultCourses);
+    }
 
     // Fetch teachers from API
-    fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
-      }/api/teachers/`,
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
+    try {
+      const teachersRes = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+        }/api/teachers/`,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+
+      if (teachersRes.ok) {
+        const contentType = teachersRes.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await teachersRes.json();
+          if (data) {
+            console.log("Teachers data:", data);
+            if (Array.isArray(data)) {
+              setTeachers(data);
+            } else if (data.results) {
+              setTeachers(data.results);
+            }
+          }
+        }
+      } else {
+        console.error(
+          "Teachers fetch failed:",
+          teachersRes.status,
+          teachersRes.statusText
+        );
       }
-    )
-      .then((res) => {
-        if (res.ok) {
-          const contentType = res.headers.get("content-type");
-          if (contentType && contentType.includes("application/json")) {
-            return res.json();
-          }
-        }
-        return null;
-      })
-      .then((data) => {
-        if (data) {
-          console.log("Teachers data:", data);
-          if (Array.isArray(data)) {
-            setTeachers(data);
-          } else if (data.results) {
-            setTeachers(data.results);
-          }
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching teachers:", err);
-      });
+    } catch (err) {
+      console.error("Error fetching teachers:", err);
+    }
   };
 
   useEffect(() => {
@@ -197,17 +231,17 @@ export default function DashboardPage() {
       <main className="max-w-7xl mx-auto px-6 pt-24 pb-12">
         {/* Hero Section - Full Width */}
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.4 }}
-           className="w-full mb-16"
-         >
-           <Hero 
-             coursesCount={courses.length} 
-             teachersCount={teachers.length}
-             studentsCount={1000}
-           />
-         </motion.div>
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="w-full mb-16"
+        >
+          <Hero
+            coursesCount={courses.length}
+            teachersCount={teachers.length}
+            studentsCount={1000}
+          />
+        </motion.div>
 
         {/* Courses Catalog Section */}
         <motion.div
@@ -227,63 +261,63 @@ export default function DashboardPage() {
                 }
 
                 return (
-                <motion.div
-                  key={course.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="group"
-                >
-                  <Link href="/courses">
-                    <div className="bg-card rounded-2xl border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col">
-                      {/* Icon Section */}
-                      <div className="p-8 flex justify-center border-b border-border bg-gradient-to-br from-card to-secondary">
-                        <div className="flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 group-hover:scale-110 transition-transform duration-300">
-                          <IconComponent className="w-12 h-12 text-primary" />
+                  <motion.div
+                    key={course.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className="group"
+                  >
+                    <Link href="/courses">
+                      <div className="bg-card rounded-2xl border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col">
+                        {/* Icon Section */}
+                        <div className="p-8 flex justify-center border-b border-border bg-gradient-to-br from-card to-secondary">
+                          <div className="flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 group-hover:scale-110 transition-transform duration-300">
+                            <IconComponent className="w-12 h-12 text-primary" />
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Content Section */}
-                      <div className="p-5 flex-1 flex flex-col">
-                        {/* Subject Name */}
-                        <h4 className="font-bold text-lg text-foreground text-center mb-2 line-clamp-2">
-                          {course.subject || course.title}
-                        </h4>
+                        {/* Content Section */}
+                        <div className="p-5 flex-1 flex flex-col">
+                          {/* Subject Name */}
+                          <h4 className="font-bold text-lg text-foreground text-center mb-2 line-clamp-2">
+                            {course.subject || course.title}
+                          </h4>
 
-                        {/* English Title */}
-                        <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-1">
-                          {course.title}
-                        </p>
-
-                        {/* Divider */}
-                        <div className="mb-3 border-t border-border"></div>
-
-                        {/* Description (if exists) */}
-                        {course.description && (
-                          <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-2 flex-1">
-                            {course.description}
+                          {/* English Title */}
+                          <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-1">
+                            {course.title}
                           </p>
-                        )}
 
-                        {/* Lessons Count */}
-                        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
-                          <BookOpen className="w-4 h-4" />
-                          <span>{course.lessons || 0} dars</span>
+                          {/* Divider */}
+                          <div className="mb-3 border-t border-border"></div>
+
+                          {/* Description (if exists) */}
+                          {course.description && (
+                            <p className="text-xs text-muted-foreground text-center mb-3 line-clamp-2 flex-1">
+                              {course.description}
+                            </p>
+                          )}
+
+                          {/* Lessons Count */}
+                          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-4">
+                            <BookOpen className="w-4 h-4" />
+                            <span>{course.lessons || 0} dars</span>
+                          </div>
+
+                          {/* Start Course Button */}
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="w-full mt-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold text-sm transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-500/30"
+                          >
+                            <ArrowRight className="w-4 h-4" />
+                            Kursni boshlash
+                          </motion.button>
                         </div>
-
-                        {/* Start Course Button */}
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="w-full mt-auto flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold text-sm transition-all duration-300 cursor-pointer shadow-lg hover:shadow-blue-500/30"
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                          Kursni boshlash
-                        </motion.button>
                       </div>
-                    </div>
-                  </Link>
-                </motion.div>
+                    </Link>
+                  </motion.div>
                 );
               }
             )}
@@ -368,28 +402,28 @@ export default function DashboardPage() {
               {
                 id: 1,
                 name: "Aziz Karimov",
-                avatar: "/placeholder-user.jpg",
+                avatar: placeholderImage,
                 review:
                   "Bu platforma o'z hayotimni o'zgartti! Darslar juda tushunarligunga va o'qituvchilar juda yaxshi. Hammaga tavsiyalayapman!",
               },
               {
                 id: 2,
                 name: "Dilora Sattarova",
-                avatar: "/placeholder-user.jpg",
+                avatar: placeholderImage,
                 review:
                   "Ingliz tilini o'rgandim va endi IELTS imtixoniga tayyor. O'qituvchilar juda professional va yardamchi.",
               },
               {
                 id: 3,
                 name: "Rustam Abdullayev",
-                avatar: "/placeholder-user.jpg",
+                avatar: placeholderImage,
                 review:
                   "Dasturlash darslarini kuzatdim va hozir o'z loyihalarim bo'ylab ishlayapman. Shukriya!",
               },
               {
                 id: 4,
                 name: "Madina Normatova",
-                avatar: "/placeholder-user.jpg",
+                avatar: placeholderImage,
                 review:
                   "Matematika darslar juda aniq va to'la. Imtixonda A oladim. Ajoyib platforma!",
               },
